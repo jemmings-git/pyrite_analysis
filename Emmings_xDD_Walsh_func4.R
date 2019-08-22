@@ -16,6 +16,7 @@ library(devtools) # run once
 devtools::install_github("moodymudskipper/safejoin") # needed for coalesce join # run once
 library(safejoin)
 devtools::install_github("adibender/pammtools") # provides geom_stepribbon for ggplot2
+library(pammtools)
 library(gridExtra)
 
 # clear working environment if re-running this script from Part 1 in the same R session
