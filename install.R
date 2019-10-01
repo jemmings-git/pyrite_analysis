@@ -1,0 +1,13 @@
+install.packages('devtools')
+devtools::install_github("moodymudskipper/safejoin") # needed for coalesce join # run once
+devtools::install_github("adibender/pammtools")
+
+# attach
+
+install.packages('dplyr') # plyr is not needed (note loading plyr after dplyr will prevent execution of PART 2')
+install.packages('tidyr')
+install.packages('readr')
+install.packages('jsonlite')
+install.packages('reshape2')
+install.packages('ggplot2')
+install.packages('gridExtra')
