@@ -1,8 +1,8 @@
-##### This R script was written by Joe Emmings (British Geological Survey) ####
+##### This R script was written by Joe Emmings and Jo Walsh (British Geological Survey) ####
 ##### This script is designed to manipulate and process GeoDeepDive extractions
 ##### interfaced with the Macrostrat database
 
-##### PART 1 - Load and merge the GDD extractions and Macrostrat database ####
+##### PART 1 - Load and merge the GDD extractions and Macrostrat databases ####
 
 # install the following libraries (and dependencies)
 
@@ -32,17 +32,15 @@ rm(list=ls())
 project_home <- 'N:/Data/xGDD/analysis'
 setwd(project_home)
 
+# import GDD extractions # (note 'results2' is with new pyrite terms 24/10/19
 
-#import GDD extractions
-
-extracts <- read_csv("results.csv")
-#extracts <- read.delim("results.txt") # alternative import text file
+extracts <- read_csv("results2.csv")
 
 # remove unresolved strat_name_id hits
 
 extracts <- extracts[!grepl(pattern = "\\~", extracts$strat_name_id),]   
 
-# import TWO Macrostrat database files
+# import Macrostrat database files
 
 macrostrat_data <- function(filename, data_url){
   if (!file.exists(filename)) {
@@ -52,69 +50,54 @@ macrostrat_data <- function(filename, data_url){
   return(data[["success"]][["data"]])
 }
 
-# first file is "strat names" including ALL strat_names_ID
+# import strat package Macrostrat database
 
 strat <- macrostrat_data("strat.json", "https://macrostrat.org/api/defs/strat_names?all&format=json&response=long")
 
-### ALTERNATIVE strat concept files
+# import strat concepts Macrostrat database
 
 concepts <- macrostrat_data("concepts.json", "https://macrostrat.org/api/defs/strat_name_concepts?all&format=json&response=long")
 
-intervals <- macrostrat_data("intervals.json", "https://macrostrat.org/api/defs/intervals?all&format=json&response=long")
+## output 1 - merge of strat and concepts 
+strat_concepts <- right_join(strat, concepts, by = c("concept_id", "concept_id"))
 
-columns <- macrostrat_data("columns", "https://macrostrat.org/api/defs/columns?all&format=json&response=long")
-
-
-# second file is "units" which includes environment of deposition info, palaeolatitude, etc.
-# but note many strat_names_ID listed in 'strat' are not listed in 'units'
+# import units Macrostrat database
 
 units <- macrostrat_data("units.json", "https://macrostrat.org/api/units?age_top=0&age_bottom=4540000000&response=long&format=json")
 
-# merge the two Macrostrat databases into one - match to strat_names_ID
+# merge the two Macrostrat databases into one - match using strat_names_ID
 
 strat$strat_name_id  = as.character(strat$strat_name_id)
 units$strat_name_id  = as.character(units$strat_name_id)
 
-# merge the GDD extracts and Macrostrat files, using 'strat_name_id' as the unique identifier
-# there are presently two options - 
+## output 2 - composite database where units are propagated and prioritised (where available)
 
-# OPTION 1 - merge strat and units, and propagate all 'units'
-# normalisation to total 'marine units' should correct for spatial bias
-# but it might also introduce uncertainty - i.e., how can we be sure a given strat ID 
-# can be joined to all units associated with the ID?
+# first merge units and strat databases
 
-# that said, OPTION 1 is presently favoured (and appears to be adopted in Peters et al. 2017)
 strat_units <- safe_right_join(units, strat, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
 
+# then merge to concepts
 
-# OR OPTION 2 - merged datasets without propagation of 'units'
-#strat_units <- safe_right_join(units, strat, by = c("strat_name_id", "strat_name_id"), conflict = ~.y)
-#strat_units <- strat_units[!duplicated(strat_units[c("strat_name_id", "t_age", "b_age")]),] # remove duplicate IDs but only for those with matching age ranges
-# produces a more 'blocky' and apparently lower resolution output 
+strat_units$concept_id  = as.integer(strat_units$concept_id)
+concepts$concept_id  = as.integer(concepts$concept_id)
+
+strat_units_concepts <- right_join(strat_units, concepts, by = c("concept_id", "concept_id"))
+
+## next step is to join both dataframes (options 1 and 2) to the xDD extracts 
 
 extracts$strat_name_id  = as.character(extracts$strat_name_id)
+strat_concepts$strat_name_id  = as.character(strat_concepts$strat_name_id)
 
-data <- safe_right_join(extracts, strat_units, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
+# generate output files, part1 excluding units, part 2 including units
 
-# subset palaeolatitude data (G-plates model) - see PART 6
-
-plates <- subset(data, select = c(strat_name_id, target_word, unit_name, t_age, b_age, strat_name, t_plat, t_plng, b_plat, b_plng, lith, environ))
-plates <- plates[!is.na(plates$t_plat),]
-plates$lith  = as.character(plates$lith)
-plates$environ  = as.character(plates$environ)
-write.table(plates, "plates.txt", sep="\t")
-
-# optional export of the merged data file
-
-# write.table(data, "data5.txt", sep="\t")
-
-# optional remove extracts and strat from working environment
-# rm(extracts, strat)
-
+data_part1 <- safe_right_join(extracts, strat_concepts, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
+data_part2 <- safe_right_join(extracts, strat_units_concepts, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
 
 ##### PART 2 - Prepare dataset for normalisation to Macrostrat units #####
-##### - Addition of Phanerozoic time bins between top and base ages ####
-##### subset dataframe into phanerozoic & precambrian (ultimately bins = 1 and 10, respectively)
+##### This section interpolates time bins between top and base ages ####
+##### seperately defining phanerozoic & precambrian bin size ####
+
+# for output 1
 
 cutoff <- 541 # Ma 
 phanerozoic_increment <- 1 # in Ma
@@ -134,40 +117,92 @@ add_all_bins <- function(df, increment) {
   return(df)
 }
 
-data_precambrian <- subset(data, t_age > cutoff)
-data_precambrian <- add_all_bins(data_precambrian, precambrian_increment)
+data_part1_precambrian <- subset(data_part1, t_age > cutoff)
+data_part1_precambrian <- add_all_bins(data_part1_precambrian, precambrian_increment)
 
 # including units spanning Phanerozoic-Precambrian boundary
 
-data_phanerozoic1 <- subset(data, t_age < cutoff & b_age < cutoff)
-data_phanerozoic1 <- add_all_bins(data_phanerozoic1, phanerozoic_increment)
+data_part1_phanerozoic1 <- subset(data_part1, t_age < cutoff & b_age < cutoff)
+data_part1_phanerozoic1 <- add_all_bins(data_part1_phanerozoic1, phanerozoic_increment)
 
-data_phanerozoic2 <- subset(data, t_age < cutoff & b_age > cutoff)
-data_phanerozoic2$b_age <- cutoff
-data_phanerozoic2 <- add_all_bins(data_phanerozoic2, phanerozoic_increment)
+data_part1_phanerozoic2 <- subset(data_part1, t_age < cutoff & b_age > cutoff)
+data_part1_phanerozoic2$b_age <- cutoff
+data_part1_phanerozoic2 <- add_all_bins(data_part1_phanerozoic2, phanerozoic_increment)
 
-data_phanerozoic3 <- subset(data, t_age < cutoff & b_age > cutoff)
-data_phanerozoic3$t_age <- cutoff
-data_phanerozoic3 <- add_all_bins(data_phanerozoic3, precambrian_increment)
+data_part1_phanerozoic3 <- subset(data_part1, t_age < cutoff & b_age > cutoff)
+data_part1_phanerozoic3$t_age <- cutoff
+data_part1_phanerozoic3 <- add_all_bins(data_part1_phanerozoic3, precambrian_increment)
 
 # Bind the Phanerozoic and Precambrian datasets
 
-data <- bind_rows(data_phanerozoic1, data_phanerozoic2, data_phanerozoic3, data_precambrian)
+data_part1 <- bind_rows(data_part1_phanerozoic1, data_part1_phanerozoic2, data_part1_phanerozoic3, data_part1_precambrian)
 
-# export the merged file in order to avoid re-running the above code during analysis
+# remove any nested carriage returns, which can cause problems during export
 
-# first convert the nested lists to character strings (otherwise the .txt export fails)
+data_part1 <- as.data.frame(sapply(data_part1, function(x) gsub("\n", "", x)))
+data_part1 <- as.data.frame(sapply(data_part1, function(x) gsub("\r", "", x)))
 
-data$lith  = as.character(data$lith)
-data$environ  = as.character(data$environ)
-data$econ  = as.character(data$econ)
-data$measure = as.character(data$measure)
-data$units_above = as.character(data$units_above)
-data$units_below = as.character(data$units_below)
-data$refs = as.character(data$refs)
+# export output1 (csv works well here)
 
-# export the data
-write.table(data, "data_comp.txt", sep="\t")
+write.csv(data_part1, "data_part1_comp.csv")
 
-# clear working environment
-rm(list=ls())
+# repeat again for output 2 (composite dataset)
+
+cutoff <- 541 # Ma 
+phanerozoic_increment <- 1 # in Ma
+precambrian_increment <- 10 # in Ma
+
+
+add_all_bins <- function(df, increment) {
+  ncols <- ceiling((max(df$b_age - df$t_age))/increment)
+  
+  df <- df %>% mutate(bin1 = ifelse(b_age-increment > t_age+increment, t_age+increment, NA))
+  for(n in 2:(ncols-1)){
+    next_bin <- paste('bin', n, sep='')
+    bin <- paste0('bin', (n-1), sep='')
+    # See https://stackoverflow.com/a/49311813/4319767 for why this syntax 
+    df <- df %>% mutate(!!next_bin := ifelse(UQ(rlang::sym(bin)) < b_age-increment, UQ(rlang::sym(bin))+increment, NA))
+  }  
+  return(df)
+}
+
+data_part2_precambrian <- subset(data_part2, t_age > cutoff)
+data_part2_precambrian <- add_all_bins(data_part2_precambrian, precambrian_increment)
+
+# including units spanning Phanerozoic-Precambrian boundary
+
+data_part2_phanerozoic1 <- subset(data_part2, t_age < cutoff & b_age < cutoff)
+data_part2_phanerozoic1 <- add_all_bins(data_part2_phanerozoic1, phanerozoic_increment)
+
+data_part2_phanerozoic2 <- subset(data_part2, t_age < cutoff & b_age > cutoff)
+data_part2_phanerozoic2$b_age <- cutoff
+data_part2_phanerozoic2 <- add_all_bins(data_part2_phanerozoic2, phanerozoic_increment)
+
+data_part2_phanerozoic3 <- subset(data_part2, t_age < cutoff & b_age > cutoff)
+data_part2_phanerozoic3$t_age <- cutoff
+data_part2_phanerozoic3 <- add_all_bins(data_part2_phanerozoic3, precambrian_increment)
+
+# Bind the Phanerozoic and Precambrian datasets
+
+data_part2 <- bind_rows(data_part2_phanerozoic1, data_part2_phanerozoic2, data_part2_phanerozoic3, data_part2_precambrian)
+
+#  convert the nested lists to character strings (otherwise can cause problems during export)
+
+data_part2$lith  = as.character(data_part2$lith)
+data_part2$environ  = as.character(data_part2$environ)
+data_part2$econ  = as.character(data_part2$econ)
+data_part2$measure = as.character(data_part2$measure)
+data_part2$units_above = as.character(data_part2$units_above)
+data_part2$units_below = as.character(data_part2$units_below)
+data_part2$refs.x = as.character(data_part2$refs.x)
+data_part2$refs.y = as.character(data_part2$refs.y)
+
+# remove any nested carriage returns, which can cause problems during export
+data_part2 <- as.data.frame(sapply(data_part2, function(x) gsub("\n", "", x)))
+data_part2 <- as.data.frame(sapply(data_part2, function(x) gsub("\r", "", x)))
+
+# export output 2 (again csv works well here)
+
+write.csv(data_part2, "data_part2_comp.csv")
+
+##### END ####
