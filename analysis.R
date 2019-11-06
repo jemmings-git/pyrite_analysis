@@ -11,9 +11,17 @@ library(ggplot2)
 library(safejoin)
 library(pammtools)
 library(gridExtra)
+library(tidyverse)
+
 
 project_home <- 'N:/Data/xGDD/analysis'
-setwd(project_home)
+tryCatch({
+  setwd(project_home)
+}, error = function(err) { 
+  if (dir.exists('./data')) {
+    setwd('./data') }
+}
+)
 
 ###### PART 1 - using 'output 2' ('p2') - composite analysis of units and strat packages #####
 
@@ -704,7 +712,7 @@ periods <- periods$Period
 
 # import zaffos file - https://github.com/UW-Macrostrat/PNAS_201702297/blob/master/FinalData/ContinuousTimeSeries.csv
 
-zaffos <- read.delim("Zaffos_et_al.txt")
+zaffos <- read.delim("Zaffos_et_al.txt", sep=",")
 
 zaffos <- zaffos[,1:2]
 
@@ -800,8 +808,6 @@ test$period <- cut(test$V2,
                    labels=periods)
 
 #unique(test$econ)
-
-library(tidyverse)
 
 test <- test[!is.infinite(test$V1),]
 test <- test[!is.na(test$V1),]
