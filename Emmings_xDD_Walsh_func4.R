@@ -28,13 +28,25 @@ library(gridExtra)
 rm(list=ls())
 
 # set working directory
-
 project_home <- 'N:/Data/xGDD/analysis'
-setwd(project_home)
+
+tryCatch({
+  setwd(project_home)
+}, error = function(err) { 
+    if (dir.exists('./data')) {
+      setwd('./data') }
+}
+)
 
 # import GDD extractions # (note 'results2' is with new pyrite terms 24/10/19
 
-extracts <- read_csv("results2.csv")
+if (!file.exists('results.csv')) {
+  source_data <- 'https://geodeepdive.org/app_output/jemmings_with_pyrite_24Oct2019.zip'
+  download.file(source_data, 'jemmings_etal.zip', method='auto')
+  unzip('jemmings_etal.zip')
+}
+
+extracts <- read_csv("results.csv")
 
 # remove unresolved strat_name_id hits
 
@@ -204,5 +216,11 @@ data_part2 <- as.data.frame(sapply(data_part2, function(x) gsub("\r", "", x)))
 # export output 2 (again csv works well here)
 
 write.csv(data_part2, "data_part2_comp.csv")
+
+# collect additional data sources
+
+zaffos_et_al = 'https://raw.githubusercontent.com/UW-Macrostrat/PNAS_201702297/master/FinalData/ContinuousTimeSeries.csv'
+download.file(zaffos_et_al, 'Zaffos_et_al.txt', method="auto")
+
 
 ##### END ####
