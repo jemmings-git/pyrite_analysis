@@ -1290,7 +1290,7 @@ periods <- periods$Period
 
 # import zaffos file - https://github.com/UW-Macrostrat/PNAS_201702297/blob/master/FinalData/ContinuousTimeSeries.csv
 
-zaffos <- read.delim("Zaffos_et_al.txt")
+zaffos <- read.delim("Zaffos_et_al.txt", sep=",")
 
 zaffos <- zaffos[,1:2]
 
