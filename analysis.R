@@ -2,6 +2,20 @@
 ##### This script is designed to plot GeoDeepDive extractions
 ##### interfaced with the Macrostrat database
 
+
+##### ideas for further development 07/11/19
+
+##### 1) convert 'sediment' grepl strings to instead insert each 'name' in seds in:
+##### liths <- macrostrat_data("liths.json", "https://macrostrat.org/api/defs/lithologies?all")
+##### seds <- subset(liths, class == "sedimentary" | type == "metasedimentary")
+
+##### 2) explore subdividing the analysis into 'shallow water' and 'deep water' components
+##### perhaps using environment definitions from
+##### envs <- macrostrat_data("envs.json", "https://macrostrat.org/api/defs/environments?all")
+##### as the basis
+##### for now I have added 'shallow' and deep' qualifiers
+
+
 library(dplyr) # plyr is not needed (note loading plyr after dplyr will prevent execution of PART 2)
 library(tidyr)
 library(readr)
@@ -38,18 +52,18 @@ data_p2 <-  read.csv(file = "data_part2_comp.csv", row.names = 1)
 # run this block below - this is required for normalisation to all sediments
 # Further subdivision, such as 'marine', etc. is not presently implemented
 
-data_p2$lith2 <- grepl("sediment", data_p2$other)  |  grepl("Sediment", data_p2$other) |
-  grepl("shale", data_p2$other)  |  grepl("Shale", data_p2$other) |
-  grepl("clay", data_p2$other)  |  grepl("Clay", data_p2$other) |
-  grepl("stone", data_p2$other)  |  grepl("carbonate", data_p2$other) |
-  grepl("Carbonate", data_p2$other)  |  grepl("Conglomerate", data_p2$other) |
-  grepl("conglomerate", data_p2$other) |  
-  grepl("sediment", data_p2$lith)  |  grepl("Sediment", data_p2$lith) |
-  grepl("shale", data_p2$lith)  |  grepl("Shale", data_p2$lith) |
-  grepl("clay", data_p2$lith)  |  grepl("Clay", data_p2$lith) |
-  grepl("stone", data_p2$lith)  |  grepl("carbonate", data_p2$lith) |
-  grepl("Carbonate", data_p2$lith)  |  grepl("Conglomerate", data_p2$lith) |
-  grepl("conglomerate", data_p2$lith) 
+data_p2$lith2 <- grepl("sediment", data_p2$other, ignore.case=TRUE)  |  
+  grepl("shale", data_p2$other, ignore.case=TRUE)  |
+  grepl("clay", data_p2$other, ignore.case=TRUE)  |  
+  grepl("stone", data_p2$other, ignore.case=TRUE)  |  
+  grepl("carbonate", data_p2$other, ignore.case=TRUE) |
+  grepl("conglomerate", data_p2$other, ignore.case=TRUE) |
+  grepl("sediment", data_p2$lith, ignore.case=TRUE)  |  
+  grepl("shale", data_p2$lith, ignore.case=TRUE)  | 
+  grepl("clay", data_p2$lith, data_p2$lith, ignore.case=TRUE) |
+  grepl("stone", data_p2$lith, ignore.case=TRUE)  |  
+  grepl("carbonate", data_p2$lith, ignore.case=TRUE) |
+  grepl("conglomerate", data_p2$lith, ignore.case=TRUE) 
 
 Mode <- function(x) {
   ux <- unique(x)
@@ -70,21 +84,13 @@ list <- as.data.frame(summary(data_p2$target_word))
 
 # block start
 
-framboids <- subset(data_p2, target_word == "framboidal pyrite"
-                    | target_word == "Framboidal pyrite"
-                    | target_word == "Framboidal Pyrite"
-                    | target_word == "pyrite framboids"
-                    | target_word == "pyrite framboid"
-                    | target_word == "Pyrite framboids"
-                    | target_word == "Pyrite framboid"
-                    | target_word == "Pyrite Framboids"
-                    | target_word == "Pyrite Framboid"
-                    | target_word == "PYRITE FRAMBOID"
-                    | target_word == "PYRITE FRAMBOIDS")
+framboids <- grepl("framboid", data_p2$target_word, ignore.case=TRUE)
+
+framboids <- subset(data_p2, framboids)
 
 # include any framboid mentions in concept description (not likely)
 
-framboids1 <- grepl("yrite framboid", data_p2$other) | grepl("ramboidal pyrite", data_p2$other)
+framboids1 <- grepl("framboid", data_p2$other, ignore.case=TRUE)
 framboids1 <- subset(data_p2, framboids1)
 framboids <- rbind(framboids, framboids1)
 
@@ -98,36 +104,37 @@ cutoff <- 541 # Ma
 phanerozoic_increment <- 1 # in Ma
 precambrian_increment <- 10 # in Ma
 
-sediments <- grepl("sediment", framboids$other)  |  grepl("Sediment", framboids$other) |
-  grepl("shale", framboids$other)  |  grepl("Shale", framboids$other) |
-  grepl("clay", framboids$other)  |  grepl("Clay", framboids$other) |
-  grepl("stone", framboids$other)  |  grepl("carbonate", framboids$other) |
-  grepl("Carbonate", framboids$other)  |  grepl("Conglomerate", framboids$other) |
-  grepl("conglomerate", framboids$other) | grepl("sediment", framboids$lith)  |  
-  grepl("Sediment", framboids$lith) |
-  grepl("shale", framboids$lith)  |  grepl("Shale", framboids$lith) |
-  grepl("clay", framboids$lith)  |  grepl("Clay", framboids$lith) |
-  grepl("stone", framboids$lith)  |  grepl("carbonate", framboids$lith) |
-  grepl("Carbonate", framboids$lith)  |  grepl("Conglomerate", framboids$lith) |
-  grepl("conglomerate", framboids$lith)
+sediments <- grepl("sediment", framboids$other, ignore.case=TRUE)  |  
+  grepl("shale", framboids$other, ignore.case=TRUE)  |
+  grepl("clay", framboids$other, ignore.case=TRUE)  |  
+  grepl("stone", framboids$other, ignore.case=TRUE)  |  
+  grepl("carbonate", framboids$other, ignore.case=TRUE) |
+  grepl("conglomerate", framboids$other, ignore.case=TRUE) |
+  grepl("sediment", framboids$lith, ignore.case=TRUE)  |  
+  grepl("shale", framboids$lith, ignore.case=TRUE)  | 
+  grepl("clay", framboids$lith, framboids$lith, ignore.case=TRUE) |
+  grepl("stone", framboids$lith, ignore.case=TRUE)  |  
+  grepl("carbonate", framboids$lith, ignore.case=TRUE) |
+  grepl("conglomerate", framboids$lith, ignore.case=TRUE) 
 
 framboids1 <- subset(framboids, t_age > cutoff & b_age > cutoff)
 framboids2 <- framboids1[!duplicated(framboids1$unit_id), ]
 framboids3 <- framboids1[is.na(framboids1$unit_id),]
 framboids2 <- framboids2[!is.na(framboids2$unit_id),] 
 
-sediments <- grepl("sediment", framboids2$other)  |  grepl("Sediment", framboids2$other) |
-  grepl("shale", framboids2$other)  |  grepl("Shale", framboids2$other) |
-  grepl("clay", framboids2$other)  |  grepl("Clay", framboids2$other) |
-  grepl("stone", framboids2$other)  |  grepl("carbonate", framboids2$other) |
-  grepl("Carbonate", framboids2$other)  |  grepl("Conglomerate", framboids2$other) |
-  grepl("conglomerate", framboids2$other) | grepl("sediment", framboids2$lith)  |  
-  grepl("Sediment", framboids2$lith) |
-  grepl("shale", framboids2$lith)  |  grepl("Shale", framboids2$lith) |
-  grepl("clay", framboids2$lith)  |  grepl("Clay", framboids2$lith) |
-  grepl("stone", framboids2$lith)  |  grepl("carbonate", framboids2$lith) |
-  grepl("Carbonate", framboids2$lith)  |  grepl("Conglomerate", framboids2$lith) |
-  grepl("conglomerate", framboids2$lith)
+sediments <- grepl("sediment", framboids2$other, ignore.case=TRUE)  |  
+  grepl("shale", framboids2$other, ignore.case=TRUE)  |
+  grepl("clay", framboids2$other, ignore.case=TRUE)  |  
+  grepl("stone", framboids2$other, ignore.case=TRUE)  |  
+  grepl("carbonate", framboids2$other, ignore.case=TRUE) |
+  grepl("conglomerate", framboids2$other, ignore.case=TRUE) |
+  grepl("sediment", framboids2$lith, ignore.case=TRUE)  |  
+  grepl("shale", framboids2$lith, ignore.case=TRUE)  | 
+  grepl("clay", framboids2$lith, framboids2$lith, ignore.case=TRUE) |
+  grepl("stone", framboids2$lith, ignore.case=TRUE)  |  
+  grepl("carbonate", framboids2$lith, ignore.case=TRUE) |
+  grepl("conglomerate", framboids2$lith, ignore.case=TRUE) 
+
 
 framboids2 <- subset(framboids2, sediments) #  subset only sed units
 framboids3 <- framboids3[!duplicated(framboids3$strat_name_id),]
@@ -138,18 +145,18 @@ framboids3 <- framboids2[!duplicated(framboids2$unit_id), ]
 framboids4 <- framboids2[is.na(framboids2$unit_id),]
 framboids3 <- framboids3[!is.na(framboids3$unit_id),]
 
-sediments <- grepl("sediment", framboids3$other)  |  grepl("Sediment", framboids3$other) |
-  grepl("shale", framboids3$other)  |  grepl("Shale", framboids3$other) |
-  grepl("clay", framboids3$other)  |  grepl("Clay", framboids3$other) |
-  grepl("stone", framboids3$other)  |  grepl("carbonate", framboids3$other) |
-  grepl("Carbonate", framboids3$other)  |  grepl("Conglomerate", framboids3$other) |
-  grepl("conglomerate", framboids3$other) | grepl("sediment", framboids3$lith)  |  
-  grepl("Sediment", framboids3$lith) |
-  grepl("shale", framboids3$lith)  |  grepl("Shale", framboids3$lith) |
-  grepl("clay", framboids3$lith)  |  grepl("Clay", framboids3$lith) |
-  grepl("stone", framboids3$lith)  |  grepl("carbonate", framboids3$lith) |
-  grepl("Carbonate", framboids3$lith)  |  grepl("Conglomerate", framboids3$lith) |
-  grepl("conglomerate", framboids3$lith)
+sediments <- grepl("sediment", framboids3$other, ignore.case=TRUE)  |  
+  grepl("shale", framboids3$other, ignore.case=TRUE)  |
+  grepl("clay", framboids3$other, ignore.case=TRUE)  |  
+  grepl("stone", framboids3$other, ignore.case=TRUE)  |  
+  grepl("carbonate", framboids3$other, ignore.case=TRUE) |
+  grepl("conglomerate", framboids3$other, ignore.case=TRUE) |
+  grepl("sediment", framboids3$lith, ignore.case=TRUE)  |  
+  grepl("shale", framboids3$lith, ignore.case=TRUE)  | 
+  grepl("clay", framboids3$lith, framboids3$lith, ignore.case=TRUE) |
+  grepl("stone", framboids3$lith, ignore.case=TRUE)  |  
+  grepl("carbonate", framboids3$lith, ignore.case=TRUE) |
+  grepl("conglomerate", framboids3$lith, ignore.case=TRUE) 
 
 framboids3 <- subset(framboids3, sediments) #  subset only sed units
 framboids4 <- framboids4[!duplicated(framboids4$strat_name_id),]
@@ -160,18 +167,18 @@ framboids4 <- framboids3[!duplicated(framboids3$unit_id), ]
 framboids5 <- framboids3[is.na(framboids3$unit_id),]
 framboids4 <- framboids4[!is.na(framboids4$unit_id),]
 
-sediments <- grepl("sediment", framboids4$other)  |  grepl("Sediment", framboids4$other) |
-  grepl("shale", framboids4$other)  |  grepl("Shale", framboids4$other) |
-  grepl("clay", framboids4$other)  |  grepl("Clay", framboids4$other) |
-  grepl("stone", framboids4$other)  |  grepl("carbonate", framboids4$other) |
-  grepl("Carbonate", framboids4$other)  |  grepl("Conglomerate", framboids4$other) |
-  grepl("conglomerate", framboids4$other) | grepl("sediment", framboids4$lith)  |  
-  grepl("Sediment", framboids4$lith) |
-  grepl("shale", framboids4$lith)  |  grepl("Shale", framboids4$lith) |
-  grepl("clay", framboids4$lith)  |  grepl("Clay", framboids4$lith) |
-  grepl("stone", framboids4$lith)  |  grepl("carbonate", framboids4$lith) |
-  grepl("Carbonate", framboids4$lith)  |  grepl("Conglomerate", framboids4$lith) |
-  grepl("conglomerate", framboids4$lith)
+sediments <- grepl("sediment", framboids4$other, ignore.case=TRUE)  |  
+  grepl("shale", framboids4$other, ignore.case=TRUE)  |
+  grepl("clay", framboids4$other, ignore.case=TRUE)  |  
+  grepl("stone", framboids4$other, ignore.case=TRUE)  |  
+  grepl("carbonate", framboids4$other, ignore.case=TRUE) |
+  grepl("conglomerate", framboids4$other, ignore.case=TRUE) |
+  grepl("sediment", framboids4$lith, ignore.case=TRUE)  |  
+  grepl("shale", framboids4$lith, ignore.case=TRUE)  | 
+  grepl("clay", framboids4$lith, framboids4$lith, ignore.case=TRUE) |
+  grepl("stone", framboids4$lith, ignore.case=TRUE)  |  
+  grepl("carbonate", framboids4$lith, ignore.case=TRUE) |
+  grepl("conglomerate", framboids4$lith, ignore.case=TRUE) 
 
 framboids4 <- subset(framboids4, sediments) #  subset only sed units
 framboids5 <- framboids5[!duplicated(framboids5$strat_name_id),]
@@ -182,18 +189,18 @@ framboids5 <- framboids4[!duplicated(framboids4$unit_id), ]
 framboids6 <- framboids4[is.na(framboids4$unit_id),]
 framboids5 <- framboids5[!is.na(framboids5$unit_id),]
 
-sediments <- grepl("sediment", framboids5$other)  |  grepl("Sediment", framboids5$other) |
-  grepl("shale", framboids5$other)  |  grepl("Shale", framboids5$other) |
-  grepl("clay", framboids5$other)  |  grepl("Clay", framboids5$other) |
-  grepl("stone", framboids5$other)  |  grepl("carbonate", framboids5$other) |
-  grepl("Carbonate", framboids5$other)  |  grepl("Conglomerate", framboids5$other) |
-  grepl("conglomerate", framboids5$other) | grepl("sediment", framboids5$lith)  |  
-  grepl("Sediment", framboids5$lith) |
-  grepl("shale", framboids5$lith)  |  grepl("Shale", framboids5$lith) |
-  grepl("clay", framboids5$lith)  |  grepl("Clay", framboids5$lith) |
-  grepl("stone", framboids5$lith)  |  grepl("carbonate", framboids5$lith) |
-  grepl("Carbonate", framboids5$lith)  |  grepl("Conglomerate", framboids5$lith) |
-  grepl("conglomerate", framboids5$lith)
+sediments <- grepl("sediment", framboids5$other, ignore.case=TRUE)  |  
+  grepl("shale", framboids5$other, ignore.case=TRUE)  |
+  grepl("clay", framboids5$other, ignore.case=TRUE)  |  
+  grepl("stone", framboids5$other, ignore.case=TRUE)  |  
+  grepl("carbonate", framboids5$other, ignore.case=TRUE) |
+  grepl("conglomerate", framboids5$other, ignore.case=TRUE) |
+  grepl("sediment", framboids5$lith, ignore.case=TRUE)  |  
+  grepl("shale", framboids5$lith, ignore.case=TRUE)  | 
+  grepl("clay", framboids5$lith, framboids5$lith, ignore.case=TRUE) |
+  grepl("stone", framboids5$lith, ignore.case=TRUE)  |  
+  grepl("carbonate", framboids5$lith, ignore.case=TRUE) |
+  grepl("conglomerate", framboids5$lith, ignore.case=TRUE) 
 
 framboids5 <- subset(framboids5, sediments) #  subset only sed units
 framboids6 <- framboids6[!duplicated(framboids6$strat_name_id),]
@@ -207,64 +214,50 @@ framboids <- rbind(framboids1, framboids2, framboids3, framboids4)
 
 # block start
 
-nodules <- subset(data_p2, target_word == "pyrite nodules"
-                  | target_word == "pyrite concretions"
-                  | target_word == "Pyrite nodules"
-                  | target_word == "Pyrite nodule"
-                  | target_word == "nodular pyrite"
-                  | target_word == "oncretionary pyrite"
-                  | target_word == "pyritic nodules"
-                  | target_word == "pyritic concretions"
-                  | target_word == "concretions of pyrite"
-                  | target_word == "pyritic nodule"
-                  | target_word == "nodules of pyrite"
-                  | target_word == "Pyrite nodule"
-                  | target_word == "Pyrite concretions"
-                  | target_word == "Nodular pyrite"
-                  | target_word == "Pyritic nodules"
-                  | target_word == "pyrite concretion"
-                  | target_word == "Pyrite Nodules"
-                  | target_word == "Pyrite concretion"
-                  | target_word == "PYRITE NODULE"
-                  | target_word == "PYRITE NODULES")
+nodules <- grepl("nodul", data_p2$target_word, ignore.case=TRUE) | grepl("concretion", data_p2$target_word, ignore.case=TRUE) 
+
+nodules <- subset(data_p2, nodules)
 
 # include nodule mentions pulled from lexicons (concepts)
 
-nodules1 <- grepl("yrite concretion", data_p2$other) | grepl("yrite nodule", data_p2$other) | 
-  grepl("odules of pyrite", data_p2$other) | grepl("oncretions of pyrite", data_p2$other)
+nodules1 <- grepl("pyrite nodul", data_p2$other, ignore.case=TRUE) | grepl("pyrite concretion", data_p2$other, ignore.case=TRUE) |
+  grepl("pyritic nodul", data_p2$other, ignore.case=TRUE) | grepl("pyritic concretion", data_p2$other, ignore.case=TRUE) |
+  grepl("nodules of pyrite", data_p2$other, ignore.case=TRUE) | grepl("concretions of pyrite", data_p2$other, ignore.case=TRUE) | 
+  grepl("nodular pyrite", data_p2$other, ignore.case=TRUE) | grepl("concretionary pyrite", data_p2$other, ignore.case=TRUE)
+
 nodules1 <- subset(data_p2, nodules1)
 nodules <- rbind(nodules, nodules1)
 
-sediments <- grepl("sediment", nodules$other)  |  grepl("Sediment", nodules$other) |
-  grepl("shale", nodules$other)  |  grepl("Shale", nodules$other) |
-  grepl("clay", nodules$other)  |  grepl("Clay", nodules$other) |
-  grepl("stone", nodules$other)  |  grepl("carbonate", nodules$other) |
-  grepl("Carbonate", nodules$other)  |  grepl("Conglomerate", nodules$other) |
-  grepl("conglomerate", nodules$other) | grepl("sediment", nodules$lith)  |  
-  grepl("Sediment", nodules$lith) |
-  grepl("shale", nodules$lith)  |  grepl("Shale", nodules$lith) |
-  grepl("clay", nodules$lith)  |  grepl("Clay", nodules$lith) |
-  grepl("stone", nodules$lith)  |  grepl("carbonate", nodules$lith) |
-  grepl("Carbonate", nodules$lith)  |  grepl("Conglomerate", nodules$lith) |
-  grepl("conglomerate", nodules$lith)
+sediments <- grepl("sediment", nodules$other, ignore.case=TRUE)  |  
+  grepl("shale", nodules$other, ignore.case=TRUE)  |
+  grepl("clay", nodules$other, ignore.case=TRUE)  |  
+  grepl("stone", nodules$other, ignore.case=TRUE)  |  
+  grepl("carbonate", nodules$other, ignore.case=TRUE) |
+  grepl("conglomerate", nodules$other, ignore.case=TRUE) |
+  grepl("sediment", nodules$lith, ignore.case=TRUE)  |  
+  grepl("shale", nodules$lith, ignore.case=TRUE)  | 
+  grepl("clay", nodules$lith, nodules$lith, ignore.case=TRUE) |
+  grepl("stone", nodules$lith, ignore.case=TRUE)  |  
+  grepl("carbonate", nodules$lith, ignore.case=TRUE) |
+  grepl("conglomerate", nodules$lith, ignore.case=TRUE) 
 
 nodules1 <- subset(nodules, t_age > cutoff & b_age > cutoff)
 nodules2 <- nodules1[!duplicated(nodules1$unit_id), ]
 nodules3 <- nodules1[is.na(nodules1$unit_id),]
 nodules2 <- nodules2[!is.na(nodules2$unit_id),]
 
-sediments <- grepl("sediment", nodules2$other)  |  grepl("Sediment", nodules2$other) |
-  grepl("shale", nodules2$other)  |  grepl("Shale", nodules2$other) |
-  grepl("clay", nodules2$other)  |  grepl("Clay", nodules2$other) |
-  grepl("stone", nodules2$other)  |  grepl("carbonate", nodules2$other) |
-  grepl("Carbonate", nodules2$other)  |  grepl("Conglomerate", nodules2$other) |
-  grepl("conglomerate", nodules2$other) | grepl("sediment", nodules2$lith)  |  
-  grepl("Sediment", nodules2$lith) |
-  grepl("shale", nodules2$lith)  |  grepl("Shale", nodules2$lith) |
-  grepl("clay", nodules2$lith)  |  grepl("Clay", nodules2$lith) |
-  grepl("stone", nodules2$lith)  |  grepl("carbonate", nodules2$lith) |
-  grepl("Carbonate", nodules2$lith)  |  grepl("Conglomerate", nodules2$lith) |
-  grepl("conglomerate", nodules2$lith)
+sediments <- grepl("sediment", nodules2$other, ignore.case=TRUE)  |  
+  grepl("shale", nodules2$other, ignore.case=TRUE)  |
+  grepl("clay", nodules2$other, ignore.case=TRUE)  |  
+  grepl("stone", nodules2$other, ignore.case=TRUE)  |  
+  grepl("carbonate", nodules2$other, ignore.case=TRUE) |
+  grepl("conglomerate", nodules2$other, ignore.case=TRUE) |
+  grepl("sediment", nodules2$lith, ignore.case=TRUE)  |  
+  grepl("shale", nodules2$lith, ignore.case=TRUE)  | 
+  grepl("clay", nodules2$lith, nodules2$lith, ignore.case=TRUE) |
+  grepl("stone", nodules2$lith, ignore.case=TRUE)  |  
+  grepl("carbonate", nodules2$lith, ignore.case=TRUE) |
+  grepl("conglomerate", nodules2$lith, ignore.case=TRUE) 
 
 nodules2 <- subset(nodules2, sediments) #  subset only sed units
 nodules3 <- nodules3[!duplicated(nodules3$strat_name_id),]
@@ -275,18 +268,18 @@ nodules3 <- nodules2[!duplicated(nodules2$unit_id), ]
 nodules4 <- nodules2[is.na(nodules2$unit_id),]
 nodules3 <- nodules3[!is.na(nodules3$unit_id),]
 
-sediments <- grepl("sediment", nodules3$other)  |  grepl("Sediment", nodules3$other) |
-  grepl("shale", nodules3$other)  |  grepl("Shale", nodules3$other) |
-  grepl("clay", nodules3$other)  |  grepl("Clay", nodules3$other) |
-  grepl("stone", nodules3$other)  |  grepl("carbonate", nodules3$other) |
-  grepl("Carbonate", nodules3$other)  |  grepl("Conglomerate", nodules3$other) |
-  grepl("conglomerate", nodules3$other) | grepl("sediment", nodules3$lith)  |  
-  grepl("Sediment", nodules3$lith) |
-  grepl("shale", nodules3$lith)  |  grepl("Shale", nodules3$lith) |
-  grepl("clay", nodules3$lith)  |  grepl("Clay", nodules3$lith) |
-  grepl("stone", nodules3$lith)  |  grepl("carbonate", nodules3$lith) |
-  grepl("Carbonate", nodules3$lith)  |  grepl("Conglomerate", nodules3$lith) |
-  grepl("conglomerate", nodules3$lith)
+sediments <- grepl("sediment", nodules3$other, ignore.case=TRUE)  |  
+  grepl("shale", nodules3$other, ignore.case=TRUE)  |
+  grepl("clay", nodules3$other, ignore.case=TRUE)  |  
+  grepl("stone", nodules3$other, ignore.case=TRUE)  |  
+  grepl("carbonate", nodules3$other, ignore.case=TRUE) |
+  grepl("conglomerate", nodules3$other, ignore.case=TRUE) |
+  grepl("sediment", nodules3$lith, ignore.case=TRUE)  |  
+  grepl("shale", nodules3$lith, ignore.case=TRUE)  | 
+  grepl("clay", nodules3$lith, nodules3$lith, ignore.case=TRUE) |
+  grepl("stone", nodules3$lith, ignore.case=TRUE)  |  
+  grepl("carbonate", nodules3$lith, ignore.case=TRUE) |
+  grepl("conglomerate", nodules3$lith, ignore.case=TRUE) 
 
 nodules3 <- subset(nodules3, sediments) #  subset only sed units
 nodules4 <- nodules4[!duplicated(nodules4$strat_name_id),]
@@ -297,18 +290,18 @@ nodules4 <- nodules3[!duplicated(nodules3$unit_id), ]
 nodules5 <- nodules3[is.na(nodules3$unit_id),]
 nodules4 <- nodules4[!is.na(nodules4$unit_id),]
 
-sediments <- grepl("sediment", nodules4$other)  |  grepl("Sediment", nodules4$other) |
-  grepl("shale", nodules4$other)  |  grepl("Shale", nodules4$other) |
-  grepl("clay", nodules4$other)  |  grepl("Clay", nodules4$other) |
-  grepl("stone", nodules4$other)  |  grepl("carbonate", nodules4$other) |
-  grepl("Carbonate", nodules4$other)  |  grepl("Conglomerate", nodules4$other) |
-  grepl("conglomerate", nodules4$other) | grepl("sediment", nodules4$lith)  |  
-  grepl("Sediment", nodules4$lith) |
-  grepl("shale", nodules4$lith)  |  grepl("Shale", nodules4$lith) |
-  grepl("clay", nodules4$lith)  |  grepl("Clay", nodules4$lith) |
-  grepl("stone", nodules4$lith)  |  grepl("carbonate", nodules4$lith) |
-  grepl("Carbonate", nodules4$lith)  |  grepl("Conglomerate", nodules4$lith) |
-  grepl("conglomerate", nodules4$lith)
+sediments <- grepl("sediment", nodules4$other, ignore.case=TRUE)  |  
+  grepl("shale", nodules4$other, ignore.case=TRUE)  |
+  grepl("clay", nodules4$other, ignore.case=TRUE)  |  
+  grepl("stone", nodules4$other, ignore.case=TRUE)  |  
+  grepl("carbonate", nodules4$other, ignore.case=TRUE) |
+  grepl("conglomerate", nodules4$other, ignore.case=TRUE) |
+  grepl("sediment", nodules4$lith, ignore.case=TRUE)  |  
+  grepl("shale", nodules4$lith, ignore.case=TRUE)  | 
+  grepl("clay", nodules4$lith, nodules4$lith, ignore.case=TRUE) |
+  grepl("stone", nodules4$lith, ignore.case=TRUE)  |  
+  grepl("carbonate", nodules4$lith, ignore.case=TRUE) |
+  grepl("conglomerate", nodules4$lith, ignore.case=TRUE) 
 
 nodules4 <- subset(nodules4, sediments) #  subset only sed units
 nodules5 <- nodules5[!duplicated(nodules5$strat_name_id),]
@@ -319,18 +312,18 @@ nodules5 <- nodules4[!duplicated(nodules4$unit_id), ]
 nodules6 <- nodules4[is.na(nodules4$unit_id),]
 nodules5 <- nodules5[!is.na(nodules5$unit_id),]
 
-sediments <- grepl("sediment", nodules5$other)  |  grepl("Sediment", nodules5$other) |
-  grepl("shale", nodules5$other)  |  grepl("Shale", nodules5$other) |
-  grepl("clay", nodules5$other)  |  grepl("Clay", nodules5$other) |
-  grepl("stone", nodules5$other)  |  grepl("carbonate", nodules5$other) |
-  grepl("Carbonate", nodules5$other)  |  grepl("Conglomerate", nodules5$other) |
-  grepl("conglomerate", nodules5$other) | grepl("sediment", nodules5$lith)  |  
-  grepl("Sediment", nodules5$lith) |
-  grepl("shale", nodules5$lith)  |  grepl("Shale", nodules5$lith) |
-  grepl("clay", nodules5$lith)  |  grepl("Clay", nodules5$lith) |
-  grepl("stone", nodules5$lith)  |  grepl("carbonate", nodules5$lith) |
-  grepl("Carbonate", nodules5$lith)  |  grepl("Conglomerate", nodules5$lith) |
-  grepl("conglomerate", nodules5$lith)
+sediments <- grepl("sediment", nodules5$other, ignore.case=TRUE)  |  
+  grepl("shale", nodules5$other, ignore.case=TRUE)  |
+  grepl("clay", nodules5$other, ignore.case=TRUE)  |  
+  grepl("stone", nodules5$other, ignore.case=TRUE)  |  
+  grepl("carbonate", nodules5$other, ignore.case=TRUE) |
+  grepl("conglomerate", nodules5$other, ignore.case=TRUE) |
+  grepl("sediment", nodules5$lith, ignore.case=TRUE)  |  
+  grepl("shale", nodules5$lith, ignore.case=TRUE)  | 
+  grepl("clay", nodules5$lith, nodules5$lith, ignore.case=TRUE) |
+  grepl("stone", nodules5$lith, ignore.case=TRUE)  |  
+  grepl("carbonate", nodules5$lith, ignore.case=TRUE) |
+  grepl("conglomerate", nodules5$lith, ignore.case=TRUE) 
 
 nodules5 <- subset(nodules5, sediments) #  subset only sed units
 nodules6 <- nodules6[!duplicated(nodules6$strat_name_id),]
@@ -346,11 +339,10 @@ nodules <- rbind(nodules1, nodules2, nodules3, nodules4)
 
 # start by including pyritic strat concepts pulled from lexicons (undifferentiated)
 
-pyritic_strat <- grepl("pyrit", data_p2$other)  |  grepl("Pyrit", data_p2$other) |
-  grepl("pyrit", data_p2$lith)  |  grepl("Pyrit", data_p2$lith)
+pyritic_strat <- grepl("pyrit", data_p2$other, ignore.case=TRUE)  |  grepl("pyrit", data_p2$lith, ignore.case=TRUE)
 
 pyritic_strat <- subset(data_p2, pyritic_strat)
-false <- !grepl("non-pyrit", pyritic_strat$other) & !grepl("Non-pyrit", pyritic_strat$other) & !grepl("Non-pyrit", pyritic_strat$lith) & !grepl("non-pyrit", pyritic_strat$lith)
+false <- !grepl("non-pyrit", pyritic_strat$other, ignore.case=TRUE) & !grepl("non-pyrit", pyritic_strat$lith, ignore.case=TRUE)
 pyritic_strat <- subset(pyritic_strat, false)
 
 # now need to carry forward only units not already listed in framboids or nodules record
@@ -370,10 +362,9 @@ all <- rbind(all1, all2)
 pyritic_strat <- safe_right_join(all, pyritic_strat, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
 pyritic_strat <- pyritic_strat[is.na(pyritic_strat$target_word),]
 
-pyrite_undif <- subset(data_p2, target_word == "pyrite"
-                       | target_word == "Pyrite"
-                       | target_word == "Pyritic"
-                       | target_word == "pyritic")
+pyrite_undif <- grepl("\\<pyrite\\>", data_p2$target_word, ignore.case=TRUE) | grepl("\\<pyritic\\>", data_p2$target_word, ignore.case=TRUE)
+
+pyrite_undif <- subset(data_p2, pyrite_undif)
 
 pyrite_undif <- rbind(pyritic_strat, pyrite_undif)
 
@@ -389,18 +380,18 @@ pyrite_undif <- anti_join(pyrite_undif, all, by = c("strat_name_id", "strat_name
 # linked to a sedimentary unit - this is because framboids + nodules form primarily in 
 # a 'sedimentary' environment whereas 'pyrite' in general is present in many settings
 
-sediments <- grepl("sediment", pyrite_undif$other)  |  grepl("Sediment", pyrite_undif$other) |
-  grepl("shale", pyrite_undif$other)  |  grepl("Shale", pyrite_undif$other) |
-  grepl("clay", pyrite_undif$other)  |  grepl("Clay", pyrite_undif$other) |
-  grepl("stone", pyrite_undif$other)  |  grepl("carbonate", pyrite_undif$other) |
-  grepl("Carbonate", pyrite_undif$other)  |  grepl("Conglomerate", pyrite_undif$other) |
-  grepl("conglomerate", pyrite_undif$other) | grepl("sediment", pyrite_undif$lith)  |  
-  grepl("Sediment", pyrite_undif$lith) |
-  grepl("shale", pyrite_undif$lith)  |  grepl("Shale", pyrite_undif$lith) |
-  grepl("clay", pyrite_undif$lith)  |  grepl("Clay", pyrite_undif$lith) |
-  grepl("stone", pyrite_undif$lith)  |  grepl("carbonate", pyrite_undif$lith) |
-  grepl("Carbonate", pyrite_undif$lith)  |  grepl("Conglomerate", pyrite_undif$lith) |
-  grepl("conglomerate", pyrite_undif$lith)
+sediments <- grepl("sediment", pyrite_undif$other, ignore.case=TRUE)  |  
+  grepl("shale", pyrite_undif$other, ignore.case=TRUE)  |
+  grepl("clay", pyrite_undif$other, ignore.case=TRUE)  |  
+  grepl("stone", pyrite_undif$other, ignore.case=TRUE)  |  
+  grepl("carbonate", pyrite_undif$other, ignore.case=TRUE) |
+  grepl("conglomerate", pyrite_undif$other, ignore.case=TRUE) |
+  grepl("sediment", pyrite_undif$lith, ignore.case=TRUE)  |  
+  grepl("shale", pyrite_undif$lith, ignore.case=TRUE)  | 
+  grepl("clay", pyrite_undif$lith, pyrite_undif$lith, ignore.case=TRUE) |
+  grepl("stone", pyrite_undif$lith, ignore.case=TRUE)  |  
+  grepl("carbonate", pyrite_undif$lith, ignore.case=TRUE) |
+  grepl("conglomerate", pyrite_undif$lith, ignore.case=TRUE) 
 
 pyrite_undif <- subset(pyrite_undif, sediments)
 
@@ -436,7 +427,7 @@ pyrite_undif <- rbind(pyrite_undif1, pyrite_undif2, pyrite_undif3, pyrite_undif4
 
 # extract nearby mentions of veins or mineralisation
 
-veins <- grepl("vein", pyrite_undif$phrase)  |  grepl("ineralisation", pyrite_undif$phrase)
+veins <- grepl("vein", pyrite_undif$phrase, ignore.case=TRUE)  |  grepl("mineralisation", pyrite_undif$phrase, ignore.case=TRUE)
 
 veins <- subset(pyrite_undif, veins)
 
@@ -541,23 +532,21 @@ veins_bins <- veins_bins[!duplicated(veins_bins$V2),] # remove second 541
 
 # run this block if ALL sediments - includes framboid + nodule mentions (in order to scale normalisation between 0 and 1)
 
-sediments <- grepl("sediment", data_p2$other)  |  grepl("Sediment", data_p2$other) |
-  grepl("shale", data_p2$other)  |  grepl("Shale", data_p2$other) |
-  grepl("clay", data_p2$other)  |  grepl("Clay", data_p2$other) |
-  grepl("stone", data_p2$other)  |  grepl("carbonate", data_p2$other) |
-  grepl("Carbonate", data_p2$other)  |  grepl("Conglomerate", data_p2$other) |
-  grepl("conglomerate", data_p2$other) | grepl("ramb", data_p2$target_word) |
-  grepl("RAMB", data_p2$target_word)  | grepl("yrite con", data_p2$target_word) |
-  grepl("yrite nod", data_p2$other) | grepl("yrite Con", data_p2$target_word) |
-  grepl("yrite Nod", data_p2$target_word) | grepl("YRITE CON", data_p2$target_word) |
-  grepl("YRITE NOD", data_p2$other) | grepl("oncretions of pyrite", data_p2$target_word) |
-  grepl("odules of pyrite", data_p2$target_word) | grepl("odular pyrite", data_p2$target_word) |
-  grepl("oncretionary pyrite", data_p2$lith) | grepl("sediment", data_p2$lith)  |  grepl("Sediment", data_p2$lith) |
-  grepl("shale", data_p2$lith)  |  grepl("Shale", data_p2$lith) |
-  grepl("clay", data_p2$lith)  |  grepl("Clay", data_p2$lith) |
-  grepl("stone", data_p2$lith)  |  grepl("carbonate", data_p2$lith) |
-  grepl("Carbonate", data_p2$lith)  |  grepl("Conglomerate", data_p2$lith) |
-  grepl("conglomerate", data_p2$lith)
+sediments <- grepl("sediment", data_p2$other, ignore.case=TRUE)  |  
+  grepl("shale", data_p2$other, ignore.case=TRUE)  |
+  grepl("clay", data_p2$other, ignore.case=TRUE)  |  
+  grepl("stone", data_p2$other, ignore.case=TRUE)  |  
+  grepl("carbonate", data_p2$other, ignore.case=TRUE) |
+  grepl("conglomerate", data_p2$other, ignore.case=TRUE) |
+  grepl("sediment", data_p2$lith, ignore.case=TRUE)  |  
+  grepl("shale", data_p2$lith, ignore.case=TRUE)  | 
+  grepl("clay", data_p2$lith, data_p2$lith, ignore.case=TRUE) |
+  grepl("stone", data_p2$lith, ignore.case=TRUE)  |  
+  grepl("carbonate", data_p2$lith, ignore.case=TRUE) |
+  grepl("conglomerate", data_p2$lith, ignore.case=TRUE) |
+  grepl("framboid", data_p2$other, ignore.case=TRUE) | 
+  grepl("nodul", data_p2$other, ignore.case=TRUE) | 
+  grepl("concretion", data_p2$other, ignore.case=TRUE)
 
 sediments <- subset(data_p2, sediments)
 
@@ -880,21 +869,13 @@ list <- as.data.frame(summary(data_p1$target_word))
 
 # compile framboid mentions
 
-framboids <- subset(data_p1, target_word == "framboidal pyrite"
-                    | target_word == "Framboidal pyrite"
-                    | target_word == "Framboidal Pyrite"
-                    | target_word == "pyrite framboids"
-                    | target_word == "pyrite framboid"
-                    | target_word == "Pyrite framboids"
-                    | target_word == "Pyrite framboid"
-                    | target_word == "Pyrite Framboids"
-                    | target_word == "Pyrite Framboid"
-                    | target_word == "PYRITE FRAMBOID"
-                    | target_word == "PYRITE FRAMBOIDS")
+framboids <- grepl("framboid", data_p1$target_word, ignore.case=TRUE)
+
+framboids <- subset(data_p1, framboids)
 
 # check mentions of pyrite framboid in concept description
 
-framboids1 <- grepl("yrite framboid", data_p1$other) | grepl("ramboidal pyrite", data_p1$other)
+framboids1 <- grepl("framboid", data_p1$other, ignore.case=TRUE)
 framboids1 <- subset(data_p1, framboids1)
 framboids <- rbind(framboids, framboids1)
 
@@ -925,31 +906,19 @@ framboids <- rbind(framboids1, framboids2, framboids3, framboids4)
 
 # block start
 
-nodules <- subset(data_p1, target_word == "pyrite nodules"
-                  | target_word == "pyrite concretions"
-                  | target_word == "Pyrite nodules"
-                  | target_word == "Pyrite nodule"
-                  | target_word == "nodular pyrite"
-                  | target_word == "oncretionary pyrite"
-                  | target_word == "pyritic nodules"
-                  | target_word == "pyritic concretions"
-                  | target_word == "concretions of pyrite"
-                  | target_word == "pyritic nodule"
-                  | target_word == "nodules of pyrite"
-                  | target_word == "Pyrite nodule"
-                  | target_word == "Pyrite concretions"
-                  | target_word == "Nodular pyrite"
-                  | target_word == "Pyritic nodules"
-                  | target_word == "pyrite concretion"
-                  | target_word == "Pyrite Nodules"
-                  | target_word == "Pyrite concretion"
-                  | target_word == "PYRITE NODULE"
-                  | target_word == "PYRITE NODULES")
+nodules <- grepl("nodul", data_p1$target_word, ignore.case=TRUE) | 
+  grepl("concretion", data_p1$target_word, ignore.case=TRUE) 
+
+nodules <- subset(data_p1, nodules)
 
 # include nodule mentions pulled from lexicons (concepts)
 
-nodules1 <- grepl("yrite concretion", data_p1$other) | grepl("yrite nodule", data_p1$other) | 
-  grepl("odules of pyrite", data_p1$other) | grepl("oncretions of pyrite", data_p1$other)
+nodules1 <- grepl("pyrite nodul", data_p1$other, ignore.case=TRUE) | grepl("pyrite concretion", data_p1$other, ignore.case=TRUE) |
+  grepl("pyritic nodul", data_p1$other, ignore.case=TRUE) | grepl("pyritic concretion", data_p1$other, ignore.case=TRUE) |
+  grepl("nodules of pyrite", data_p1$other, ignore.case=TRUE) | grepl("concretions of pyrite", data_p1$other, ignore.case=TRUE) | 
+  grepl("nodular pyrite", data_p1$other, ignore.case=TRUE) | grepl("concretionary pyrite", data_p1$other, ignore.case=TRUE)
+
+
 nodules1 <- subset(data_p1, nodules1)
 nodules <- rbind(nodules, nodules1)
 
@@ -967,6 +936,7 @@ nodules4 <- nodules4[!duplicated(nodules4$strat_name_id),]
 
 nodules <- rbind(nodules1, nodules2, nodules3, nodules4)
 
+
 # block end
 
 # now to process undifferentiated pyrite mentions
@@ -974,9 +944,9 @@ nodules <- rbind(nodules1, nodules2, nodules3, nodules4)
 # block start
 
 # pyritic strat concepts pulled from lexicons (undifferentiated)
-pyritic_strat <- grepl("pyrit", data_p1$other)  |  grepl("Pyrit", data_p1$other)
+pyritic_strat <- grepl("pyrit", data_p1$other, ignore.case=TRUE)
 pyritic_strat <- subset(data_p1, pyritic_strat)
-false <- !grepl("non-pyrit", pyritic_strat$other) & !grepl("Non-pyrit", pyritic_strat$other)
+false <- !grepl("non-pyrit", pyritic_strat$other, ignore.case=TRUE)
 pyritic_strat <- subset(pyritic_strat, false)
 
 all <- rbind(framboids, nodules)
@@ -990,10 +960,9 @@ all <- all[!duplicated(all$strat_name_id),]
 pyritic_strat <- safe_right_join(all, pyritic_strat, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
 pyritic_strat <- pyritic_strat[is.na(pyritic_strat$target_word),]
 
-pyrite_undif <- subset(data_p1, target_word == "pyrite"
-                       | target_word == "Pyrite"
-                       | target_word == "Pyritic"
-                       | target_word == "pyritic")
+pyrite <- grepl("\\<pyrite\\>", data_p1$target_word, ignore.case=TRUE) | grepl("\\<pyritic\\>", data_p1$target_word, ignore.case=TRUE)
+
+pyrite_undif <- subset(data_p1, pyrite)
 
 pyrite_undif <- rbind(pyritic_strat, pyrite_undif)
 
@@ -1004,12 +973,13 @@ pyrite_undif <- safe_right_join(sed.list, pyrite_undif, by = c("strat_name_id", 
 
 # in theory lith2 is the only requirement here (if defined by ALL sediments), but other terms added as a precaution
 
-sediments <- grepl("sediment", pyrite_undif$other)  |  grepl("Sediment", pyrite_undif$other) |
-  grepl("shale", pyrite_undif$other)  |  grepl("Shale", pyrite_undif$other) |
-  grepl("clay", pyrite_undif$other)  |  grepl("Clay", pyrite_undif$other) |
-  grepl("stone", pyrite_undif$other)  |  grepl("carbonate", pyrite_undif$other) |
-  grepl("Carbonate", pyrite_undif$other)  |  grepl("Conglomerate", pyrite_undif$other) |
-  grepl("conglomerate", pyrite_undif$other) | grepl("TRUE", pyrite_undif$lith2) 
+sediments <- grepl("sediment", pyrite_undif$other, ignore.case=TRUE)  |  
+  grepl("shale", pyrite_undif$other, ignore.case=TRUE)  |
+  grepl("clay", pyrite_undif$other, ignore.case=TRUE)  |  
+  grepl("stone", pyrite_undif$other, ignore.case=TRUE)  |  
+  grepl("carbonate", pyrite_undif$other, ignore.case=TRUE) |
+  grepl("conglomerate", pyrite_undif$other, ignore.case=TRUE) |
+  grepl("TRUE", pyrite_undif$lith2) 
 
 pyrite_undif <- subset(pyrite_undif, sediments)
 
@@ -1037,7 +1007,8 @@ pyrite_undif <- rbind(pyrite_undif1, pyrite_undif2, pyrite_undif3, pyrite_undif4
 
 # veins/mineralisation extraction as in part 1
 
-veins <- grepl("vein", pyrite_undif$phrase)  |  grepl("ineralisation", pyrite_undif$phrase)
+veins <- grepl("vein", pyrite_undif$phrase, ignore.case=TRUE)  |  
+  grepl("mineralisation", pyrite_undif$phrase, ignore.case=TRUE)
 
 veins <- subset(pyrite_undif, veins)
 
@@ -1143,18 +1114,29 @@ veins_bins <- veins_bins[!duplicated(veins_bins$V2),] # remove second 541
 
 data.sed <- safe_right_join(sed.list, data_p1, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
 
-sediments <- grepl("sediment", data.sed$other)  |  grepl("Sediment", data.sed$other) |
-  grepl("shale", data.sed$other)  |  grepl("Shale", data.sed$other) |
-  grepl("clay", data.sed$other)  |  grepl("Clay", data.sed$other) |
-  grepl("stone", data.sed$other)  |  grepl("carbonate", data.sed$other) |
-  grepl("Carbonate", data.sed$other)  |  grepl("Conglomerate", data.sed$other) |
-  grepl("conglomerate", data.sed$other) | grepl("ramb", data.sed$target_word) |
-  grepl("RAMB", data.sed$target_word)  | grepl("yrite con", data.sed$target_word) |
-  grepl("yrite nod", data.sed$other) | grepl("yrite Con", data.sed$target_word) |
-  grepl("yrite Nod", data.sed$target_word) | grepl("YRITE CON", data.sed$target_word) |
-  grepl("YRITE NOD", data.sed$other) | grepl("oncretions of pyrite", data.sed$target_word) |
-  grepl("odules of pyrite", data.sed$target_word) | grepl("odular pyrite", data.sed$target_word) |
-  grepl("oncretionary pyrite", data.sed$other) | grepl("TRUE", data.sed$lith2) 
+sediments <- grepl("sediment", data.sed$other, ignore.case=TRUE)  |  
+  grepl("shale", data.sed$other, ignore.case=TRUE)  |
+  grepl("clay", data.sed$other, ignore.case=TRUE)  |  
+  grepl("stone", data.sed$other, ignore.case=TRUE)  |  
+  grepl("carbonate", data.sed$other, ignore.case=TRUE) |
+  grepl("conglomerate", data.sed$other, ignore.case=TRUE) |
+  grepl("sediment", data.sed$lith, ignore.case=TRUE)  |  
+  grepl("shale", data.sed$lith, ignore.case=TRUE)  | 
+  grepl("clay", data.sed$lith, data.sed$lith, ignore.case=TRUE) |
+  grepl("stone", data.sed$lith, ignore.case=TRUE)  |  
+  grepl("carbonate", data.sed$lith, ignore.case=TRUE) |
+  grepl("conglomerate", data.sed$lith, ignore.case=TRUE) |
+  grepl("framboid", data.sed$target_word, ignore.case=TRUE) | 
+  grepl("nodul", data.sed$target_word, ignore.case=TRUE) | 
+  grepl("concretion", data.sed$target_word, ignore.case=TRUE) |
+  grepl("framboid", data.sed$other, ignore.case=TRUE) | 
+  grepl("pyrite nodul", data.sed$other, ignore.case=TRUE) | 
+  grepl("pyritic nodul", data.sed$other, ignore.case=TRUE) | 
+  grepl("nodules of pyrite", data.sed$other, ignore.case=TRUE) | 
+  grepl("pyrite concretion", data.sed$other, ignore.case=TRUE) |
+  grepl("concretionary pyrite", data.sed$other, ignore.case=TRUE) |
+  grepl("concretions of pyrite", data.sed$other, ignore.case=TRUE) |
+  grepl("TRUE", data.sed$lith2) 
 
 sediments <- subset(data.sed, sediments)
 
@@ -1245,7 +1227,7 @@ a <- ggplot() + theme_bw() +
   geom_step(data = nodulesR, aes(V2-0.5, V1)) + 
   geom_step(data = veinsR, aes(V2-0.5, V1)) + 
   geom_step(data = framboidsR, aes(V2-0.5, V1)) #+ 
-  #geom_vline(xintercept = c(Extras))
+#geom_vline(xintercept = c(Extras))
 
 b <- ggplot() + theme_bw() +
   scale_x_reverse(limits = c(541, Top)) +
@@ -1261,8 +1243,8 @@ b <- ggplot() + theme_bw() +
   theme(axis.title.y=element_blank(),
         axis.text.y=element_blank(),
         axis.ticks.y=element_blank()) #+ 
-  #geom_vline(xintercept = ME) #+ 
-  #geom_vline(xintercept = c(Es, OAEs))
+#geom_vline(xintercept = ME) #+ 
+#geom_vline(xintercept = c(Es, OAEs))
 
 #Extras, ME, OAEs, 
 
