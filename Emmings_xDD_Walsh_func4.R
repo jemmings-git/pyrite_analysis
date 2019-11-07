@@ -26,6 +26,7 @@ library(gridExtra)
 
 # clear working environment if re-running this script from Part 1 in the same R session
 rm(list=ls())
+source('macrostrat_data.R')
 
 # set working directory
 project_home <- 'N:/Data/xGDD/analysis'
@@ -52,15 +53,7 @@ extracts <- read_csv("results.csv")
 
 extracts <- extracts[!grepl(pattern = "\\~", extracts$strat_name_id),]   
 
-# import Macrostrat database files
 
-macrostrat_data <- function(filename, data_url){
-  if (!file.exists(filename)) {
-    download.file(data_url, filename, method="auto")
-  }
-  data <- fromJSON(filename)
-  return(data[["success"]][["data"]])
-}
 
 # import strat package Macrostrat database
 
@@ -224,3 +217,4 @@ download.file(zaffos_et_al, 'Zaffos_et_al.txt', method="auto")
 
 
 ##### END ####
+
