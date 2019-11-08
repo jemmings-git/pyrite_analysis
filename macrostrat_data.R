@@ -17,4 +17,4 @@ sedimentary_rocks <- function() {
   return(rocks)
 }
 
-
+sedimentary_rocks <- c(sedimentary_rocks(), "sediment")
