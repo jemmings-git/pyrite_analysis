@@ -544,9 +544,19 @@ sediments <- grepl("sediment", data_p2$other, ignore.case=TRUE)  |
   grepl("stone", data_p2$lith, ignore.case=TRUE)  |  
   grepl("carbonate", data_p2$lith, ignore.case=TRUE) |
   grepl("conglomerate", data_p2$lith, ignore.case=TRUE) |
+  grepl("framboid", data_p2$target_word, ignore.case=TRUE) | 
+  grepl("nodul", data_p2$target_word, ignore.case=TRUE) | 
+  grepl("concretion", data_p2$target_word, ignore.case=TRUE) |
   grepl("framboid", data_p2$other, ignore.case=TRUE) | 
-  grepl("nodul", data_p2$other, ignore.case=TRUE) | 
-  grepl("concretion", data_p2$other, ignore.case=TRUE)
+  grepl("pyrite nodul", data_p2$other, ignore.case=TRUE) | 
+  grepl("pyrite concretion", data_p2$other, ignore.case=TRUE) |
+  grepl("pyritic nodul", data_p2$other, ignore.case=TRUE) | 
+  grepl("pyritic concretion", data_p2$other, ignore.case=TRUE) |
+  grepl("nodules of pyrite", data_p2$other, ignore.case=TRUE) | 
+  grepl("concretions of pyrite", data_p2$other, ignore.case=TRUE) | 
+  grepl("nodular pyrite", data_p2$other, ignore.case=TRUE) | 
+  grepl("concretionary pyrite", data_p2$other, ignore.case=TRUE)
+
 
 sediments <- subset(data_p2, sediments)
 
