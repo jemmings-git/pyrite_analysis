@@ -20,6 +20,10 @@ library(gridExtra)
 library(tidyverse)
 
 
+rm(list=ls())
+
+source('macrostrat_data.R')
+
 project_home <- 'N:/Data/xGDD/analysis'
 tryCatch({
   setwd(project_home)
@@ -31,7 +35,6 @@ tryCatch({
 
 ###### PART 1 - using 'output 2' ('p2') - composite analysis of units and strat packages #####
 
-rm(list=ls())
 
 data_p2 <-  read.csv(file = "data_part2_comp.csv", row.names = 1)
 
@@ -44,7 +47,6 @@ data_p2 <-  read.csv(file = "data_part2_comp.csv", row.names = 1)
 # run this block below - this is required for normalisation to all sediments
 # Further subdivision, such as 'marine', etc. is not presently implemented
 
-source('macrostrat_data.R')
 
 data_p2$lith2 <- grepl(paste(sedimentary_rocks, collapse = "|"), data_p2$lith, ignore.case=TRUE) | 
   grepl(paste(sedimentary_rocks, collapse = "|"), data_p2$other, ignore.case=TRUE)
