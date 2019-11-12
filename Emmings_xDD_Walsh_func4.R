@@ -34,26 +34,35 @@ project_home <- 'N:/Data/xGDD/analysis'
 tryCatch({
   setwd(project_home)
 }, error = function(err) { 
-    if (dir.exists('./data')) {
-      setwd('./data') }
+  if (dir.exists('./data')) {
+    setwd('./data') }
 }
 )
 
+source('macrostrat_data.R') # use choices below to find strat flag hits not in concepts database
+
+rocks <- sedimentary_rocks # normalisation to all sedimentary rocks
+rocks <- meta_sedimentary_rocks # normalisation to all sedimentary and metamorphosed sedimentary rocks
+rocks <- mud_rocks # normalisation to mudstones - perhaps this is the most robust approach
+
+
 # import GDD extractions # (note 'results2' is with new pyrite terms 24/10/19
 
-if (!file.exists('results.csv')) {
+if (!file.exists('results2.csv')) {
   source_data <- 'https://geodeepdive.org/app_output/jemmings_with_pyrite_24Oct2019.zip'
   download.file(source_data, 'jemmings_etal.zip', method='auto')
   unzip('jemmings_etal.zip')
 }
 
-extracts <- read_csv("results.csv")
+extracts <- read_csv("results2.csv")
 
 # remove unresolved strat_name_id hits
 
 extracts <- extracts[!grepl(pattern = "\\~", extracts$strat_name_id),]   
 
-
+length(unique(extracts$docid)) # metrics - no. of documents
+length(unique(extracts$strat_name_id)) # metrics - no. of strat packages
+length(unique(extracts$result_id))
 
 # import strat package Macrostrat database
 
@@ -65,6 +74,12 @@ concepts <- macrostrat_data("concepts.json", "https://macrostrat.org/api/defs/st
 
 ## output 1 - merge of strat and concepts 
 strat_concepts <- right_join(strat, concepts, by = c("concept_id", "concept_id"))
+
+strat_flags <- subset(strat, grepl(paste(rocks, collapse = "|"), strat$strat_name_long, ignore.case=TRUE))
+
+strat_flags <- subset(strat_flags, concept_id == 0)
+
+strat_concepts <- safe_full_join(strat_flags, strat_concepts, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
 
 # import units Macrostrat database
 
@@ -85,6 +100,8 @@ strat_units <- safe_right_join(units, strat, by = c("strat_name_id", "strat_name
 
 strat_units$concept_id  = as.integer(strat_units$concept_id)
 concepts$concept_id  = as.integer(concepts$concept_id)
+
+concepts <- safe_full_join(strat_flags, concepts, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
 
 strat_units_concepts <- right_join(strat_units, concepts, by = c("concept_id", "concept_id"))
 
@@ -217,4 +234,3 @@ download.file(zaffos_et_al, 'Zaffos_et_al.txt', method="auto")
 
 
 ##### END ####
-
