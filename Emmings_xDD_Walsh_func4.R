@@ -26,7 +26,6 @@ library(gridExtra)
 
 # clear working environment if re-running this script from Part 1 in the same R session
 rm(list=ls())
-source('macrostrat_data.R')
 
 # set working directory
 project_home <- 'N:/Data/xGDD/analysis'
@@ -73,11 +72,15 @@ strat <- macrostrat_data("strat.json", "https://macrostrat.org/api/defs/strat_na
 concepts <- macrostrat_data("concepts.json", "https://macrostrat.org/api/defs/strat_name_concepts?all&format=json&response=long")
 
 ## output 1 - merge of strat and concepts 
-strat_concepts <- right_join(strat, concepts, by = c("concept_id", "concept_id"))
+strat_concepts <- right_join(strat, concepts, by = c("concept_id", "concept_id")) # right join - on the basis strat packages with concept = 0 are captured below
+
+# find entries without concept but can be included on the basis of strat_flag def
 
 strat_flags <- subset(strat, grepl(paste(rocks, collapse = "|"), strat$strat_name_long, ignore.case=TRUE))
 
 strat_flags <- subset(strat_flags, concept_id == 0)
+
+# join for complete lith output
 
 strat_concepts <- safe_full_join(strat_flags, strat_concepts, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
 
@@ -87,23 +90,33 @@ units <- macrostrat_data("units.json", "https://macrostrat.org/api/units?age_top
 
 # merge the two Macrostrat databases into one - match using strat_names_ID
 
+strat_concepts$strat_name_id  = as.character(strat_concepts$strat_name_id)
 strat$strat_name_id  = as.character(strat$strat_name_id)
 units$strat_name_id  = as.character(units$strat_name_id)
 
 ## output 2 - composite database where units are propagated and prioritised (where available)
 
-# first merge units and strat databases
+# coalesce units and strat databases (units prioritised)
 
-strat_units <- safe_right_join(units, strat, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
+units_strat <- safe_right_join(units, strat, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
 
-# then merge to concepts
+units_strat_concepts <- right_join(concepts, units_strat, by = c("concept_id", "concept_id"))
 
-strat_units$concept_id  = as.integer(strat_units$concept_id)
-concepts$concept_id  = as.integer(concepts$concept_id)
+# extract units
 
-concepts <- safe_full_join(strat_flags, concepts, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
+units2 <- units_strat_concepts[!is.na(units_strat_concepts$unit_id),] # carry forward all units (lith info is subsetted during later analysis)
 
-strat_units_concepts <- right_join(strat_units, concepts, by = c("concept_id", "concept_id"))
+# extract strat units
+
+strat2 <- units_strat_concepts[is.na(units_strat_concepts$unit_id),]
+
+strat_flags2 <- subset(strat2, grepl(paste(rocks, collapse = "|"), strat2$strat_name_long, ignore.case=TRUE))
+
+strat_flags2 <- subset(strat_flags2, concept_id == 0) # this brings forward all strat packages with lith mentioned in the strat name (e.g., flag) but without a concept
+
+strat2 <- subset(strat2, concept_id != 0) #| concept_id != NA) this part not necessary. This brings forward all strat packages with a concept
+
+strat_units_concepts <- rbind(strat2, strat_flags2, units2) # combine
 
 ## next step is to join both dataframes (options 1 and 2) to the xDD extracts 
 
