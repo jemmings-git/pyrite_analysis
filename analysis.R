@@ -18,16 +18,18 @@ tryCatch({
 
 source('macrostrat_data.R')
 
+# choose one of the following rocks and rocks2 defs
+
 rocks <- sedimentary_rocks # normalisation to all sedimentary rocks
 rocks2 <- sedimentary_rocks
 
 rocks <- meta_sedimentary_rocks # normalisation to all sedimentary and metamorphosed sedimentary rocks
 rocks2 <- meta_sedimentary_rocks
 
-rocks <- mud_rocks # normalisation to mudstones - perhaps this is the most robust approach
+rocks <- mud_rocks # normalisation to mudstones
 rocks2 <- mud_rocks
 
-# or two tiered-subset
+# or two tiered-subset - again choose one of the below
 
 rocks <- meta_sedimentary_rocks # normalisation to marine sedimentary & metased rocks
 rocks2 <- marine
@@ -55,6 +57,7 @@ library(tidyverse)
 ###### PART 1 - using 'output 2' ('p2') - composite analysis of units and strat packages #####
 
 data_p2 <-  read.csv(file = "data_part2_comp.csv", row.names = 1)
+
 
 # generate complete list of sedimentary units for part 2 - 
 # this is done by propagating unit lith info to strat IDs
@@ -511,12 +514,14 @@ sediments_bins <- sediments_bins[c(1:541,543:889),] # remove duplicate 541
 
 pyrite_undif_bins$V1 <- pyrite_undif_bins$V1-veins_bins$V1
 
-# ratios - S indicates stacked, R indicates not stacked
+# use below for plot 1 - S indicates stacked
 
 framboidsS <- as.data.frame(cbind((framboids_bins$V1)/sediments_bins$V1,nodules_bins$V2))
 nodulesS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
 veinsS <- as.data.frame(cbind((veins_bins$V1+framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,veins_bins$V2))
 undifS <- as.data.frame(cbind((pyrite_undif_bins$V1+veins_bins$V1+framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
+
+# - ratios - not presently in use 
 
 framboidsR <- as.data.frame(cbind((framboids_bins$V1)/sediments_bins$V1,nodules_bins$V2))
 nodulesR <- as.data.frame(cbind((nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
@@ -528,7 +533,7 @@ ratio <- as.data.frame(cbind((framboidsR$V1)/(framboidsR$V1+nodulesR$V1),nodules
 ratio$V1[is.nan(ratio$V1)] <- NA
 frams_nods <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
 
-# alternative - normalised to all pyrite-bearing 'rocks',  - R indicates stacked
+# alternative used for plot 2 - normalised to all pyrite-bearing 'rocks',  - R indicates stacked
 
 framboidsS <- as.data.frame(cbind((framboids_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1+veins_bins$V1),nodules_bins$V2))
 nodulesS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1+veins_bins$V1),nodules_bins$V2))
@@ -564,6 +569,8 @@ Top <- -0 # top age for plot (in Ma), set at -0.5 in order to centre bins
 Bottom <- 3500 # bottom age for plot (in Ma)
 phanerozoic_increment <- 1
 precambrian_increment <- 10
+
+# output - select 'plot 1' or 'plot 2' code blocks above then print a and b below
 
 a <- ggplot() + theme_bw() +
   scale_x_reverse(limits = c(Bottom, 541)) +
@@ -602,320 +609,7 @@ b <- ggplot() + theme_bw() +
 
 grid.arrange(a,b, ncol = 2)
 
-# discrete histograms - not stacked
-
-a <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(Bottom, 541)) +
-  #scale_y_continuous(limits = c(0,0.6)) +
-  geom_stepribbon(data = allR, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
-  geom_step(data = allR, aes(V2-0.5, V1)) +
-  geom_vline(xintercept = c(Extras)) 
-
-b <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(541, Top)) +
-  #scale_y_continuous(limits = c(0,0.6)) +
-  geom_stepribbon(data = allR, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
-  geom_step(data = allR, aes(V2-0.5, V1)) +
-  theme(axis.title.y=element_blank(),
-        axis.text.y=element_blank(),
-        axis.ticks.y=element_blank()) +
-  geom_vline(xintercept = c(Extras))  +
-  geom_vline(xintercept = c(OAEs), colour = 'red') 
-
-c <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(Bottom, 541)) +
-  #scale_y_continuous(limits = c(0,0.6)) +
-  geom_stepribbon(data = undifR, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
-  geom_stepribbon(data = veinsR, aes(V2-0.5, ymin = 0, ymax = V1), fill = "green") +
-  geom_step(data = undifR, aes(V2-0.5, V1)) +
-  geom_step(data = veinsR, aes(V2-0.5, V1)) +
-  geom_vline(xintercept = c(Extras)) 
-
-d <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(541, Top)) +
-  #scale_y_continuous(limits = c(0,0.6)) +
-  geom_stepribbon(data = undifR, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
-  geom_stepribbon(data = veinsR, aes(V2-0.5, ymin = 0, ymax = V1), fill = "green") +
-  geom_step(data = undifR, aes(V2-0.5, V1)) +
-  geom_step(data = veinsR, aes(V2-0.5, V1)) +
-  theme(axis.title.y=element_blank(),
-        axis.text.y=element_blank(),
-        axis.ticks.y=element_blank()) +
-  geom_vline(xintercept = c(Extras))  +
-  geom_vline(xintercept = c(OAEs), colour = 'red') 
-
-e <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(Bottom, 541)) +
-  #scale_y_continuous(limits = c(0,0.6)) +
-  geom_stepribbon(data = framboidsR, aes(V2-0.5, ymin = 0, ymax = V1), fill = "red") +
-  geom_step(data = framboidsR, aes(V2-0.5, V1)) +
-  geom_vline(xintercept = c(Extras)) 
-
-f <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(541, Top)) +
-  #scale_y_continuous(limits = c(0,0.6)) +
-  geom_stepribbon(data = framboidsR, aes(V2-0.5, ymin = 0, ymax = V1), fill = "red") +
-  geom_step(data = framboidsR, aes(V2-0.5, V1)) +
-  theme(axis.title.y=element_blank(),
-        axis.text.y=element_blank(),
-        axis.ticks.y=element_blank()) +
-  geom_vline(xintercept = c(Extras))  +
-  geom_vline(xintercept = c(OAEs), colour = 'red') 
-
-g <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(Bottom, 541)) +
-  #scale_y_continuous(limits = c(0,0.6)) +
-  geom_stepribbon(data = nodulesR, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue") +
-  geom_step(data = nodulesR, aes(V2-0.5, V1)) +
-  geom_vline(xintercept = c(Extras)) 
-
-h <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(541, Top)) +
-  #scale_y_continuous(limits = c(0,0.6)) +
-  geom_stepribbon(data = nodulesR, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue") +
-  geom_step(data = nodulesR, aes(V2-0.5, V1)) +
-  theme(axis.title.y=element_blank(),
-        axis.text.y=element_blank(),
-        axis.ticks.y=element_blank()) +
-  geom_vline(xintercept = c(Extras))  +
-  geom_vline(xintercept = c(OAEs), colour = 'red') 
-
-#Extras, ME, OAEs, 
-
-# generate plots
-
-grid.arrange(a,b,c,d,e,f,g,h, ncol = 2)
-
-# plot of framboid/(framboid+nodule) ratio
-
-a <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(Bottom, 541)) +
-  #scale_y_continuous(limits = c(0,0.3)) +
-  geom_stepribbon(data = ratio, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
-  geom_step(data = ratio, aes(V2-0.5, V1)) + 
-  geom_vline(xintercept = c(Extras))
-
-b <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(541, Top)) +
-  #scale_y_continuous(limits = c(0,0.3)) +
-  geom_stepribbon(data = ratio, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
-  geom_step(data = ratio, aes(V2-0.5, V1)) + 
-  theme(axis.title.y=element_blank(),
-        axis.text.y=element_blank(),
-        axis.ticks.y=element_blank()) +
-  geom_vline(xintercept = c(Extras)) #+ 
-#geom_vline(xintercept = ME) #+ 
-#geom_vline(xintercept = c(Es, OAEs))
-
-#Extras, ME, OAEs, 
-
-# generate plots
-
-grid.arrange(a,b, ncol = 2)
-
-
 # block end
-
-##### Part 1 follow-on - fragmentation index and convex hull facets for each period ####
-## in development 08/11/19 ##
-
-# import geological period info
-
-periods <- read.delim("periods.txt")
-
-periods<- periods[seq(dim(periods)[1],1),]
-
-breaks <- periods$Breaks
-
-periods$Period <- factor(periods$Period, levels=unique(periods$Period))
-periods <- periods$Period
-
-# import zaffos file - https://github.com/UW-Macrostrat/PNAS_201702297/blob/master/FinalData/ContinuousTimeSeries.csv
-
-zaffos <- read.delim("Zaffos_et_al.txt")
-
-zaffos <- zaffos[,1:2]
-
-names(zaffos)<- c("V2", "fragmentation")
-
-names(veinsR)<- c("veinsR", "V2")
-names(nodulesR)<- c("nodulesR", "V2")
-names(framboidsR)<- c("framboidsR", "V2")
-names(all)<- c("all", "V2")
-names(frams_nods)<- c("frams_nods", "V2")
-
-zaffos <- left_join(veinsR, zaffos, by = c("V2", "V2"))
-zaffos <- left_join(nodulesR, zaffos, by = c("V2", "V2"))
-zaffos <- left_join(framboidsR, zaffos, by = c("V2", "V2"))
-zaffos <- left_join(all, zaffos, by = c("V2", "V2"))
-zaffos <- left_join(frams_nods, zaffos, by = c("V2", "V2"))
-
-test <- zaffos$fragmentation
-
-# plot - not sure if it is worth further investigating? doesn't appear to be any key relationship
-zaffos <- zaffos[2:541,]
-
-fit <- lm(fragmentation ~ poly(V2,6,raw=TRUE), zaffos)
-zaffos$fitted <- fitted(fit)
-
-ggplot(zaffos, aes(x=V2)) + 
-  geom_line(aes(y = fragmentation), colour="red") + 
-  geom_line(aes(y = fitted), colour="blue") + theme_bw()
-
-zaffos$slope <- c(diff(zaffos$fitted) / diff(zaffos$V2), NA)
-
-zaff <- ggplot(zaffos, aes(x=V2)) + 
-  geom_line(aes(y = fragmentation), colour="red") + 
-  geom_line(aes(y = fitted), colour="blue") + theme_bw() + 
-  #geom_line(aes(y = slope*150), colour="red") +
-  scale_x_reverse(limits = c(541, Top))
-
-b <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(541, Top)) +
-  #scale_y_continuous(limits = c(0,0.3)) +
-  geom_stepribbon(data = ratio, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
-  geom_step(data = ratio, aes(V2-0.5, V1)) + 
-  geom_vline(xintercept = c(Extras)) + 
-  theme_bw() +
-  stat_smooth(data = ratio,aes(V2-0.5, V1), colour = "black", method=lm, formula = y ~ poly(x,8)) +
-  geom_line(data = zaffos, aes(x = V2, y = slope*150), colour="red")
-
-grid.arrange(b, zaff)
-
-# one option might be to explore D() i.e., differentiating the fragmentation curve
-
-# superimposed onto strat_only plot 
-
-p <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(541, Top)) +
-  scale_y_continuous(limits = c(0,0.3)) +
-  geom_stepribbon(data = all, aes(V2-0.5, ymin = 0, ymax = all), fill = "grey") +
-  geom_stepribbon(data = nodulesR, aes(V2-0.5, ymin = 0, ymax = nodulesR), fill = "blue") +
-  geom_stepribbon(data = framboidsR, aes(V2-0.5, ymin = 0, ymax = framboidsR), fill = "red") +
-  geom_stepribbon(data = veinsR, aes(V2-0.5, ymin = 0, ymax = veinsR), fill = "green") +
-  geom_step(data = framboidsR, aes(V2-0.5, framboidsR)) + 
-  geom_step(data = nodulesR, aes(V2-0.5, nodulesR)) + 
-  geom_step(data = veinsR, aes(V2-0.5, veinsR)) + 
-  geom_step(data = all, aes(V2-0.5, all)) +
-  geom_line(data = zaffos, aes(V2, fragmentation/3)) +
-  scale_y_continuous(sec.axis = sec_axis(~.), limits = c(0, 0.35))
-
-print(p)
-
-# facets by period - in this example plotting the ratio of framboids/nodules versus pyritic vs. non-pyritic packages and units
-
-pyrites <- rbind(framboids, nodules, pyrite_undif) # OPTION A
-
-length(unique(pyrites$docid)) # metrics - no. of documents
-length(unique(pyrites$strat_name_id)) # metrics - no. of strat packages
-length(unique(pyrites$unit_id)) # metrics - no. of units
-length(unique(pyrites$result_id)) # metrics - no. of target phrases
-
-pyrites <- rbind(framboids, nodules) # OPTION B
-
-pyrites1 <- subset(pyrites, value > cutoff)
-pyrites2 <- pyrites1[!duplicated(pyrites1$unit_id), ]
-pyrites3 <- pyrites1[is.na(pyrites1$unit_id),]
-pyrites2 <- pyrites2[!is.na(pyrites2$unit_id),]
-pyrites3 <- pyrites3[!duplicated(pyrites3$strat_name_id),]
-pyrites1 <- rbind(pyrites2, pyrites3)
-
-pyrites2 <- subset(pyrites, value < cutoff)
-pyrites3 <- pyrites2[!duplicated(pyrites2$unit_id), ]
-pyrites4 <- pyrites2[is.na(pyrites2$unit_id),]
-pyrites3 <- pyrites3[!is.na(pyrites3$unit_id),]
-pyrites4 <- pyrites4[!duplicated(pyrites4$strat_name_id),]
-pyrites2 <- rbind(pyrites3, pyrites4)
-
-pyrites <- rbind(pyrites1, pyrites2)
-
-# fix for Phanerozoic vs. Precambrian below
-
-pyrites1 <- subset(pyrites, value <= 541)
-pyrites1$V2 <- round(pyrites1$value, digits = 0)
-
-pyrites2 <- subset(pyrites, value > 541)
-pyrites2$value <- pyrites2$value-1
-pyrites2$V2 <- round(pyrites2$value, digits = -1)
-pyrites2$value <- pyrites2$value+1
-pyrites2$V2 <- pyrites2$V2+1
-
-pyrites <- rbind(pyrites1, pyrites2)
-
-# use frams_nods from this point onwards (i.e, framboids+nodules/ sed packages)
-# or 'all' is (framboids+nodules+pyrite undif/sed packages)
-
-nodules.ratio <- as.data.frame(cbind((nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
-framboids.ratio <- as.data.frame(cbind((framboids_bins$V1)/sediments_bins$V1,framboids_bins$V2))
-
-names(nodules.ratio)<- c("nodules", "V2")
-names(framboids.ratio)<- c("framboids", "V2")
-
-test <- left_join(pyrites, nodules.ratio, by = c("V2", "V2"))
-test <- left_join(test, framboids.ratio, by = c("V2", "V2"))
-
-#test <- left_join(test, all, by = c("V2", "V2"))
-#test <- left_join(test, frams_nods, by = c("V2", "V2"))
-
-test$period <- cut(test$V2, 
-                   breaks=c(-Inf, 2500, 541, 485, 444, 419, 359, 299, 252, 201, 145, 66, 23, 3, Inf),
-                   labels=periods)
-
-#unique(test$econ)
-
-test <- test[!is.infinite(test$nodules),]
-test <- test[!is.na(test$nodules),]
-test <- test[!is.infinite(test$framboids),]
-test <- test[!is.na(test$framboids),]
-
-hull_test <- test %>%
-  group_by(strat_name_id) %>%
-  slice(chull(nodules, framboids))
-
-# optional removal of quaternary & archaean
-
-#hull_test <- hull_test[which(hull_test$period != "Quaternary"),]
-#hull_test <- hull_test[which(hull_test$period != "Archaean"),]
-
-# x axis - ratio of framboids:nodules, y-axis proportion of framboids+nodules normalised to sed. packages
-
-ggplot(hull_test, aes(nodules, framboids)) + geom_polygon(aes(group = strat_name_id, fill = period), alpha = 0.5) +
-  theme_bw() + 
-  #scale_y_log10(limits = c(0.001, 0.1)) +
-  #scale_x_log10(limits = c(0.001, 0.1)) +
-  geom_polygon(aes(group = strat_name_id), colour = "black", alpha = 0) +
-  facet_wrap(~period) + 
-  #geom_hline(yintercept = c(0.02, 0.06)) +
-  #geom_vline(xintercept = 0.35) +
-  geom_point(aes(fill = period), colour = "black", pch = 21)
-
-# or for y axis as all pyrite mentions (including undifferentiated)
-
-test <- test[!is.infinite(test$V1),]
-test <- test[!is.na(test$V1),]
-test <- test[!is.infinite(test$all),]
-test <- test[!is.na(test$all),]
-
-hull_test <- test %>%
-  group_by(strat_name_id) %>%
-  slice(chull(V1, all))
-
-# optional removal of quaternary
-
-#hull_test <- hull_test[which(hull_test$period != "Quaternary"),]
-#hull_test <- hull_test[which(hull_test$period != "Archaean"),]
-
-# x axis - ratio of framboids:nodules, y-axis proportion of framboids+nodules normalised to sed. packages
-
-ggplot(hull_test, aes(V1, all)) + geom_polygon(aes(group = strat_name_id, fill = period), alpha = 0.5) +
-  theme_bw() + 
-  #scale_y_log10(limits = c(0.003, 0.3)) +
-  #scale_x_continuous(limits = c(0.1, 0.5)) +
-  geom_polygon(aes(group = strat_name_id), colour = "black", alpha = 0) +
-  facet_wrap(~period) + geom_hline(yintercept = c(0.15, 0.25)) +
-  geom_vline(xintercept = 0.35) +
-  geom_point(aes(fill = period), colour = "black", pch = 21)
-
 
 ###### PART 2 - this section is to generate an output without propagation of units ##### 
 # Retain sed.list generated in part 1
@@ -1275,12 +969,14 @@ sediments_bins <- sediments_bins[c(1:541,543:889),] # remove duplicate 541
 
 pyrite_undif_bins$V1 <- pyrite_undif_bins$V1-veins_bins$V1
 
-# ratios - S indicates stacked, R indicates not stacked
+# choose for plot 3 - S indicates stacked
 
 framboidsS <- as.data.frame(cbind((framboids_bins$V1)/sediments_bins$V1,nodules_bins$V2))
 nodulesS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
 veinsS <- as.data.frame(cbind((veins_bins$V1+framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,veins_bins$V2))
 undifS <- as.data.frame(cbind((pyrite_undif_bins$V1+veins_bins$V1+framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
+
+# alternative as ratios (R indicates not stacked) - not presently used
 
 framboidsR <- as.data.frame(cbind((framboids_bins$V1)/sediments_bins$V1,nodules_bins$V2))
 nodulesR <- as.data.frame(cbind((nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
@@ -1292,12 +988,14 @@ ratio <- as.data.frame(cbind((framboidsR$V1)/(framboidsR$V1+nodulesR$V1),nodules
 ratio$V1[is.nan(ratio$V1)] <- NA
 frams_nods <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
 
-# alternative - normalised to all pyrite-bearing 'rocks',  - R indicates stacked
+# choose for plot 4 - S indicates stacked
 
 framboidsS <- as.data.frame(cbind((framboids_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1+veins_bins$V1),nodules_bins$V2))
 nodulesS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1+veins_bins$V1),nodules_bins$V2))
 veinsS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1+veins_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1+veins_bins$V1),nodules_bins$V2))
 undifS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1+veins_bins$V1+pyrite_undif_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1+veins_bins$V1),nodules_bins$V2))
+
+# alternative using ratios - not presently used
 
 framboidsR <- as.data.frame(cbind((framboids_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1+veins_bins$V1),nodules_bins$V2))
 nodulesR <- as.data.frame(cbind((nodules_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1+veins_bins$V1),nodules_bins$V2))
@@ -1322,7 +1020,7 @@ supercontinents <- c(320, 170, 900, 700, 1600, 1400) # from Li et al. 2019 Preca
 carb.intervals <- c(541, 465, 372, 323, 265, 227, 164, 133)
 lows <- c(323, 299, 201, 170) # carb.intervals and lows from Riding et al. 2019
 
-# plots
+# output - choose plot 3 or plot 4 code blocks then print a and b below
 
 Top <- -0 # top age for plot (in Ma), set at -0.5 in order to centre bins
 Bottom <- 3500 # bottom age for plot (in Ma)
@@ -1331,7 +1029,7 @@ precambrian_increment <- 10
 
 a <- ggplot() + theme_bw() +
   scale_x_reverse(limits = c(Bottom, 541)) +
-  scale_y_continuous(limits = c(0,0.5)) +
+  scale_y_continuous(limits = c(0,1)) +
   geom_stepribbon(data = undifS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
   geom_stepribbon(data = veinsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "green") +
   geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue") +
@@ -1344,7 +1042,7 @@ a <- ggplot() + theme_bw() +
 
 b <- ggplot() + theme_bw() +
   scale_x_reverse(limits = c(541, Top)) +
-  scale_y_continuous(limits = c(0,0.5)) +
+  scale_y_continuous(limits = c(0,1)) +
   geom_stepribbon(data = undifS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
   geom_stepribbon(data = veinsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "green") +
   geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue") +
@@ -1365,258 +1063,3 @@ b <- ggplot() + theme_bw() +
 # generate plots
 
 grid.arrange(a,b, ncol = 2)
-
-# discrete histograms - not stacked
-
-a <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(Bottom, 541)) +
-  #scale_y_continuous(limits = c(0,0.6)) +
-  geom_stepribbon(data = allR, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
-  geom_step(data = allR, aes(V2-0.5, V1)) +
-  geom_vline(xintercept = c(Extras)) 
-
-b <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(541, Top)) +
-  #scale_y_continuous(limits = c(0,0.6)) +
-  geom_stepribbon(data = allR, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
-  geom_step(data = allR, aes(V2-0.5, V1)) +
-  theme(axis.title.y=element_blank(),
-        axis.text.y=element_blank(),
-        axis.ticks.y=element_blank()) +
-  geom_vline(xintercept = c(Extras))  +
-  geom_vline(xintercept = c(OAEs), colour = 'red') 
-
-c <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(Bottom, 541)) +
-  #scale_y_continuous(limits = c(0,0.6)) +
-  geom_stepribbon(data = undifR, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
-  geom_stepribbon(data = veinsR, aes(V2-0.5, ymin = 0, ymax = V1), fill = "green") +
-  geom_step(data = undifR, aes(V2-0.5, V1)) +
-  geom_step(data = veinsR, aes(V2-0.5, V1)) +
-  geom_vline(xintercept = c(Extras)) 
-
-d <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(541, Top)) +
-  #scale_y_continuous(limits = c(0,0.6)) +
-  geom_stepribbon(data = undifR, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
-  geom_stepribbon(data = veinsR, aes(V2-0.5, ymin = 0, ymax = V1), fill = "green") +
-  geom_step(data = undifR, aes(V2-0.5, V1)) +
-  geom_step(data = veinsR, aes(V2-0.5, V1)) +
-  theme(axis.title.y=element_blank(),
-        axis.text.y=element_blank(),
-        axis.ticks.y=element_blank()) +
-  geom_vline(xintercept = c(Extras))  +
-  geom_vline(xintercept = c(OAEs), colour = 'red') 
-
-e <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(Bottom, 541)) +
-  #scale_y_continuous(limits = c(0,0.6)) +
-  geom_stepribbon(data = framboidsR, aes(V2-0.5, ymin = 0, ymax = V1), fill = "red") +
-  geom_step(data = framboidsR, aes(V2-0.5, V1)) +
-  geom_vline(xintercept = c(Extras)) 
-
-f <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(541, Top)) +
-  #scale_y_continuous(limits = c(0,0.6)) +
-  geom_stepribbon(data = framboidsR, aes(V2-0.5, ymin = 0, ymax = V1), fill = "red") +
-  geom_step(data = framboidsR, aes(V2-0.5, V1)) +
-  theme(axis.title.y=element_blank(),
-        axis.text.y=element_blank(),
-        axis.ticks.y=element_blank()) +
-  geom_vline(xintercept = c(Extras))  +
-  geom_vline(xintercept = c(OAEs), colour = 'red') 
-
-g <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(Bottom, 541)) +
-  #scale_y_continuous(limits = c(0,0.6)) +
-  geom_stepribbon(data = nodulesR, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue") +
-  geom_step(data = nodulesR, aes(V2-0.5, V1)) +
-  geom_vline(xintercept = c(Extras)) 
-
-h <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(541, Top)) +
-  #scale_y_continuous(limits = c(0,0.6)) +
-  geom_stepribbon(data = nodulesR, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue") +
-  geom_step(data = nodulesR, aes(V2-0.5, V1)) +
-  theme(axis.title.y=element_blank(),
-        axis.text.y=element_blank(),
-        axis.ticks.y=element_blank()) +
-  geom_vline(xintercept = c(Extras))  +
-  geom_vline(xintercept = c(OAEs), colour = 'red') 
-
-#Extras, ME, OAEs, 
-
-# generate plots
-
-grid.arrange(a,b,c,d,e,f,g,h, ncol = 2)
-
-# block end
-
-##### Part 2 follow-on - fragmentation index and convex hull facets for each period ####
-## in development 08/11/19 ##
-
-# import geological period info
-
-periods <- read.delim("periods.txt")
-
-periods<- periods[seq(dim(periods)[1],1),]
-
-breaks <- periods$Breaks
-
-periods$Period <- factor(periods$Period, levels=unique(periods$Period))
-periods <- periods$Period
-
-# import zaffos file - https://github.com/UW-Macrostrat/PNAS_201702297/blob/master/FinalData/ContinuousTimeSeries.csv
-
-zaffos <- read.delim("Zaffos_et_al.txt", sep=",")
-
-zaffos <- zaffos[,1:2]
-
-names(zaffos)<- c("V2", "fragmentation")
-
-names(veinsR)<- c("veinsR", "V2")
-names(nodulesR)<- c("nodulesR", "V2")
-names(framboidsR)<- c("framboidsR", "V2")
-names(all)<- c("all", "V2")
-names(frams_nods)<- c("frams_nods", "V2")
-
-zaffos <- left_join(veinsR, zaffos, by = c("V2", "V2"))
-zaffos <- left_join(nodulesR, zaffos, by = c("V2", "V2"))
-zaffos <- left_join(framboidsR, zaffos, by = c("V2", "V2"))
-zaffos <- left_join(all, zaffos, by = c("V2", "V2"))
-zaffos <- left_join(frams_nods, zaffos, by = c("V2", "V2"))
-
-test <- zaffos$fragmentation
-
-# plot - not sure if it is worth further investigating? doesn't appear to be any key relationship
-
-ggplot(zaffos) + geom_line(aes(V2, fragmentation)) +
-  stat_smooth(aes(V2, fragmentation), colour = "black", method=lm, formula = y ~ poly(x,6)) +
-  theme_bw() + scale_x_continuous(limits = c(0,541))
-
-# one option might be to explore D() i.e., differentiating the fragmentation curve
-
-# superimposed onto strat_only plot 
-
-p <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(541, Top)) +
-  scale_y_continuous(limits = c(0,0.3)) +
-  geom_stepribbon(data = all, aes(V2-0.5, ymin = 0, ymax = all), fill = "grey") +
-  geom_stepribbon(data = nodulesR, aes(V2-0.5, ymin = 0, ymax = nodulesR), fill = "blue") +
-  geom_stepribbon(data = framboidsR, aes(V2-0.5, ymin = 0, ymax = framboidsR), fill = "red") +
-  geom_stepribbon(data = veinsR, aes(V2-0.5, ymin = 0, ymax = veinsR), fill = "green") +
-  geom_step(data = framboidsR, aes(V2-0.5, framboidsR)) + 
-  geom_step(data = nodulesR, aes(V2-0.5, nodulesR)) + 
-  geom_step(data = veinsR, aes(V2-0.5, veinsR)) + 
-  geom_step(data = all, aes(V2-0.5, all)) +
-  geom_line(data = zaffos, aes(V2, fragmentation/3)) +
-  scale_y_continuous(sec.axis = sec_axis(~.), limits = c(0, 0.35))
-
-print(p)
-
-# facets by period - in this example plotting the ratio of framboids/nodules versus pyritic vs. non-pyritic packages and units
-
-pyrites <- rbind(framboids, nodules, pyrite_undif) # OPTION A
-
-length(unique(pyrites$docid)) # metrics - no. of documents
-length(unique(pyrites$strat_name_id)) # metrics - no. of strat packages
-length(unique(pyrites$unit_id)) # metrics - no. of units
-length(unique(pyrites$result_id)) # metrics - no. of target phrases
-
-pyrites <- rbind(framboids, nodules) # OPTION B
-
-pyrites1 <- subset(pyrites, value > cutoff)
-pyrites1 <- pyrites1[!duplicated(pyrites1$strat_name_id),]
-
-pyrites2 <- subset(pyrites, value < cutoff)
-pyrites2 <- pyrites2[!duplicated(pyrites2$strat_name_id),]
-
-pyrites <- rbind(pyrites1, pyrites2)
-
-# fix for Phanerozoic vs. Precambrian below
-
-pyrites1 <- subset(pyrites, value <= 541)
-pyrites1$V2 <- round(pyrites1$value, digits = 0)
-
-pyrites2 <- subset(pyrites, value > 541)
-pyrites2$value <- pyrites2$value-1
-pyrites2$V2 <- round(pyrites2$value, digits = -1)
-pyrites2$value <- pyrites2$value+1
-pyrites2$V2 <- pyrites2$V2+1
-
-pyrites <- rbind(pyrites1, pyrites2)
-
-# use frams_nods from this point onwards (i.e, framboids+nodules/ sed packages)
-# or 'all' is (framboids+nodules+pyrite undif/sed packages)
-
-nodules.ratio <- as.data.frame(cbind((nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
-framboids.ratio <- as.data.frame(cbind((framboids_bins$V1)/sediments_bins$V1,framboids_bins$V2))
-
-names(nodules.ratio)<- c("nodules", "V2")
-names(framboids.ratio)<- c("framboids", "V2")
-
-test <- left_join(pyrites, nodules.ratio, by = c("V2", "V2"))
-test <- left_join(test, framboids.ratio, by = c("V2", "V2"))
-
-#test <- left_join(test, all, by = c("V2", "V2"))
-#test <- left_join(test, frams_nods, by = c("V2", "V2"))
-
-test$period <- cut(test$V2, 
-                   breaks=c(-Inf, 2500, 541, 485, 444, 419, 359, 299, 252, 201, 145, 66, 23, 3, Inf),
-                   labels=periods)
-
-#unique(test$econ)
-
-test <- test[!is.infinite(test$nodules),]
-test <- test[!is.na(test$nodules),]
-test <- test[!is.infinite(test$framboids),]
-test <- test[!is.na(test$framboids),]
-
-hull_test <- test %>%
-  group_by(strat_name_id) %>%
-  slice(chull(nodules, framboids))
-
-# optional removal of quaternary & archaean
-
-#hull_test <- hull_test[which(hull_test$period != "Quaternary"),]
-#hull_test <- hull_test[which(hull_test$period != "Archaean"),]
-
-# x axis - ratio of framboids:nodules, y-axis proportion of framboids+nodules normalised to sed. packages
-
-ggplot(hull_test, aes(nodules, framboids)) + geom_polygon(aes(group = strat_name_id, fill = period), alpha = 0.5) +
-  theme_bw() + 
-  scale_y_continuous(limits = c(0,0.05)) +
-  scale_x_continuous(limits = c(0,0.05)) +
-  geom_polygon(aes(group = strat_name_id), colour = "black", alpha = 0) +
-  facet_wrap(~period) + geom_hline(yintercept = c(0.02, 0.06)) +
-  geom_vline(xintercept = 0.35) +
-  geom_point(aes(fill = period), colour = "black", pch = 21)
-
-# or for y axis as all pyrite mentions (including undifferentiated)
-
-test <- test[!is.infinite(test$V1),]
-test <- test[!is.na(test$V1),]
-test <- test[!is.infinite(test$all),]
-test <- test[!is.na(test$all),]
-
-hull_test <- test %>%
-  group_by(strat_name_id) %>%
-  slice(chull(V1, all))
-
-# optional removal of quaternary
-
-#hull_test <- hull_test[which(hull_test$period != "Quaternary"),]
-#hull_test <- hull_test[which(hull_test$period != "Archaean"),]
-
-# x axis - ratio of framboids:nodules, y-axis proportion of framboids+nodules normalised to sed. packages
-
-ggplot(hull_test, aes(V1, all)) + geom_polygon(aes(group = strat_name_id, fill = period), alpha = 0.5) +
-  theme_bw() + 
-  #scale_y_log10(limits = c(0.003, 0.3)) +
-  #scale_x_continuous(limits = c(0.1, 0.5)) +
-  geom_polygon(aes(group = strat_name_id), colour = "black", alpha = 0) +
-  facet_wrap(~period) + geom_hline(yintercept = c(0.15, 0.25)) +
-  geom_vline(xintercept = 0.35) +
-  geom_point(aes(fill = period), colour = "black", pch = 21)
-
-##### END #####
