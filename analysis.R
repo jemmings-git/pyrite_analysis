@@ -355,15 +355,15 @@ framboids <- subset(framboids, variable != "b_age")
 
 # repeat for the others
 
-nodules <- melt(nodules, id.vars = c(1:20, 23:83), na.rm=TRUE)
+nodules <- melt(nodules, id.vars = c(1:32, 35:83), na.rm=TRUE)
 nodules$value <- as.numeric(nodules$value)
 nodules <- subset(nodules, variable != "b_age")
 
-pyrite_undif <- melt(pyrite_undif, id.vars = c(1:20, 23:83), na.rm=TRUE)
+pyrite_undif <- melt(pyrite_undif, id.vars = c(1:32, 35:83), na.rm=TRUE)
 pyrite_undif$value <- as.numeric(pyrite_undif$value)
 pyrite_undif <- subset(pyrite_undif, variable != "b_age")
 
-veins <- melt(veins, id.vars = c(1:20, 23:83), na.rm=TRUE)
+veins <- melt(veins, id.vars = c(1:32, 35:83), na.rm=TRUE)
 veins$value <- as.numeric(veins$value)
 veins <- subset(veins, variable != "b_age")
 
@@ -485,7 +485,7 @@ sediments4 <- rbind(sediments5, sediments6)
 
 sediments <- rbind(sediments1, sediments2, sediments3, sediments4)
 
-sediments <- melt(sediments, id.vars = c(1:20, 23:83), na.rm=TRUE)
+sediments <- melt(sediments, id.vars = c(1:32, 35:83), na.rm=TRUE)
 sediments$value <- as.numeric(sediments$value)
 
 sediments <- subset(sediments, variable != "b_age")
