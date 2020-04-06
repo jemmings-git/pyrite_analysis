@@ -9,8 +9,7 @@
 # run once
 
 library(devtools)
-devtools::install_github("moodymudskipper/safejoin") # needed for coalesce join # run once
-devtools::install_github("adibender/pammtools")
+
 
 # attach
 
@@ -30,16 +29,18 @@ rm(list=ls())
 # set working directory
 project_home <- 'N:/Data/xGDD/analysis'
 
+
+
+source('macrostrat_data.R') # use choices below to find strat flag hits not in concepts database
+
 tryCatch({
   setwd(project_home)
-}, error = function(err) { 
+}, error = function(err) {
   if (dir.exists('./data')) {
     setwd('./data') }
 }
 )
-
-source('macrostrat_data.R') # use choices below to find strat flag hits not in concepts database
-
+ 
 rocks <- sedimentary_rocks # normalisation to all sedimentary rocks
 rocks <- meta_sedimentary_rocks # normalisation to all sedimentary and metamorphosed sedimentary rocks
 rocks <- mud_rocks # normalisation to mudstones - perhaps this is the most robust approach
@@ -53,11 +54,11 @@ if (!file.exists('results2.csv')) {
   unzip('jemmings_etal.zip')
 }
 
-extracts <- read_csv("results2.csv")
+extracts <- read_csv("results.csv")
 
 # remove unresolved strat_name_id hits
 
-extracts <- extracts[!grepl(pattern = "\\~", extracts$strat_name_id),]   
+extracts <- extracts[!grepl(pattern = "\\~", extracts$strat_name_id),]
 
 length(unique(extracts$docid)) # metrics - no. of documents
 length(unique(extracts$strat_name_id)) # metrics - no. of strat packages
@@ -71,7 +72,7 @@ strat <- macrostrat_data("strat.json", "https://macrostrat.org/api/defs/strat_na
 
 concepts <- macrostrat_data("concepts.json", "https://macrostrat.org/api/defs/strat_name_concepts?all&format=json&response=long")
 
-## output 1 - merge of strat and concepts 
+## output 1 - merge of strat and concepts
 strat_concepts <- right_join(strat, concepts, by = c("concept_id", "concept_id")) # right join - on the basis strat packages with concept = 0 are captured below
 
 # find entries without concept but can be included on the basis of strat_flag def
@@ -134,21 +135,21 @@ data_part2 <- safe_right_join(extracts, strat_units_concepts, by = c("strat_name
 
 # for output 1
 
-cutoff <- 541 # Ma 
+cutoff <- 541 # Ma
 phanerozoic_increment <- 1 # in Ma
 precambrian_increment <- 10 # in Ma
 
-
+# add placeholder numbered bins to a dataframe, by increment, for later population
 add_all_bins <- function(df, increment) {
   ncols <- ceiling((max(df$b_age - df$t_age))/increment)
-  
+
   df <- df %>% mutate(bin1 = ifelse(b_age-increment > t_age+increment, t_age+increment, NA))
   for(n in 2:(ncols-1)){
     next_bin <- paste('bin', n, sep='')
     bin <- paste0('bin', (n-1), sep='')
     # See https://stackoverflow.com/a/49311813/4319767 for why this syntax 
     df <- df %>% mutate(!!next_bin := ifelse(UQ(rlang::sym(bin)) < b_age-increment, UQ(rlang::sym(bin))+increment, NA))
-  }  
+  }
   return(df)
 }
 
