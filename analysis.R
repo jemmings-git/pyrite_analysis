@@ -4,6 +4,7 @@
 
 rm(list=ls())
 
+
 project_home <- 'N:/Data/xGDD/analysis'
 tryCatch({
   setwd(project_home)
@@ -13,10 +14,11 @@ tryCatch({
 }
 )
 
-
 # choices for analysis:
 
-source('macrostrat_data.R')
+source('../macrostrat_data.R')
+
+
 
 # choose one of the following rocks and rocks2 defs
 
@@ -38,21 +40,10 @@ rocks <- meta_sedimentary_rocks # normalisation to marine sedimentary & metased 
 rocks2 <- non.mar # normalisation to non-marine sedimentary rocks - doesn't work very well?
 
 rocks <- meta_sedimentary_rocks # normalisation to marine sedimentary & metased rocks
-rocks2 <- deep_water # also doesn't work very well.. the problem is due to varying detail in 'other'
+rocks2 <- deep_water # also doesn't work very well.. the problem is due to varying detail in 'other
 
-
-
-library(dplyr) # plyr is not needed (note loading plyr after dplyr will prevent execution of PART 2)
-library(tidyr)
-library(readr)
-library(jsonlite)
-library(reshape2)
-library(ggplot2)
-library(safejoin)
-library(pammtools)
-library(gridExtra)
-library(tidyverse)
-
+sediments <- rocks
+metasediments <- rocks2
 
 ###### PART 1 - using 'output 2' ('p2') - composite analysis of units and strat packages #####
 
