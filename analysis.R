@@ -337,7 +337,7 @@ veins <- subset(pyrite_undif, veins)
 
 # for example framboids
 
-framboids <- melt(framboids, id.vars = c(1:20, 23:83), na.rm=TRUE)
+framboids <- melt(framboids, id.vars = c(1:32, 35:83), na.rm=TRUE)
 framboids$value <- as.numeric(framboids$value)
 
 # remove b_age - otherwise end up with 2x in the final bin
