@@ -5,6 +5,16 @@
 rm(list=ls())
 
 
+library(dplyr) # plyr is not needed (note loading plyr after dplyr will prevent execution of PART 2)
+library(tidyr)
+library(readr)
+library(jsonlite)
+library(reshape2)
+library(ggplot2)
+library(safejoin)
+library(pammtools)
+library(gridExtra)
+
 project_home <- 'N:/Data/xGDD/analysis'
 tryCatch({
   setwd(project_home)
@@ -159,169 +169,169 @@ sediments <- (grepl(paste(rocks, collapse = "|"), framboids$lith, ignore.case=TR
      grepl(paste(rocks2, collapse = "|"), framboids$strat_flag, ignore.case=TRUE) |
      grepl(paste(rocks2, collapse = "|"), framboids$phrase, ignore.case=TRUE) |
      grepl(paste(rocks2, collapse = "|"), framboids$environ, ignore.case=TRUE))
-
-framboids <- subset(framboids, sediments) # subset to 'rocks' of interest
-
-# block end
-
-# repeat the same process for any other 'similar' phrases - in this case 'pyrite nodules'
-
-# block start
-
-nodules <- grepl("nodul", data_p2$target_word, ignore.case=TRUE) | grepl("concretion", data_p2$target_word, ignore.case=TRUE) 
-
-nodules <- subset(data_p2, nodules)
-
-# include nodule mentions pulled from lexicons (concepts)
-
-nodules1 <- grepl("pyrite nodul", data_p2$other, ignore.case=TRUE) | grepl("pyrite concretion", data_p2$other, ignore.case=TRUE) |
-  grepl("pyritic nodul", data_p2$other, ignore.case=TRUE) | grepl("pyritic concretion", data_p2$other, ignore.case=TRUE) |
-  grepl("nodules of pyrite", data_p2$other, ignore.case=TRUE) | grepl("concretions of pyrite", data_p2$other, ignore.case=TRUE) | 
-  grepl("nodular pyrite", data_p2$other, ignore.case=TRUE) | grepl("concretionary pyrite", data_p2$other, ignore.case=TRUE)
-
-nodules1 <- subset(data_p2, nodules1)
-nodules <- rbind(nodules, nodules1)
-
-nodules1 <- subset(nodules, t_age > cutoff & b_age > cutoff)
-nodules2 <- nodules1[!duplicated(nodules1$unit_id), ]
-nodules3 <- nodules1[is.na(nodules1$unit_id),]
-nodules2 <- nodules2[!is.na(nodules2$unit_id),]
-nodules3 <- nodules3[!duplicated(nodules3$strat_name_id),]
-nodules1 <- rbind(nodules2, nodules3)
-
-nodules2 <- subset(nodules, t_age < cutoff & b_age < cutoff)
-nodules3 <- nodules2[!duplicated(nodules2$unit_id), ]
-nodules4 <- nodules2[is.na(nodules2$unit_id),]
-nodules3 <- nodules3[!is.na(nodules3$unit_id),]
-nodules4 <- nodules4[!duplicated(nodules4$strat_name_id),]
-nodules2 <- rbind(nodules3, nodules4)
-
-nodules3 <- subset(nodules, t_age < cutoff & b_age == cutoff)
-nodules4 <- nodules3[!duplicated(nodules3$unit_id), ]
-nodules5 <- nodules3[is.na(nodules3$unit_id),]
-nodules4 <- nodules4[!is.na(nodules4$unit_id),]
-nodules5 <- nodules5[!duplicated(nodules5$strat_name_id),]
-nodules3 <- rbind(nodules4, nodules5)
-
-nodules4 <- subset(nodules, t_age == cutoff & b_age > cutoff)
-nodules5 <- nodules4[!duplicated(nodules4$unit_id), ]
-nodules6 <- nodules4[is.na(nodules4$unit_id),]
-nodules5 <- nodules5[!is.na(nodules5$unit_id),]
-nodules6 <- nodules6[!duplicated(nodules6$strat_name_id),]
-nodules4 <- rbind(nodules5, nodules6)
-
-nodules <- rbind(nodules1, nodules2, nodules3, nodules4)
-
-sediments <- (grepl(paste(rocks, collapse = "|"), nodules$lith, ignore.case=TRUE) | 
-  grepl(paste(rocks, collapse = "|"), nodules$other, ignore.case=TRUE) | 
-  grepl(paste(rocks, collapse = "|"), nodules$environ, ignore.case=TRUE) | 
-  grepl(paste(rocks, collapse = "|"), nodules$strat_phrase_root, ignore.case=TRUE) | 
-  grepl(paste(rocks, collapse = "|"), nodules$phrase, ignore.case=TRUE) | 
-  grepl(paste(rocks, collapse = "|"), nodules$strat_flag, ignore.case=TRUE) |
-  grepl(paste(rocks, collapse = "|"), nodules$environ, ignore.case=TRUE))  &
-  (grepl(paste(rocks2, collapse = "|"), nodules$lith, ignore.case=TRUE) | 
-     grepl(paste(rocks2, collapse = "|"), nodules$other, ignore.case=TRUE) | 
-     grepl(paste(rocks2, collapse = "|"), nodules$strat_phrase_root, ignore.case=TRUE) | 
-     grepl(paste(rocks2, collapse = "|"), nodules$strat_flag, ignore.case=TRUE) |
-     grepl(paste(rocks2, collapse = "|"), nodules$phrase, ignore.case=TRUE) |
-     grepl(paste(rocks2, collapse = "|"), nodules$environ, ignore.case=TRUE))
-
-nodules <- subset(nodules, sediments) # subset to 'rocks' of interest
-
-# block end
-
-# the next section processes undifferentiated pyrite mentions - this is handled slightly differently
-
-# block start
-
-# start by including pyritic strat concepts pulled from lexicons (undifferentiated)
-
-pyritic_strat <- grepl("pyrit", data_p2$other, ignore.case=TRUE)  |  grepl("pyrit", data_p2$lith, ignore.case=TRUE)
-
-pyritic_strat <- subset(data_p2, pyritic_strat)
-false <- !grepl("non-pyrit", pyritic_strat$other, ignore.case=TRUE) & !grepl("non-pyrit", pyritic_strat$lith, ignore.case=TRUE)
-pyritic_strat <- subset(pyritic_strat, false)
-
-# now need to carry forward only units not already listed in framboids or nodules record
-
-# therefore first bind framboid and nodules datasets
-
-all <- rbind(framboids, nodules)
-
-all1 <- all[!duplicated(all$unit_id), ]
-all2 <- all[is.na(all$unit_id),]
-all1 <- all1[!is.na(all1$unit_id),]
-all2 <- all2[!duplicated(all2$strat_name_id),]
-all <- rbind(all1, all2)
-
-# right join framboids+nodules to the pyritic strat record
-
-pyritic_strat <- safe_right_join(all, pyritic_strat, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
-pyritic_strat <- pyritic_strat[is.na(pyritic_strat$target_word),]
-
-pyrite_undif <- grepl("\\<pyrite\\>", data_p2$target_word, ignore.case=TRUE) | grepl("\\<pyritic\\>", data_p2$target_word, ignore.case=TRUE)
-
-pyrite_undif <- subset(data_p2, pyrite_undif)
-
-pyrite_undif <- rbind(pyritic_strat, pyrite_undif)
-
-# use anti_join to again carry forward only packages not already identified as containing framboids or nodules
-
-pyrite_undif <- anti_join(pyrite_undif, all, by = c("strat_name_id", "strat_name_id")) 
-
-# subset so only sediments extracted
-
-# run this line if ALL sediments - note slightly different ordering of subset compared to framboids and nodules
-# this is because ALL framboids and nodules are assumed to be sedimentary, UNLESS the strat ID is matched to
-# a non-sedimentary unit. Whereas undifferentiated pyrite is included ONLY if explicitly
-# linked to a sedimentary unit - this is because framboids + nodules form primarily in 
-# a 'sedimentary' environment whereas 'pyrite' in general is present in many settings
-
-pyrite_undif1 <- subset(pyrite_undif, t_age > cutoff & b_age > cutoff)
-pyrite_undif2 <- pyrite_undif1[!duplicated(pyrite_undif1$unit_id), ]
-pyrite_undif3 <- pyrite_undif1[is.na(pyrite_undif1$unit_id),]
-pyrite_undif2 <- pyrite_undif2[!is.na(pyrite_undif2$unit_id),]
-pyrite_undif3 <- pyrite_undif3[!duplicated(pyrite_undif3$strat_name_id),]
-pyrite_undif1 <- rbind(pyrite_undif2, pyrite_undif3)
-
-pyrite_undif2 <- subset(pyrite_undif, t_age < cutoff & b_age < cutoff)
-pyrite_undif3 <- pyrite_undif2[!duplicated(pyrite_undif2$unit_id), ]
-pyrite_undif4 <- pyrite_undif2[is.na(pyrite_undif2$unit_id),]
-pyrite_undif3 <- pyrite_undif3[!is.na(pyrite_undif3$unit_id),]
-pyrite_undif4 <- pyrite_undif4[!duplicated(pyrite_undif4$strat_name_id),]
-pyrite_undif2 <- rbind(pyrite_undif3, pyrite_undif4)
-
-pyrite_undif3 <- subset(pyrite_undif, t_age < cutoff & b_age == cutoff)
-pyrite_undif4 <- pyrite_undif3[!duplicated(pyrite_undif3$unit_id), ]
-pyrite_undif5 <- pyrite_undif3[is.na(pyrite_undif3$unit_id),]
-pyrite_undif4 <- pyrite_undif4[!is.na(pyrite_undif4$unit_id),]
-pyrite_undif5 <- pyrite_undif5[!duplicated(pyrite_undif5$strat_name_id),]
-pyrite_undif3 <- rbind(pyrite_undif4, pyrite_undif5)
-
-pyrite_undif4 <- subset(pyrite_undif, t_age == cutoff & b_age > cutoff)
-pyrite_undif5 <- pyrite_undif4[!duplicated(pyrite_undif4$unit_id), ]
-pyrite_undif6 <- pyrite_undif4[is.na(pyrite_undif4$unit_id),]
-pyrite_undif5 <- pyrite_undif5[!is.na(pyrite_undif5$unit_id),]
-pyrite_undif6 <- pyrite_undif6[!duplicated(pyrite_undif6$strat_name_id),]
-pyrite_undif4 <- rbind(pyrite_undif5, pyrite_undif6)
-
-pyrite_undif <- rbind(pyrite_undif1, pyrite_undif2, pyrite_undif3, pyrite_undif4)
-
-sediments <- (grepl(paste(rocks, collapse = "|"), pyrite_undif$lith, ignore.case=TRUE) | 
-  grepl(paste(rocks, collapse = "|"), pyrite_undif$other, ignore.case=TRUE) | 
-  grepl(paste(rocks, collapse = "|"), pyrite_undif$environ, ignore.case=TRUE) | 
-  grepl(paste(rocks, collapse = "|"), pyrite_undif$strat_phrase_root, ignore.case=TRUE) | 
-  grepl(paste(rocks, collapse = "|"), pyrite_undif$phrase, ignore.case=TRUE) | 
-  grepl(paste(rocks, collapse = "|"), pyrite_undif$strat_flag, ignore.case=TRUE) |
-  grepl(paste(rocks, collapse = "|"), pyrite_undif$environ, ignore.case=TRUE))  &
-  (grepl(paste(rocks2, collapse = "|"), pyrite_undif$lith, ignore.case=TRUE) | 
-     grepl(paste(rocks2, collapse = "|"), pyrite_undif$other, ignore.case=TRUE) | 
-     grepl(paste(rocks2, collapse = "|"), pyrite_undif$strat_phrase_root, ignore.case=TRUE) | 
-     grepl(paste(rocks2, collapse = "|"), pyrite_undif$strat_flag, ignore.case=TRUE) |
-     grepl(paste(rocks2, collapse = "|"), pyrite_undif$phrase, ignore.case=TRUE) |
-     grepl(paste(rocks2, collapse = "|"), pyrite_undif$environ, ignore.case=TRUE))
-
-pyrite_undif <- subset(pyrite_undif, sediments)
+  
+  framboids <- subset(framboids, sediments) # subset to 'rocks' of interest
+  
+  # block end
+  
+  # repeat the same process for any other 'similar' phrases - in this case 'pyrite nodules'
+  
+  # block start
+  
+  nodules <- grepl("nodul", data_p2$target_word, ignore.case=TRUE) | grepl("concretion", data_p2$target_word, ignore.case=TRUE) 
+  
+  nodules <- subset(data_p2, nodules)
+  
+  # include nodule mentions pulled from lexicons (concepts)
+  
+  nodules1 <- grepl("pyrite nodul", data_p2$other, ignore.case=TRUE) | grepl("pyrite concretion", data_p2$other, ignore.case=TRUE) |
+    grepl("pyritic nodul", data_p2$other, ignore.case=TRUE) | grepl("pyritic concretion", data_p2$other, ignore.case=TRUE) |
+    grepl("nodules of pyrite", data_p2$other, ignore.case=TRUE) | grepl("concretions of pyrite", data_p2$other, ignore.case=TRUE) | 
+    grepl("nodular pyrite", data_p2$other, ignore.case=TRUE) | grepl("concretionary pyrite", data_p2$other, ignore.case=TRUE)
+  
+  nodules1 <- subset(data_p2, nodules1)
+  nodules <- rbind(nodules, nodules1)
+  
+  nodules1 <- subset(nodules, t_age > cutoff & b_age > cutoff)
+  nodules2 <- nodules1[!duplicated(nodules1$unit_id), ]
+  nodules3 <- nodules1[is.na(nodules1$unit_id),]
+  nodules2 <- nodules2[!is.na(nodules2$unit_id),]
+  nodules3 <- nodules3[!duplicated(nodules3$strat_name_id),]
+  nodules1 <- rbind(nodules2, nodules3)
+  
+  nodules2 <- subset(nodules, t_age < cutoff & b_age < cutoff)
+  nodules3 <- nodules2[!duplicated(nodules2$unit_id), ]
+  nodules4 <- nodules2[is.na(nodules2$unit_id),]
+  nodules3 <- nodules3[!is.na(nodules3$unit_id),]
+  nodules4 <- nodules4[!duplicated(nodules4$strat_name_id),]
+  nodules2 <- rbind(nodules3, nodules4)
+  
+  nodules3 <- subset(nodules, t_age < cutoff & b_age == cutoff)
+  nodules4 <- nodules3[!duplicated(nodules3$unit_id), ]
+  nodules5 <- nodules3[is.na(nodules3$unit_id),]
+  nodules4 <- nodules4[!is.na(nodules4$unit_id),]
+  nodules5 <- nodules5[!duplicated(nodules5$strat_name_id),]
+  nodules3 <- rbind(nodules4, nodules5)
+  
+  nodules4 <- subset(nodules, t_age == cutoff & b_age > cutoff)
+  nodules5 <- nodules4[!duplicated(nodules4$unit_id), ]
+  nodules6 <- nodules4[is.na(nodules4$unit_id),]
+  nodules5 <- nodules5[!is.na(nodules5$unit_id),]
+  nodules6 <- nodules6[!duplicated(nodules6$strat_name_id),]
+  nodules4 <- rbind(nodules5, nodules6)
+  
+  nodules <- rbind(nodules1, nodules2, nodules3, nodules4)
+  
+  sediments <- (grepl(paste(rocks, collapse = "|"), nodules$lith, ignore.case=TRUE) | 
+    grepl(paste(rocks, collapse = "|"), nodules$other, ignore.case=TRUE) | 
+    grepl(paste(rocks, collapse = "|"), nodules$environ, ignore.case=TRUE) | 
+    grepl(paste(rocks, collapse = "|"), nodules$strat_phrase_root, ignore.case=TRUE) | 
+    grepl(paste(rocks, collapse = "|"), nodules$phrase, ignore.case=TRUE) | 
+    grepl(paste(rocks, collapse = "|"), nodules$strat_flag, ignore.case=TRUE) |
+    grepl(paste(rocks, collapse = "|"), nodules$environ, ignore.case=TRUE))  &
+    (grepl(paste(rocks2, collapse = "|"), nodules$lith, ignore.case=TRUE) | 
+       grepl(paste(rocks2, collapse = "|"), nodules$other, ignore.case=TRUE) | 
+       grepl(paste(rocks2, collapse = "|"), nodules$strat_phrase_root, ignore.case=TRUE) | 
+       grepl(paste(rocks2, collapse = "|"), nodules$strat_flag, ignore.case=TRUE) |
+       grepl(paste(rocks2, collapse = "|"), nodules$phrase, ignore.case=TRUE) |
+       grepl(paste(rocks2, collapse = "|"), nodules$environ, ignore.case=TRUE))
+  
+  nodules <- subset(nodules, sediments) # subset to 'rocks' of interest
+  
+  # block end
+  
+  # the next section processes undifferentiated pyrite mentions - this is handled slightly differently
+  
+  # block start
+  
+  # start by including pyritic strat concepts pulled from lexicons (undifferentiated)
+  
+  pyritic_strat <- grepl("pyrit", data_p2$other, ignore.case=TRUE)  |  grepl("pyrit", data_p2$lith, ignore.case=TRUE)
+  
+  pyritic_strat <- subset(data_p2, pyritic_strat)
+  false <- !grepl("non-pyrit", pyritic_strat$other, ignore.case=TRUE) & !grepl("non-pyrit", pyritic_strat$lith, ignore.case=TRUE)
+  pyritic_strat <- subset(pyritic_strat, false)
+  
+  # now need to carry forward only units not already listed in framboids or nodules record
+  
+  # therefore first bind framboid and nodules datasets
+  
+  all <- rbind(framboids, nodules)
+  
+  all1 <- all[!duplicated(all$unit_id), ]
+  all2 <- all[is.na(all$unit_id),]
+  all1 <- all1[!is.na(all1$unit_id),]
+  all2 <- all2[!duplicated(all2$strat_name_id),]
+  all <- rbind(all1, all2)
+  
+  # right join framboids+nodules to the pyritic strat record
+  
+  pyritic_strat <- safe_right_join(all, pyritic_strat, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
+  pyritic_strat <- pyritic_strat[is.na(pyritic_strat$target_word),]
+  
+  pyrite_undif <- grepl("\\<pyrite\\>", data_p2$target_word, ignore.case=TRUE) | grepl("\\<pyritic\\>", data_p2$target_word, ignore.case=TRUE)
+  
+  pyrite_undif <- subset(data_p2, pyrite_undif)
+  
+  pyrite_undif <- rbind(pyritic_strat, pyrite_undif)
+  
+  # use anti_join to again carry forward only packages not already identified as containing framboids or nodules
+  
+  pyrite_undif <- anti_join(pyrite_undif, all, by = c("strat_name_id", "strat_name_id")) 
+  
+  # subset so only sediments extracted
+  
+  # run this line if ALL sediments - note slightly different ordering of subset compared to framboids and nodules
+  # this is because ALL framboids and nodules are assumed to be sedimentary, UNLESS the strat ID is matched to
+  # a non-sedimentary unit. Whereas undifferentiated pyrite is included ONLY if explicitly
+  # linked to a sedimentary unit - this is because framboids + nodules form primarily in 
+  # a 'sedimentary' environment whereas 'pyrite' in general is present in many settings
+  
+  pyrite_undif1 <- subset(pyrite_undif, t_age > cutoff & b_age > cutoff)
+  pyrite_undif2 <- pyrite_undif1[!duplicated(pyrite_undif1$unit_id), ]
+  pyrite_undif3 <- pyrite_undif1[is.na(pyrite_undif1$unit_id),]
+  pyrite_undif2 <- pyrite_undif2[!is.na(pyrite_undif2$unit_id),]
+  pyrite_undif3 <- pyrite_undif3[!duplicated(pyrite_undif3$strat_name_id),]
+  pyrite_undif1 <- rbind(pyrite_undif2, pyrite_undif3)
+  
+  pyrite_undif2 <- subset(pyrite_undif, t_age < cutoff & b_age < cutoff)
+  pyrite_undif3 <- pyrite_undif2[!duplicated(pyrite_undif2$unit_id), ]
+  pyrite_undif4 <- pyrite_undif2[is.na(pyrite_undif2$unit_id),]
+  pyrite_undif3 <- pyrite_undif3[!is.na(pyrite_undif3$unit_id),]
+  pyrite_undif4 <- pyrite_undif4[!duplicated(pyrite_undif4$strat_name_id),]
+  pyrite_undif2 <- rbind(pyrite_undif3, pyrite_undif4)
+  
+  pyrite_undif3 <- subset(pyrite_undif, t_age < cutoff & b_age == cutoff)
+  pyrite_undif4 <- pyrite_undif3[!duplicated(pyrite_undif3$unit_id), ]
+  pyrite_undif5 <- pyrite_undif3[is.na(pyrite_undif3$unit_id),]
+  pyrite_undif4 <- pyrite_undif4[!is.na(pyrite_undif4$unit_id),]
+  pyrite_undif5 <- pyrite_undif5[!duplicated(pyrite_undif5$strat_name_id),]
+  pyrite_undif3 <- rbind(pyrite_undif4, pyrite_undif5)
+  
+  pyrite_undif4 <- subset(pyrite_undif, t_age == cutoff & b_age > cutoff)
+  pyrite_undif5 <- pyrite_undif4[!duplicated(pyrite_undif4$unit_id), ]
+  pyrite_undif6 <- pyrite_undif4[is.na(pyrite_undif4$unit_id),]
+  pyrite_undif5 <- pyrite_undif5[!is.na(pyrite_undif5$unit_id),]
+  pyrite_undif6 <- pyrite_undif6[!duplicated(pyrite_undif6$strat_name_id),]
+  pyrite_undif4 <- rbind(pyrite_undif5, pyrite_undif6)
+  
+  pyrite_undif <- rbind(pyrite_undif1, pyrite_undif2, pyrite_undif3, pyrite_undif4)
+  
+  sediments <- (grepl(paste(rocks, collapse = "|"), pyrite_undif$lith, ignore.case=TRUE) | 
+    grepl(paste(rocks, collapse = "|"), pyrite_undif$other, ignore.case=TRUE) | 
+    grepl(paste(rocks, collapse = "|"), pyrite_undif$environ, ignore.case=TRUE) | 
+    grepl(paste(rocks, collapse = "|"), pyrite_undif$strat_phrase_root, ignore.case=TRUE) | 
+    grepl(paste(rocks, collapse = "|"), pyrite_undif$phrase, ignore.case=TRUE) | 
+    grepl(paste(rocks, collapse = "|"), pyrite_undif$strat_flag, ignore.case=TRUE) |
+    grepl(paste(rocks, collapse = "|"), pyrite_undif$environ, ignore.case=TRUE))  &
+    (grepl(paste(rocks2, collapse = "|"), pyrite_undif$lith, ignore.case=TRUE) | 
+       grepl(paste(rocks2, collapse = "|"), pyrite_undif$other, ignore.case=TRUE) | 
+       grepl(paste(rocks2, collapse = "|"), pyrite_undif$strat_phrase_root, ignore.case=TRUE) | 
+       grepl(paste(rocks2, collapse = "|"), pyrite_undif$strat_flag, ignore.case=TRUE) |
+       grepl(paste(rocks2, collapse = "|"), pyrite_undif$phrase, ignore.case=TRUE) |
+       grepl(paste(rocks2, collapse = "|"), pyrite_undif$environ, ignore.case=TRUE))
+  
+  pyrite_undif <- subset(pyrite_undif, sediments)
 
 # extract nearby mentions of veins or mineralisation
 
@@ -1054,3 +1064,4 @@ b <- ggplot() + theme_bw() +
 # generate plots
 
 grid.arrange(a,b, ncol = 2)
+
