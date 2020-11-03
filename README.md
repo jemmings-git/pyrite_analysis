@@ -1,4 +1,4 @@
-# Experiment to analyse the GeoDeepDive for pyrite formations
+# Experiment to analyse the GeoDeepDive library for pyrite types through geological time
 
 ## Steps
 
