@@ -35,7 +35,7 @@ source('../macrostrat_data.R')
 rocks <- sedimentary_rocks # normalisation to all sedimentary rocks
 rocks2 <- sedimentary_rocks
 
-rocks <- meta_sedimentary_rocks # normalisation to all sedimentary and metamorphosed sedimentary rocks
+rocks <- meta_sedimentary_rocks # normalisation to all sedimentary and metamorphosed sedimentary rocks - choose this option to replicate manuscript output
 rocks2 <- meta_sedimentary_rocks
 
 rocks <- mud_rocks # normalisation to mudstones
@@ -58,7 +58,6 @@ metasediments <- rocks2
 ###### PART 1 - using 'output 2' ('p2') - composite analysis of units and strat packages #####
 
 data_p2 <-  read.csv(file = "data_part2_comp.csv", row.names = 1)
-
 
 # generate complete list of sedimentary units for part 2 - 
 # this is done by propagating unit lith info to strat IDs
@@ -110,6 +109,10 @@ framboids <- grepl("framboid", data_p2$target_word, ignore.case=TRUE) |
 
 framboids <- subset(data_p2, framboids)
 
+length(unique(framboids$result_id)) # no of framboid results
+length(unique(framboids$strat_name_id)) # no of strat packages
+length(unique(framboids$unit_id)) # no of units
+
 # include any framboid mentions in concept description (not likely)
 
 framboids1 <- grepl("framboid", data_p2$other, ignore.case=TRUE)
@@ -126,28 +129,28 @@ cutoff <- 541 # Ma
 phanerozoic_increment <- 1 # in Ma
 precambrian_increment <- 10 # in Ma
 
-framboids1 <- subset(framboids, t_age > cutoff & b_age > cutoff)
+framboids1 <- subset(framboids, t_age2 > cutoff & b_age2 > cutoff)
 framboids2 <- framboids1[!duplicated(framboids1$unit_id), ]
 framboids3 <- framboids1[is.na(framboids1$unit_id),]
 framboids2 <- framboids2[!is.na(framboids2$unit_id),] 
 framboids3 <- framboids3[!duplicated(framboids3$strat_name_id),]
 framboids1 <- rbind(framboids2, framboids3)
 
-framboids2 <- subset(framboids, t_age < cutoff & b_age < cutoff)
+framboids2 <- subset(framboids, t_age2 < cutoff & b_age2 < cutoff)
 framboids3 <- framboids2[!duplicated(framboids2$unit_id), ]
 framboids4 <- framboids2[is.na(framboids2$unit_id),]
 framboids3 <- framboids3[!is.na(framboids3$unit_id),]
 framboids4 <- framboids4[!duplicated(framboids4$strat_name_id),]
 framboids2 <- rbind(framboids3, framboids4)
 
-framboids3 <- subset(framboids, t_age < cutoff & b_age == cutoff)
+framboids3 <- subset(framboids, t_age2 < cutoff & b_age2 == cutoff)
 framboids4 <- framboids3[!duplicated(framboids3$unit_id), ]
 framboids5 <- framboids3[is.na(framboids3$unit_id),]
 framboids4 <- framboids4[!is.na(framboids4$unit_id),]
 framboids5 <- framboids5[!duplicated(framboids5$strat_name_id),]
 framboids3 <- rbind(framboids4, framboids5)
 
-framboids4 <- subset(framboids, t_age == cutoff & b_age > cutoff)
+framboids4 <- subset(framboids, t_age2 == cutoff & b_age2 > cutoff)
 framboids5 <- framboids4[!duplicated(framboids4$unit_id), ]
 framboids6 <- framboids4[is.na(framboids4$unit_id),]
 framboids5 <- framboids5[!is.na(framboids5$unit_id),]
@@ -169,169 +172,173 @@ sediments <- (grepl(paste(rocks, collapse = "|"), framboids$lith, ignore.case=TR
      grepl(paste(rocks2, collapse = "|"), framboids$strat_flag, ignore.case=TRUE) |
      grepl(paste(rocks2, collapse = "|"), framboids$phrase, ignore.case=TRUE) |
      grepl(paste(rocks2, collapse = "|"), framboids$environ, ignore.case=TRUE))
-  
-  framboids <- subset(framboids, sediments) # subset to 'rocks' of interest
-  
-  # block end
-  
-  # repeat the same process for any other 'similar' phrases - in this case 'pyrite nodules'
-  
-  # block start
-  
-  nodules <- grepl("nodul", data_p2$target_word, ignore.case=TRUE) | grepl("concretion", data_p2$target_word, ignore.case=TRUE) 
-  
-  nodules <- subset(data_p2, nodules)
-  
-  # include nodule mentions pulled from lexicons (concepts)
-  
-  nodules1 <- grepl("pyrite nodul", data_p2$other, ignore.case=TRUE) | grepl("pyrite concretion", data_p2$other, ignore.case=TRUE) |
-    grepl("pyritic nodul", data_p2$other, ignore.case=TRUE) | grepl("pyritic concretion", data_p2$other, ignore.case=TRUE) |
-    grepl("nodules of pyrite", data_p2$other, ignore.case=TRUE) | grepl("concretions of pyrite", data_p2$other, ignore.case=TRUE) | 
-    grepl("nodular pyrite", data_p2$other, ignore.case=TRUE) | grepl("concretionary pyrite", data_p2$other, ignore.case=TRUE)
-  
-  nodules1 <- subset(data_p2, nodules1)
-  nodules <- rbind(nodules, nodules1)
-  
-  nodules1 <- subset(nodules, t_age > cutoff & b_age > cutoff)
-  nodules2 <- nodules1[!duplicated(nodules1$unit_id), ]
-  nodules3 <- nodules1[is.na(nodules1$unit_id),]
-  nodules2 <- nodules2[!is.na(nodules2$unit_id),]
-  nodules3 <- nodules3[!duplicated(nodules3$strat_name_id),]
-  nodules1 <- rbind(nodules2, nodules3)
-  
-  nodules2 <- subset(nodules, t_age < cutoff & b_age < cutoff)
-  nodules3 <- nodules2[!duplicated(nodules2$unit_id), ]
-  nodules4 <- nodules2[is.na(nodules2$unit_id),]
-  nodules3 <- nodules3[!is.na(nodules3$unit_id),]
-  nodules4 <- nodules4[!duplicated(nodules4$strat_name_id),]
-  nodules2 <- rbind(nodules3, nodules4)
-  
-  nodules3 <- subset(nodules, t_age < cutoff & b_age == cutoff)
-  nodules4 <- nodules3[!duplicated(nodules3$unit_id), ]
-  nodules5 <- nodules3[is.na(nodules3$unit_id),]
-  nodules4 <- nodules4[!is.na(nodules4$unit_id),]
-  nodules5 <- nodules5[!duplicated(nodules5$strat_name_id),]
-  nodules3 <- rbind(nodules4, nodules5)
-  
-  nodules4 <- subset(nodules, t_age == cutoff & b_age > cutoff)
-  nodules5 <- nodules4[!duplicated(nodules4$unit_id), ]
-  nodules6 <- nodules4[is.na(nodules4$unit_id),]
-  nodules5 <- nodules5[!is.na(nodules5$unit_id),]
-  nodules6 <- nodules6[!duplicated(nodules6$strat_name_id),]
-  nodules4 <- rbind(nodules5, nodules6)
-  
-  nodules <- rbind(nodules1, nodules2, nodules3, nodules4)
-  
-  sediments <- (grepl(paste(rocks, collapse = "|"), nodules$lith, ignore.case=TRUE) | 
-    grepl(paste(rocks, collapse = "|"), nodules$other, ignore.case=TRUE) | 
-    grepl(paste(rocks, collapse = "|"), nodules$environ, ignore.case=TRUE) | 
-    grepl(paste(rocks, collapse = "|"), nodules$strat_phrase_root, ignore.case=TRUE) | 
-    grepl(paste(rocks, collapse = "|"), nodules$phrase, ignore.case=TRUE) | 
-    grepl(paste(rocks, collapse = "|"), nodules$strat_flag, ignore.case=TRUE) |
-    grepl(paste(rocks, collapse = "|"), nodules$environ, ignore.case=TRUE))  &
-    (grepl(paste(rocks2, collapse = "|"), nodules$lith, ignore.case=TRUE) | 
-       grepl(paste(rocks2, collapse = "|"), nodules$other, ignore.case=TRUE) | 
-       grepl(paste(rocks2, collapse = "|"), nodules$strat_phrase_root, ignore.case=TRUE) | 
-       grepl(paste(rocks2, collapse = "|"), nodules$strat_flag, ignore.case=TRUE) |
-       grepl(paste(rocks2, collapse = "|"), nodules$phrase, ignore.case=TRUE) |
-       grepl(paste(rocks2, collapse = "|"), nodules$environ, ignore.case=TRUE))
-  
-  nodules <- subset(nodules, sediments) # subset to 'rocks' of interest
-  
-  # block end
-  
-  # the next section processes undifferentiated pyrite mentions - this is handled slightly differently
-  
-  # block start
-  
-  # start by including pyritic strat concepts pulled from lexicons (undifferentiated)
-  
-  pyritic_strat <- grepl("pyrit", data_p2$other, ignore.case=TRUE)  |  grepl("pyrit", data_p2$lith, ignore.case=TRUE)
-  
-  pyritic_strat <- subset(data_p2, pyritic_strat)
-  false <- !grepl("non-pyrit", pyritic_strat$other, ignore.case=TRUE) & !grepl("non-pyrit", pyritic_strat$lith, ignore.case=TRUE)
-  pyritic_strat <- subset(pyritic_strat, false)
-  
-  # now need to carry forward only units not already listed in framboids or nodules record
-  
-  # therefore first bind framboid and nodules datasets
-  
-  all <- rbind(framboids, nodules)
-  
-  all1 <- all[!duplicated(all$unit_id), ]
-  all2 <- all[is.na(all$unit_id),]
-  all1 <- all1[!is.na(all1$unit_id),]
-  all2 <- all2[!duplicated(all2$strat_name_id),]
-  all <- rbind(all1, all2)
-  
-  # right join framboids+nodules to the pyritic strat record
-  
-  pyritic_strat <- safe_right_join(all, pyritic_strat, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
-  pyritic_strat <- pyritic_strat[is.na(pyritic_strat$target_word),]
-  
-  pyrite_undif <- grepl("\\<pyrite\\>", data_p2$target_word, ignore.case=TRUE) | grepl("\\<pyritic\\>", data_p2$target_word, ignore.case=TRUE)
-  
-  pyrite_undif <- subset(data_p2, pyrite_undif)
-  
-  pyrite_undif <- rbind(pyritic_strat, pyrite_undif)
-  
-  # use anti_join to again carry forward only packages not already identified as containing framboids or nodules
-  
-  pyrite_undif <- anti_join(pyrite_undif, all, by = c("strat_name_id", "strat_name_id")) 
-  
-  # subset so only sediments extracted
-  
-  # run this line if ALL sediments - note slightly different ordering of subset compared to framboids and nodules
-  # this is because ALL framboids and nodules are assumed to be sedimentary, UNLESS the strat ID is matched to
-  # a non-sedimentary unit. Whereas undifferentiated pyrite is included ONLY if explicitly
-  # linked to a sedimentary unit - this is because framboids + nodules form primarily in 
-  # a 'sedimentary' environment whereas 'pyrite' in general is present in many settings
-  
-  pyrite_undif1 <- subset(pyrite_undif, t_age > cutoff & b_age > cutoff)
-  pyrite_undif2 <- pyrite_undif1[!duplicated(pyrite_undif1$unit_id), ]
-  pyrite_undif3 <- pyrite_undif1[is.na(pyrite_undif1$unit_id),]
-  pyrite_undif2 <- pyrite_undif2[!is.na(pyrite_undif2$unit_id),]
-  pyrite_undif3 <- pyrite_undif3[!duplicated(pyrite_undif3$strat_name_id),]
-  pyrite_undif1 <- rbind(pyrite_undif2, pyrite_undif3)
-  
-  pyrite_undif2 <- subset(pyrite_undif, t_age < cutoff & b_age < cutoff)
-  pyrite_undif3 <- pyrite_undif2[!duplicated(pyrite_undif2$unit_id), ]
-  pyrite_undif4 <- pyrite_undif2[is.na(pyrite_undif2$unit_id),]
-  pyrite_undif3 <- pyrite_undif3[!is.na(pyrite_undif3$unit_id),]
-  pyrite_undif4 <- pyrite_undif4[!duplicated(pyrite_undif4$strat_name_id),]
-  pyrite_undif2 <- rbind(pyrite_undif3, pyrite_undif4)
-  
-  pyrite_undif3 <- subset(pyrite_undif, t_age < cutoff & b_age == cutoff)
-  pyrite_undif4 <- pyrite_undif3[!duplicated(pyrite_undif3$unit_id), ]
-  pyrite_undif5 <- pyrite_undif3[is.na(pyrite_undif3$unit_id),]
-  pyrite_undif4 <- pyrite_undif4[!is.na(pyrite_undif4$unit_id),]
-  pyrite_undif5 <- pyrite_undif5[!duplicated(pyrite_undif5$strat_name_id),]
-  pyrite_undif3 <- rbind(pyrite_undif4, pyrite_undif5)
-  
-  pyrite_undif4 <- subset(pyrite_undif, t_age == cutoff & b_age > cutoff)
-  pyrite_undif5 <- pyrite_undif4[!duplicated(pyrite_undif4$unit_id), ]
-  pyrite_undif6 <- pyrite_undif4[is.na(pyrite_undif4$unit_id),]
-  pyrite_undif5 <- pyrite_undif5[!is.na(pyrite_undif5$unit_id),]
-  pyrite_undif6 <- pyrite_undif6[!duplicated(pyrite_undif6$strat_name_id),]
-  pyrite_undif4 <- rbind(pyrite_undif5, pyrite_undif6)
-  
-  pyrite_undif <- rbind(pyrite_undif1, pyrite_undif2, pyrite_undif3, pyrite_undif4)
-  
-  sediments <- (grepl(paste(rocks, collapse = "|"), pyrite_undif$lith, ignore.case=TRUE) | 
-    grepl(paste(rocks, collapse = "|"), pyrite_undif$other, ignore.case=TRUE) | 
-    grepl(paste(rocks, collapse = "|"), pyrite_undif$environ, ignore.case=TRUE) | 
-    grepl(paste(rocks, collapse = "|"), pyrite_undif$strat_phrase_root, ignore.case=TRUE) | 
-    grepl(paste(rocks, collapse = "|"), pyrite_undif$phrase, ignore.case=TRUE) | 
-    grepl(paste(rocks, collapse = "|"), pyrite_undif$strat_flag, ignore.case=TRUE) |
-    grepl(paste(rocks, collapse = "|"), pyrite_undif$environ, ignore.case=TRUE))  &
-    (grepl(paste(rocks2, collapse = "|"), pyrite_undif$lith, ignore.case=TRUE) | 
-       grepl(paste(rocks2, collapse = "|"), pyrite_undif$other, ignore.case=TRUE) | 
-       grepl(paste(rocks2, collapse = "|"), pyrite_undif$strat_phrase_root, ignore.case=TRUE) | 
-       grepl(paste(rocks2, collapse = "|"), pyrite_undif$strat_flag, ignore.case=TRUE) |
-       grepl(paste(rocks2, collapse = "|"), pyrite_undif$phrase, ignore.case=TRUE) |
-       grepl(paste(rocks2, collapse = "|"), pyrite_undif$environ, ignore.case=TRUE))
-  
-  pyrite_undif <- subset(pyrite_undif, sediments)
+
+framboids <- subset(framboids, sediments) # subset to 'rocks' of interest
+
+# block end
+
+# repeat the same process for any other 'similar' phrases - in this case 'pyrite nodules'
+
+# block start
+
+nodules <- grepl("nodul", data_p2$target_word, ignore.case=TRUE) | grepl("concretion", data_p2$target_word, ignore.case=TRUE) 
+
+nodules <- subset(data_p2, nodules)
+
+length(unique(nodules$result_id)) # no. of nodule+concretion results
+length(unique(nodules$strat_name_id)) # no of strat packages
+length(unique(nodules$unit_id)) # no of units
+
+# include nodule mentions pulled from lexicons (concepts)
+
+nodules1 <- grepl("pyrite nodul", data_p2$other, ignore.case=TRUE) | grepl("pyrite concretion", data_p2$other, ignore.case=TRUE) |
+  grepl("pyritic nodul", data_p2$other, ignore.case=TRUE) | grepl("pyritic concretion", data_p2$other, ignore.case=TRUE) |
+  grepl("nodules of pyrite", data_p2$other, ignore.case=TRUE) | grepl("concretions of pyrite", data_p2$other, ignore.case=TRUE) | 
+  grepl("nodular pyrite", data_p2$other, ignore.case=TRUE) | grepl("concretionary pyrite", data_p2$other, ignore.case=TRUE)
+
+nodules1 <- subset(data_p2, nodules1)
+nodules <- rbind(nodules, nodules1)
+
+nodules1 <- subset(nodules, t_age2 > cutoff & b_age2 > cutoff)
+nodules2 <- nodules1[!duplicated(nodules1$unit_id), ]
+nodules3 <- nodules1[is.na(nodules1$unit_id),]
+nodules2 <- nodules2[!is.na(nodules2$unit_id),]
+nodules3 <- nodules3[!duplicated(nodules3$strat_name_id),]
+nodules1 <- rbind(nodules2, nodules3)
+
+nodules2 <- subset(nodules, t_age2 < cutoff & b_age2 < cutoff)
+nodules3 <- nodules2[!duplicated(nodules2$unit_id), ]
+nodules4 <- nodules2[is.na(nodules2$unit_id),]
+nodules3 <- nodules3[!is.na(nodules3$unit_id),]
+nodules4 <- nodules4[!duplicated(nodules4$strat_name_id),]
+nodules2 <- rbind(nodules3, nodules4)
+
+nodules3 <- subset(nodules, t_age2 < cutoff & b_age2 == cutoff)
+nodules4 <- nodules3[!duplicated(nodules3$unit_id), ]
+nodules5 <- nodules3[is.na(nodules3$unit_id),]
+nodules4 <- nodules4[!is.na(nodules4$unit_id),]
+nodules5 <- nodules5[!duplicated(nodules5$strat_name_id),]
+nodules3 <- rbind(nodules4, nodules5)
+
+nodules4 <- subset(nodules, t_age2 == cutoff & b_age2 > cutoff)
+nodules5 <- nodules4[!duplicated(nodules4$unit_id), ]
+nodules6 <- nodules4[is.na(nodules4$unit_id),]
+nodules5 <- nodules5[!is.na(nodules5$unit_id),]
+nodules6 <- nodules6[!duplicated(nodules6$strat_name_id),]
+nodules4 <- rbind(nodules5, nodules6)
+
+nodules <- rbind(nodules1, nodules2, nodules3, nodules4)
+
+sediments <- (grepl(paste(rocks, collapse = "|"), nodules$lith, ignore.case=TRUE) | 
+  grepl(paste(rocks, collapse = "|"), nodules$other, ignore.case=TRUE) | 
+  grepl(paste(rocks, collapse = "|"), nodules$environ, ignore.case=TRUE) | 
+  grepl(paste(rocks, collapse = "|"), nodules$strat_phrase_root, ignore.case=TRUE) | 
+  grepl(paste(rocks, collapse = "|"), nodules$phrase, ignore.case=TRUE) | 
+  grepl(paste(rocks, collapse = "|"), nodules$strat_flag, ignore.case=TRUE) |
+  grepl(paste(rocks, collapse = "|"), nodules$environ, ignore.case=TRUE))  &
+  (grepl(paste(rocks2, collapse = "|"), nodules$lith, ignore.case=TRUE) | 
+     grepl(paste(rocks2, collapse = "|"), nodules$other, ignore.case=TRUE) | 
+     grepl(paste(rocks2, collapse = "|"), nodules$strat_phrase_root, ignore.case=TRUE) | 
+     grepl(paste(rocks2, collapse = "|"), nodules$strat_flag, ignore.case=TRUE) |
+     grepl(paste(rocks2, collapse = "|"), nodules$phrase, ignore.case=TRUE) |
+     grepl(paste(rocks2, collapse = "|"), nodules$environ, ignore.case=TRUE))
+
+nodules <- subset(nodules, sediments) # subset to 'rocks' of interest
+
+# block end
+
+# the next section processes undifferentiated pyrite mentions - this is handled slightly differently
+
+# block start
+
+# start by including pyritic strat concepts pulled from lexicons (undifferentiated)
+
+pyritic_strat <- grepl("pyrit", data_p2$other, ignore.case=TRUE)  |  grepl("pyrit", data_p2$lith, ignore.case=TRUE)
+
+pyritic_strat <- subset(data_p2, pyritic_strat)
+false <- !grepl("non-pyrit", pyritic_strat$other, ignore.case=TRUE) & !grepl("non-pyrit", pyritic_strat$lith, ignore.case=TRUE)
+pyritic_strat <- subset(pyritic_strat, false)
+
+# now need to carry forward only units not already listed in framboids or nodules record
+
+# therefore first bind framboid and nodules datasets
+
+all <- rbind(framboids, nodules)
+
+all1 <- all[!duplicated(all$unit_id), ]
+all2 <- all[is.na(all$unit_id),]
+all1 <- all1[!is.na(all1$unit_id),]
+all2 <- all2[!duplicated(all2$strat_name_id),]
+all <- rbind(all1, all2)
+
+# right join framboids+nodules to the pyritic strat record
+
+pyritic_strat <- safe_right_join(all, pyritic_strat, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
+pyritic_strat <- pyritic_strat[is.na(pyritic_strat$target_word),]
+
+pyrite_undif <- grepl("\\<pyrite\\>", data_p2$target_word, ignore.case=TRUE) | grepl("\\<pyritic\\>", data_p2$target_word, ignore.case=TRUE)
+
+pyrite_undif <- subset(data_p2, pyrite_undif)
+
+pyrite_undif <- rbind(pyritic_strat, pyrite_undif)
+
+# use anti_join to again carry forward only packages not already identified as containing framboids or nodules
+
+pyrite_undif <- anti_join(pyrite_undif, all, by = c("strat_name_id", "strat_name_id")) 
+
+# subset so only sediments extracted
+
+# run this line if ALL sediments - note slightly different ordering of subset compared to framboids and nodules
+# this is because ALL framboids and nodules are assumed to be sedimentary, UNLESS the strat ID is matched to
+# a non-sedimentary unit. Whereas undifferentiated pyrite is included ONLY if explicitly
+# linked to a sedimentary unit - this is because framboids + nodules form primarily in 
+# a 'sedimentary' environment whereas 'pyrite' in general is present in many settings
+
+pyrite_undif1 <- subset(pyrite_undif, t_age2 > cutoff & b_age2 > cutoff)
+pyrite_undif2 <- pyrite_undif1[!duplicated(pyrite_undif1$unit_id), ]
+pyrite_undif3 <- pyrite_undif1[is.na(pyrite_undif1$unit_id),]
+pyrite_undif2 <- pyrite_undif2[!is.na(pyrite_undif2$unit_id),]
+pyrite_undif3 <- pyrite_undif3[!duplicated(pyrite_undif3$strat_name_id),]
+pyrite_undif1 <- rbind(pyrite_undif2, pyrite_undif3)
+
+pyrite_undif2 <- subset(pyrite_undif, t_age2 < cutoff & b_age2 < cutoff)
+pyrite_undif3 <- pyrite_undif2[!duplicated(pyrite_undif2$unit_id), ]
+pyrite_undif4 <- pyrite_undif2[is.na(pyrite_undif2$unit_id),]
+pyrite_undif3 <- pyrite_undif3[!is.na(pyrite_undif3$unit_id),]
+pyrite_undif4 <- pyrite_undif4[!duplicated(pyrite_undif4$strat_name_id),]
+pyrite_undif2 <- rbind(pyrite_undif3, pyrite_undif4)
+
+pyrite_undif3 <- subset(pyrite_undif, t_age2 < cutoff & b_age2 == cutoff)
+pyrite_undif4 <- pyrite_undif3[!duplicated(pyrite_undif3$unit_id), ]
+pyrite_undif5 <- pyrite_undif3[is.na(pyrite_undif3$unit_id),]
+pyrite_undif4 <- pyrite_undif4[!is.na(pyrite_undif4$unit_id),]
+pyrite_undif5 <- pyrite_undif5[!duplicated(pyrite_undif5$strat_name_id),]
+pyrite_undif3 <- rbind(pyrite_undif4, pyrite_undif5)
+
+pyrite_undif4 <- subset(pyrite_undif, t_age2 == cutoff & b_age2 > cutoff)
+pyrite_undif5 <- pyrite_undif4[!duplicated(pyrite_undif4$unit_id), ]
+pyrite_undif6 <- pyrite_undif4[is.na(pyrite_undif4$unit_id),]
+pyrite_undif5 <- pyrite_undif5[!is.na(pyrite_undif5$unit_id),]
+pyrite_undif6 <- pyrite_undif6[!duplicated(pyrite_undif6$strat_name_id),]
+pyrite_undif4 <- rbind(pyrite_undif5, pyrite_undif6)
+
+pyrite_undif <- rbind(pyrite_undif1, pyrite_undif2, pyrite_undif3, pyrite_undif4)
+
+sediments <- (grepl(paste(rocks, collapse = "|"), pyrite_undif$lith, ignore.case=TRUE) | 
+  grepl(paste(rocks, collapse = "|"), pyrite_undif$other, ignore.case=TRUE) | 
+  grepl(paste(rocks, collapse = "|"), pyrite_undif$environ, ignore.case=TRUE) | 
+  grepl(paste(rocks, collapse = "|"), pyrite_undif$strat_phrase_root, ignore.case=TRUE) | 
+  grepl(paste(rocks, collapse = "|"), pyrite_undif$phrase, ignore.case=TRUE) | 
+  grepl(paste(rocks, collapse = "|"), pyrite_undif$strat_flag, ignore.case=TRUE) |
+  grepl(paste(rocks, collapse = "|"), pyrite_undif$environ, ignore.case=TRUE))  &
+  (grepl(paste(rocks2, collapse = "|"), pyrite_undif$lith, ignore.case=TRUE) | 
+     grepl(paste(rocks2, collapse = "|"), pyrite_undif$other, ignore.case=TRUE) | 
+     grepl(paste(rocks2, collapse = "|"), pyrite_undif$strat_phrase_root, ignore.case=TRUE) | 
+     grepl(paste(rocks2, collapse = "|"), pyrite_undif$strat_flag, ignore.case=TRUE) |
+     grepl(paste(rocks2, collapse = "|"), pyrite_undif$phrase, ignore.case=TRUE) |
+     grepl(paste(rocks2, collapse = "|"), pyrite_undif$environ, ignore.case=TRUE))
+
+pyrite_undif <- subset(pyrite_undif, sediments)
 
 # extract nearby mentions of veins or mineralisation
 
@@ -347,26 +354,21 @@ veins <- subset(pyrite_undif, veins)
 
 # for example framboids
 
-framboids <- melt(framboids, id.vars = c(1:32, 35:83), na.rm=TRUE)
+framboids <- melt(framboids, id.vars = c(1:83,626), na.rm=TRUE)
 framboids$value <- as.numeric(framboids$value)
+framboids <- subset(framboids, variable != "b_age2")
 
-# remove b_age - otherwise end up with 2x in the final bin
-
-framboids <- subset(framboids, variable != "b_age")
-
-# repeat for the others
-
-nodules <- melt(nodules, id.vars = c(1:32, 35:83), na.rm=TRUE)
+nodules <- melt(nodules, id.vars = c(1:83,626), na.rm=TRUE)
 nodules$value <- as.numeric(nodules$value)
-nodules <- subset(nodules, variable != "b_age")
+nodules <- subset(nodules, variable != "b_age2")
 
-pyrite_undif <- melt(pyrite_undif, id.vars = c(1:32, 35:83), na.rm=TRUE)
+pyrite_undif <- melt(pyrite_undif, id.vars = c(1:83,626), na.rm=TRUE)
 pyrite_undif$value <- as.numeric(pyrite_undif$value)
-pyrite_undif <- subset(pyrite_undif, variable != "b_age")
+pyrite_undif <- subset(pyrite_undif, variable != "b_age2")
 
-veins <- melt(veins, id.vars = c(1:32, 35:83), na.rm=TRUE)
+veins <- melt(veins, id.vars = c(1:83,626), na.rm=TRUE)
 veins$value <- as.numeric(veins$value)
-veins <- subset(veins, variable != "b_age")
+veins <- subset(veins, variable != "b_age2")
 
 # block end
 
@@ -456,28 +458,28 @@ sediments <- (grepl(paste(rocks, collapse = "|"), data_p2$lith, ignore.case=TRUE
 
 sediments <- subset(data_p2, sediments)
 
-sediments1 <- subset(sediments, t_age > cutoff & b_age > cutoff)
+sediments1 <- subset(sediments, t_age2 > cutoff & b_age2 > cutoff)
 sediments2 <- sediments1[!duplicated(sediments1$unit_id), ]
 sediments3 <- sediments1[is.na(sediments1$unit_id),]
 sediments2 <- sediments2[!is.na(sediments2$unit_id),]
 sediments3 <- sediments3[!duplicated(sediments3$strat_name_id),]
 sediments1 <- rbind(sediments2, sediments3)
 
-sediments2 <- subset(sediments, t_age < cutoff & b_age < cutoff)
+sediments2 <- subset(sediments, t_age2 < cutoff & b_age2 < cutoff)
 sediments3 <- sediments2[!duplicated(sediments2$unit_id), ]
 sediments4 <- sediments2[is.na(sediments2$unit_id),]
 sediments3 <- sediments3[!is.na(sediments3$unit_id),]
 sediments4 <- sediments4[!duplicated(sediments4$strat_name_id),]
 sediments2 <- rbind(sediments3, sediments4)
 
-sediments3 <- subset(sediments, t_age < cutoff & b_age == cutoff)
+sediments3 <- subset(sediments, t_age2 < cutoff & b_age2 == cutoff)
 sediments4 <- sediments3[!duplicated(sediments3$unit_id), ]
 sediments5 <- sediments3[is.na(sediments3$unit_id),]
 sediments4 <- sediments4[!is.na(sediments4$unit_id),]
 sediments5 <- sediments5[!duplicated(sediments5$strat_name_id),]
 sediments3 <- rbind(sediments4, sediments5)
 
-sediments4 <- subset(sediments, t_age == cutoff & b_age > cutoff)
+sediments4 <- subset(sediments, t_age2 == cutoff & b_age2 > cutoff)
 sediments5 <- sediments4[!duplicated(sediments4$unit_id), ]
 sediments6 <- sediments4[is.na(sediments4$unit_id),]
 sediments5 <- sediments5[!is.na(sediments5$unit_id),]
@@ -486,10 +488,9 @@ sediments4 <- rbind(sediments5, sediments6)
 
 sediments <- rbind(sediments1, sediments2, sediments3, sediments4)
 
-sediments <- melt(sediments, id.vars = c(1:32, 35:83), na.rm=TRUE)
+sediments <- melt(sediments, id.vars = c(1:83,626), na.rm=TRUE)
 sediments$value <- as.numeric(sediments$value)
-
-sediments <- subset(sediments, variable != "b_age")
+sediments <- subset(sediments, variable != "b_age2")
 
 # Phanerozoic bins
 
@@ -511,46 +512,6 @@ sediments_bins <- sediments_bins[c(1:541,543:889),] # remove duplicate 541
 
 # block start
 
-# remove vein counts from pyrite_undif
-
-pyrite_undif_bins$V1 <- pyrite_undif_bins$V1-veins_bins$V1
-
-# use below for plot 1 - S indicates stacked
-
-framboidsS <- as.data.frame(cbind((framboids_bins$V1)/sediments_bins$V1,nodules_bins$V2))
-nodulesS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
-veinsS <- as.data.frame(cbind((veins_bins$V1+framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,veins_bins$V2))
-undifS <- as.data.frame(cbind((pyrite_undif_bins$V1+veins_bins$V1+framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
-
-# - ratios - not presently in use 
-
-framboidsR <- as.data.frame(cbind((framboids_bins$V1)/sediments_bins$V1,nodules_bins$V2))
-nodulesR <- as.data.frame(cbind((nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
-veinsR <- as.data.frame(cbind((veins_bins$V1)/sediments_bins$V1,nodules_bins$V2))
-undifR <- as.data.frame(cbind((pyrite_undif_bins$V1)/sediments_bins$V1,nodules_bins$V2))
-allR <- as.data.frame(cbind((pyrite_undif_bins$V1+veins_bins$V1+framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
-
-ratio <- as.data.frame(cbind((framboidsR$V1)/(framboidsR$V1+nodulesR$V1),nodules_bins$V2))
-ratio$V1[is.nan(ratio$V1)] <- NA
-frams_nods <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
-
-# alternative used for plot 2 - normalised to all pyrite-bearing 'rocks',  - R indicates stacked
-
-framboidsS <- as.data.frame(cbind((framboids_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1+veins_bins$V1),nodules_bins$V2))
-nodulesS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1+veins_bins$V1),nodules_bins$V2))
-veinsS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1+veins_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1+veins_bins$V1),nodules_bins$V2))
-undifS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1+veins_bins$V1+pyrite_undif_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1+veins_bins$V1),nodules_bins$V2))
-
-framboidsR <- as.data.frame(cbind((framboids_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1+veins_bins$V1),nodules_bins$V2))
-nodulesR <- as.data.frame(cbind((nodules_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1+veins_bins$V1),nodules_bins$V2))
-veinsR <- as.data.frame(cbind((veins_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1+veins_bins$V1),nodules_bins$V2))
-undifR <- as.data.frame(cbind((pyrite_undif_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1+veins_bins$V1),nodules_bins$V2))
-
-ratio <- as.data.frame(cbind((framboidsR$V1)/(framboidsR$V1+nodulesR$V1),nodules_bins$V2))
-ratio$V1[is.nan(ratio$V1)] <- NA
-frams_nods <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
-
-
 # optional additional time points for plotting
 
 ME <- c(445, 372, 252, 201, 65)
@@ -567,35 +528,36 @@ lows <- c(323, 299, 201, 170) # carb.intervals and lows from Riding et al. 2019
 # plots
 
 Top <- -0 # top age for plot (in Ma), set at -0.5 in order to centre bins
-Bottom <- 3500 # bottom age for plot (in Ma)
+Bottom <- 3000 # bottom age for plot (in Ma)
 phanerozoic_increment <- 1
 precambrian_increment <- 10
 
-# output - select 'plot 1' or 'plot 2' code blocks above then print a and b below
+# use below for plot 1 - S indicates stacked
+
+framboidsS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
+nodulesS <- as.data.frame(cbind((nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
+veinsS <- as.data.frame(cbind((veins_bins$V1+framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,veins_bins$V2))
+undifS <- as.data.frame(cbind((pyrite_undif_bins$V1+framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
+
+# output 
 
 a <- ggplot() + theme_bw() +
   scale_x_reverse(limits = c(Bottom, 541)) +
-  #scale_y_continuous(limits = c(0,0.3)) +
   geom_stepribbon(data = undifS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
-  geom_stepribbon(data = veinsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "green") +
-  geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue") +
   geom_stepribbon(data = framboidsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "red") +
+  geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue") +
   geom_step(data = undifS, aes(V2-0.5, V1)) +
-  geom_step(data = veinsS, aes(V2-0.5, V1)) + 
   geom_step(data = nodulesS, aes(V2-0.5, V1)) + 
   geom_step(data = framboidsS, aes(V2-0.5, V1)) +
   geom_vline(xintercept = c(Extras))
 
 b <- ggplot() + theme_bw() +
   scale_x_reverse(limits = c(541, Top)) +
-  #scale_y_continuous(limits = c(0,0.3)) +
   geom_stepribbon(data = undifS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
-  geom_stepribbon(data = veinsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "green") +
-  geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue") +
   geom_stepribbon(data = framboidsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "red") +
+  geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue") +
   geom_step(data = framboidsS, aes(V2-0.5, V1)) + 
   geom_step(data = nodulesS, aes(V2-0.5, V1)) + 
-  geom_step(data = veinsS, aes(V2-0.5, V1)) + 
   geom_step(data = undifS, aes(V2-0.5, V1)) +
   theme(axis.title.y=element_blank(),
         axis.text.y=element_blank(),
@@ -604,9 +566,7 @@ b <- ggplot() + theme_bw() +
 #geom_vline(xintercept = ME) #+ 
 #geom_vline(xintercept = c(Es, OAEs))
 
-#Extras, ME, OAEs, 
-
-# generate plots
+# generate plots 
 
 grid.arrange(a,b, ncol = 2)
 
@@ -648,16 +608,16 @@ cutoff <- 541 # Ma
 phanerozoic_increment <- 1 # in Ma
 precambrian_increment <- 10 # in Ma
 
-framboids1 <- subset(framboids, t_age > cutoff & b_age > cutoff)
+framboids1 <- subset(framboids, t_age2 > cutoff & b_age2 > cutoff)
 framboids1 <- framboids1[!duplicated(framboids1$strat_name_id),]
 
-framboids2 <- subset(framboids, t_age < cutoff & b_age < cutoff)
+framboids2 <- subset(framboids, t_age2 < cutoff & b_age2 < cutoff)
 framboids2 <- framboids2[!duplicated(framboids2$strat_name_id),]
 
-framboids3 <- subset(framboids, t_age < cutoff & b_age == cutoff)
+framboids3 <- subset(framboids, t_age2 < cutoff & b_age2 == cutoff)
 framboids3 <- framboids3[!duplicated(framboids3$strat_name_id),]
 
-framboids4 <- subset(framboids, t_age == cutoff & b_age > cutoff)
+framboids4 <- subset(framboids, t_age2 == cutoff & b_age2 > cutoff)
 framboids4 <- framboids4[!duplicated(framboids4$strat_name_id),]
 
 framboids <- rbind(framboids1, framboids2, framboids3, framboids4)
@@ -702,16 +662,16 @@ nodules1 <- grepl("pyrite nodul", data_p1$other, ignore.case=TRUE) | grepl("pyri
 nodules1 <- subset(data_p1, nodules1)
 nodules <- rbind(nodules, nodules1)
 
-nodules1 <- subset(nodules, t_age > cutoff & b_age > cutoff)
+nodules1 <- subset(nodules, t_age2 > cutoff & b_age2 > cutoff)
 nodules1 <- nodules1[!duplicated(nodules1$strat_name_id),]
 
-nodules2 <- subset(nodules, t_age < cutoff & b_age < cutoff)
+nodules2 <- subset(nodules, t_age2 < cutoff & b_age2 < cutoff)
 nodules2 <- nodules2[!duplicated(nodules2$strat_name_id),]
 
-nodules3 <- subset(nodules, t_age < cutoff & b_age == cutoff)
+nodules3 <- subset(nodules, t_age2 < cutoff & b_age2 == cutoff)
 nodules3 <- nodules3[!duplicated(nodules3$strat_name_id),]
 
-nodules4 <- subset(nodules, t_age == cutoff & b_age > cutoff)
+nodules4 <- subset(nodules, t_age2 == cutoff & b_age2 > cutoff)
 nodules4 <- nodules4[!duplicated(nodules4$strat_name_id),]
 
 nodules <- rbind(nodules1, nodules2, nodules3, nodules4)
@@ -751,10 +711,6 @@ all <- rbind(framboids, nodules)
 
 all <- all[!duplicated(all$strat_name_id),]
 
-# 01/11/19 note -
-# something which could be done, would be to upgrade pyritic units to strat packages using Mode
-# in the same way as 'sediments' via the use of sed.list..
-
 pyritic_strat <- safe_right_join(all, pyritic_strat, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
 pyritic_strat <- pyritic_strat[is.na(pyritic_strat$target_word),]
 
@@ -791,19 +747,61 @@ pyrite_undif <- anti_join(pyrite_undif, all, by = c("strat_name_id", "strat_name
 
 pyrite_undif <- select(pyrite_undif, -c(lith2))
 
-pyrite_undif1 <- subset(pyrite_undif, t_age > cutoff & b_age > cutoff)
+pyrite_undif1 <- subset(pyrite_undif, t_age2 > cutoff & b_age2 > cutoff)
 pyrite_undif1 <- pyrite_undif1[!duplicated(pyrite_undif1$strat_name_id),]
 
-pyrite_undif2 <- subset(pyrite_undif, t_age < cutoff & b_age < cutoff)
+pyrite_undif2 <- subset(pyrite_undif, t_age2 < cutoff & b_age2 < cutoff)
 pyrite_undif2 <- pyrite_undif2[!duplicated(pyrite_undif2$strat_name_id),]
 
-pyrite_undif3 <- subset(pyrite_undif, t_age < cutoff & b_age == cutoff)
+pyrite_undif3 <- subset(pyrite_undif, t_age2 < cutoff & b_age2 == cutoff)
 pyrite_undif3 <- pyrite_undif3[!duplicated(pyrite_undif3$strat_name_id),]
 
-pyrite_undif4 <- subset(pyrite_undif, t_age == cutoff & b_age > cutoff)
+pyrite_undif4 <- subset(pyrite_undif, t_age2 == cutoff & b_age2 > cutoff)
 pyrite_undif4 <- pyrite_undif4[!duplicated(pyrite_undif4$strat_name_id),]
 
 pyrite_undif <- rbind(pyrite_undif1, pyrite_undif2, pyrite_undif3, pyrite_undif4)
+
+# alternative for pyrite undif taking only pyrite extracted via xdd
+
+pyrite_xdd <- data_p1
+
+pyrite_xdd <- pyrite_xdd[!is.na(pyrite_xdd$result_id),]
+
+pyrite_xdd <- safe_right_join(sed.list, pyrite_xdd, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
+
+sediments <- grepl("TRUE", pyrite_xdd$lith2) |
+  (grepl(paste(rocks, collapse = "|"), pyrite_xdd$other, ignore.case=TRUE) |
+     grepl(paste(rocks, collapse = "|"), pyrite_xdd$strat_phrase_root, ignore.case=TRUE) | 
+     grepl(paste(rocks, collapse = "|"), pyrite_xdd$phrase, ignore.case=TRUE) | 
+     grepl(paste(rocks, collapse = "|"), pyrite_xdd$strat_flag, ignore.case=TRUE))  &
+  (grepl(paste(rocks2, collapse = "|"), pyrite_xdd$other, ignore.case=TRUE) | 
+     grepl(paste(rocks2, collapse = "|"), pyrite_xdd$strat_phrase_root, ignore.case=TRUE) | 
+     grepl(paste(rocks2, collapse = "|"), pyrite_xdd$strat_flag, ignore.case=TRUE) |
+     grepl(paste(rocks2, collapse = "|"), pyrite_xdd$phrase, ignore.case=TRUE))
+
+pyrite_xdd <- subset(pyrite_xdd, sediments)
+
+##### carry forward only strat packages not already containing framboid or nodule phrases
+
+pyrite_xdd <- anti_join(pyrite_xdd, all, by = c("strat_name_id", "strat_name_id")) 
+
+# drop lith2 as not needed from this point onwards
+
+pyrite_xdd <- select(pyrite_xdd, -c(lith2))
+
+pyrite_xdd1 <- subset(pyrite_xdd, t_age2 > cutoff & b_age2 > cutoff)
+pyrite_xdd1 <- pyrite_xdd1[!duplicated(pyrite_xdd1$strat_name_id),]
+
+pyrite_xdd2 <- subset(pyrite_xdd, t_age2 < cutoff & b_age2 < cutoff)
+pyrite_xdd2 <- pyrite_xdd2[!duplicated(pyrite_xdd2$strat_name_id),]
+
+pyrite_xdd3 <- subset(pyrite_xdd, t_age2 < cutoff & b_age2 == cutoff)
+pyrite_xdd3 <- pyrite_xdd3[!duplicated(pyrite_xdd3$strat_name_id),]
+
+pyrite_xdd4 <- subset(pyrite_xdd, t_age2 == cutoff & b_age2 > cutoff)
+pyrite_xdd4 <- pyrite_xdd4[!duplicated(pyrite_xdd4$strat_name_id),]
+
+pyrite_xdd <- rbind(pyrite_xdd1, pyrite_xdd2, pyrite_xdd3, pyrite_xdd4)
 
 # veins/mineralisation extraction as in part 1
 
@@ -818,21 +816,25 @@ veins <- subset(pyrite_undif, veins)
 
 # melt datasets - the same workflow as part 1, but with different column ranges
 
-framboids <- melt(framboids, id.vars = c(1:26, 29:44), na.rm=TRUE)
+framboids <- melt(framboids, id.vars = c(1:44), na.rm=TRUE)
 framboids$value <- as.numeric(framboids$value)
-framboids <- subset(framboids, variable != "b_age")
+framboids <- subset(framboids, variable != "b_age2")
 
-nodules <- melt(nodules, id.vars = c(1:26, 29:44), na.rm=TRUE)
+nodules <- melt(nodules, id.vars = c(1:44), na.rm=TRUE)
 nodules$value <- as.numeric(nodules$value)
-nodules <- subset(nodules, variable != "b_age")
+nodules <- subset(nodules, variable != "b_age2")
 
-pyrite_undif <- melt(pyrite_undif, id.vars = c(1:26, 29:44), na.rm=TRUE)
+pyrite_undif <- melt(pyrite_undif, id.vars = c(1:44), na.rm=TRUE)
 pyrite_undif$value <- as.numeric(pyrite_undif$value)
-pyrite_undif <- subset(pyrite_undif, variable != "b_age")
+pyrite_undif <- subset(pyrite_undif, variable != "b_age2")
 
-veins <- melt(veins, id.vars = c(1:26, 29:44), na.rm=TRUE)
+pyrite_xdd <- melt(pyrite_xdd, id.vars = c(1:44), na.rm=TRUE)
+pyrite_xdd$value <- as.numeric(pyrite_xdd$value)
+pyrite_xdd <- subset(pyrite_xdd, variable != "b_age2")
+
+veins <- melt(veins, id.vars = c(1:44), na.rm=TRUE)
 veins$value <- as.numeric(veins$value)
-veins <- subset(veins, variable != "b_age")
+veins <- subset(veins, variable != "b_age2")
 
 # block end
 
@@ -888,6 +890,22 @@ pyrite_undif_bins <- rbind(pyrite_undif_bins1,pyrite_undif_bins2)
 
 pyrite_undif_bins <- pyrite_undif_bins[c(1:541,543:889),] # remove duplicate 541
 
+# undifferentiated pyrite mentions - xdd only
+
+# Phanerozoic bins
+pyrite_xdd_bins1 <- hist(pyrite_xdd$value[pyrite_xdd$value >= 0 & pyrite_xdd$value < cutoff+1], breaks = seq(0, cutoff+1, by = phanerozoic_increment))
+pyrite_xdd_bins1 <- as.data.frame(cbind(pyrite_xdd_bins1$counts, pyrite_xdd_bins1$breaks))
+pyrite_xdd_bins1 <- pyrite_xdd_bins1[1:542,]
+
+# Precambrian bins
+pyrite_xdd_bins2 <- hist(pyrite_xdd$value[pyrite_xdd$value >= cutoff & pyrite_xdd$value <= 4001], breaks = seq(cutoff, 4001, by = precambrian_increment))
+pyrite_xdd_bins2 <- as.data.frame(cbind(pyrite_xdd_bins2$counts, pyrite_xdd_bins2$breaks))
+
+# Bind
+pyrite_xdd_bins <- rbind(pyrite_xdd_bins1,pyrite_xdd_bins2)
+
+pyrite_xdd_bins <- pyrite_xdd_bins[c(1:541,543:889),] # remove duplicate 541
+
 # undifferentiated pyrite mentions - associated with veins and mineralisation mentions
 
 # Phanerozoic bins
@@ -928,24 +946,24 @@ sediments <- subset(data.sed, sediments)
 
 sediments <- select(sediments, -c(lith2))
 
-sediments1 <- subset(sediments, t_age > cutoff & b_age > cutoff)
+sediments1 <- subset(sediments, t_age2 > cutoff & b_age2 > cutoff)
 sediments1 <- sediments1[!duplicated(sediments1$strat_name_id),]
 
-sediments2 <- subset(sediments, t_age < cutoff & b_age < cutoff)
+sediments2 <- subset(sediments, t_age2 < cutoff & b_age2 < cutoff)
 sediments2 <- sediments2[!duplicated(sediments2$strat_name_id),]
 
-sediments3 <- subset(sediments, t_age < cutoff & b_age == cutoff)
+sediments3 <- subset(sediments, t_age2 < cutoff & b_age2 == cutoff)
 sediments3 <- sediments3[!duplicated(sediments3$strat_name_id),]
 
-sediments4 <- subset(sediments, t_age == cutoff & b_age > cutoff)
+sediments4 <- subset(sediments, t_age2 == cutoff & b_age2 > cutoff)
 sediments4 <- sediments4[!duplicated(sediments4$strat_name_id),]
 
 sediments <- rbind(sediments1, sediments2, sediments3, sediments4)
 
-sediments <- melt(sediments, id.vars = c(1:26, 29:44), na.rm=TRUE)
+sediments <- melt(sediments, id.vars = c(1:44), na.rm=TRUE)
 sediments$value <- as.numeric(sediments$value)
 
-sediments <- subset(sediments, variable != "b_age")
+sediments <- subset(sediments, variable != "b_age2")
 
 sediments_bins1 <- hist(sediments$value[sediments$value >= 0 & sediments$value < cutoff+1], breaks = seq(0, cutoff+1, by = phanerozoic_increment))
 sediments_bins1 <- as.data.frame(cbind(sediments_bins1$counts, sediments_bins1$breaks))
@@ -966,48 +984,6 @@ sediments_bins <- sediments_bins[c(1:541,543:889),] # remove duplicate 541
 
 # block start
 
-# remove vein counts from pyrite_undif
-
-pyrite_undif_bins$V1 <- pyrite_undif_bins$V1-veins_bins$V1
-
-# choose for plot 3 - S indicates stacked
-
-framboidsS <- as.data.frame(cbind((framboids_bins$V1)/sediments_bins$V1,nodules_bins$V2))
-nodulesS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
-veinsS <- as.data.frame(cbind((veins_bins$V1+framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,veins_bins$V2))
-undifS <- as.data.frame(cbind((pyrite_undif_bins$V1+veins_bins$V1+framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
-
-# alternative as ratios (R indicates not stacked) - not presently used
-
-framboidsR <- as.data.frame(cbind((framboids_bins$V1)/sediments_bins$V1,nodules_bins$V2))
-nodulesR <- as.data.frame(cbind((nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
-veinsR <- as.data.frame(cbind((veins_bins$V1)/sediments_bins$V1,nodules_bins$V2))
-undifR <- as.data.frame(cbind((pyrite_undif_bins$V1)/sediments_bins$V1,nodules_bins$V2))
-allR <- as.data.frame(cbind((pyrite_undif_bins$V1+veins_bins$V1+framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
-
-ratio <- as.data.frame(cbind((framboidsR$V1)/(framboidsR$V1+nodulesR$V1),nodules_bins$V2))
-ratio$V1[is.nan(ratio$V1)] <- NA
-frams_nods <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
-
-# choose for plot 4 - S indicates stacked
-
-framboidsS <- as.data.frame(cbind((framboids_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1+veins_bins$V1),nodules_bins$V2))
-nodulesS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1+veins_bins$V1),nodules_bins$V2))
-veinsS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1+veins_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1+veins_bins$V1),nodules_bins$V2))
-undifS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1+veins_bins$V1+pyrite_undif_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1+veins_bins$V1),nodules_bins$V2))
-
-# alternative using ratios - not presently used
-
-framboidsR <- as.data.frame(cbind((framboids_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1+veins_bins$V1),nodules_bins$V2))
-nodulesR <- as.data.frame(cbind((nodules_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1+veins_bins$V1),nodules_bins$V2))
-veinsR <- as.data.frame(cbind((veins_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1+veins_bins$V1),nodules_bins$V2))
-undifR <- as.data.frame(cbind((pyrite_undif_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1+veins_bins$V1),nodules_bins$V2))
-
-ratio <- as.data.frame(cbind((framboidsR$V1)/(framboidsR$V1+nodulesR$V1),nodules_bins$V2))
-ratio$V1[is.nan(ratio$V1)] <- NA
-frams_nods <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
-
-
 # optional additional time points for plotting
 
 ME <- c(445, 372, 252, 201, 65)
@@ -1021,41 +997,47 @@ supercontinents <- c(320, 170, 900, 700, 1600, 1400) # from Li et al. 2019 Preca
 carb.intervals <- c(541, 465, 372, 323, 265, 227, 164, 133)
 lows <- c(323, 299, 201, 170) # carb.intervals and lows from Riding et al. 2019
 
-# output - choose plot 3 or plot 4 code blocks then print a and b below
+# output - plot 3
 
 Top <- -0 # top age for plot (in Ma), set at -0.5 in order to centre bins
-Bottom <- 3500 # bottom age for plot (in Ma)
+Bottom <- 3000 # bottom age for plot (in Ma)
 phanerozoic_increment <- 1
 precambrian_increment <- 10
 
+# choose for plot 3 - S indicates stacked
+
+nodulesS <- as.data.frame(cbind((nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
+framboidsS  <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
+veinsS <- as.data.frame(cbind((veins_bins$V1+framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,veins_bins$V2))
+undifS <- as.data.frame(cbind((pyrite_undif_bins$V1+framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
+
+
 a <- ggplot() + theme_bw() +
   scale_x_reverse(limits = c(Bottom, 541)) +
-  scale_y_continuous(limits = c(0,1)) +
+  scale_y_continuous(limits = c(0,0.25)) +
   geom_stepribbon(data = undifS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
-  geom_stepribbon(data = veinsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "green") +
-  geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue") +
   geom_stepribbon(data = framboidsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "red") +
+  geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue") +
   geom_step(data = undifS, aes(V2-0.5, V1)) +
-  geom_step(data = veinsS, aes(V2-0.5, V1)) + 
   geom_step(data = nodulesS, aes(V2-0.5, V1)) + 
   geom_step(data = framboidsS, aes(V2-0.5, V1)) +
-  geom_vline(xintercept = c(Extras))
+  geom_vline(xintercept = c(Extras)) +
+  geom_vline(xintercept = 800, colour = "red")
 
 b <- ggplot() + theme_bw() +
   scale_x_reverse(limits = c(541, Top)) +
-  scale_y_continuous(limits = c(0,1)) +
+  scale_y_continuous(limits = c(0,0.25)) +
   geom_stepribbon(data = undifS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
-  geom_stepribbon(data = veinsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "green") +
-  geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue") +
   geom_stepribbon(data = framboidsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "red") +
+    geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue") +
   geom_step(data = framboidsS, aes(V2-0.5, V1)) + 
   geom_step(data = nodulesS, aes(V2-0.5, V1)) + 
-  geom_step(data = veinsS, aes(V2-0.5, V1)) + 
   geom_step(data = undifS, aes(V2-0.5, V1)) +
   theme(axis.title.y=element_blank(),
         axis.text.y=element_blank(),
         axis.ticks.y=element_blank()) +
-  geom_vline(xintercept = c(Extras)) #+ 
+  geom_vline(xintercept = c(Extras)) +
+  geom_vline(xintercept = 55.9, colour = "red") #+ 
 #geom_vline(xintercept = ME) #+ 
 #geom_vline(xintercept = c(Es, OAEs))
 
@@ -1064,4 +1046,6 @@ b <- ggplot() + theme_bw() +
 # generate plots
 
 grid.arrange(a,b, ncol = 2)
+
+## END ##
 
