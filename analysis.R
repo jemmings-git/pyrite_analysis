@@ -1,9 +1,9 @@
-##### This R script was written by Joe Emmings and Jo Walsh (British Geological Survey) ####
+##### This R script was written by Joe Emmings, Jo Walsh and Kathryn Leeming (British Geological Survey) ####
 ##### This script is designed to plot GeoDeepDive extractions
 ##### interfaced with the Macrostrat database
 
-rm(list=ls())
 
+rm(list=ls())
 
 library(dplyr) # plyr is not needed (note loading plyr after dplyr will prevent execution of PART 2)
 library(tidyr)
@@ -14,6 +14,7 @@ library(ggplot2)
 library(safejoin)
 library(pammtools)
 library(gridExtra)
+library(tidyverse)
 
 project_home <- 'N:/Data/xGDD/analysis'
 tryCatch({
@@ -24,40 +25,28 @@ tryCatch({
 }
 )
 
+
 # choices for analysis:
 
-source('../macrostrat_data.R')
-
-
+source('macrostrat_data.R')
 
 # choose one of the following rocks and rocks2 defs
 
-rocks <- sedimentary_rocks # normalisation to all sedimentary rocks
-rocks2 <- sedimentary_rocks
+#rocks <- sedimentary_rocks # normalisation to all sedimentary rocks
+#rocks2 <- sedimentary_rocks
 
 rocks <- meta_sedimentary_rocks # normalisation to all sedimentary and metamorphosed sedimentary rocks - choose this option to replicate manuscript output
 rocks2 <- meta_sedimentary_rocks
 
-rocks <- mud_rocks # normalisation to mudstones
-rocks2 <- mud_rocks
-
-# or two tiered-subset - again choose one of the below
-
-rocks <- meta_sedimentary_rocks # normalisation to marine sedimentary & metased rocks
-rocks2 <- marine
-
-rocks <- meta_sedimentary_rocks # normalisation to marine sedimentary & metased rocks
-rocks2 <- non.mar # normalisation to non-marine sedimentary rocks - doesn't work very well?
-
-rocks <- meta_sedimentary_rocks # normalisation to marine sedimentary & metased rocks
-rocks2 <- deep_water # also doesn't work very well.. the problem is due to varying detail in 'other
-
-sediments <- rocks
-metasediments <- rocks2
+#rocks <- mud_rocks # normalisation to mudstones
+#rocks2 <- mud_rocks
 
 ###### PART 1 - using 'output 2' ('p2') - composite analysis of units and strat packages #####
 
 data_p2 <-  read.csv(file = "data_part2_comp.csv", row.names = 1)
+
+length(unique(data_p2$result_id))
+
 
 # generate complete list of sedimentary units for part 2 - 
 # this is done by propagating unit lith info to strat IDs
@@ -96,7 +85,7 @@ sed.list <- aggregate(lith2 ~ strat_name_id, data_p2, Mode)
 
 # optional compilation of target words and summary
 phrases <- as.data.frame(as.array(data_p2$target_word))
-list <- as.data.frame(summary(data_p2$target_word))
+list.phrases <- as.data.frame(summary(data_p2$target_word))
 
 # compile framboid mentions
 
@@ -263,17 +252,17 @@ pyritic_strat <- subset(pyritic_strat, false)
 
 # therefore first bind framboid and nodules datasets
 
-all <- rbind(framboids, nodules)
+all0 <- rbind(framboids, nodules)
 
-all1 <- all[!duplicated(all$unit_id), ]
-all2 <- all[is.na(all$unit_id),]
+all1 <- all0[!duplicated(all0$unit_id), ]
+all2 <- all0[is.na(all0$unit_id),]
 all1 <- all1[!is.na(all1$unit_id),]
 all2 <- all2[!duplicated(all2$strat_name_id),]
-all <- rbind(all1, all2)
+all0 <- rbind(all1, all2)
 
 # right join framboids+nodules to the pyritic strat record
 
-pyritic_strat <- safe_right_join(all, pyritic_strat, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
+pyritic_strat <- safe_right_join(all0, pyritic_strat, by = "strat_name_id", conflict = coalesce)
 pyritic_strat <- pyritic_strat[is.na(pyritic_strat$target_word),]
 
 pyrite_undif <- grepl("\\<pyrite\\>", data_p2$target_word, ignore.case=TRUE) | grepl("\\<pyritic\\>", data_p2$target_word, ignore.case=TRUE)
@@ -284,7 +273,7 @@ pyrite_undif <- rbind(pyritic_strat, pyrite_undif)
 
 # use anti_join to again carry forward only packages not already identified as containing framboids or nodules
 
-pyrite_undif <- anti_join(pyrite_undif, all, by = c("strat_name_id", "strat_name_id")) 
+pyrite_undif <- anti_join(pyrite_undif, all0, by = "strat_name_id") 
 
 # subset so only sediments extracted
 
@@ -539,7 +528,7 @@ nodulesS <- as.data.frame(cbind((nodules_bins$V1)/sediments_bins$V1,nodules_bins
 veinsS <- as.data.frame(cbind((veins_bins$V1+framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,veins_bins$V2))
 undifS <- as.data.frame(cbind((pyrite_undif_bins$V1+framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
 
-# output 
+#### output - Figure 1A ###
 
 a <- ggplot() + theme_bw() +
   scale_x_reverse(limits = c(Bottom, 541)) +
@@ -570,6 +559,49 @@ b <- ggplot() + theme_bw() +
 
 grid.arrange(a,b, ncol = 2)
 
+
+# alternative used for plot 2 - normalised to all pyrite-bearing 'rocks',  - R indicates stacked
+
+framboidsS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1),nodules_bins$V2))
+nodulesS <- as.data.frame(cbind((nodules_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1),nodules_bins$V2))
+veinsS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1+veins_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1),nodules_bins$V2))
+undifS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1),nodules_bins$V2))
+
+#### output - Figure 1B ###
+
+c <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(Bottom, 541)) +
+  scale_y_continuous(limits = c(0,0.45)) +
+  geom_stepribbon(data = undifS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
+  geom_stepribbon(data = framboidsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "red") +
+  geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue") +
+  geom_step(data = undifS, aes(V2-0.5, V1)) +
+  geom_step(data = nodulesS, aes(V2-0.5, V1)) + 
+  geom_step(data = framboidsS, aes(V2-0.5, V1)) +
+  geom_vline(xintercept = c(Extras))
+
+d <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(541, Top)) +
+  scale_y_continuous(limits = c(0,0.45)) +
+  geom_stepribbon(data = undifS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
+  geom_stepribbon(data = framboidsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "red") +
+  geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue") +
+  geom_step(data = framboidsS, aes(V2-0.5, V1)) + 
+  geom_step(data = nodulesS, aes(V2-0.5, V1)) + 
+  geom_step(data = undifS, aes(V2-0.5, V1)) +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) +
+  geom_vline(xintercept = c(Extras)) #+ 
+#geom_vline(xintercept = ME) #+ 
+#geom_vline(xintercept = c(Es, OAEs))
+
+#Extras, ME, OAEs, 
+
+# generate plots 
+
+grid.arrange(c,d, ncol = 2)
+
 # block end
 
 ###### PART 2 - this section is to generate an output without propagation of units ##### 
@@ -586,7 +618,7 @@ data_p1 <-  read.csv(file = "data_part1_comp.csv", row.names = 1)
 
 # optional compilation of target words and summary
 phrases <- as.data.frame(as.array(data_p1$target_word))
-list <- as.data.frame(summary(data_p1$target_word))
+list.phrases <- as.data.frame(summary(data_p1$target_word))
 
 # compile framboid mentions, including in 'phrase' for pyrite undif hits
 
@@ -625,7 +657,7 @@ framboids <- rbind(framboids1, framboids2, framboids3, framboids4)
 # subset so only sediments extracted - use sed.list from part 1 - based on unit lith descriptions
 # sed.list is defined using 'rocks'
 
-framboids <- safe_right_join(sed.list, framboids, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
+framboids <- safe_right_join(sed.list, framboids, by = "strat_name_id", conflict = coalesce)
 
 sediments <-  grepl("TRUE", framboids$lith2) |
   (grepl(paste(rocks, collapse = "|"), framboids$other, ignore.case=TRUE) |
@@ -679,7 +711,7 @@ nodules <- rbind(nodules1, nodules2, nodules3, nodules4)
 # subset so only sediments extracted - use sed.list from part 1 - based on unit lith descriptions
 # sed.list is defined using 'rocks'
 
-nodules <- safe_right_join(sed.list, nodules, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
+nodules <- safe_right_join(sed.list, nodules, by = "strat_name_id", conflict = coalesce)
 
 sediments <- grepl("TRUE", nodules$lith2) |
   (grepl(paste(rocks, collapse = "|"), nodules$other, ignore.case=TRUE) |
@@ -707,11 +739,11 @@ pyritic_strat <- subset(data_p1, pyritic_strat)
 false <- !grepl("non-pyrit", pyritic_strat$other, ignore.case=TRUE)
 pyritic_strat <- subset(pyritic_strat, false)
 
-all <- rbind(framboids, nodules)
+all0 <- rbind(framboids, nodules)
 
-all <- all[!duplicated(all$strat_name_id),]
+all0 <- all0[!duplicated(all0$strat_name_id),]
 
-pyritic_strat <- safe_right_join(all, pyritic_strat, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
+pyritic_strat <- safe_right_join(all0, pyritic_strat, by = "strat_name_id", conflict = coalesce)
 pyritic_strat <- pyritic_strat[is.na(pyritic_strat$target_word),]
 
 pyrite <- grepl("\\<pyrite\\>", data_p1$target_word, ignore.case=TRUE) | grepl("\\<pyritic\\>", data_p1$target_word, ignore.case=TRUE)
@@ -723,7 +755,7 @@ pyrite_undif <- rbind(pyritic_strat, pyrite_undif)
 # subset so only sediments extracted - use sed.list from part 1 - based on unit lith descriptions
 # sed.list is defined using 'rocks'
 
-pyrite_undif <- safe_right_join(sed.list, pyrite_undif, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
+pyrite_undif <- safe_right_join(sed.list, pyrite_undif, by = "strat_name_id", conflict = coalesce)
 
 # in theory lith2 is the only requirement here (if defined by ALL sediments), but other terms added as a precaution
 
@@ -741,7 +773,7 @@ pyrite_undif <- subset(pyrite_undif, sediments)
 
 ##### carry forward only strat packages not already containing framboid or nodule phrases
 
-pyrite_undif <- anti_join(pyrite_undif, all, by = c("strat_name_id", "strat_name_id")) 
+pyrite_undif <- anti_join(pyrite_undif, all0, by = "strat_name_id") 
 
 # drop lith2 as not needed from this point onwards
 
@@ -767,7 +799,7 @@ pyrite_xdd <- data_p1
 
 pyrite_xdd <- pyrite_xdd[!is.na(pyrite_xdd$result_id),]
 
-pyrite_xdd <- safe_right_join(sed.list, pyrite_xdd, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
+pyrite_xdd <- safe_right_join(sed.list, pyrite_xdd, by = "strat_name_id", conflict = coalesce)
 
 sediments <- grepl("TRUE", pyrite_xdd$lith2) |
   (grepl(paste(rocks, collapse = "|"), pyrite_xdd$other, ignore.case=TRUE) |
@@ -783,7 +815,7 @@ pyrite_xdd <- subset(pyrite_xdd, sediments)
 
 ##### carry forward only strat packages not already containing framboid or nodule phrases
 
-pyrite_xdd <- anti_join(pyrite_xdd, all, by = c("strat_name_id", "strat_name_id")) 
+pyrite_xdd <- anti_join(pyrite_xdd, all0, by = "strat_name_id") 
 
 # drop lith2 as not needed from this point onwards
 
@@ -930,7 +962,7 @@ veins_bins <- veins_bins[c(1:541,543:889),] # remove duplicate 541
 
 # use sed info from lith for N. American units, upgraded to strat package level, using Mode as defined in part 1
 
-data.sed <- safe_right_join(sed.list, data_p1, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
+data.sed <- safe_right_join(sed.list, data_p1, by = "strat_name_id", conflict = coalesce)
 
 sediments <- grepl("TRUE", data.sed$lith2) |
   (grepl(paste(rocks, collapse = "|"), data.sed$other, ignore.case=TRUE) |
@@ -1011,6 +1043,7 @@ framboidsS  <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1)/sediments
 veinsS <- as.data.frame(cbind((veins_bins$V1+framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,veins_bins$V2))
 undifS <- as.data.frame(cbind((pyrite_undif_bins$V1+framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
 
+#### output - Figure 1C ###
 
 a <- ggplot() + theme_bw() +
   scale_x_reverse(limits = c(Bottom, 541)) +
@@ -1046,6 +1079,50 @@ b <- ggplot() + theme_bw() +
 # generate plots
 
 grid.arrange(a,b, ncol = 2)
+
+#### output - Figure 1D ###
+
+nodulesS <- as.data.frame(cbind((nodules_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1),nodules_bins$V2))
+framboidsS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1),nodules_bins$V2))
+veinsS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1+veins_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1+veins_bins$V1),nodules_bins$V2))
+undifS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1),nodules_bins$V2))
+
+# output - plot 4
+
+c <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(Bottom, 541)) +
+  scale_y_continuous(limits = c(0,0.3)) +
+  geom_stepribbon(data = undifS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
+  geom_stepribbon(data = framboidsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "red") +
+  geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue") +
+  geom_step(data = undifS, aes(V2-0.5, V1)) +
+  geom_step(data = nodulesS, aes(V2-0.5, V1)) + 
+  geom_step(data = framboidsS, aes(V2-0.5, V1)) +
+  geom_vline(xintercept = c(Extras)) +
+  geom_vline(xintercept = 800, colour = "red")
+
+d <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(541, Top)) +
+  scale_y_continuous(limits = c(0,0.3)) +
+  geom_stepribbon(data = undifS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
+  geom_stepribbon(data = framboidsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "red") +
+  geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue") +
+  geom_step(data = framboidsS, aes(V2-0.5, V1)) + 
+  geom_step(data = nodulesS, aes(V2-0.5, V1)) + 
+  geom_step(data = undifS, aes(V2-0.5, V1)) +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) +
+  geom_vline(xintercept = c(Extras)) +
+  geom_vline(xintercept = 55.9, colour = "red") #+ 
+#geom_vline(xintercept = ME) #+ 
+#geom_vline(xintercept = c(Es, OAEs))
+
+#Extras, ME, OAEs, 
+
+# generate plots
+
+grid.arrange(a,b,c,d, ncol = 2)
 
 ## END ##
 
