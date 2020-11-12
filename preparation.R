@@ -1,4 +1,4 @@
-##### This R script was written by Joe Emmings and Jo Walsh (British Geological Survey) ####
+##### This R script was written by Joe Emmings, Jo Walsh and Kathryn Leeming (British Geological Survey) ####
 ##### This script is designed to manipulate and process GeoDeepDive extractions
 ##### interfaced with the Macrostrat database
 
@@ -9,7 +9,6 @@
 # run once
 
 library(devtools)
-
 
 # attach
 
@@ -29,26 +28,24 @@ rm(list=ls())
 # set working directory
 project_home <- 'N:/Data/xGDD/analysis'
 
-
-
-source('macrostrat_data.R') # use choices below to find strat flag hits not in concepts database
-
 tryCatch({
   setwd(project_home)
-}, error = function(err) {
+}, error = function(err) { 
   if (dir.exists('./data')) {
     setwd('./data') }
 }
 )
- 
-rocks <- sedimentary_rocks # normalisation to all sedimentary rocks
-rocks <- meta_sedimentary_rocks # normalisation to all sedimentary and metamorphosed sedimentary rocks
-rocks <- mud_rocks # normalisation to mudstones - perhaps this is the most robust approach
+
+source('macrostrat_data.R') # use choices below to find strat flag hits not in concepts database
+
+#rocks <- sedimentary_rocks # normalisation to all sedimentary rocks
+rocks <- meta_sedimentary_rocks # normalisation to all sedimentary and metamorphosed sedimentary rocks - choose this option to replicate the results in the manuscript
+#rocks <- mud_rocks # normalisation to mudstones - perhaps this is the most robust approach
 
 
-# import GDD extractions # (note 'results2' is with new pyrite terms 24/10/19
+# import GDD extractions 
 
-if (!file.exists('results2.csv')) {
+if (!file.exists('results.csv')) {
   source_data <- 'https://geodeepdive.org/app_output/jemmings_with_pyrite_24Oct2019.zip'
   download.file(source_data, 'jemmings_etal.zip', method='auto')
   unzip('jemmings_etal.zip')
@@ -58,7 +55,15 @@ extracts <- read_csv("results.csv")
 
 # remove unresolved strat_name_id hits
 
-extracts <- extracts[!grepl(pattern = "\\~", extracts$strat_name_id),]
+extracts <- extracts[!grepl(pattern = "\\~", extracts$strat_name_id),]   
+
+# remove all non-pyrite phrases
+
+out <- grepl("pyrit", extracts$target_word, ignore.case = TRUE) | 
+  grepl("nodul", extracts$target_word, ignore.case = TRUE) | 
+  grepl("concretion", extracts$target_word, ignore.case = TRUE)
+
+extracts <- subset(extracts, out)
 
 length(unique(extracts$docid)) # metrics - no. of documents
 length(unique(extracts$strat_name_id)) # metrics - no. of strat packages
@@ -72,8 +77,8 @@ strat <- macrostrat_data("strat.json", "https://macrostrat.org/api/defs/strat_na
 
 concepts <- macrostrat_data("concepts.json", "https://macrostrat.org/api/defs/strat_name_concepts?all&format=json&response=long")
 
-## output 1 - merge of strat and concepts
-strat_concepts <- right_join(strat, concepts, by = c("concept_id", "concept_id")) # right join - on the basis strat packages with concept = 0 are captured below
+## output 1 - merge of strat and concepts 
+strat_concepts <- right_join(strat, concepts, by = "concept_id") # right join - on the basis strat packages with concept = 0 are captured below
 
 # find entries without concept but can be included on the basis of strat_flag def
 
@@ -83,7 +88,7 @@ strat_flags <- subset(strat_flags, concept_id == 0)
 
 # join for complete lith output
 
-strat_concepts <- safe_full_join(strat_flags, strat_concepts, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
+strat_concepts <- safe_full_join(strat_flags, strat_concepts, by = "strat_name_id", conflict = coalesce)
 
 # import units Macrostrat database
 
@@ -99,9 +104,9 @@ units$strat_name_id  = as.character(units$strat_name_id)
 
 # coalesce units and strat databases (units prioritised)
 
-units_strat <- safe_right_join(units, strat, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
+units_strat <- safe_right_join(units, strat, by = "strat_name_id", conflict = coalesce)
 
-units_strat_concepts <- right_join(concepts, units_strat, by = c("concept_id", "concept_id"))
+units_strat_concepts <- right_join(concepts, units_strat, by = "concept_id")
 
 # extract units
 
@@ -126,47 +131,106 @@ strat_concepts$strat_name_id  = as.character(strat_concepts$strat_name_id)
 
 # generate output files, part1 excluding units, part 2 including units
 
-data_part1 <- safe_right_join(extracts, strat_concepts, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
-data_part2 <- safe_right_join(extracts, strat_units_concepts, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
+data_part1 <- safe_right_join(extracts, strat_concepts, by = "strat_name_id", conflict = coalesce)
+data_part2 <- safe_right_join(extracts, strat_units_concepts, by = "strat_name_id", conflict = coalesce)
 
 ##### PART 2 - Prepare dataset for normalisation to Macrostrat units #####
 ##### This section interpolates time bins between top and base ages ####
 ##### seperately defining phanerozoic & precambrian bin size ####
 
-# for output 1
+# add rounded ages - fixes bin duplication during analysis
 
-cutoff <- 541 # Ma
+cutoff <- 541 # Ma 
 phanerozoic_increment <- 1 # in Ma
 precambrian_increment <- 10 # in Ma
 
-# add placeholder numbered bins to a dataframe, by increment, for later population
-add_all_bins <- function(df, increment) {
-  ncols <- ceiling((max(df$b_age - df$t_age))/increment)
+# precambrian
 
-  df <- df %>% mutate(bin1 = ifelse(b_age-increment > t_age+increment, t_age+increment, NA))
+data_part1_precambrian <- subset(data_part1, t_age > cutoff)
+data_part1_precambrian$t_age2 <- round(data_part1_precambrian$t_age, digits = -1)+(cutoff-round(cutoff, digits = -1))
+data_part1_precambrian$b_age2 <- round(data_part1_precambrian$b_age, digits = -1)+(cutoff-round(cutoff, digits = -1))
+
+# phanerozoic & overlapping units
+
+data_part1_phanerozoic1 <- subset(data_part1, t_age < cutoff & b_age < cutoff)
+data_part1_phanerozoic1$t_age2 <- round(data_part1_phanerozoic1$t_age, digits = 0)
+data_part1_phanerozoic1$b_age2 <- round(data_part1_phanerozoic1$b_age, digits = 0)
+
+
+data_part1_phanerozoic2 <- subset(data_part1, t_age < cutoff & b_age > cutoff)
+data_part1_phanerozoic2$b_age <- cutoff
+data_part1_phanerozoic2$t_age2 <- round(data_part1_phanerozoic2$t_age, digits = 0)
+data_part1_phanerozoic2$b_age2 <- round(data_part1_phanerozoic2$b_age, digits = 0)
+
+
+data_part1_phanerozoic3 <- subset(data_part1, t_age < cutoff & b_age > cutoff)
+data_part1_phanerozoic3$t_age <- cutoff
+data_part1_phanerozoic3$t_age2 <- round(data_part1_phanerozoic3$t_age, digits = 0)
+data_part1_phanerozoic3$b_age2 <- round(data_part1_phanerozoic3$b_age, digits = -1)+(cutoff-round(cutoff, digits = -1))
+
+# Bind the Phanerozoic and Precambrian datasets
+
+data_part1 <- bind_rows(data_part1_phanerozoic1, data_part1_phanerozoic2, data_part1_phanerozoic3, data_part1_precambrian)
+
+# then repeat for part2
+
+# precambrian
+
+data_part2_precambrian <- subset(data_part2, t_age > cutoff)
+data_part2_precambrian$t_age2 <- round(data_part2_precambrian$t_age, digits = -1)+(cutoff-round(cutoff, digits = -1))
+data_part2_precambrian$b_age2 <- round(data_part2_precambrian$b_age, digits = -1)+(cutoff-round(cutoff, digits = -1))
+
+# phanerozoic & overlapping units
+
+data_part2_phanerozoic1 <- subset(data_part2, t_age < cutoff & b_age < cutoff)
+data_part2_phanerozoic1$t_age2 <- round(data_part2_phanerozoic1$t_age, digits = 0)
+data_part2_phanerozoic1$b_age2 <- round(data_part2_phanerozoic1$b_age, digits = 0)
+
+
+data_part2_phanerozoic2 <- subset(data_part2, t_age < cutoff & b_age > cutoff)
+data_part2_phanerozoic2$b_age <- cutoff
+data_part2_phanerozoic2$t_age2 <- round(data_part2_phanerozoic2$t_age, digits = 0)
+data_part2_phanerozoic2$b_age2 <- round(data_part2_phanerozoic2$b_age, digits = 0)
+
+
+data_part2_phanerozoic3 <- subset(data_part2, t_age < cutoff & b_age > cutoff)
+data_part2_phanerozoic3$t_age <- cutoff
+data_part2_phanerozoic3$t_age2 <- round(data_part2_phanerozoic3$t_age, digits = 0)
+data_part2_phanerozoic3$b_age2 <- round(data_part2_phanerozoic3$b_age, digits = -1)+(cutoff-round(cutoff, digits = -1))
+
+# Bind
+
+data_part2 <- bind_rows(data_part2_phanerozoic1, data_part2_phanerozoic2, data_part2_phanerozoic3, data_part2_precambrian)
+
+
+# for output 1
+
+
+add_all_bins <- function(df, increment) {
+  ncols <- ceiling((max(df$b_age2 - df$t_age2))/increment)
+  
+  df <- df %>% mutate(bin1 = ifelse(b_age2-increment > t_age2+increment, t_age2+increment, NA))
   for(n in 2:(ncols-1)){
     next_bin <- paste('bin', n, sep='')
     bin <- paste0('bin', (n-1), sep='')
     # See https://stackoverflow.com/a/49311813/4319767 for why this syntax 
-    df <- df %>% mutate(!!next_bin := ifelse(UQ(rlang::sym(bin)) < b_age-increment, UQ(rlang::sym(bin))+increment, NA))
-  }
+    df <- df %>% mutate(!!next_bin := ifelse(UQ(rlang::sym(bin)) < b_age2-increment, UQ(rlang::sym(bin))+increment, NA))
+  }  
   return(df)
 }
 
-data_part1_precambrian <- subset(data_part1, t_age > cutoff)
+data_part1_precambrian <- subset(data_part1, t_age2 > cutoff)
 data_part1_precambrian <- add_all_bins(data_part1_precambrian, precambrian_increment)
 
 # including units spanning Phanerozoic-Precambrian boundary
 
-data_part1_phanerozoic1 <- subset(data_part1, t_age < cutoff & b_age < cutoff)
+data_part1_phanerozoic1 <- subset(data_part1, t_age2 < cutoff & b_age2 < cutoff)
 data_part1_phanerozoic1 <- add_all_bins(data_part1_phanerozoic1, phanerozoic_increment)
 
-data_part1_phanerozoic2 <- subset(data_part1, t_age < cutoff & b_age > cutoff)
-data_part1_phanerozoic2$b_age <- cutoff
+data_part1_phanerozoic2 <- subset(data_part1, t_age2 < cutoff & b_age2 == cutoff)
 data_part1_phanerozoic2 <- add_all_bins(data_part1_phanerozoic2, phanerozoic_increment)
 
-data_part1_phanerozoic3 <- subset(data_part1, t_age < cutoff & b_age > cutoff)
-data_part1_phanerozoic3$t_age <- cutoff
+data_part1_phanerozoic3 <- subset(data_part1, t_age2 == cutoff & b_age2 > cutoff)
 data_part1_phanerozoic3 <- add_all_bins(data_part1_phanerozoic3, precambrian_increment)
 
 # Bind the Phanerozoic and Precambrian datasets
@@ -190,32 +254,30 @@ precambrian_increment <- 10 # in Ma
 
 
 add_all_bins <- function(df, increment) {
-  ncols <- ceiling((max(df$b_age - df$t_age))/increment)
+  ncols <- ceiling((max(df$b_age2 - df$t_age2))/increment)
   
-  df <- df %>% mutate(bin1 = ifelse(b_age-increment > t_age+increment, t_age+increment, NA))
+  df <- df %>% mutate(bin1 = ifelse(b_age2-increment > t_age2+increment, t_age2+increment, NA))
   for(n in 2:(ncols-1)){
     next_bin <- paste('bin', n, sep='')
     bin <- paste0('bin', (n-1), sep='')
     # See https://stackoverflow.com/a/49311813/4319767 for why this syntax 
-    df <- df %>% mutate(!!next_bin := ifelse(UQ(rlang::sym(bin)) < b_age-increment, UQ(rlang::sym(bin))+increment, NA))
+    df <- df %>% mutate(!!next_bin := ifelse(UQ(rlang::sym(bin)) < b_age2-increment, UQ(rlang::sym(bin))+increment, NA))
   }  
   return(df)
 }
 
-data_part2_precambrian <- subset(data_part2, t_age > cutoff)
+data_part2_precambrian <- subset(data_part2, t_age2 > cutoff)
 data_part2_precambrian <- add_all_bins(data_part2_precambrian, precambrian_increment)
 
 # including units spanning Phanerozoic-Precambrian boundary
 
-data_part2_phanerozoic1 <- subset(data_part2, t_age < cutoff & b_age < cutoff)
+data_part2_phanerozoic1 <- subset(data_part2, t_age2 < cutoff & b_age2 < cutoff)
 data_part2_phanerozoic1 <- add_all_bins(data_part2_phanerozoic1, phanerozoic_increment)
 
-data_part2_phanerozoic2 <- subset(data_part2, t_age < cutoff & b_age > cutoff)
-data_part2_phanerozoic2$b_age <- cutoff
+data_part2_phanerozoic2 <- subset(data_part2, t_age2 < cutoff & b_age2 == cutoff)
 data_part2_phanerozoic2 <- add_all_bins(data_part2_phanerozoic2, phanerozoic_increment)
 
-data_part2_phanerozoic3 <- subset(data_part2, t_age < cutoff & b_age > cutoff)
-data_part2_phanerozoic3$t_age <- cutoff
+data_part2_phanerozoic3 <- subset(data_part2, t_age2 == cutoff & b_age2 > cutoff)
 data_part2_phanerozoic3 <- add_all_bins(data_part2_phanerozoic3, precambrian_increment)
 
 # Bind the Phanerozoic and Precambrian datasets
@@ -240,11 +302,5 @@ data_part2 <- as.data.frame(sapply(data_part2, function(x) gsub("\r", "", x)))
 # export output 2 (again csv works well here)
 
 write.csv(data_part2, "data_part2_comp.csv")
-
-# collect additional data sources
-
-zaffos_et_al = 'https://raw.githubusercontent.com/UW-Macrostrat/PNAS_201702297/master/FinalData/ContinuousTimeSeries.csv'
-download.file(zaffos_et_al, 'Zaffos_et_al.txt', method="auto")
-
 
 ##### END ####
