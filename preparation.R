@@ -1,4 +1,4 @@
-##### This R script was written by Joe Emmings and Jo Walsh (British Geological Survey) ####
+##### This R script was written by Joe Emmings, Jo Walsh and Kathryn Leeming (British Geological Survey) ####
 ##### This script is designed to manipulate and process GeoDeepDive extractions
 ##### interfaced with the Macrostrat database
 
@@ -9,6 +9,8 @@
 # run once
 
 library(devtools)
+devtools::install_github("moodymudskipper/safejoin") # needed for coalesce join # run once
+devtools::install_github("adibender/pammtools")
 
 # attach
 
@@ -38,21 +40,20 @@ tryCatch({
 
 source('macrostrat_data.R') # use choices below to find strat flag hits not in concepts database
 
-rocks <- sedimentary_rocks # normalisation to all sedimentary rocks
-rocks <- meta_sedimentary_rocks # normalisation to all sedimentary and metamorphosed sedimentary rocks
-rocks <- mud_rocks # normalisation to mudstones - perhaps this is the most robust approach
+#rocks <- sedimentary_rocks # normalisation to all sedimentary rocks
+rocks <- meta_sedimentary_rocks # normalisation to all sedimentary and metamorphosed sedimentary rocks - choose this option to replicate the results in the manuscript
+#rocks <- mud_rocks # normalisation to mudstones - perhaps this is the most robust approach
 
 
-# import GDD extractions # (note 'results2' is with new pyrite terms 24/10/19
-# in Github version just refer to 'results' as the most up to date copy
+# import GDD extractions 
 
-if (!file.exists('results2.csv')) {
+if (!file.exists('results.csv')) {
   source_data <- 'https://geodeepdive.org/app_output/jemmings_with_pyrite_24Oct2019.zip'
   download.file(source_data, 'jemmings_etal.zip', method='auto')
   unzip('jemmings_etal.zip')
 }
 
-extracts <- read_csv("results2.csv")
+extracts <- read_csv("results.csv")
 
 # remove unresolved strat_name_id hits
 
@@ -79,7 +80,7 @@ strat <- macrostrat_data("strat.json", "https://macrostrat.org/api/defs/strat_na
 concepts <- macrostrat_data("concepts.json", "https://macrostrat.org/api/defs/strat_name_concepts?all&format=json&response=long")
 
 ## output 1 - merge of strat and concepts 
-strat_concepts <- right_join(strat, concepts, by = c("concept_id", "concept_id")) # right join - on the basis strat packages with concept = 0 are captured below
+strat_concepts <- right_join(strat, concepts, by = "concept_id") # right join - on the basis strat packages with concept = 0 are captured below
 
 # find entries without concept but can be included on the basis of strat_flag def
 
@@ -89,7 +90,7 @@ strat_flags <- subset(strat_flags, concept_id == 0)
 
 # join for complete lith output
 
-strat_concepts <- safe_full_join(strat_flags, strat_concepts, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
+strat_concepts <- safe_full_join(strat_flags, strat_concepts, by = "strat_name_id", conflict = coalesce)
 
 # import units Macrostrat database
 
@@ -105,9 +106,9 @@ units$strat_name_id  = as.character(units$strat_name_id)
 
 # coalesce units and strat databases (units prioritised)
 
-units_strat <- safe_right_join(units, strat, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
+units_strat <- safe_right_join(units, strat, by = "strat_name_id", conflict = coalesce)
 
-units_strat_concepts <- right_join(concepts, units_strat, by = c("concept_id", "concept_id"))
+units_strat_concepts <- right_join(concepts, units_strat, by = "concept_id")
 
 # extract units
 
@@ -132,8 +133,8 @@ strat_concepts$strat_name_id  = as.character(strat_concepts$strat_name_id)
 
 # generate output files, part1 excluding units, part 2 including units
 
-data_part1 <- safe_right_join(extracts, strat_concepts, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
-data_part2 <- safe_right_join(extracts, strat_units_concepts, by = c("strat_name_id", "strat_name_id"), conflict = coalesce)
+data_part1 <- safe_right_join(extracts, strat_concepts, by = "strat_name_id", conflict = coalesce)
+data_part2 <- safe_right_join(extracts, strat_units_concepts, by = "strat_name_id", conflict = coalesce)
 
 ##### PART 2 - Prepare dataset for normalisation to Macrostrat units #####
 ##### This section interpolates time bins between top and base ages ####
