@@ -9,8 +9,6 @@
 # run once
 
 library(devtools)
-devtools::install_github("moodymudskipper/safejoin") # needed for coalesce join # run once
-devtools::install_github("adibender/pammtools")
 
 # attach
 
