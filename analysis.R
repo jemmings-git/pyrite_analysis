@@ -602,6 +602,19 @@ d <- ggplot() + theme_bw() +
 
 grid.arrange(c,d, ncol = 2)
 
+# optional data export
+
+out <- cbind(framboids_bins, nodules_bins, veins_bins, pyrite_undif_bins, sediments_bins)
+out <- out[,c(1,3,5,7,9:10)]
+names(out)[1] <- "framboids"
+names(out)[2] <- "nodules"
+names(out)[3] <- "min"
+names(out)[4] <- "undif"
+names(out)[5] <- "seds"
+names(out)[6] <- "Age"
+
+write.csv(out, "xdd_binned_results.csv") 
+
 # block end
 
 ###### PART 2 - this section is to generate an output without propagation of units ##### 
