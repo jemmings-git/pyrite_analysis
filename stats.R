@@ -1,6 +1,6 @@
 ##### This R script was written by Joe Emmings (British Geological Survey) ####
 ##### This R script implements data manipulation and statistical analysis #####
-##### This R script generates Figures 2-5 and Figs. S11-S19 #####
+##### as in Figures 2-5 and Figs. S11-S19 #####
 
 ##### KEY REFERENCES ####
 
@@ -23,12 +23,9 @@ library(ggbiplot)
 library(BBmisc)
 library(gridExtra)
 library(dplyr)
-library(Hmisc)
-library(car)
 library(RColorBrewer)
 library(pheatmap)
-library(spdep) # check if this is needed?
-library(useful) # check if this is needed?
+library(useful)
 library(compositions)
 library(data.table)
 library(boot)
@@ -59,9 +56,6 @@ SGP <- read.csv("SGP2.csv") # import SGP siliciclastic sediments in focal area
 #{"type":"samples","filters":{"country":["North America","United Kingdom","United States","Canada","Australia","New Zealand"],"lithology_type":["siliciclastic","carbonate","organic"],"lithology_class":["sedimentary"]},"show":["fe","fe_carb","fe_ox","fe_mag","fe_py","tic","toc","tot_c","del_13c_carb","del_13c_org","tmax","s2","s1","s3","su","s_py","s_org","del_34s_py","del_34s_cas","del_34s_gyp","del_34s_obs","del_34s_bulk","n","del_15n","alu","ars","cu","mo","mn","ni","p","u","v","zr","interpreted_age","fe_hr"]}zones <- read.delim("redox_zones2.txt") # use v2 for more conservative zone A def
 
 # add redox stage definitions to SGP data
-
-zone.names <- zones$Zone
-zones <- zones$Break
 
 SGP$zone <- cut(SGP$interpreted.age,c(zones))
 levels(SGP$zone) <- c(paste(rev(zone.names)))
@@ -114,7 +108,7 @@ HCA2 <- BBmisc::normalize(HCA2, method = "standardize") # scale and centre for H
 
 # cluster
 hr <- hclust(dist(HCA2, method = "euclidean"), method = "ward.D2")
-#hc <- hclust(dist(HCA3, method = "euclidean"), method = "ward.D2")
+hc <- hclust(dist(HCA3, method = "euclidean"), method = "ward.D2")
 
 #plot(hr) # display dendrogram
 #rect.hclust(hr, k=5, border="red") 
@@ -398,7 +392,7 @@ prox_t <- rowSums(test)
 
 # generate two smooths, Precambrian and Phanerozoic
 
-boot.R <- 100 # select number to bootstrap - final version boot n = 10000
+boot.R <- 10 # select number to bootstrap - final version boot n = 10000
 
 # include all data (including outliers)
 poles2 <- poles
@@ -480,6 +474,9 @@ outB$age2 <- rep(seq(540,4000, 10),each = boot.R)
 
 # print - Fig. 5B
 
+Periods <- c(2500, 1600, 1000, 720, 635, 541, 485.4, 443.8, 419.2, 358.9, 298.9, 
+             251.9, 201.3, 145, 66, 23.03, 2.58) # add Period boundaries (ICS)
+
 a <- ggplot() + 
   scale_x_reverse(limits = c(3500, 540)) +
   scale_y_reverse(limits = c(360,-30)) +
@@ -508,7 +505,8 @@ b <- ggplot() +
   theme(axis.text.x = element_text(angle = 90), legend.position = "none") +
   scale_fill_gradientn(colours = colorspace::sequential_hcl(6, palette = "Oslo", rev = FALSE)) +
   geom_hline(yintercept = c(0,45,135,225,270,315)) +
-  geom_vline(xintercept = c(Periods)) + geom_vline(xintercept = c(zones), colour = "red")
+  geom_vline(xintercept = c(Periods)) + 
+  geom_vline(xintercept = c(zones), colour = "red")
 
 grid.arrange(a,b, ncol = 2)
 
