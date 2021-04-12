@@ -1,13 +1,13 @@
 ##### This R script was written by Joe Emmings (British Geological Survey) ####
 ##### This R script implements data manipulation and statistical analysis #####
-##### as in Figures 2-5 and Figs. S11-S19 #####
+##### as in Figures 2-6 and Figs. S11-S19 #####
 
 ##### KEY REFERENCES ####
 
 # Figure 2 utilises data from the Sedimentary Geochemistry and Palaeoenvironments Project (SGP) http://sgp-search.io/
 # See Mehra et al. 2021, GSA Today, 31, https://doi.org/10.1130/GSATG484A.1. and Farrell et al., Geobiology (in review) (2021).
 
-# Figures 3-5 utilise pyrite trace element data accessible here: https://doi.org/10.1130/GEOL.S.12456332
+# Figures 3-6 utilise pyrite trace element data accessible here: https://doi.org/10.1130/GEOL.S.12456332
 # The data derive from:
 # Large et al., Earth and Planetary Science Letters 389, 209-220 (2014).
 #	Large et al., Gondwana Research 28, 1282-1293 (2015).
@@ -251,7 +251,7 @@ ggplot(poles, aes(theta)) +
 
 # tidy all plots using graphics package
 
-##### Figure 5A ####
+##### Figure 5 ####
 
 # as factor - i.e., free and collapsed scale
 poles$age2 <- as.factor(poles$age)
@@ -374,7 +374,7 @@ c <- ggplot(poles.sub2, aes(age, theta)) +
 
 grid.arrange(a,b,c,ncol=1)
 
-##### Figure 5B - loess predictions #####
+##### Figure 6A - loess predictions #####
 
 # age weighting - see Mehra et al. 2021. Curation and Analysis of Global Sedimentary Geochemical Data to Inform Earth History. GSA Today, 31. https://doi.org/10.1130/GSATG484A.1
 
@@ -510,7 +510,7 @@ b <- ggplot() +
 
 grid.arrange(a,b, ncol = 2)
 
-##### Figure 5C - Interquartile range (IQR) loess #####
+##### Figure 6B - Interquartile range (IQR) loess #####
 
 # compute IQR by age
 theta.IQR <- poles %>%
