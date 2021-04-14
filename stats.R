@@ -4,8 +4,10 @@
 
 ##### KEY REFERENCES ####
 
-# Figure 2 utilises data from the Sedimentary Geochemistry and Palaeoenvironments Project (SGP) http://sgp-search.io/
-# See Mehra et al. 2021, GSA Today, 31, https://doi.org/10.1130/GSATG484A.1. and Farrell et al., Geobiology (in review) (2021).
+# Figure 2 utilises Phase 1 data from the Sedimentary Geochemistry and Palaeoenvironments Project (SGP) http://sgp-search.io/
+# The citable references for the Phase 1 data product are:
+# Mehra et al. 2021, GSA Today, 31, https://doi.org/10.1130/GSATG484A.1.
+# Farrell et al., Geobiology (in review) (2021).
 
 # Figures 3-6 utilise pyrite trace element data accessible here: https://doi.org/10.1130/GEOL.S.12456332
 # The data derive from:
@@ -52,7 +54,7 @@ zones <- zones$Break
 
 SGP <- read.csv("SGP2.csv") # import SGP siliciclastic sediments in focal area
 
-# the data are accessible via the following API call
+# the data are accessible at http://sgp-search.io/ and via the following API call
 #{"type":"samples","filters":{"country":["North America","United Kingdom","United States","Canada","Australia","New Zealand"],"lithology_type":["siliciclastic","carbonate","organic"],"lithology_class":["sedimentary"]},"show":["fe","fe_carb","fe_ox","fe_mag","fe_py","tic","toc","tot_c","del_13c_carb","del_13c_org","tmax","s2","s1","s3","su","s_py","s_org","del_34s_py","del_34s_cas","del_34s_gyp","del_34s_obs","del_34s_bulk","n","del_15n","alu","ars","cu","mo","mn","ni","p","u","v","zr","interpreted_age","fe_hr"]}zones <- read.delim("redox_zones2.txt") # use v2 for more conservative zone A def
 
 # add redox stage definitions to SGP data
