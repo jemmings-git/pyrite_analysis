@@ -34,7 +34,7 @@ library(colorspace)
 
 # set working directory
 
-setwd("N:/Papers/Pyrite_geochemistry_revisited")
+setwd("...") # set working directory
 
 ##### Figure 1 - text mining outputs ####
 
