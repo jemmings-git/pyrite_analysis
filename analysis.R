@@ -16,7 +16,7 @@ library(pammtools)
 library(gridExtra)
 library(tidyverse)
 
-project_home <- 'N:/Data/xGDD/analysis'
+project_home <- '...' # insert directory
 tryCatch({
   setwd(project_home)
 }, error = function(err) { 
