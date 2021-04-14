@@ -9,6 +9,6 @@ At present we recommend running this in RStudio
  * `analysis.R` - produce a series of analytical plots illustrating the observable pyrite distributions as presented on Figure 1
  * `stats.R`- conduct statistics and data manipulation as presented on Figures 2-6 and supplementary materials
 
-`xdd_binned_results.csv` represents the results of text mining as presented on Figures 1A-1B
+`xdd_binned_results.csv` - the results of text mining as presented on Figures 1A-1B
 
-`xdd_binned_results_strat_only.csv` represents the results of text mining as presented on Figures 1C-1D
+`xdd_binned_results_strat_only.csv` - the results of text mining as presented on Figures 1C-1D
