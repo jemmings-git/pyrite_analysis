@@ -89,7 +89,9 @@ grid.arrange(a,b, ncol= 1)
 # download the pyrite trace element dataset of Mukherjee and Large (2020) (CC-BY-NC)
 # https://doi.org/10.1130/GEOL.S.12456332 
 
-pyrites <- read.delim("Mukherjee_and_Large2.txt") # manually culled for shales in the focal area
+# note the file was manually culled for shales in the focal area. In our derivative we included three columns "Sample" "Location" and "Age.Ma" , followed by each element (n = 18)
+
+pyrites <- read.delim("Mukherjee_and_Large2.txt") 
 
 # add redox stages derived from Fig. 1
 
