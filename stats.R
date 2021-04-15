@@ -1,6 +1,6 @@
 ##### This R script was written by Joe Emmings (British Geological Survey) ####
 ##### This R script implements data manipulation and statistical analysis #####
-##### as in Figures 2-6 and Figs. S11-S19 #####
+##### as in Figures 2-6, S11-S20 #####
 
 ##### KEY REFERENCES ####
 
@@ -36,7 +36,7 @@ library(colorspace)
 
 # set working directory
 
-setwd("...") # set working directory
+setwd("N:/Papers/Pyrite_geochemistry_revisited")
 
 ##### Figure 1 - text mining outputs ####
 
@@ -61,7 +61,7 @@ SGP <- read.csv("SGP2.csv") # import SGP siliciclastic sediments in focal area
 
 SGP$zone <- cut(SGP$interpreted.age,c(zones))
 levels(SGP$zone) <- c(paste(rev(zone.names)))
-SGP[,ncol(SGP)][is.na(SGP$zone)] <- "Meso"
+SGP[,ncol(SGP)][is.na(SGP$zone)] <- "M"
 
 # subset for anoxic facies
 SGP.sub <- subset(SGP, FeHR/Fe..wt.. >= 0.38 & Fe..wt.. >= 0.5)
@@ -91,9 +91,7 @@ grid.arrange(a,b, ncol= 1)
 # download the pyrite trace element dataset of Mukherjee and Large (2020) (CC-BY-NC)
 # https://doi.org/10.1130/GEOL.S.12456332 
 
-# note the file was manually culled for shales in the focal area. In our derivative we included three columns "Sample" "Location" and "Age.Ma" , followed by each element (n = 18)
-
-pyrites <- read.delim("Mukherjee_and_Large2.txt") 
+pyrites <- read.delim("Mukherjee_and_Large2.txt") # manually culled for shales in the focal area. The first three columns should be defined as "Sample" "Location" and "Age.Ma" , followed by each element
 
 # add redox stages derived from Fig. 1
 
@@ -227,24 +225,28 @@ poles2$theta <- poles2$theta-360
 
 poles <- rbind(poles1, poles2)
 
-# weighted histograms
+# r-weighted (Fig. 4) or unweighted (Fig. S11) histograms
 
 # by HCA cluster (Fig. 4, left hand side)
 
-ggplot(subset(poles, HCA.clusters != "Cluster High-Au"), aes(theta)) + 
-  geom_histogram(binwidth = 15, aes(weight = r, fill = HCA.clusters), center = 7.5) + 
+a <- ggplot(subset(poles, HCA.clusters != "Cluster High-Au"), aes(theta)) + 
+  geom_histogram(binwidth = 15, aes(fill = HCA.clusters), center = 7.5) + # optional weight = r
   theme_bw() + coord_flip() +
   facet_wrap(~HCA.clusters, ncol = 6, scale="free_x") + scale_x_reverse() +
   geom_vline(xintercept = c(0,45,135,225,270,315)) +
-  theme(legend.position = "none") #+ geom_density(aes(y=..density..*20000)) # optional density line
+  theme(legend.position = "none") + geom_density(aes(y=..density..*5000)) # optional density line
 
 # by redox stage (Fig. 4, right hand side)
 
-ggplot(poles, aes(theta)) + 
-  geom_histogram(binwidth = 15, aes(weight = r, fill = groups), center = 7.5) + 
+b <- ggplot(poles, aes(theta)) + 
+  geom_histogram(binwidth = 15, aes(fill = groups), center = 7.5) + # optional weight = r
   theme_bw() + coord_flip() +
   facet_wrap(~groups, ncol = 6, scale="free_x") + scale_x_reverse() +
-  geom_vline(xintercept = c(0,45,135,225,270,315))
+  geom_vline(xintercept = c(0,45,135,225,270,315)) +
+  geom_density(aes(y=..density..*2500)) + # optional density line
+  theme(legend.position = "none")
+
+grid.arrange(a,b, ncol = 2)
 
 # coloured by location (Figs. S12-S16)
 ggplot(poles, aes(theta)) + 
@@ -297,7 +299,7 @@ ggplot(diffs, aes(Age, Diff)) + geom_line(group = 1) + theme_bw() + scale_y_log1
 
 # for main panel on Fig. 5A
 
-xdd <- read.csv("xdd_binned_results.csv") # import text mining outputs - use write.csv following Figure 1B output in analysis.R
+xdd <- read.csv("xdd_binned_results.csv") # import text mining outputs - import from Github
 
 xdd1 <- data.table(xdd)
 poles1 <- data.table(poles)
@@ -380,27 +382,38 @@ grid.arrange(a,b,c,ncol=1)
 
 ##### Figure 6A - loess predictions #####
 
+poles2 <- poles
+
 # age weighting - see Mehra et al. 2021. Curation and Analysis of Global Sedimentary Geochemical Data to Inform Earth History. GSA Today, 31. https://doi.org/10.1130/GSATG484A.1
+# weight loess or boot as necessary
 
+# option 1 - Fig. 6 - age-weighted loess with span_age = 100 Ma
 age_bin <- 100 # span_age parameter
-
 t_t <- as.data.frame(outer(poles$age, poles$age, `-`))/age_bin
-
 t_t <- ((t_t^2)^0.5) # positive distance matrix
-
 test <- 1/((t_t^2)+1)
-
 test <- as.data.frame(test)
-
 prox_t <- rowSums(test)
+weights <- 1/(prox_t)
+
+# option 2 - Fig. S20A - age-weighted loess with span_age = 10 Ma
+age_bin <- 10 # span_age parameter
+t_t <- as.data.frame(outer(poles$age, poles$age, `-`))/age_bin
+t_t <- ((t_t^2)^0.5) # positive distance matrix
+test <- 1/((t_t^2)+1)
+test <- as.data.frame(test)
+prox_t <- rowSums(test)
+weights <- 1/(prox_t)
+
+# option 3 - Fig. S20B - unweighted loess with age-weighted bootstrap at span_age = 10 Ma
+# add option 3 weights to boot rather than loess
+# based on ca. 1-in-5 probability of selection
+
+weights <- 1/((prox_t*median(2/prox_t))+1) # centred on ca. 1-in-5
 
 # generate two smooths, Precambrian and Phanerozoic
 
 boot.R <- 10 # select number to bootstrap - final version boot n = 10000
-
-# include all data (including outliers)
-poles2 <- poles
-prox_t2 <- prox_t
 
 # Cross Validated (CV) loess span
 
@@ -408,16 +421,16 @@ prox_t2 <- prox_t
 
 poles2.sub1 <- subset(poles2, age <= 540)
 poles2.sub2 <- subset(poles2, age > 540)
-prox_t22 <- cbind(poles2, prox_t2)
-prox_t2.sub1 <- subset(prox_t22, age <= 540)
-prox_t2.sub1 <- prox_t2.sub1[,10]
-prox_t2.sub2 <- subset(prox_t22, age > 540)
-prox_t2.sub2 <- prox_t2.sub2[,10]
+weights2 <- cbind(poles2, weights)
+weights2.sub1 <- subset(weights2, age <= 540)
+weights2.sub1 <- weights2.sub1[,10]
+weights2.sub2 <- subset(weights2, age > 540)
+weights2.sub2 <- weights2.sub2[,10]
 
-loess.predict <- loess.as(poles2.sub1$age, poles2.sub1$theta, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, weights = 1/(prox_t2.sub1)) # , weights = 1/(prox_t2.sub1)
+loess.predict <- loess.as(poles2.sub1$age, poles2.sub1$theta, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, weights = weights2.sub1) # add or remove weights as necessary
 loess.predict[["pars"]][["span"]] # optimum span = 0.05 for Phanerozoic
 
-loess.predict <- loess.as(poles2.sub2$age, poles2.sub2$theta, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, weights = 1/(prox_t2.sub2)) # , weights = 1/(prox_t2.sub2)
+loess.predict <- loess.as(poles2.sub2$age, poles2.sub2$theta, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, weights = weights2.sub2) # add or remove weights as necessary
 loess.predict[["pars"]][["span"]] # optimum span = 0.07 for Precambrian
 
 # Phanerozoic loess boot
@@ -425,11 +438,11 @@ loess.predict[["pars"]][["span"]] # optimum span = 0.07 for Precambrian
 boot_fn <- function(poles2, indices) {
   d <- poles2[indices, ]
   d <- d[order(d$age),]
-  loess_fit <- loess(theta ~ age, d, span = 0.06, degree = 1, weights = 1/(prox_t2)) # remove weights here if replicating Fig. S19B 
+  loess_fit <- loess(theta ~ age, d, span = 0.06, degree = 1, weights = weights) # remove weights for Fig. S20B
   predict(loess_fit, data.frame(age = seq(0,539, 1)), se = T)$fit
 }
 
-loess_boot <- boot(poles2, R = boot.R, statistic = boot_fn) # for Fig. S19B, add the following: , weights = 1/((prox_t2*median(2/prox_t2))+1) # ca. 1 in 5
+loess_boot <- boot(poles2, R = boot.R, statistic = boot_fn)  # add weights = weights for Fig. S20B 
 
 # 95% confidence intervals and median smooth
 conf_97.5_A <- apply(loess_boot$t, 2, function(x) quantile(x, .975, na.rm = TRUE))
@@ -453,11 +466,11 @@ outA$age2 <- rep(seq(0,539, 1),each = boot.R)
 boot_fn <- function(poles2, indices) {
   d <- poles2[indices, ]
   d <- d[order(d$age),]
-  loess_fit <- loess(theta ~ age, d, span = 0.07, degree = 1, weights = 1/(prox_t2)) # remove weights here if replicating Fig. S19B
+  loess_fit <- loess(theta ~ age, d, span = 0.07, degree = 1, weights = weights) # remove weights for Fig. S20B
   predict(loess_fit, data.frame(age = seq(540,4000, 10)), se = T)$fit
 }
 
-loess_boot <- boot(poles2, R = boot.R, statistic = boot_fn) # for Fig. S19B, add the following: , weights = 1/((prox_t2*median(2/prox_t2))+1) # ca. 1 in 5
+loess_boot <- boot(poles2, R = boot.R, statistic = boot_fn) # add weights = weights for Fig. S20B 
 
 # 95% confidence intervals and median smooth
 conf_97.5_B <- apply(loess_boot$t, 2, function(x) quantile(x, .975, na.rm = TRUE))
@@ -520,6 +533,8 @@ grid.arrange(a,b, ncol = 2)
 theta.IQR <- poles %>%
   group_by(age, groups) %>%
   summarise(IQR = IQR(theta, na.rm = TRUE), age = age) # collapse age or not?
+
+# age weight (option 1)
 
 age_bin <- 100 # span_age parameter 
 
