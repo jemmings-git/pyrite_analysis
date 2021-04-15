@@ -14,7 +14,7 @@
 # Figures 3-6 utilise pyrite trace element data accessible here: https://doi.org/10.1130/GEOL.S.12456332
 # The data derive from:
 # Large et al., Earth and Planetary Science Letters 389, 209-220 (2014).
-#	Large et al., Gondwana Research 28, 1282-1293 (2015).
+# Large et al., Gondwana Research 28, 1282-1293 (2015).
 # Large et al., Earth and Planetary Science Letters 428, 139-150 (2015).
 # Large et al., Mineralium Deposita 54, 485-506 (2019).
 # Mukherjee and Large, Geology 48, 1018-1022 (2020).
