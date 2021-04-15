@@ -54,21 +54,29 @@ zones <- zones$Break
 
 ##### Figure 2 ####
 
-SGP <- read.csv("SGP2.csv") # import SGP siliciclastic sediments in focal area
+# call SGP API - sediments culled to focal area
 
-# the data are accessible at http://sgp-search.io/ and via the following API call
-#{"type":"samples","filters":{"country":["North America","United Kingdom","United States","Canada","Australia","New Zealand"],"lithology_type":["siliciclastic","carbonate","organic"],"lithology_class":["sedimentary"]},"show":["fe","fe_carb","fe_ox","fe_mag","fe_py","tic","toc","tot_c","del_13c_carb","del_13c_org","tmax","s2","s1","s3","su","s_py","s_org","del_34s_py","del_34s_cas","del_34s_gyp","del_34s_obs","del_34s_bulk","n","del_15n","alu","ars","cu","mo","mn","ni","p","u","v","zr","interpreted_age","fe_hr"]}zones <- read.delim("redox_zones2.txt") # use v2 for more conservative zone A def
+body = '{"type":"samples","filters":{"country":["North America","United Kingdom","United States","Canada","Australia","New Zealand"],"lithology_type":["siliciclastic","carbonate","organic"],"lithology_class":["sedimentary"]},"show":["fe","fe_carb","fe_ox","fe_mag","fe_py","tic","toc","tot_c","del_13c_carb","del_13c_org","tmax","s2","s1","s3","su","s_py","s_org","del_34s_py","del_34s_cas","del_34s_gyp","del_34s_obs","del_34s_bulk","n","del_15n","alu","ars","cu","mo","mn","ni","p","u","v","zr","interpreted_age","fe_hr"]}'
+
+r <- POST("http://sgp-search.io/api/v1/post", body=body, 
+          httr::add_headers(`accept` = 'application/json'), 
+          httr::content_type('application/json'))
+
+out <- content(r, "text")
+
+SGP <- jsonlite::fromJSON(out)
+
+SGP[,3:38] <- sapply(SGP[,3:38], as.numeric)
 
 # add redox stage definitions to SGP data
-
-SGP$zone <- cut(SGP$interpreted.age,c(zones))
+SGP$zone <- cut(SGP$`interpreted age`,c(zones))
 levels(SGP$zone) <- c(paste(rev(zone.names)))
 SGP[,ncol(SGP)][is.na(SGP$zone)] <- "M"
 
 # subset for anoxic facies
-SGP.sub <- subset(SGP, FeHR/Fe..wt.. >= 0.38 & Fe..wt.. >= 0.5)
+SGP.sub <- subset(SGP, FeHR/`Fe (wt%)` >= 0.38 & `Fe (wt%)` >= 0.5)
 
-a <- ggplot(SGP.sub, aes(x=zone, y=Fe.py..wt../FeHR, fill=zone)) + 
+a <- ggplot(SGP.sub, aes(x=zone, y=`Fe-py (wt%)`/FeHR, fill=zone)) + 
   geom_violin(scale = "width", draw_quantiles = c(0.25, 0.75)) +
   theme_bw() + 
   scale_x_discrete(limits = rev(levels(SGP$zone))) +
@@ -76,7 +84,9 @@ a <- ggplot(SGP.sub, aes(x=zone, y=Fe.py..wt../FeHR, fill=zone)) +
   stat_summary(fun="median", geom="line", group = 1) +
   scale_y_continuous(limits = c(0,1)) + geom_hline(yintercept = c(0.7,0.8))
 
-b <- ggplot(SGP.sub, aes(x=zone, y=TOC..wt../P..ppm., fill=zone)) + 
+SGP.sub$`P (ppm)` <- SGP.sub$`P (ppm)`/10000 # convert P to wt. %
+
+b <- ggplot(SGP.sub, aes(x=zone, y=`TOC (wt%)`/`P (ppm)`, fill=zone)) + 
   geom_violin(scale = "width", draw_quantiles = c(0.25, 0.75)) +
   theme_bw() + 
   scale_x_discrete(limits = rev(levels(SGP$zone))) +
