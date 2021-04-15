@@ -13,4 +13,4 @@ At present we recommend running this in RStudio
 
 `xdd_binned_results_strat_only.csv` - the results of text mining as presented on Figures 1C-1D
 
-`redox_zones.txt` - anoxic temporal stages A-E derived from interpretaiton of the text mining outputs
+`redox_zones.txt` - anoxic temporal stages A-E derived from interpretation of the text mining outputs
