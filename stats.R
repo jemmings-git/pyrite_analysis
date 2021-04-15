@@ -2,6 +2,8 @@
 ##### This R script implements data manipulation and statistical analysis #####
 ##### as in Figures 2-6, S11-S20 #####
 
+# Each code block (for each figure) should be run consecutively #
+
 ##### KEY REFERENCES ####
 
 # Figure 2 utilises Phase 1 data from the Sedimentary Geochemistry and Palaeoenvironments Project (SGP) http://sgp-search.io/
