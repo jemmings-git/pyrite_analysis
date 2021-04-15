@@ -1,4 +1,4 @@
-# Analyse the GeoDeepDive library for pyrite types through geological time (Figure 1), and conduct statistical analysis of pyrite trace element geochemistry (Figures 2-6)
+# Analyse the xDD library for pyrite types through geological time (Figure 1), and conduct statistical analysis of pyrite trace element geochemistry (Figures 2-6)
 
 ## Steps
 
