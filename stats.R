@@ -35,6 +35,9 @@ library(data.table)
 library(boot)
 library(fANCOVA)
 library(colorspace)
+library(jsonlite)
+library(httr)
+library(rio)
 
 # set working directory
 
