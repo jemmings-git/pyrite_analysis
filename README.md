@@ -16,3 +16,5 @@ At present we recommend running this in RStudio
 `redox_zones.txt` - anoxic temporal stages A-E derived from interpretation of the text mining outputs
 
 `pyrite_refs.txt` - list of refences in the xDD library containing at least one mention of framboidal, nodular, concretionary or undifferentiated pyrite matched to a (meta)sedimentary rock in the Macrostrat database. This is an expanded version of the reference list contained in the Supplementary Materials.
+
+`SGP_refs.txt` - list of references used to construct Figure 2
