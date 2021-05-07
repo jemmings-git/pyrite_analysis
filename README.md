@@ -37,6 +37,7 @@ Farrell et al., Geobiology (in review) (2021).
 
 ## Figures 3-5 utilise [previously published pyrite trace element data](https://doi.org/10.1130/GEOL.S.12456332) : https://doi.org/10.1130/GEOL.S.12456332
 The data derive from:
+
 Large et al., Earth and Planetary Science Letters 389, 209-220 (2014).
 
 Large et al., Gondwana Research 28, 1282-1293 (2015).
