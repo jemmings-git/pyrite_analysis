@@ -1,5 +1,5 @@
 # Emmings et al. Pyrite meta-analysis.
-## We analysed the xDD library for pyrite types through geological time (Figure 1). Then we conducted statistical analysis and machine learning of pyrite trace element geochemistry (Figures 2-5).
+### We analysed the xDD library for pyrite types through geological time (Figure 1). Then we conducted statistical analysis and machine learning of pyrite trace element geochemistry (Figures 2-5).
 
 We recommend implementation in RStudio.
 
