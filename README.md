@@ -28,13 +28,18 @@ We recommend implementation in RStudio.
 ## Figure 2 utilises Phase 1 data from the Sedimentary Geochemistry and Palaeoenvironments Project (SGP) http://sgp-search.io/
 The citable references for the Phase 1 data product are:
 Mehra et al. 2021, GSA Today, 31, https://doi.org/10.1130/GSATG484A.1.
+
 Farrell et al., Geobiology (in review) (2021).
 
 ## Figures 3-5 utilise pyrite trace element data accessible here: https://doi.org/10.1130/GEOL.S.12456332
 The data derive from:
 Large et al., Earth and Planetary Science Letters 389, 209-220 (2014).
+
 Large et al., Gondwana Research 28, 1282-1293 (2015).
+
 Large et al., Earth and Planetary Science Letters 428, 139-150 (2015).
+
 Large et al., Mineralium Deposita 54, 485-506 (2019).
+
 Mukherjee and Large, Geology 48, 1018-1022 (2020).
 
