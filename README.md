@@ -3,7 +3,7 @@
 
 We recommend implementation in RStudio.
 
-## Steps following deployment of the pyrite machine reading application (https://github.com/jemmings-git/pyrite_app):
+## Steps following deployment of the [pyrite machine reading application](https://github.com/jemmings-git/pyrite_app):
 
  * `install.R` - install the project's dependencies
  * `preparation.R` - collect and link related data from Macrostrat, do binning on the dataframe, save the results
