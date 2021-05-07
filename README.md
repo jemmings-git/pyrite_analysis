@@ -26,15 +26,15 @@ We recommend implementation in RStudio.
 # Acknowledgements
 
 ## Figure 1 is derived from the [GeoDeepDive](https://geodeepdive.org) (now known as xDD) library and machine reading system
-As the basis of our pyrite application we [forked](https://github.com/jemmings-git/pyrite_app) the text mining application used in Peters, Husson and Wilcots [2017, Geology](http://doi.org/10.1130/G38931.1). A comprehensive description of the original Peters et al. 2017 application is located here: https://github.com/UW-Macrostrat/stromatolites_demo
+As the basis of our pyrite application we [forked](https://github.com/jemmings-git/pyrite_app) the [original text mining application](https://github.com/UW-Macrostrat/stromatolites_demo) used in Peters, Husson and Wilcots [2017, Geology](http://doi.org/10.1130/G38931.1). 
 
-## Figure 2 utilises Phase 1 data from the Sedimentary Geochemistry and Palaeoenvironments Project (SGP) http://sgp-search.io/
+## Figure 2 utilises Phase 1 data from the [Sedimentary Geochemistry and Palaeoenvironments Project (SGP)](http://sgp-search.io/)
 The citable references for the Phase 1 data product are:
 Mehra et al. 2021, GSA Today, 31, https://doi.org/10.1130/GSATG484A.1.
 
 Farrell et al., Geobiology (in review) (2021).
 
-## Figures 3-5 utilise pyrite trace element data accessible here: https://doi.org/10.1130/GEOL.S.12456332
+## Figures 3-5 utilise [previously published pyrite trace element data](https://doi.org/10.1130/GEOL.S.12456332) : https://doi.org/10.1130/GEOL.S.12456332
 The data derive from:
 Large et al., Earth and Planetary Science Letters 389, 209-220 (2014).
 
