@@ -14303,7 +14303,7 @@ phan_results.bins[1:3,3] <- NA
 phan_results.bins[1:3,1] <- 0
 phan_results.melt.bins <- reshape2::melt(phan_results.bins, id.vars = c("edge","span", "mid","variable"))
 names(phan_results.melt.bins)[5] <- "type"
-#write.csv(phan_results.bins, "phanerozoic_pyrite_types_downsampled1.csv") # optional
+#write.csv(phan_results.bins, "phanerozoic_pyrite_types_downsampled.csv") # optional
 
 # Precambrian
 pre_results.melt.bins <- pre_results.melt
@@ -14326,16 +14326,16 @@ pre_results.bins <- join(diffs.pre, pre_results.bins, by = "bins")
 pre_results.bins <- pre_results.bins[,c(4:6,10:ncol(pre_results.bins))]
 pre_results.melt.bins <- reshape2::melt(pre_results.bins, id.vars = c("edge","span", "mid", "variable"))
 names(pre_results.melt.bins)[5] <- "type"
-#write.csv(pre_results.bins, "precambrian_pyrite_types_downsampled1.csv") # optional
+#write.csv(pre_results.bins, "precambrian_pyrite_types_downsampled.csv") # optional
 
 # optional import results 
-phan_results.bins <- read.csv("phanerozoic_pyrite_types_downsampled_notCV.csv")
+phan_results.bins <- read.csv("phanerozoic_pyrite_types_downsampled.csv")
 phan_results.bins <- phan_results.bins[,-1]
 names(phan_results.bins)[5:9] <- c("Type.5", "Type.1","Type.2", "Type.3", "Type.4")
 phan_results.melt.bins <- reshape2::melt(phan_results.bins, id.vars = c("edge","span", "mid", "variable"))
 names(phan_results.melt.bins)[5] <- "type"
 
-pre_results.bins <- read.csv("precambrian_pyrite_types_downsampled_notCV.csv")
+pre_results.bins <- read.csv("precambrian_pyrite_types_downsampled.csv")
 pre_results.bins <- pre_results.bins[,-1]
 names(pre_results.bins)[5:9] <- c("Type.5", "Type.1","Type.2", "Type.3", "Type.4")
 pre_results.melt.bins <- reshape2::melt(pre_results.bins, id.vars = c("edge","span", "mid", "variable"))
@@ -14751,4 +14751,3 @@ b <- ggplot() +
 grid.arrange(b,a,ncol=2)
 
 # End main plots
-
