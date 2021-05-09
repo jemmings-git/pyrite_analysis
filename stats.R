@@ -14699,50 +14699,52 @@ b <- ggplot() +
 
 grid.arrange(b,a,ncol=2)
 
-# Type.2 (DOM-OX) vs. Type.1 (DOM-dissolved Fe) - Fig. 5E
+# Fig. 5E
+
+# Fe-OX (Type 5 + Type 2) vs. DFe (Type 1) microenvironments
 
 # error in quadrature
-phan.DOM.OX.DFe <- phan_results.melt.bins.error.POM[,1:3]
-phan.DOM.OX.DFe$DOM.OX <- phan_results.melt.bins.error.DOM.OX$mean
-phan.DOM.OX.DFe$DOM.DFe <- phan_results.melt.bins.error.DOM.DFe$mean
-phan.DOM.OX.DFe$ratio <- phan.DOM.OX.DFe$DOM.OX/(phan.DOM.OX.DFe$DOM.OX+phan.DOM.OX.DFe$DOM.DFe)
-phan.DOM.OX.DFe$den <- ((phan_results.melt.bins.error.DOM.OX$error)^2+(phan_results.melt.bins.error.DOM.DFe$error)^2)^0.5
-phan.DOM.OX.DFe$num <- (phan_results.melt.bins.error.DOM.OX$error)
-phan.DOM.OX.DFe$quad <- ((phan.DOM.OX.DFe$num/phan.DOM.OX.DFe$DOM.OX)^2+(phan.DOM.OX.DFe$den/(phan.DOM.OX.DFe$DOM.DFe+phan.DOM.OX.DFe$DOM.OX))^2)^0.5
-phan.DOM.OX.DFe$quad <- (phan.DOM.OX.DFe$ratio)*(phan.DOM.OX.DFe$quad)
-phan.DOM.OX.DFe$upper <- phan.DOM.OX.DFe$ratio+phan.DOM.OX.DFe$quad
-phan.DOM.OX.DFe$lower <- phan.DOM.OX.DFe$ratio-phan.DOM.OX.DFe$quad
-phan.DOM.OX.DFe[,10:11][phan.DOM.OX.DFe[,10:11] < 0] <- 0
-phan.DOM.OX.DFe[,10:11][phan.DOM.OX.DFe[,10:11] > 1] <- 1
+phan.OX.DFe <- phan_results.melt.bins.error.POM[,1:3]
+phan.OX.DFe$OX <- phan_results.melt.bins.error.DOM.OX$mean+phan_results.melt.bins.error.POM$mean
+phan.OX.DFe$DFe <- phan_results.melt.bins.error.DOM.DFe$mean
+phan.OX.DFe$ratio <- phan.OX.DFe$OX/(phan.OX.DFe$DFe+phan.OX.DFe$OX)
+phan.OX.DFe$den <- ((phan_results.melt.bins.error.DOM.OX$error)^2+(phan_results.melt.bins.error.DOM.DFe$error)^2+(phan_results.melt.bins.error.POM$error)^2)^0.5
+phan.OX.DFe$num <- ((phan_results.melt.bins.error.DOM.OX$error)^2+(phan_results.melt.bins.error.POM$error)^2)^0.5
+phan.OX.DFe$quad <- ((phan.OX.DFe$num/phan.OX.DFe$OX)^2+(phan.OX.DFe$den/(phan.OX.DFe$DFe+phan.OX.DFe$OX))^2)^0.5
+phan.OX.DFe$quad <- (phan.OX.DFe$ratio)*(phan.OX.DFe$quad)
+phan.OX.DFe$upper <- phan.OX.DFe$ratio+phan.OX.DFe$quad
+phan.OX.DFe$lower <- phan.OX.DFe$ratio-phan.OX.DFe$quad
+phan.OX.DFe[,10:11][phan.OX.DFe[,10:11] < 0] <- 0
+phan.OX.DFe[,10:11][phan.OX.DFe[,10:11] > 1] <- 1
 
-pre.DOM.OX.DFe <- pre_results.melt.bins.error.POM[,1:3]
-pre.DOM.OX.DFe$DOM.OX <- pre_results.melt.bins.error.DOM.OX$mean
-pre.DOM.OX.DFe$DOM.DFe <- pre_results.melt.bins.error.DOM.DFe$mean
-pre.DOM.OX.DFe$ratio <- pre.DOM.OX.DFe$DOM.OX/(pre.DOM.OX.DFe$DOM.OX+pre.DOM.OX.DFe$DOM.DFe)
-pre.DOM.OX.DFe$den <- ((pre_results.melt.bins.error.DOM.OX$error)^2+(pre_results.melt.bins.error.DOM.DFe$error)^2)^0.5
-pre.DOM.OX.DFe$num <- (pre_results.melt.bins.error.DOM.OX$error)
-pre.DOM.OX.DFe$quad <- ((pre.DOM.OX.DFe$num/pre.DOM.OX.DFe$DOM.OX)^2+(pre.DOM.OX.DFe$den/(pre.DOM.OX.DFe$DOM.DFe+pre.DOM.OX.DFe$DOM.OX))^2)^0.5
-pre.DOM.OX.DFe$quad <- (pre.DOM.OX.DFe$ratio)*(pre.DOM.OX.DFe$quad)
-pre.DOM.OX.DFe$upper <- pre.DOM.OX.DFe$ratio+pre.DOM.OX.DFe$quad
-pre.DOM.OX.DFe$lower <- pre.DOM.OX.DFe$ratio-pre.DOM.OX.DFe$quad
-pre.DOM.OX.DFe[,10:11][pre.DOM.OX.DFe[,10:11] < 0] <- 0
-pre.DOM.OX.DFe[,10:11][pre.DOM.OX.DFe[,10:11] > 1] <- 1
+pre.OX.DFe <- pre_results.melt.bins.error.POM[,1:3]
+pre.OX.DFe$OX <- pre_results.melt.bins.error.DOM.OX$mean+pre_results.melt.bins.error.POM$mean
+pre.OX.DFe$DFe <- pre_results.melt.bins.error.DOM.DFe$mean
+pre.OX.DFe$ratio <- pre.OX.DFe$OX/(pre.OX.DFe$DFe+pre.OX.DFe$OX)
+pre.OX.DFe$den <- ((pre_results.melt.bins.error.DOM.OX$error)^2+(pre_results.melt.bins.error.DOM.DFe$error)^2+(pre_results.melt.bins.error.POM$error)^2)^0.5
+pre.OX.DFe$num <- ((pre_results.melt.bins.error.DOM.OX$error)^2+(pre_results.melt.bins.error.POM$error)^2)^0.5
+pre.OX.DFe$quad <- ((pre.OX.DFe$num/pre.OX.DFe$OX)^2+(pre.OX.DFe$den/(pre.OX.DFe$DFe+pre.OX.DFe$OX))^2)^0.5
+pre.OX.DFe$quad <- (pre.OX.DFe$ratio)*(pre.OX.DFe$quad)
+pre.OX.DFe$upper <- pre.OX.DFe$ratio+pre.OX.DFe$quad
+pre.OX.DFe$lower <- pre.OX.DFe$ratio-pre.OX.DFe$quad
+pre.OX.DFe[,10:11][pre.OX.DFe[,10:11] < 0] <- 0
+pre.OX.DFe[,10:11][pre.OX.DFe[,10:11] > 1] <- 1
 
-# Type.2 vs. Type.1
+# Fe-OX (Type 5 + Type 2) vs. DFe (Type 1)
 
 a <- ggplot() +
-  geom_stepribbon(data = phan.DOM.OX.DFe,
+  geom_stepribbon(data = phan.OX.DFe,
                   aes(x = edge, ymin = lower, ymax = upper), fill = "grey50") +
-  geom_step(data = phan.DOM.OX.DFe, aes(y =ratio, x = edge),
+  geom_step(data = phan.OX.DFe, aes(y =ratio, x = edge),
             direction = "hv", colour = "blue") +
   theme_bw() + scale_x_reverse(limits = c(550,0)) +
   geom_point(aes(x = unique(coords.all$age), y = 1.02)) +
   geom_vline(xintercept = zones)
 
 b <- ggplot() +
-  geom_stepribbon(data = pre.DOM.OX.DFe,
+  geom_stepribbon(data = pre.OX.DFe,
                   aes(x = edge, ymin = lower, ymax = upper), fill = "grey50") +
-  geom_step(data = pre.DOM.OX.DFe, aes(y =ratio, x = edge),
+  geom_step(data = pre.OX.DFe, aes(y =ratio, x = edge),
             direction = "hv", colour = "blue") +
   theme_bw() + scale_x_reverse(limits = c(4000, 540)) +
   geom_point(aes(x = unique(coords.all$age), y = 1.02)) +
@@ -14751,3 +14753,4 @@ b <- ggplot() +
 grid.arrange(b,a,ncol=2)
 
 # End main plots
+
