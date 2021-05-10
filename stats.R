@@ -324,9 +324,9 @@ coords.all <- cbind(coords.all, groups, labels, HCA.clusters, age)
 
 ###### prediction interval bootstraps up to 2sd #####
 
-## in order to implement double CV spans (for experimentation, not presented)
-# the user should replace 'span_upper <- span' AND 'span_lower <- span'
-# with 'span <- loess.predict[["pars"]][["span"]]'
+## in order to adopt a fixed span (Fig. S20-S21)
+# the user should replace 'span_upper <- loess.predict[["pars"]][["span"]]' and 'span_lower <- loess.predict[["pars"]][["span"]]'
+# with 'span_upper <- loess.predict[["pars"]][["span"]]' and 'span_lower <- loess.predict[["pars"]][["span"]]'
 
 coords.all2 <- coords.all
 
@@ -365,7 +365,7 @@ names(PC1_2sd_phan_upper)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_2sd_phan_upper$age, PC1_2sd_phan_upper$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC1_2sd_phan_upper, indices) {
@@ -405,7 +405,7 @@ names(PC1_2sd_phan_lower)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_2sd_phan_lower$age, PC1_2sd_phan_lower$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC1_2sd_phan_lower, indices) {
@@ -449,7 +449,7 @@ names(PC1_1.8sd_phan_upper)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_1.8sd_phan_upper$age, PC1_1.8sd_phan_upper$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC1_1.8sd_phan_upper, indices) {
@@ -489,7 +489,7 @@ names(PC1_1.8sd_phan_lower)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_1.8sd_phan_lower$age, PC1_1.8sd_phan_lower$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC1_1.8sd_phan_lower, indices) {
@@ -533,7 +533,7 @@ names(PC1_1.6sd_phan_upper)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_1.6sd_phan_upper$age, PC1_1.6sd_phan_upper$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC1_1.6sd_phan_upper, indices) {
@@ -573,7 +573,7 @@ names(PC1_1.6sd_phan_lower)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_1.6sd_phan_lower$age, PC1_1.6sd_phan_lower$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC1_1.6sd_phan_lower, indices) {
@@ -617,7 +617,7 @@ names(PC1_1.4sd_phan_upper)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_1.4sd_phan_upper$age, PC1_1.4sd_phan_upper$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC1_1.4sd_phan_upper, indices) {
@@ -657,7 +657,7 @@ names(PC1_1.4sd_phan_lower)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_1.4sd_phan_lower$age, PC1_1.4sd_phan_lower$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC1_1.4sd_phan_lower, indices) {
@@ -701,7 +701,7 @@ names(PC1_1.2sd_phan_upper)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_1.2sd_phan_upper$age, PC1_1.2sd_phan_upper$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC1_1.2sd_phan_upper, indices) {
@@ -741,7 +741,7 @@ names(PC1_1.2sd_phan_lower)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_1.2sd_phan_lower$age, PC1_1.2sd_phan_lower$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC1_1.2sd_phan_lower, indices) {
@@ -785,7 +785,7 @@ names(PC1_1.0sd_phan_upper)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_1.0sd_phan_upper$age, PC1_1.0sd_phan_upper$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC1_1.0sd_phan_upper, indices) {
@@ -825,7 +825,7 @@ names(PC1_1.0sd_phan_lower)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_1.0sd_phan_lower$age, PC1_1.0sd_phan_lower$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC1_1.0sd_phan_lower, indices) {
@@ -869,7 +869,7 @@ names(PC1_0.8sd_phan_upper)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_0.8sd_phan_upper$age, PC1_0.8sd_phan_upper$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC1_0.8sd_phan_upper, indices) {
@@ -909,7 +909,7 @@ names(PC1_0.8sd_phan_lower)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_0.8sd_phan_lower$age, PC1_0.8sd_phan_lower$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC1_0.8sd_phan_lower, indices) {
@@ -953,7 +953,7 @@ names(PC1_0.6sd_phan_upper)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_0.6sd_phan_upper$age, PC1_0.6sd_phan_upper$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC1_0.6sd_phan_upper, indices) {
@@ -993,7 +993,7 @@ names(PC1_0.6sd_phan_lower)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_0.6sd_phan_lower$age, PC1_0.6sd_phan_lower$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC1_0.6sd_phan_lower, indices) {
@@ -1037,7 +1037,7 @@ names(PC1_0.4sd_phan_upper)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_0.4sd_phan_upper$age, PC1_0.4sd_phan_upper$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC1_0.4sd_phan_upper, indices) {
@@ -1077,7 +1077,7 @@ names(PC1_0.4sd_phan_lower)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_0.4sd_phan_lower$age, PC1_0.4sd_phan_lower$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC1_0.4sd_phan_lower, indices) {
@@ -1121,7 +1121,7 @@ names(PC1_0.2sd_phan_upper)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_0.2sd_phan_upper$age, PC1_0.2sd_phan_upper$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC1_0.2sd_phan_upper, indices) {
@@ -1161,7 +1161,7 @@ names(PC1_0.2sd_phan_lower)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_0.2sd_phan_lower$age, PC1_0.2sd_phan_lower$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC1_0.2sd_phan_lower, indices) {
@@ -1205,7 +1205,7 @@ names(PC1_0.0sd_phan_upper)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_0.0sd_phan_upper$age, PC1_0.0sd_phan_upper$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC1_0.0sd_phan_upper, indices) {
@@ -1245,7 +1245,7 @@ names(PC1_0.0sd_phan_lower)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_0.0sd_phan_lower$age, PC1_0.0sd_phan_lower$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC1_0.0sd_phan_lower, indices) {
@@ -1320,7 +1320,7 @@ names(PC1_2sd_pre_upper)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_2sd_pre_upper$age, PC1_2sd_pre_upper$PC1, degree = 1, criterion = c("aicc", "gcv")[1], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC1_2sd_pre_upper, indices) {
@@ -1360,7 +1360,7 @@ names(PC1_2sd_pre_lower)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_2sd_pre_lower$age, PC1_2sd_pre_lower$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC1_2sd_pre_lower, indices) {
@@ -1404,7 +1404,7 @@ names(PC1_1.8sd_pre_upper)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_1.8sd_pre_upper$age, PC1_1.8sd_pre_upper$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC1_1.8sd_pre_upper, indices) {
@@ -1444,7 +1444,7 @@ names(PC1_1.8sd_pre_lower)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_1.8sd_pre_lower$age, PC1_1.8sd_pre_lower$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC1_1.8sd_pre_lower, indices) {
@@ -1488,7 +1488,7 @@ names(PC1_1.6sd_pre_upper)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_1.6sd_pre_upper$age, PC1_1.6sd_pre_upper$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC1_1.6sd_pre_upper, indices) {
@@ -1528,7 +1528,7 @@ names(PC1_1.6sd_pre_lower)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_1.6sd_pre_lower$age, PC1_1.6sd_pre_lower$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC1_1.6sd_pre_lower, indices) {
@@ -1572,7 +1572,7 @@ names(PC1_1.4sd_pre_upper)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_1.4sd_pre_upper$age, PC1_1.4sd_pre_upper$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC1_1.4sd_pre_upper, indices) {
@@ -1612,7 +1612,7 @@ names(PC1_1.4sd_pre_lower)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_1.4sd_pre_lower$age, PC1_1.4sd_pre_lower$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC1_1.4sd_pre_lower, indices) {
@@ -1656,7 +1656,7 @@ names(PC1_1.2sd_pre_upper)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_1.2sd_pre_upper$age, PC1_1.2sd_pre_upper$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC1_1.2sd_pre_upper, indices) {
@@ -1696,7 +1696,7 @@ names(PC1_1.2sd_pre_lower)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_1.2sd_pre_lower$age, PC1_1.2sd_pre_lower$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC1_1.2sd_pre_lower, indices) {
@@ -1740,7 +1740,7 @@ names(PC1_1.0sd_pre_upper)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_1.0sd_pre_upper$age, PC1_1.0sd_pre_upper$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC1_1.0sd_pre_upper, indices) {
@@ -1780,7 +1780,7 @@ names(PC1_1.0sd_pre_lower)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_1.0sd_pre_lower$age, PC1_1.0sd_pre_lower$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC1_1.0sd_pre_lower, indices) {
@@ -1824,7 +1824,7 @@ names(PC1_0.8sd_pre_upper)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_0.8sd_pre_upper$age, PC1_0.8sd_pre_upper$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC1_0.8sd_pre_upper, indices) {
@@ -1864,7 +1864,7 @@ names(PC1_0.8sd_pre_lower)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_0.8sd_pre_lower$age, PC1_0.8sd_pre_lower$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC1_0.8sd_pre_lower, indices) {
@@ -1908,7 +1908,7 @@ names(PC1_0.6sd_pre_upper)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_0.6sd_pre_upper$age, PC1_0.6sd_pre_upper$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC1_0.6sd_pre_upper, indices) {
@@ -1948,7 +1948,7 @@ names(PC1_0.6sd_pre_lower)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_0.6sd_pre_lower$age, PC1_0.6sd_pre_lower$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC1_0.6sd_pre_lower, indices) {
@@ -1992,7 +1992,7 @@ names(PC1_0.4sd_pre_upper)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_0.4sd_pre_upper$age, PC1_0.4sd_pre_upper$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC1_0.4sd_pre_upper, indices) {
@@ -2032,7 +2032,7 @@ names(PC1_0.4sd_pre_lower)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_0.4sd_pre_lower$age, PC1_0.4sd_pre_lower$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC1_0.4sd_pre_lower, indices) {
@@ -2076,7 +2076,7 @@ names(PC1_0.2sd_pre_upper)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_0.2sd_pre_upper$age, PC1_0.2sd_pre_upper$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC1_0.2sd_pre_upper, indices) {
@@ -2116,7 +2116,7 @@ names(PC1_0.2sd_pre_lower)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_0.2sd_pre_lower$age, PC1_0.2sd_pre_lower$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC1_0.2sd_pre_lower, indices) {
@@ -2160,7 +2160,7 @@ names(PC1_0.0sd_pre_upper)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_0.0sd_pre_upper$age, PC1_0.0sd_pre_upper$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC1_0.0sd_pre_upper, indices) {
@@ -2200,7 +2200,7 @@ names(PC1_0.0sd_pre_lower)[1:2] <- c("age","PC1")
 
 # CV spans
 loess.predict <- loess.as(PC1_0.0sd_pre_lower$age, PC1_0.0sd_pre_lower$PC1, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC1_0.0sd_pre_lower, indices) {
@@ -2278,7 +2278,7 @@ names(PC2_2sd_phan_upper)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_2sd_phan_upper$age, PC2_2sd_phan_upper$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC2_2sd_phan_upper, indices) {
@@ -2318,7 +2318,7 @@ names(PC2_2sd_phan_lower)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_2sd_phan_lower$age, PC2_2sd_phan_lower$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC2_2sd_phan_lower, indices) {
@@ -2362,7 +2362,7 @@ names(PC2_1.8sd_phan_upper)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_1.8sd_phan_upper$age, PC2_1.8sd_phan_upper$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC2_1.8sd_phan_upper, indices) {
@@ -2402,7 +2402,7 @@ names(PC2_1.8sd_phan_lower)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_1.8sd_phan_lower$age, PC2_1.8sd_phan_lower$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC2_1.8sd_phan_lower, indices) {
@@ -2446,7 +2446,7 @@ names(PC2_1.6sd_phan_upper)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_1.6sd_phan_upper$age, PC2_1.6sd_phan_upper$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC2_1.6sd_phan_upper, indices) {
@@ -2486,7 +2486,7 @@ names(PC2_1.6sd_phan_lower)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_1.6sd_phan_lower$age, PC2_1.6sd_phan_lower$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC2_1.6sd_phan_lower, indices) {
@@ -2530,7 +2530,7 @@ names(PC2_1.4sd_phan_upper)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_1.4sd_phan_upper$age, PC2_1.4sd_phan_upper$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC2_1.4sd_phan_upper, indices) {
@@ -2570,7 +2570,7 @@ names(PC2_1.4sd_phan_lower)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_1.4sd_phan_lower$age, PC2_1.4sd_phan_lower$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC2_1.4sd_phan_lower, indices) {
@@ -2614,7 +2614,7 @@ names(PC2_1.2sd_phan_upper)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_1.2sd_phan_upper$age, PC2_1.2sd_phan_upper$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC2_1.2sd_phan_upper, indices) {
@@ -2654,7 +2654,7 @@ names(PC2_1.2sd_phan_lower)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_1.2sd_phan_lower$age, PC2_1.2sd_phan_lower$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC2_1.2sd_phan_lower, indices) {
@@ -2698,7 +2698,7 @@ names(PC2_1.0sd_phan_upper)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_1.0sd_phan_upper$age, PC2_1.0sd_phan_upper$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC2_1.0sd_phan_upper, indices) {
@@ -2738,7 +2738,7 @@ names(PC2_1.0sd_phan_lower)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_1.0sd_phan_lower$age, PC2_1.0sd_phan_lower$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC2_1.0sd_phan_lower, indices) {
@@ -2782,7 +2782,7 @@ names(PC2_0.8sd_phan_upper)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_0.8sd_phan_upper$age, PC2_0.8sd_phan_upper$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC2_0.8sd_phan_upper, indices) {
@@ -2822,7 +2822,7 @@ names(PC2_0.8sd_phan_lower)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_0.8sd_phan_lower$age, PC2_0.8sd_phan_lower$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC2_0.8sd_phan_lower, indices) {
@@ -2866,7 +2866,7 @@ names(PC2_0.6sd_phan_upper)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_0.6sd_phan_upper$age, PC2_0.6sd_phan_upper$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC2_0.6sd_phan_upper, indices) {
@@ -2906,7 +2906,7 @@ names(PC2_0.6sd_phan_lower)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_0.6sd_phan_lower$age, PC2_0.6sd_phan_lower$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC2_0.6sd_phan_lower, indices) {
@@ -2950,7 +2950,7 @@ names(PC2_0.4sd_phan_upper)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_0.4sd_phan_upper$age, PC2_0.4sd_phan_upper$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC2_0.4sd_phan_upper, indices) {
@@ -2990,7 +2990,7 @@ names(PC2_0.4sd_phan_lower)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_0.4sd_phan_lower$age, PC2_0.4sd_phan_lower$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC2_0.4sd_phan_lower, indices) {
@@ -3034,7 +3034,7 @@ names(PC2_0.2sd_phan_upper)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_0.2sd_phan_upper$age, PC2_0.2sd_phan_upper$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC2_0.2sd_phan_upper, indices) {
@@ -3074,7 +3074,7 @@ names(PC2_0.2sd_phan_lower)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_0.2sd_phan_lower$age, PC2_0.2sd_phan_lower$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC2_0.2sd_phan_lower, indices) {
@@ -3118,7 +3118,7 @@ names(PC2_0.0sd_phan_upper)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_0.0sd_phan_upper$age, PC2_0.0sd_phan_upper$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC2_0.0sd_phan_upper, indices) {
@@ -3158,7 +3158,7 @@ names(PC2_0.0sd_phan_lower)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_0.0sd_phan_lower$age, PC2_0.0sd_phan_lower$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC2_0.0sd_phan_lower, indices) {
@@ -3233,7 +3233,7 @@ names(PC2_2sd_pre_upper)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_2sd_pre_upper$age, PC2_2sd_pre_upper$PC2, degree = 1, criterion = c("aicc", "gcv")[1], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC2_2sd_pre_upper, indices) {
@@ -3273,7 +3273,7 @@ names(PC2_2sd_pre_lower)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_2sd_pre_lower$age, PC2_2sd_pre_lower$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC2_2sd_pre_lower, indices) {
@@ -3317,7 +3317,7 @@ names(PC2_1.8sd_pre_upper)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_1.8sd_pre_upper$age, PC2_1.8sd_pre_upper$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC2_1.8sd_pre_upper, indices) {
@@ -3357,7 +3357,7 @@ names(PC2_1.8sd_pre_lower)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_1.8sd_pre_lower$age, PC2_1.8sd_pre_lower$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC2_1.8sd_pre_lower, indices) {
@@ -3401,7 +3401,7 @@ names(PC2_1.6sd_pre_upper)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_1.6sd_pre_upper$age, PC2_1.6sd_pre_upper$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC2_1.6sd_pre_upper, indices) {
@@ -3441,7 +3441,7 @@ names(PC2_1.6sd_pre_lower)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_1.6sd_pre_lower$age, PC2_1.6sd_pre_lower$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC2_1.6sd_pre_lower, indices) {
@@ -3485,7 +3485,7 @@ names(PC2_1.4sd_pre_upper)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_1.4sd_pre_upper$age, PC2_1.4sd_pre_upper$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC2_1.4sd_pre_upper, indices) {
@@ -3525,7 +3525,7 @@ names(PC2_1.4sd_pre_lower)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_1.4sd_pre_lower$age, PC2_1.4sd_pre_lower$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC2_1.4sd_pre_lower, indices) {
@@ -3569,7 +3569,7 @@ names(PC2_1.2sd_pre_upper)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_1.2sd_pre_upper$age, PC2_1.2sd_pre_upper$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC2_1.2sd_pre_upper, indices) {
@@ -3609,7 +3609,7 @@ names(PC2_1.2sd_pre_lower)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_1.2sd_pre_lower$age, PC2_1.2sd_pre_lower$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC2_1.2sd_pre_lower, indices) {
@@ -3653,7 +3653,7 @@ names(PC2_1.0sd_pre_upper)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_1.0sd_pre_upper$age, PC2_1.0sd_pre_upper$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC2_1.0sd_pre_upper, indices) {
@@ -3693,7 +3693,7 @@ names(PC2_1.0sd_pre_lower)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_1.0sd_pre_lower$age, PC2_1.0sd_pre_lower$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC2_1.0sd_pre_lower, indices) {
@@ -3737,7 +3737,7 @@ names(PC2_0.8sd_pre_upper)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_0.8sd_pre_upper$age, PC2_0.8sd_pre_upper$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC2_0.8sd_pre_upper, indices) {
@@ -3777,7 +3777,7 @@ names(PC2_0.8sd_pre_lower)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_0.8sd_pre_lower$age, PC2_0.8sd_pre_lower$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC2_0.8sd_pre_lower, indices) {
@@ -3821,7 +3821,7 @@ names(PC2_0.6sd_pre_upper)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_0.6sd_pre_upper$age, PC2_0.6sd_pre_upper$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC2_0.6sd_pre_upper, indices) {
@@ -3861,7 +3861,7 @@ names(PC2_0.6sd_pre_lower)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_0.6sd_pre_lower$age, PC2_0.6sd_pre_lower$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC2_0.6sd_pre_lower, indices) {
@@ -3905,7 +3905,7 @@ names(PC2_0.4sd_pre_upper)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_0.4sd_pre_upper$age, PC2_0.4sd_pre_upper$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC2_0.4sd_pre_upper, indices) {
@@ -3945,7 +3945,7 @@ names(PC2_0.4sd_pre_lower)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_0.4sd_pre_lower$age, PC2_0.4sd_pre_lower$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC2_0.4sd_pre_lower, indices) {
@@ -3989,7 +3989,7 @@ names(PC2_0.2sd_pre_upper)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_0.2sd_pre_upper$age, PC2_0.2sd_pre_upper$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC2_0.2sd_pre_upper, indices) {
@@ -4029,7 +4029,7 @@ names(PC2_0.2sd_pre_lower)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_0.2sd_pre_lower$age, PC2_0.2sd_pre_lower$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC2_0.2sd_pre_lower, indices) {
@@ -4073,7 +4073,7 @@ names(PC2_0.0sd_pre_upper)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_0.0sd_pre_upper$age, PC2_0.0sd_pre_upper$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC2_0.0sd_pre_upper, indices) {
@@ -4113,7 +4113,7 @@ names(PC2_0.0sd_pre_lower)[1:2] <- c("age","PC2")
 
 # CV spans
 loess.predict <- loess.as(PC2_0.0sd_pre_lower$age, PC2_0.0sd_pre_lower$PC2, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC2_0.0sd_pre_lower, indices) {
@@ -4193,7 +4193,7 @@ names(PC3_2sd_phan_upper)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_2sd_phan_upper$age, PC3_2sd_phan_upper$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC3_2sd_phan_upper, indices) {
@@ -4233,7 +4233,7 @@ names(PC3_2sd_phan_lower)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_2sd_phan_lower$age, PC3_2sd_phan_lower$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC3_2sd_phan_lower, indices) {
@@ -4277,7 +4277,7 @@ names(PC3_1.8sd_phan_upper)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_1.8sd_phan_upper$age, PC3_1.8sd_phan_upper$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC3_1.8sd_phan_upper, indices) {
@@ -4317,7 +4317,7 @@ names(PC3_1.8sd_phan_lower)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_1.8sd_phan_lower$age, PC3_1.8sd_phan_lower$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC3_1.8sd_phan_lower, indices) {
@@ -4361,7 +4361,7 @@ names(PC3_1.6sd_phan_upper)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_1.6sd_phan_upper$age, PC3_1.6sd_phan_upper$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC3_1.6sd_phan_upper, indices) {
@@ -4401,7 +4401,7 @@ names(PC3_1.6sd_phan_lower)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_1.6sd_phan_lower$age, PC3_1.6sd_phan_lower$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC3_1.6sd_phan_lower, indices) {
@@ -4445,7 +4445,7 @@ names(PC3_1.4sd_phan_upper)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_1.4sd_phan_upper$age, PC3_1.4sd_phan_upper$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC3_1.4sd_phan_upper, indices) {
@@ -4485,7 +4485,7 @@ names(PC3_1.4sd_phan_lower)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_1.4sd_phan_lower$age, PC3_1.4sd_phan_lower$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC3_1.4sd_phan_lower, indices) {
@@ -4529,7 +4529,7 @@ names(PC3_1.2sd_phan_upper)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_1.2sd_phan_upper$age, PC3_1.2sd_phan_upper$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC3_1.2sd_phan_upper, indices) {
@@ -4569,7 +4569,7 @@ names(PC3_1.2sd_phan_lower)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_1.2sd_phan_lower$age, PC3_1.2sd_phan_lower$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC3_1.2sd_phan_lower, indices) {
@@ -4613,7 +4613,7 @@ names(PC3_1.0sd_phan_upper)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_1.0sd_phan_upper$age, PC3_1.0sd_phan_upper$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC3_1.0sd_phan_upper, indices) {
@@ -4653,7 +4653,7 @@ names(PC3_1.0sd_phan_lower)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_1.0sd_phan_lower$age, PC3_1.0sd_phan_lower$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC3_1.0sd_phan_lower, indices) {
@@ -4697,7 +4697,7 @@ names(PC3_0.8sd_phan_upper)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_0.8sd_phan_upper$age, PC3_0.8sd_phan_upper$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC3_0.8sd_phan_upper, indices) {
@@ -4737,7 +4737,7 @@ names(PC3_0.8sd_phan_lower)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_0.8sd_phan_lower$age, PC3_0.8sd_phan_lower$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC3_0.8sd_phan_lower, indices) {
@@ -4781,7 +4781,7 @@ names(PC3_0.6sd_phan_upper)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_0.6sd_phan_upper$age, PC3_0.6sd_phan_upper$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC3_0.6sd_phan_upper, indices) {
@@ -4821,7 +4821,7 @@ names(PC3_0.6sd_phan_lower)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_0.6sd_phan_lower$age, PC3_0.6sd_phan_lower$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC3_0.6sd_phan_lower, indices) {
@@ -4865,7 +4865,7 @@ names(PC3_0.4sd_phan_upper)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_0.4sd_phan_upper$age, PC3_0.4sd_phan_upper$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC3_0.4sd_phan_upper, indices) {
@@ -4905,7 +4905,7 @@ names(PC3_0.4sd_phan_lower)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_0.4sd_phan_lower$age, PC3_0.4sd_phan_lower$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC3_0.4sd_phan_lower, indices) {
@@ -4949,7 +4949,7 @@ names(PC3_0.2sd_phan_upper)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_0.2sd_phan_upper$age, PC3_0.2sd_phan_upper$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC3_0.2sd_phan_upper, indices) {
@@ -4989,7 +4989,7 @@ names(PC3_0.2sd_phan_lower)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_0.2sd_phan_lower$age, PC3_0.2sd_phan_lower$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC3_0.2sd_phan_lower, indices) {
@@ -5033,7 +5033,7 @@ names(PC3_0.0sd_phan_upper)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_0.0sd_phan_upper$age, PC3_0.0sd_phan_upper$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC3_0.0sd_phan_upper, indices) {
@@ -5073,7 +5073,7 @@ names(PC3_0.0sd_phan_lower)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_0.0sd_phan_lower$age, PC3_0.0sd_phan_lower$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC3_0.0sd_phan_lower, indices) {
@@ -5148,7 +5148,7 @@ names(PC3_2sd_pre_upper)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_2sd_pre_upper$age, PC3_2sd_pre_upper$PC3, degree = 1, criterion = c("aicc", "gcv")[1], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC3_2sd_pre_upper, indices) {
@@ -5188,7 +5188,7 @@ names(PC3_2sd_pre_lower)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_2sd_pre_lower$age, PC3_2sd_pre_lower$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC3_2sd_pre_lower, indices) {
@@ -5232,7 +5232,7 @@ names(PC3_1.8sd_pre_upper)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_1.8sd_pre_upper$age, PC3_1.8sd_pre_upper$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC3_1.8sd_pre_upper, indices) {
@@ -5272,7 +5272,7 @@ names(PC3_1.8sd_pre_lower)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_1.8sd_pre_lower$age, PC3_1.8sd_pre_lower$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC3_1.8sd_pre_lower, indices) {
@@ -5316,7 +5316,7 @@ names(PC3_1.6sd_pre_upper)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_1.6sd_pre_upper$age, PC3_1.6sd_pre_upper$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC3_1.6sd_pre_upper, indices) {
@@ -5356,7 +5356,7 @@ names(PC3_1.6sd_pre_lower)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_1.6sd_pre_lower$age, PC3_1.6sd_pre_lower$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC3_1.6sd_pre_lower, indices) {
@@ -5400,7 +5400,7 @@ names(PC3_1.4sd_pre_upper)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_1.4sd_pre_upper$age, PC3_1.4sd_pre_upper$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC3_1.4sd_pre_upper, indices) {
@@ -5440,7 +5440,7 @@ names(PC3_1.4sd_pre_lower)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_1.4sd_pre_lower$age, PC3_1.4sd_pre_lower$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC3_1.4sd_pre_lower, indices) {
@@ -5484,7 +5484,7 @@ names(PC3_1.2sd_pre_upper)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_1.2sd_pre_upper$age, PC3_1.2sd_pre_upper$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC3_1.2sd_pre_upper, indices) {
@@ -5524,7 +5524,7 @@ names(PC3_1.2sd_pre_lower)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_1.2sd_pre_lower$age, PC3_1.2sd_pre_lower$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC3_1.2sd_pre_lower, indices) {
@@ -5568,7 +5568,7 @@ names(PC3_1.0sd_pre_upper)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_1.0sd_pre_upper$age, PC3_1.0sd_pre_upper$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC3_1.0sd_pre_upper, indices) {
@@ -5608,7 +5608,7 @@ names(PC3_1.0sd_pre_lower)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_1.0sd_pre_lower$age, PC3_1.0sd_pre_lower$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC3_1.0sd_pre_lower, indices) {
@@ -5652,7 +5652,7 @@ names(PC3_0.8sd_pre_upper)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_0.8sd_pre_upper$age, PC3_0.8sd_pre_upper$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC3_0.8sd_pre_upper, indices) {
@@ -5692,7 +5692,7 @@ names(PC3_0.8sd_pre_lower)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_0.8sd_pre_lower$age, PC3_0.8sd_pre_lower$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC3_0.8sd_pre_lower, indices) {
@@ -5736,7 +5736,7 @@ names(PC3_0.6sd_pre_upper)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_0.6sd_pre_upper$age, PC3_0.6sd_pre_upper$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC3_0.6sd_pre_upper, indices) {
@@ -5776,7 +5776,7 @@ names(PC3_0.6sd_pre_lower)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_0.6sd_pre_lower$age, PC3_0.6sd_pre_lower$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC3_0.6sd_pre_lower, indices) {
@@ -5820,7 +5820,7 @@ names(PC3_0.4sd_pre_upper)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_0.4sd_pre_upper$age, PC3_0.4sd_pre_upper$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC3_0.4sd_pre_upper, indices) {
@@ -5860,7 +5860,7 @@ names(PC3_0.4sd_pre_lower)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_0.4sd_pre_lower$age, PC3_0.4sd_pre_lower$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC3_0.4sd_pre_lower, indices) {
@@ -5904,7 +5904,7 @@ names(PC3_0.2sd_pre_upper)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_0.2sd_pre_upper$age, PC3_0.2sd_pre_upper$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC3_0.2sd_pre_upper, indices) {
@@ -5944,7 +5944,7 @@ names(PC3_0.2sd_pre_lower)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_0.2sd_pre_lower$age, PC3_0.2sd_pre_lower$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC3_0.2sd_pre_lower, indices) {
@@ -5988,7 +5988,7 @@ names(PC3_0.0sd_pre_upper)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_0.0sd_pre_upper$age, PC3_0.0sd_pre_upper$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC3_0.0sd_pre_upper, indices) {
@@ -6028,7 +6028,7 @@ names(PC3_0.0sd_pre_lower)[1:2] <- c("age","PC3")
 
 # CV spans
 loess.predict <- loess.as(PC3_0.0sd_pre_lower$age, PC3_0.0sd_pre_lower$PC3, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC3_0.0sd_pre_lower, indices) {
@@ -6109,7 +6109,7 @@ names(PC4_2sd_phan_upper)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_2sd_phan_upper$age, PC4_2sd_phan_upper$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC4_2sd_phan_upper, indices) {
@@ -6149,7 +6149,7 @@ names(PC4_2sd_phan_lower)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_2sd_phan_lower$age, PC4_2sd_phan_lower$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC4_2sd_phan_lower, indices) {
@@ -6193,7 +6193,7 @@ names(PC4_1.8sd_phan_upper)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_1.8sd_phan_upper$age, PC4_1.8sd_phan_upper$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC4_1.8sd_phan_upper, indices) {
@@ -6233,7 +6233,7 @@ names(PC4_1.8sd_phan_lower)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_1.8sd_phan_lower$age, PC4_1.8sd_phan_lower$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC4_1.8sd_phan_lower, indices) {
@@ -6277,7 +6277,7 @@ names(PC4_1.6sd_phan_upper)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_1.6sd_phan_upper$age, PC4_1.6sd_phan_upper$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC4_1.6sd_phan_upper, indices) {
@@ -6317,7 +6317,7 @@ names(PC4_1.6sd_phan_lower)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_1.6sd_phan_lower$age, PC4_1.6sd_phan_lower$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC4_1.6sd_phan_lower, indices) {
@@ -6361,7 +6361,7 @@ names(PC4_1.4sd_phan_upper)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_1.4sd_phan_upper$age, PC4_1.4sd_phan_upper$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC4_1.4sd_phan_upper, indices) {
@@ -6401,7 +6401,7 @@ names(PC4_1.4sd_phan_lower)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_1.4sd_phan_lower$age, PC4_1.4sd_phan_lower$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC4_1.4sd_phan_lower, indices) {
@@ -6445,7 +6445,7 @@ names(PC4_1.2sd_phan_upper)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_1.2sd_phan_upper$age, PC4_1.2sd_phan_upper$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC4_1.2sd_phan_upper, indices) {
@@ -6485,7 +6485,7 @@ names(PC4_1.2sd_phan_lower)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_1.2sd_phan_lower$age, PC4_1.2sd_phan_lower$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC4_1.2sd_phan_lower, indices) {
@@ -6529,7 +6529,7 @@ names(PC4_1.0sd_phan_upper)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_1.0sd_phan_upper$age, PC4_1.0sd_phan_upper$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC4_1.0sd_phan_upper, indices) {
@@ -6569,7 +6569,7 @@ names(PC4_1.0sd_phan_lower)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_1.0sd_phan_lower$age, PC4_1.0sd_phan_lower$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC4_1.0sd_phan_lower, indices) {
@@ -6613,7 +6613,7 @@ names(PC4_0.8sd_phan_upper)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_0.8sd_phan_upper$age, PC4_0.8sd_phan_upper$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC4_0.8sd_phan_upper, indices) {
@@ -6653,7 +6653,7 @@ names(PC4_0.8sd_phan_lower)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_0.8sd_phan_lower$age, PC4_0.8sd_phan_lower$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC4_0.8sd_phan_lower, indices) {
@@ -6697,7 +6697,7 @@ names(PC4_0.6sd_phan_upper)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_0.6sd_phan_upper$age, PC4_0.6sd_phan_upper$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC4_0.6sd_phan_upper, indices) {
@@ -6737,7 +6737,7 @@ names(PC4_0.6sd_phan_lower)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_0.6sd_phan_lower$age, PC4_0.6sd_phan_lower$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC4_0.6sd_phan_lower, indices) {
@@ -6781,7 +6781,7 @@ names(PC4_0.4sd_phan_upper)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_0.4sd_phan_upper$age, PC4_0.4sd_phan_upper$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC4_0.4sd_phan_upper, indices) {
@@ -6821,7 +6821,7 @@ names(PC4_0.4sd_phan_lower)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_0.4sd_phan_lower$age, PC4_0.4sd_phan_lower$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC4_0.4sd_phan_lower, indices) {
@@ -6865,7 +6865,7 @@ names(PC4_0.2sd_phan_upper)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_0.2sd_phan_upper$age, PC4_0.2sd_phan_upper$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC4_0.2sd_phan_upper, indices) {
@@ -6905,7 +6905,7 @@ names(PC4_0.2sd_phan_lower)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_0.2sd_phan_lower$age, PC4_0.2sd_phan_lower$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC4_0.2sd_phan_lower, indices) {
@@ -6949,7 +6949,7 @@ names(PC4_0.0sd_phan_upper)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_0.0sd_phan_upper$age, PC4_0.0sd_phan_upper$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC4_0.0sd_phan_upper, indices) {
@@ -6989,7 +6989,7 @@ names(PC4_0.0sd_phan_lower)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_0.0sd_phan_lower$age, PC4_0.0sd_phan_lower$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC4_0.0sd_phan_lower, indices) {
@@ -7064,7 +7064,7 @@ names(PC4_2sd_pre_upper)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_2sd_pre_upper$age, PC4_2sd_pre_upper$PC4, degree = 1, criterion = c("aicc", "gcv")[1], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC4_2sd_pre_upper, indices) {
@@ -7104,7 +7104,7 @@ names(PC4_2sd_pre_lower)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_2sd_pre_lower$age, PC4_2sd_pre_lower$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC4_2sd_pre_lower, indices) {
@@ -7148,7 +7148,7 @@ names(PC4_1.8sd_pre_upper)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_1.8sd_pre_upper$age, PC4_1.8sd_pre_upper$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC4_1.8sd_pre_upper, indices) {
@@ -7188,7 +7188,7 @@ names(PC4_1.8sd_pre_lower)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_1.8sd_pre_lower$age, PC4_1.8sd_pre_lower$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC4_1.8sd_pre_lower, indices) {
@@ -7232,7 +7232,7 @@ names(PC4_1.6sd_pre_upper)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_1.6sd_pre_upper$age, PC4_1.6sd_pre_upper$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC4_1.6sd_pre_upper, indices) {
@@ -7272,7 +7272,7 @@ names(PC4_1.6sd_pre_lower)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_1.6sd_pre_lower$age, PC4_1.6sd_pre_lower$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC4_1.6sd_pre_lower, indices) {
@@ -7316,7 +7316,7 @@ names(PC4_1.4sd_pre_upper)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_1.4sd_pre_upper$age, PC4_1.4sd_pre_upper$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC4_1.4sd_pre_upper, indices) {
@@ -7356,7 +7356,7 @@ names(PC4_1.4sd_pre_lower)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_1.4sd_pre_lower$age, PC4_1.4sd_pre_lower$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC4_1.4sd_pre_lower, indices) {
@@ -7400,7 +7400,7 @@ names(PC4_1.2sd_pre_upper)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_1.2sd_pre_upper$age, PC4_1.2sd_pre_upper$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC4_1.2sd_pre_upper, indices) {
@@ -7440,7 +7440,7 @@ names(PC4_1.2sd_pre_lower)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_1.2sd_pre_lower$age, PC4_1.2sd_pre_lower$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC4_1.2sd_pre_lower, indices) {
@@ -7484,7 +7484,7 @@ names(PC4_1.0sd_pre_upper)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_1.0sd_pre_upper$age, PC4_1.0sd_pre_upper$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC4_1.0sd_pre_upper, indices) {
@@ -7524,7 +7524,7 @@ names(PC4_1.0sd_pre_lower)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_1.0sd_pre_lower$age, PC4_1.0sd_pre_lower$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC4_1.0sd_pre_lower, indices) {
@@ -7568,7 +7568,7 @@ names(PC4_0.8sd_pre_upper)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_0.8sd_pre_upper$age, PC4_0.8sd_pre_upper$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC4_0.8sd_pre_upper, indices) {
@@ -7608,7 +7608,7 @@ names(PC4_0.8sd_pre_lower)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_0.8sd_pre_lower$age, PC4_0.8sd_pre_lower$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC4_0.8sd_pre_lower, indices) {
@@ -7652,7 +7652,7 @@ names(PC4_0.6sd_pre_upper)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_0.6sd_pre_upper$age, PC4_0.6sd_pre_upper$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC4_0.6sd_pre_upper, indices) {
@@ -7692,7 +7692,7 @@ names(PC4_0.6sd_pre_lower)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_0.6sd_pre_lower$age, PC4_0.6sd_pre_lower$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC4_0.6sd_pre_lower, indices) {
@@ -7736,7 +7736,7 @@ names(PC4_0.4sd_pre_upper)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_0.4sd_pre_upper$age, PC4_0.4sd_pre_upper$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC4_0.4sd_pre_upper, indices) {
@@ -7776,7 +7776,7 @@ names(PC4_0.4sd_pre_lower)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_0.4sd_pre_lower$age, PC4_0.4sd_pre_lower$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC4_0.4sd_pre_lower, indices) {
@@ -7820,7 +7820,7 @@ names(PC4_0.2sd_pre_upper)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_0.2sd_pre_upper$age, PC4_0.2sd_pre_upper$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC4_0.2sd_pre_upper, indices) {
@@ -7860,7 +7860,7 @@ names(PC4_0.2sd_pre_lower)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_0.2sd_pre_lower$age, PC4_0.2sd_pre_lower$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC4_0.2sd_pre_lower, indices) {
@@ -7904,7 +7904,7 @@ names(PC4_0.0sd_pre_upper)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_0.0sd_pre_upper$age, PC4_0.0sd_pre_upper$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC4_0.0sd_pre_upper, indices) {
@@ -7944,7 +7944,7 @@ names(PC4_0.0sd_pre_lower)[1:2] <- c("age","PC4")
 
 # CV spans
 loess.predict <- loess.as(PC4_0.0sd_pre_lower$age, PC4_0.0sd_pre_lower$PC4, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC4_0.0sd_pre_lower, indices) {
@@ -8028,7 +8028,7 @@ names(PC5_2sd_phan_upper)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_2sd_phan_upper$age, PC5_2sd_phan_upper$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC5_2sd_phan_upper, indices) {
@@ -8068,7 +8068,7 @@ names(PC5_2sd_phan_lower)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_2sd_phan_lower$age, PC5_2sd_phan_lower$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC5_2sd_phan_lower, indices) {
@@ -8112,7 +8112,7 @@ names(PC5_1.8sd_phan_upper)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_1.8sd_phan_upper$age, PC5_1.8sd_phan_upper$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC5_1.8sd_phan_upper, indices) {
@@ -8152,7 +8152,7 @@ names(PC5_1.8sd_phan_lower)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_1.8sd_phan_lower$age, PC5_1.8sd_phan_lower$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC5_1.8sd_phan_lower, indices) {
@@ -8196,7 +8196,7 @@ names(PC5_1.6sd_phan_upper)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_1.6sd_phan_upper$age, PC5_1.6sd_phan_upper$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC5_1.6sd_phan_upper, indices) {
@@ -8236,7 +8236,7 @@ names(PC5_1.6sd_phan_lower)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_1.6sd_phan_lower$age, PC5_1.6sd_phan_lower$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC5_1.6sd_phan_lower, indices) {
@@ -8280,7 +8280,7 @@ names(PC5_1.4sd_phan_upper)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_1.4sd_phan_upper$age, PC5_1.4sd_phan_upper$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC5_1.4sd_phan_upper, indices) {
@@ -8320,7 +8320,7 @@ names(PC5_1.4sd_phan_lower)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_1.4sd_phan_lower$age, PC5_1.4sd_phan_lower$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC5_1.4sd_phan_lower, indices) {
@@ -8364,7 +8364,7 @@ names(PC5_1.2sd_phan_upper)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_1.2sd_phan_upper$age, PC5_1.2sd_phan_upper$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC5_1.2sd_phan_upper, indices) {
@@ -8404,7 +8404,7 @@ names(PC5_1.2sd_phan_lower)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_1.2sd_phan_lower$age, PC5_1.2sd_phan_lower$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC5_1.2sd_phan_lower, indices) {
@@ -8448,7 +8448,7 @@ names(PC5_1.0sd_phan_upper)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_1.0sd_phan_upper$age, PC5_1.0sd_phan_upper$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC5_1.0sd_phan_upper, indices) {
@@ -8488,7 +8488,7 @@ names(PC5_1.0sd_phan_lower)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_1.0sd_phan_lower$age, PC5_1.0sd_phan_lower$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC5_1.0sd_phan_lower, indices) {
@@ -8532,7 +8532,7 @@ names(PC5_0.8sd_phan_upper)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_0.8sd_phan_upper$age, PC5_0.8sd_phan_upper$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC5_0.8sd_phan_upper, indices) {
@@ -8572,7 +8572,7 @@ names(PC5_0.8sd_phan_lower)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_0.8sd_phan_lower$age, PC5_0.8sd_phan_lower$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC5_0.8sd_phan_lower, indices) {
@@ -8616,7 +8616,7 @@ names(PC5_0.6sd_phan_upper)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_0.6sd_phan_upper$age, PC5_0.6sd_phan_upper$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC5_0.6sd_phan_upper, indices) {
@@ -8656,7 +8656,7 @@ names(PC5_0.6sd_phan_lower)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_0.6sd_phan_lower$age, PC5_0.6sd_phan_lower$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC5_0.6sd_phan_lower, indices) {
@@ -8700,7 +8700,7 @@ names(PC5_0.4sd_phan_upper)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_0.4sd_phan_upper$age, PC5_0.4sd_phan_upper$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC5_0.4sd_phan_upper, indices) {
@@ -8740,7 +8740,7 @@ names(PC5_0.4sd_phan_lower)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_0.4sd_phan_lower$age, PC5_0.4sd_phan_lower$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC5_0.4sd_phan_lower, indices) {
@@ -8784,7 +8784,7 @@ names(PC5_0.2sd_phan_upper)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_0.2sd_phan_upper$age, PC5_0.2sd_phan_upper$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC5_0.2sd_phan_upper, indices) {
@@ -8824,7 +8824,7 @@ names(PC5_0.2sd_phan_lower)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_0.2sd_phan_lower$age, PC5_0.2sd_phan_lower$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC5_0.2sd_phan_lower, indices) {
@@ -8868,7 +8868,7 @@ names(PC5_0.0sd_phan_upper)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_0.0sd_phan_upper$age, PC5_0.0sd_phan_upper$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC5_0.0sd_phan_upper, indices) {
@@ -8908,7 +8908,7 @@ names(PC5_0.0sd_phan_lower)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_0.0sd_phan_lower$age, PC5_0.0sd_phan_lower$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC5_0.0sd_phan_lower, indices) {
@@ -8983,7 +8983,7 @@ names(PC5_2sd_pre_upper)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_2sd_pre_upper$age, PC5_2sd_pre_upper$PC5, degree = 1, criterion = c("aicc", "gcv")[1], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC5_2sd_pre_upper, indices) {
@@ -9023,7 +9023,7 @@ names(PC5_2sd_pre_lower)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_2sd_pre_lower$age, PC5_2sd_pre_lower$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC5_2sd_pre_lower, indices) {
@@ -9067,7 +9067,7 @@ names(PC5_1.8sd_pre_upper)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_1.8sd_pre_upper$age, PC5_1.8sd_pre_upper$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC5_1.8sd_pre_upper, indices) {
@@ -9107,7 +9107,7 @@ names(PC5_1.8sd_pre_lower)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_1.8sd_pre_lower$age, PC5_1.8sd_pre_lower$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC5_1.8sd_pre_lower, indices) {
@@ -9151,7 +9151,7 @@ names(PC5_1.6sd_pre_upper)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_1.6sd_pre_upper$age, PC5_1.6sd_pre_upper$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC5_1.6sd_pre_upper, indices) {
@@ -9191,7 +9191,7 @@ names(PC5_1.6sd_pre_lower)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_1.6sd_pre_lower$age, PC5_1.6sd_pre_lower$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC5_1.6sd_pre_lower, indices) {
@@ -9235,7 +9235,7 @@ names(PC5_1.4sd_pre_upper)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_1.4sd_pre_upper$age, PC5_1.4sd_pre_upper$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC5_1.4sd_pre_upper, indices) {
@@ -9275,7 +9275,7 @@ names(PC5_1.4sd_pre_lower)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_1.4sd_pre_lower$age, PC5_1.4sd_pre_lower$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC5_1.4sd_pre_lower, indices) {
@@ -9319,7 +9319,7 @@ names(PC5_1.2sd_pre_upper)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_1.2sd_pre_upper$age, PC5_1.2sd_pre_upper$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC5_1.2sd_pre_upper, indices) {
@@ -9359,7 +9359,7 @@ names(PC5_1.2sd_pre_lower)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_1.2sd_pre_lower$age, PC5_1.2sd_pre_lower$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC5_1.2sd_pre_lower, indices) {
@@ -9403,7 +9403,7 @@ names(PC5_1.0sd_pre_upper)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_1.0sd_pre_upper$age, PC5_1.0sd_pre_upper$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC5_1.0sd_pre_upper, indices) {
@@ -9443,7 +9443,7 @@ names(PC5_1.0sd_pre_lower)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_1.0sd_pre_lower$age, PC5_1.0sd_pre_lower$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC5_1.0sd_pre_lower, indices) {
@@ -9487,7 +9487,7 @@ names(PC5_0.8sd_pre_upper)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_0.8sd_pre_upper$age, PC5_0.8sd_pre_upper$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC5_0.8sd_pre_upper, indices) {
@@ -9527,7 +9527,7 @@ names(PC5_0.8sd_pre_lower)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_0.8sd_pre_lower$age, PC5_0.8sd_pre_lower$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC5_0.8sd_pre_lower, indices) {
@@ -9571,7 +9571,7 @@ names(PC5_0.6sd_pre_upper)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_0.6sd_pre_upper$age, PC5_0.6sd_pre_upper$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC5_0.6sd_pre_upper, indices) {
@@ -9611,7 +9611,7 @@ names(PC5_0.6sd_pre_lower)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_0.6sd_pre_lower$age, PC5_0.6sd_pre_lower$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC5_0.6sd_pre_lower, indices) {
@@ -9655,7 +9655,7 @@ names(PC5_0.4sd_pre_upper)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_0.4sd_pre_upper$age, PC5_0.4sd_pre_upper$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC5_0.4sd_pre_upper, indices) {
@@ -9695,7 +9695,7 @@ names(PC5_0.4sd_pre_lower)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_0.4sd_pre_lower$age, PC5_0.4sd_pre_lower$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC5_0.4sd_pre_lower, indices) {
@@ -9739,7 +9739,7 @@ names(PC5_0.2sd_pre_upper)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_0.2sd_pre_upper$age, PC5_0.2sd_pre_upper$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC5_0.2sd_pre_upper, indices) {
@@ -9779,7 +9779,7 @@ names(PC5_0.2sd_pre_lower)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_0.2sd_pre_lower$age, PC5_0.2sd_pre_lower$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC5_0.2sd_pre_lower, indices) {
@@ -9823,7 +9823,7 @@ names(PC5_0.0sd_pre_upper)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_0.0sd_pre_upper$age, PC5_0.0sd_pre_upper$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC5_0.0sd_pre_upper, indices) {
@@ -9863,7 +9863,7 @@ names(PC5_0.0sd_pre_lower)[1:2] <- c("age","PC5")
 
 # CV spans
 loess.predict <- loess.as(PC5_0.0sd_pre_lower$age, PC5_0.0sd_pre_lower$PC5, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC5_0.0sd_pre_lower, indices) {
@@ -9949,7 +9949,7 @@ names(PC6_2sd_phan_upper)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_2sd_phan_upper$age, PC6_2sd_phan_upper$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC6_2sd_phan_upper, indices) {
@@ -9989,7 +9989,7 @@ names(PC6_2sd_phan_lower)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_2sd_phan_lower$age, PC6_2sd_phan_lower$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC6_2sd_phan_lower, indices) {
@@ -10033,7 +10033,7 @@ names(PC6_1.8sd_phan_upper)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_1.8sd_phan_upper$age, PC6_1.8sd_phan_upper$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC6_1.8sd_phan_upper, indices) {
@@ -10073,7 +10073,7 @@ names(PC6_1.8sd_phan_lower)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_1.8sd_phan_lower$age, PC6_1.8sd_phan_lower$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC6_1.8sd_phan_lower, indices) {
@@ -10117,7 +10117,7 @@ names(PC6_1.6sd_phan_upper)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_1.6sd_phan_upper$age, PC6_1.6sd_phan_upper$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC6_1.6sd_phan_upper, indices) {
@@ -10157,7 +10157,7 @@ names(PC6_1.6sd_phan_lower)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_1.6sd_phan_lower$age, PC6_1.6sd_phan_lower$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC6_1.6sd_phan_lower, indices) {
@@ -10201,7 +10201,7 @@ names(PC6_1.4sd_phan_upper)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_1.4sd_phan_upper$age, PC6_1.4sd_phan_upper$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC6_1.4sd_phan_upper, indices) {
@@ -10241,7 +10241,7 @@ names(PC6_1.4sd_phan_lower)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_1.4sd_phan_lower$age, PC6_1.4sd_phan_lower$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC6_1.4sd_phan_lower, indices) {
@@ -10285,7 +10285,7 @@ names(PC6_1.2sd_phan_upper)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_1.2sd_phan_upper$age, PC6_1.2sd_phan_upper$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC6_1.2sd_phan_upper, indices) {
@@ -10325,7 +10325,7 @@ names(PC6_1.2sd_phan_lower)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_1.2sd_phan_lower$age, PC6_1.2sd_phan_lower$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC6_1.2sd_phan_lower, indices) {
@@ -10369,7 +10369,7 @@ names(PC6_1.0sd_phan_upper)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_1.0sd_phan_upper$age, PC6_1.0sd_phan_upper$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC6_1.0sd_phan_upper, indices) {
@@ -10409,7 +10409,7 @@ names(PC6_1.0sd_phan_lower)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_1.0sd_phan_lower$age, PC6_1.0sd_phan_lower$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC6_1.0sd_phan_lower, indices) {
@@ -10453,7 +10453,7 @@ names(PC6_0.8sd_phan_upper)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_0.8sd_phan_upper$age, PC6_0.8sd_phan_upper$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC6_0.8sd_phan_upper, indices) {
@@ -10493,7 +10493,7 @@ names(PC6_0.8sd_phan_lower)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_0.8sd_phan_lower$age, PC6_0.8sd_phan_lower$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC6_0.8sd_phan_lower, indices) {
@@ -10537,7 +10537,7 @@ names(PC6_0.6sd_phan_upper)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_0.6sd_phan_upper$age, PC6_0.6sd_phan_upper$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC6_0.6sd_phan_upper, indices) {
@@ -10577,7 +10577,7 @@ names(PC6_0.6sd_phan_lower)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_0.6sd_phan_lower$age, PC6_0.6sd_phan_lower$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC6_0.6sd_phan_lower, indices) {
@@ -10621,7 +10621,7 @@ names(PC6_0.4sd_phan_upper)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_0.4sd_phan_upper$age, PC6_0.4sd_phan_upper$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC6_0.4sd_phan_upper, indices) {
@@ -10661,7 +10661,7 @@ names(PC6_0.4sd_phan_lower)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_0.4sd_phan_lower$age, PC6_0.4sd_phan_lower$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC6_0.4sd_phan_lower, indices) {
@@ -10705,7 +10705,7 @@ names(PC6_0.2sd_phan_upper)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_0.2sd_phan_upper$age, PC6_0.2sd_phan_upper$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC6_0.2sd_phan_upper, indices) {
@@ -10745,7 +10745,7 @@ names(PC6_0.2sd_phan_lower)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_0.2sd_phan_lower$age, PC6_0.2sd_phan_lower$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC6_0.2sd_phan_lower, indices) {
@@ -10789,7 +10789,7 @@ names(PC6_0.0sd_phan_upper)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_0.0sd_phan_upper$age, PC6_0.0sd_phan_upper$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC6_0.0sd_phan_upper, indices) {
@@ -10829,7 +10829,7 @@ names(PC6_0.0sd_phan_lower)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_0.0sd_phan_lower$age, PC6_0.0sd_phan_lower$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC6_0.0sd_phan_lower, indices) {
@@ -10904,7 +10904,7 @@ names(PC6_2sd_pre_upper)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_2sd_pre_upper$age, PC6_2sd_pre_upper$PC6, degree = 1, criterion = c("aicc", "gcv")[1], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC6_2sd_pre_upper, indices) {
@@ -10944,7 +10944,7 @@ names(PC6_2sd_pre_lower)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_2sd_pre_lower$age, PC6_2sd_pre_lower$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC6_2sd_pre_lower, indices) {
@@ -10988,7 +10988,7 @@ names(PC6_1.8sd_pre_upper)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_1.8sd_pre_upper$age, PC6_1.8sd_pre_upper$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC6_1.8sd_pre_upper, indices) {
@@ -11028,7 +11028,7 @@ names(PC6_1.8sd_pre_lower)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_1.8sd_pre_lower$age, PC6_1.8sd_pre_lower$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC6_1.8sd_pre_lower, indices) {
@@ -11072,7 +11072,7 @@ names(PC6_1.6sd_pre_upper)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_1.6sd_pre_upper$age, PC6_1.6sd_pre_upper$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC6_1.6sd_pre_upper, indices) {
@@ -11112,7 +11112,7 @@ names(PC6_1.6sd_pre_lower)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_1.6sd_pre_lower$age, PC6_1.6sd_pre_lower$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC6_1.6sd_pre_lower, indices) {
@@ -11156,7 +11156,7 @@ names(PC6_1.4sd_pre_upper)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_1.4sd_pre_upper$age, PC6_1.4sd_pre_upper$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC6_1.4sd_pre_upper, indices) {
@@ -11196,7 +11196,7 @@ names(PC6_1.4sd_pre_lower)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_1.4sd_pre_lower$age, PC6_1.4sd_pre_lower$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC6_1.4sd_pre_lower, indices) {
@@ -11240,7 +11240,7 @@ names(PC6_1.2sd_pre_upper)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_1.2sd_pre_upper$age, PC6_1.2sd_pre_upper$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC6_1.2sd_pre_upper, indices) {
@@ -11280,7 +11280,7 @@ names(PC6_1.2sd_pre_lower)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_1.2sd_pre_lower$age, PC6_1.2sd_pre_lower$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC6_1.2sd_pre_lower, indices) {
@@ -11324,7 +11324,7 @@ names(PC6_1.0sd_pre_upper)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_1.0sd_pre_upper$age, PC6_1.0sd_pre_upper$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC6_1.0sd_pre_upper, indices) {
@@ -11364,7 +11364,7 @@ names(PC6_1.0sd_pre_lower)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_1.0sd_pre_lower$age, PC6_1.0sd_pre_lower$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC6_1.0sd_pre_lower, indices) {
@@ -11408,7 +11408,7 @@ names(PC6_0.8sd_pre_upper)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_0.8sd_pre_upper$age, PC6_0.8sd_pre_upper$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC6_0.8sd_pre_upper, indices) {
@@ -11448,7 +11448,7 @@ names(PC6_0.8sd_pre_lower)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_0.8sd_pre_lower$age, PC6_0.8sd_pre_lower$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC6_0.8sd_pre_lower, indices) {
@@ -11492,7 +11492,7 @@ names(PC6_0.6sd_pre_upper)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_0.6sd_pre_upper$age, PC6_0.6sd_pre_upper$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC6_0.6sd_pre_upper, indices) {
@@ -11532,7 +11532,7 @@ names(PC6_0.6sd_pre_lower)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_0.6sd_pre_lower$age, PC6_0.6sd_pre_lower$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC6_0.6sd_pre_lower, indices) {
@@ -11576,7 +11576,7 @@ names(PC6_0.4sd_pre_upper)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_0.4sd_pre_upper$age, PC6_0.4sd_pre_upper$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC6_0.4sd_pre_upper, indices) {
@@ -11616,7 +11616,7 @@ names(PC6_0.4sd_pre_lower)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_0.4sd_pre_lower$age, PC6_0.4sd_pre_lower$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC6_0.4sd_pre_lower, indices) {
@@ -11660,7 +11660,7 @@ names(PC6_0.2sd_pre_upper)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_0.2sd_pre_upper$age, PC6_0.2sd_pre_upper$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC6_0.2sd_pre_upper, indices) {
@@ -11700,7 +11700,7 @@ names(PC6_0.2sd_pre_lower)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_0.2sd_pre_lower$age, PC6_0.2sd_pre_lower$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC6_0.2sd_pre_lower, indices) {
@@ -11744,7 +11744,7 @@ names(PC6_0.0sd_pre_upper)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_0.0sd_pre_upper$age, PC6_0.0sd_pre_upper$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC6_0.0sd_pre_upper, indices) {
@@ -11784,7 +11784,7 @@ names(PC6_0.0sd_pre_lower)[1:2] <- c("age","PC6")
 
 # CV spans
 loess.predict <- loess.as(PC6_0.0sd_pre_lower$age, PC6_0.0sd_pre_lower$PC6, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC6_0.0sd_pre_lower, indices) {
@@ -11872,7 +11872,7 @@ names(PC7_2sd_phan_upper)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_2sd_phan_upper$age, PC7_2sd_phan_upper$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC7_2sd_phan_upper, indices) {
@@ -11912,7 +11912,7 @@ names(PC7_2sd_phan_lower)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_2sd_phan_lower$age, PC7_2sd_phan_lower$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC7_2sd_phan_lower, indices) {
@@ -11956,7 +11956,7 @@ names(PC7_1.8sd_phan_upper)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_1.8sd_phan_upper$age, PC7_1.8sd_phan_upper$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC7_1.8sd_phan_upper, indices) {
@@ -11996,7 +11996,7 @@ names(PC7_1.8sd_phan_lower)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_1.8sd_phan_lower$age, PC7_1.8sd_phan_lower$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC7_1.8sd_phan_lower, indices) {
@@ -12040,7 +12040,7 @@ names(PC7_1.6sd_phan_upper)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_1.6sd_phan_upper$age, PC7_1.6sd_phan_upper$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC7_1.6sd_phan_upper, indices) {
@@ -12080,7 +12080,7 @@ names(PC7_1.6sd_phan_lower)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_1.6sd_phan_lower$age, PC7_1.6sd_phan_lower$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC7_1.6sd_phan_lower, indices) {
@@ -12124,7 +12124,7 @@ names(PC7_1.4sd_phan_upper)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_1.4sd_phan_upper$age, PC7_1.4sd_phan_upper$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC7_1.4sd_phan_upper, indices) {
@@ -12164,7 +12164,7 @@ names(PC7_1.4sd_phan_lower)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_1.4sd_phan_lower$age, PC7_1.4sd_phan_lower$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC7_1.4sd_phan_lower, indices) {
@@ -12208,7 +12208,7 @@ names(PC7_1.2sd_phan_upper)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_1.2sd_phan_upper$age, PC7_1.2sd_phan_upper$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC7_1.2sd_phan_upper, indices) {
@@ -12248,7 +12248,7 @@ names(PC7_1.2sd_phan_lower)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_1.2sd_phan_lower$age, PC7_1.2sd_phan_lower$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC7_1.2sd_phan_lower, indices) {
@@ -12292,7 +12292,7 @@ names(PC7_1.0sd_phan_upper)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_1.0sd_phan_upper$age, PC7_1.0sd_phan_upper$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC7_1.0sd_phan_upper, indices) {
@@ -12332,7 +12332,7 @@ names(PC7_1.0sd_phan_lower)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_1.0sd_phan_lower$age, PC7_1.0sd_phan_lower$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC7_1.0sd_phan_lower, indices) {
@@ -12376,7 +12376,7 @@ names(PC7_0.8sd_phan_upper)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_0.8sd_phan_upper$age, PC7_0.8sd_phan_upper$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC7_0.8sd_phan_upper, indices) {
@@ -12416,7 +12416,7 @@ names(PC7_0.8sd_phan_lower)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_0.8sd_phan_lower$age, PC7_0.8sd_phan_lower$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC7_0.8sd_phan_lower, indices) {
@@ -12460,7 +12460,7 @@ names(PC7_0.6sd_phan_upper)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_0.6sd_phan_upper$age, PC7_0.6sd_phan_upper$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC7_0.6sd_phan_upper, indices) {
@@ -12500,7 +12500,7 @@ names(PC7_0.6sd_phan_lower)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_0.6sd_phan_lower$age, PC7_0.6sd_phan_lower$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC7_0.6sd_phan_lower, indices) {
@@ -12544,7 +12544,7 @@ names(PC7_0.4sd_phan_upper)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_0.4sd_phan_upper$age, PC7_0.4sd_phan_upper$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC7_0.4sd_phan_upper, indices) {
@@ -12584,7 +12584,7 @@ names(PC7_0.4sd_phan_lower)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_0.4sd_phan_lower$age, PC7_0.4sd_phan_lower$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC7_0.4sd_phan_lower, indices) {
@@ -12628,7 +12628,7 @@ names(PC7_0.2sd_phan_upper)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_0.2sd_phan_upper$age, PC7_0.2sd_phan_upper$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC7_0.2sd_phan_upper, indices) {
@@ -12668,7 +12668,7 @@ names(PC7_0.2sd_phan_lower)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_0.2sd_phan_lower$age, PC7_0.2sd_phan_lower$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC7_0.2sd_phan_lower, indices) {
@@ -12712,7 +12712,7 @@ names(PC7_0.0sd_phan_upper)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_0.0sd_phan_upper$age, PC7_0.0sd_phan_upper$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC7_0.0sd_phan_upper, indices) {
@@ -12752,7 +12752,7 @@ names(PC7_0.0sd_phan_lower)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_0.0sd_phan_lower$age, PC7_0.0sd_phan_lower$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC7_0.0sd_phan_lower, indices) {
@@ -12827,7 +12827,7 @@ names(PC7_2sd_pre_upper)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_2sd_pre_upper$age, PC7_2sd_pre_upper$PC7, degree = 1, criterion = c("aicc", "gcv")[1], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC7_2sd_pre_upper, indices) {
@@ -12867,7 +12867,7 @@ names(PC7_2sd_pre_lower)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_2sd_pre_lower$age, PC7_2sd_pre_lower$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC7_2sd_pre_lower, indices) {
@@ -12911,7 +12911,7 @@ names(PC7_1.8sd_pre_upper)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_1.8sd_pre_upper$age, PC7_1.8sd_pre_upper$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC7_1.8sd_pre_upper, indices) {
@@ -12951,7 +12951,7 @@ names(PC7_1.8sd_pre_lower)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_1.8sd_pre_lower$age, PC7_1.8sd_pre_lower$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC7_1.8sd_pre_lower, indices) {
@@ -12995,7 +12995,7 @@ names(PC7_1.6sd_pre_upper)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_1.6sd_pre_upper$age, PC7_1.6sd_pre_upper$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC7_1.6sd_pre_upper, indices) {
@@ -13035,7 +13035,7 @@ names(PC7_1.6sd_pre_lower)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_1.6sd_pre_lower$age, PC7_1.6sd_pre_lower$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC7_1.6sd_pre_lower, indices) {
@@ -13079,7 +13079,7 @@ names(PC7_1.4sd_pre_upper)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_1.4sd_pre_upper$age, PC7_1.4sd_pre_upper$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC7_1.4sd_pre_upper, indices) {
@@ -13119,7 +13119,7 @@ names(PC7_1.4sd_pre_lower)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_1.4sd_pre_lower$age, PC7_1.4sd_pre_lower$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC7_1.4sd_pre_lower, indices) {
@@ -13163,7 +13163,7 @@ names(PC7_1.2sd_pre_upper)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_1.2sd_pre_upper$age, PC7_1.2sd_pre_upper$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC7_1.2sd_pre_upper, indices) {
@@ -13203,7 +13203,7 @@ names(PC7_1.2sd_pre_lower)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_1.2sd_pre_lower$age, PC7_1.2sd_pre_lower$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC7_1.2sd_pre_lower, indices) {
@@ -13247,7 +13247,7 @@ names(PC7_1.0sd_pre_upper)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_1.0sd_pre_upper$age, PC7_1.0sd_pre_upper$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC7_1.0sd_pre_upper, indices) {
@@ -13287,7 +13287,7 @@ names(PC7_1.0sd_pre_lower)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_1.0sd_pre_lower$age, PC7_1.0sd_pre_lower$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC7_1.0sd_pre_lower, indices) {
@@ -13331,7 +13331,7 @@ names(PC7_0.8sd_pre_upper)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_0.8sd_pre_upper$age, PC7_0.8sd_pre_upper$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC7_0.8sd_pre_upper, indices) {
@@ -13371,7 +13371,7 @@ names(PC7_0.8sd_pre_lower)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_0.8sd_pre_lower$age, PC7_0.8sd_pre_lower$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC7_0.8sd_pre_lower, indices) {
@@ -13415,7 +13415,7 @@ names(PC7_0.6sd_pre_upper)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_0.6sd_pre_upper$age, PC7_0.6sd_pre_upper$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC7_0.6sd_pre_upper, indices) {
@@ -13455,7 +13455,7 @@ names(PC7_0.6sd_pre_lower)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_0.6sd_pre_lower$age, PC7_0.6sd_pre_lower$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC7_0.6sd_pre_lower, indices) {
@@ -13499,7 +13499,7 @@ names(PC7_0.4sd_pre_upper)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_0.4sd_pre_upper$age, PC7_0.4sd_pre_upper$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC7_0.4sd_pre_upper, indices) {
@@ -13539,7 +13539,7 @@ names(PC7_0.4sd_pre_lower)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_0.4sd_pre_lower$age, PC7_0.4sd_pre_lower$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC7_0.4sd_pre_lower, indices) {
@@ -13583,7 +13583,7 @@ names(PC7_0.2sd_pre_upper)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_0.2sd_pre_upper$age, PC7_0.2sd_pre_upper$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC7_0.2sd_pre_upper, indices) {
@@ -13623,7 +13623,7 @@ names(PC7_0.2sd_pre_lower)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_0.2sd_pre_lower$age, PC7_0.2sd_pre_lower$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC7_0.2sd_pre_lower, indices) {
@@ -13667,7 +13667,7 @@ names(PC7_0.0sd_pre_upper)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_0.0sd_pre_upper$age, PC7_0.0sd_pre_upper$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_upper <- span
+span_upper <- loess.predict[["pars"]][["span"]]
 
 # boot upper
 boot_fn <- function(PC7_0.0sd_pre_upper, indices) {
@@ -13707,7 +13707,7 @@ names(PC7_0.0sd_pre_lower)[1:2] <- c("age","PC7")
 
 # CV spans
 loess.predict <- loess.as(PC7_0.0sd_pre_lower$age, PC7_0.0sd_pre_lower$PC7, degree = 1, criterion = c("aicc", "gcv")[2], user.span = NULL, plot = F, family = "symmetric") 
-span_lower <- span
+span_lower <- loess.predict[["pars"]][["span"]]
 
 # boot lower
 boot_fn <- function(PC7_0.0sd_pre_lower, indices) {
@@ -14330,17 +14330,17 @@ names(pre_results.melt.bins)[5] <- "type"
 
 # optional import results (to avoid re-running the above code every time)
 
-#phan_results.bins <- read.csv("phanerozoic_pyrite_types_downsampled.csv")
-#phan_results.bins <- phan_results.bins[,-1]
-#names(phan_results.bins)[5:9] <- c("Type.5", "Type.1","Type.2", "Type.3", "Type.4")
-#phan_results.melt.bins <- reshape2::melt(phan_results.bins, id.vars = c("edge","span", "mid", "variable"))
-#names(phan_results.melt.bins)[5] <- "type"
+phan_results.bins <- read.csv("phanerozoic_pyrite_types_downsampled_doubleCV.csv")
+phan_results.bins <- phan_results.bins[,-1]
+names(phan_results.bins)[5:9] <- c("Type.5", "Type.1","Type.2", "Type.3", "Type.4")
+phan_results.melt.bins <- reshape2::melt(phan_results.bins, id.vars = c("edge","span", "mid", "variable"))
+names(phan_results.melt.bins)[5] <- "type"
 
-#pre_results.bins <- read.csv("precambrian_pyrite_types_downsampled.csv")
-#pre_results.bins <- pre_results.bins[,-1]
-#names(pre_results.bins)[5:9] <- c("Type.5", "Type.1","Type.2", "Type.3", "Type.4")
-#pre_results.melt.bins <- reshape2::melt(pre_results.bins, id.vars = c("edge","span", "mid", "variable"))
-#names(pre_results.melt.bins)[5] <- "type"
+pre_results.bins <- read.csv("precambrian_pyrite_types_downsampled_doubleCV.csv")
+pre_results.bins <- pre_results.bins[,-1]
+names(pre_results.bins)[5:9] <- c("Type.5", "Type.1","Type.2", "Type.3", "Type.4")
+pre_results.melt.bins <- reshape2::melt(pre_results.bins, id.vars = c("edge","span", "mid", "variable"))
+names(pre_results.melt.bins)[5] <- "type"
 
 HEATT <- c(56, 66, 93, 116, 183, 200, 251, 359, 372, 383, 444, 514, 542) 
 
