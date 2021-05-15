@@ -1139,3 +1139,764 @@ grid.arrange(a,b,c,d, ncol = 2)
 
 ## END ##
 
+#### Supplementary Materials derived from PART 1 ####
+
+## correlation chart - Fig. S7-S9 ##
+
+# re-run PART 1 up to melt of the framboid and nodule datasets
+
+framboids$type <- "Framboids"
+nodules$type <- "Nodules"
+
+length(unique(framboids$result_id))+length(unique(nodules$result_id))
+
+framboids.2 <- framboids[,c("result_id", "docid", 
+                            "strat_name_id", "strat_name_long",
+                            "unit_id", "t_age", "b_age", 
+                            "target_word", "phrase", "type", 
+                            "other", "lith", "environ")] 
+
+framboids.2 <- framboids.2[!duplicated(framboids.2[,c("strat_name_id", "unit_id")]),]
+
+nodules.2 <- nodules[,c("result_id", "docid", 
+                        "strat_name_id", "strat_name_long",
+                        "unit_id", "t_age", "b_age", 
+                        "target_word", "phrase", "type", 
+                        "other", "lith", "environ")] 
+
+nodules.2 <- nodules.2[!duplicated(nodules.2[,c("strat_name_id", "unit_id")]),]
+
+# units join
+
+combined.units <- full_join(framboids.2, nodules.2, by = "unit_id")
+combined.units <- combined.units[!is.na(combined.units$unit_id),]
+
+combined.units1 <- subset(combined.units, type.x == "Framboids" & type.y == "Nodules")
+combined.units1$type <- "Both"
+
+combined.units2 <- subset(combined.units, type.x == "Framboids" & is.na(type.y) == TRUE)
+combined.units2$type <- "Framboids"
+
+combined.units3 <- subset(combined.units, type.y == "Nodules" & is.na(type.x) == TRUE)
+combined.units3$type <- "Nodules"
+
+combined.units <- rbind(combined.units1, combined.units2, combined.units3)
+
+# strat names join
+
+combined.strat <- full_join(framboids.2, nodules.2, by = "strat_name_id")
+combined.strat <- combined.strat[is.na(combined.strat$unit_id.x),]
+combined.strat <- combined.strat[is.na(combined.strat$unit_id.y),]
+
+combined.strat1 <- subset(combined.strat, type.x == "Framboids" & type.y == "Nodules")
+combined.strat1$type <- "Both"
+
+combined.strat2 <- subset(combined.strat, type.x == "Framboids" & is.na(type.y) == TRUE)
+combined.strat2$type <- "Framboids"
+
+combined.strat3 <- subset(combined.strat, type.y == "Nodules" & is.na(type.x) == TRUE)
+combined.strat3$type <- "Nodules"
+
+combined.strat <- rbind(combined.strat1, combined.strat2, combined.strat3)
+
+names(combined.units)[3] <- "strat_name_id"
+names(combined.strat)[5] <- "unit_id"
+
+combined.units <- combined.units[,-16]
+combined.strat <- combined.strat[,-17]
+
+combined <- rbind(combined.units, combined.strat)
+
+combined.x <- combined[!is.na(combined$t_age.x),]
+
+combined.x$t_age <- combined.x$t_age.x
+combined.x$b_age <- combined.x$b_age.x
+combined.x$strat_name_long <- combined.x$strat_name_long.x
+combined.x$lith <- combined.x$lith.x
+combined.x$environ <- combined.x$environ.x
+combined.x$other <- combined.x$other.x
+
+combined.y <- combined[is.na(combined$t_age.x),]
+
+combined.y$t_age <- combined.y$t_age.y
+combined.y$b_age <- combined.y$b_age.y
+combined.y$strat_name_long <- combined.y$strat_name_long.y
+combined.y$lith <- combined.y$lith.y
+combined.y$environ <- combined.y$environ.y
+combined.y$other <- combined.y$other.y
+
+combined <- rbind(combined.x, combined.y)
+
+combined <- combined[,c(-4,-6,-7,-10,-11,-12,-13,-17,-18,-22,-23,-24)]
+
+ggplot(combined, aes(t_age, reorder(strat_name_long, t_age), group = strat_name_long)) +
+  geom_linerange(aes(xmin = b_age, xmax = t_age, colour = type)) + theme_bw() +
+  scale_x_reverse(limits = c(3000, 0), breaks = seq(0,3000, by = 100))
+
+## lithology metrics - estimates - Fig. S5A ##
+
+# % pure mudstone
+
+combined.new.units <- rbind(framboids, nodules)
+combined.new.units <- combined.new.units[!duplicated(combined.new.units[,c("strat_name_id", "unit_id")]),]
+combined.new.units <- combined.new.units[,1:86]
+
+muds <- grepl(paste(mud_rocks, collapse = "|"), combined.new.units$lith, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), combined.new.units$environ, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), combined.new.units$other, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), combined.new.units$strat_name_long, ignore.case=TRUE)
+
+muds.interbeds <- subset(combined.new.units, muds)
+
+muds.interbeds.total <- (100/nrow(combined.new.units))*nrow(muds.interbeds) # % mudstones - approximation includes subordinate beds
+
+manual <- muds.interbeds[sample(nrow(muds.interbeds),53), ] # manual assessment - check for approx. proportion of mudstone-dominated units/packages
+
+others <- grepl(paste(other_rocks, collapse = "|"), muds.interbeds$lith, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$environ, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$other, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$strat_name_long, ignore.case=TRUE)
+
+muds.pure <- subset(muds.interbeds, !others)
+
+muds.total <- (100/nrow(combined.new.units))*nrow(muds.pure) # % mudstones - approximation for pure mudstones
+
+others <- grepl(paste(other_rocks, collapse = "|"), muds.interbeds$lith, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$environ, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$other, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$strat_name_long, ignore.case=TRUE)
+
+muds.sands <- subset(muds.interbeds, others)
+
+muds.sands.total <- (100/nrow(combined.new.units))*nrow(muds.sands) # % mudstones interbedded with sands
+
+
+# % pure sand
+
+sand <- grepl("sand", combined.new.units$lith, ignore.case=TRUE) |
+  grepl("sand", combined.new.units$environ, ignore.case=TRUE) |
+  grepl("sand", combined.new.units$other, ignore.case=TRUE) |
+  grepl("sand", combined.new.units$strat_name_long, ignore.case=TRUE) |
+  grepl("conglomerate", combined.new.units$lith, ignore.case=TRUE) |
+  grepl("conglomerate", combined.new.units$environ, ignore.case=TRUE) |
+  grepl("conglomerate", combined.new.units$other, ignore.case=TRUE) |
+  grepl("conglomerate", combined.new.units$strat_name_long, ignore.case=TRUE) |
+  grepl("breccia", combined.new.units$lith, ignore.case=TRUE) |
+  grepl("breccia", combined.new.units$environ, ignore.case=TRUE) |
+  grepl("breccia", combined.new.units$other, ignore.case=TRUE) |
+  grepl("breccia", combined.new.units$strat_name_long, ignore.case=TRUE) |
+  grepl("quartzite", combined.new.units$lith, ignore.case=TRUE) |
+  grepl("quartzite", combined.new.units$environ, ignore.case=TRUE) |
+  grepl("quartzite", combined.new.units$other, ignore.case=TRUE) |
+  grepl("quartzite", combined.new.units$strat_name_long, ignore.case=TRUE)
+
+sand.interbeds <- subset(combined.new.units, sand)
+
+sand.interbeds.total <- (100/nrow(combined.new.units))*nrow(sand.interbeds) # % sandstones - approximation includes subordinate beds
+
+muds <- grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$lith, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$environ, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$other, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$strat_name_long, ignore.case=TRUE)
+
+sand.interbeds.not.muds <- subset(sand.interbeds, !muds)
+
+sand.interbeds.not.muds.total <- (100/nrow(combined.new.units))*nrow(sand.interbeds.not.muds) # % sandstones - approximation includes subordinate beds, excluding mudstones
+
+
+others <- grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$lith, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$environ, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$other, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$strat_name_long, ignore.case=TRUE) |
+  grepl("lime", sand.interbeds$lith, ignore.case=TRUE) |
+  grepl("lime", sand.interbeds$environ, ignore.case=TRUE) |
+  grepl("lime", sand.interbeds$other, ignore.case=TRUE) |
+  grepl("lime", sand.interbeds$strat_name_long, ignore.case=TRUE) |
+  grepl("basalt", sand.interbeds$lith, ignore.case=TRUE) |
+  grepl("basalt", sand.interbeds$environ, ignore.case=TRUE) |
+  grepl("basalt", sand.interbeds$other, ignore.case=TRUE) |
+  grepl("basalt", sand.interbeds$strat_name_long, ignore.case=TRUE) |
+  grepl("dolomite", sand.interbeds$lith, ignore.case=TRUE) |
+  grepl("dolomite", sand.interbeds$environ, ignore.case=TRUE) |
+  grepl("dolomite", sand.interbeds$other, ignore.case=TRUE) |
+  grepl("dolomite", sand.interbeds$strat_name_long, ignore.case=TRUE) |
+  grepl("chert", sand.interbeds$lith, ignore.case=TRUE) |
+  grepl("chert", sand.interbeds$environ, ignore.case=TRUE) |
+  grepl("chert", sand.interbeds$other, ignore.case=TRUE) |
+  grepl("chert", sand.interbeds$strat_name_long, ignore.case=TRUE) |
+  grepl("volcaniclastic", sand.interbeds$lith, ignore.case=TRUE) |
+  grepl("volcaniclastic", sand.interbeds$environ, ignore.case=TRUE) |
+  grepl("volcaniclastic", sand.interbeds$other, ignore.case=TRUE) |
+  grepl("volcaniclastic", sand.interbeds$strat_name_long, ignore.case=TRUE)
+
+
+
+sand.pure <- subset(sand.interbeds, !others)
+
+sand.total <- (100/nrow(combined.new.units))*nrow(sand.pure) # % sandstones - approximation for pure sandstones & conglomerates
+
+# % pure carbonate and dolomite
+
+carbs <- grepl("lime", combined.new.units$lith, ignore.case=TRUE) |
+  grepl("lime", combined.new.units$environ, ignore.case=TRUE) |
+  grepl("lime", combined.new.units$other, ignore.case=TRUE) |
+  grepl("lime", combined.new.units$strat_name_long, ignore.case=TRUE) |
+  grepl("dolomite", combined.new.units$lith, ignore.case=TRUE) |
+  grepl("dolomite", combined.new.units$environ, ignore.case=TRUE) |
+  grepl("dolomite", combined.new.units$other, ignore.case=TRUE) |
+  grepl("dolomite", combined.new.units$strat_name_long, ignore.case=TRUE) |
+  grepl("chert", combined.new.units$lith, ignore.case=TRUE) |
+  grepl("chert", combined.new.units$environ, ignore.case=TRUE) |
+  grepl("chert", combined.new.units$other, ignore.case=TRUE) |
+  grepl("chert", combined.new.units$strat_name_long, ignore.case=TRUE)
+
+carbs.interbeds <- subset(combined.new.units, carbs)
+
+carbs.interbeds.total <- (100/nrow(combined.new.units))*nrow(carbs.interbeds) # % carbonates - approximation includes subordinate beds
+
+others <- grepl(paste(mud_rocks, collapse = "|"), carbs.interbeds$lith, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), carbs.interbeds$environ, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), carbs.interbeds$other, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), carbs.interbeds$strat_name_long, ignore.case=TRUE) |
+  grepl("basalt", carbs.interbeds$lith, ignore.case=TRUE) |
+  grepl("basalt", carbs.interbeds$environ, ignore.case=TRUE) |
+  grepl("basalt", carbs.interbeds$other, ignore.case=TRUE) |
+  grepl("basalt", carbs.interbeds$strat_name_long, ignore.case=TRUE) |
+  grepl("volcaniclastic", carbs.interbeds$lith, ignore.case=TRUE) |
+  grepl("volcaniclastic", carbs.interbeds$environ, ignore.case=TRUE) |
+  grepl("volcaniclastic", carbs.interbeds$other, ignore.case=TRUE) |
+  grepl("volcaniclastic", carbs.interbeds$strat_name_long, ignore.case=TRUE) |
+  grepl("sand", carbs.interbeds$lith, ignore.case=TRUE) |
+  grepl("sand", carbs.interbeds$environ, ignore.case=TRUE) |
+  grepl("sand", carbs.interbeds$other, ignore.case=TRUE) |
+  grepl("sand", carbs.interbeds$strat_name_long, ignore.case=TRUE)  |
+  grepl("conglomerate", carbs.interbeds$lith, ignore.case=TRUE) |
+  grepl("conglomerate", carbs.interbeds$environ, ignore.case=TRUE) |
+  grepl("conglomerate", carbs.interbeds$other, ignore.case=TRUE) |
+  grepl("conglomerate", carbs.interbeds$strat_name_long, ignore.case=TRUE) |
+  grepl("breccia", carbs.interbeds$lith, ignore.case=TRUE) |
+  grepl("breccia", carbs.interbeds$environ, ignore.case=TRUE) |
+  grepl("breccia", carbs.interbeds$other, ignore.case=TRUE) |
+  grepl("breccia", carbs.interbeds$strat_name_long, ignore.case=TRUE) |
+  grepl("quartzite", carbs.interbeds$lith, ignore.case=TRUE) |
+  grepl("quartzite", carbs.interbeds$environ, ignore.case=TRUE) |
+  grepl("quartzite", carbs.interbeds$other, ignore.case=TRUE) |
+  grepl("quartzite", carbs.interbeds$strat_name_long, ignore.case=TRUE)
+
+
+carbs.pure <- subset(carbs.interbeds, !others)
+
+carb.total <- (100/nrow(combined.new.units))*nrow(carbs.pure) # % carbonates, dolomites, cherts - approximation for pure
+
+100 - carb.total - sand.total - muds.total
+
+# summary liths
+
+mud.dominant.interbeds <- (muds.interbeds.total-muds.total)*0.72 # 72% based on manual assessment of interbedded lithologies
+mud.subordinate.interbeds <- (muds.interbeds.total-muds.total)*0.28 # based on manual assessment of interbedded lithologies
+
+remaining <- 100-sum(muds.total,mud.dominant.interbeds,mud.subordinate.interbeds,sand.total, carb.total)
+
+summary.liths <- as.data.frame(rbind(muds.total,mud.dominant.interbeds,mud.subordinate.interbeds,sand.total, carb.total, remaining))
+summary.liths$liths <- rownames(summary.liths)
+summary.liths$group <- "A"
+
+ggplot(summary.liths, aes(group, V1, fill = reorder(liths, V1))) + geom_col() # Fig. S5A
+
+# source summary - Fig. S5B
+
+unique(combined.new.units$author)
+
+sources <- table(combined.new.units$author, useNA = "ifany")
+sources <- as.data.frame(sources)
+sources$group <- "A"
+
+ggplot(sources, aes(group, Freq, fill = reorder(Var1, Freq))) + geom_col(position = "fill")
+
+100/sum(sources$Freq)*127
+
+## counts - Fig. S3 ##
+
+a <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(Bottom, 541)) +
+  geom_step(data = out, aes(Age-0.5, framboids), colour = "red")
+
+b <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(541, Top)) +
+  geom_step(data = out, aes(Age-0.5, framboids), colour = "red") +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+c <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(Bottom, 541)) +
+  geom_step(data = out, aes(Age-0.5, nodules), colour = "blue")
+
+d <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(541, Top)) +
+  geom_step(data = out, aes(Age-0.5, nodules), colour = "blue") +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+e <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(Bottom, 541)) +
+  geom_step(data = out, aes(Age-0.5, undif), colour = "grey70")
+
+f <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(541, Top)) +
+  geom_step(data = out, aes(Age-0.5, undif), colour = "grey70") +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+g <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(Bottom, 541)) +
+  geom_step(data = out, aes(Age-0.5, seds), colour = "black")
+
+h <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(541, Top)) +
+  geom_step(data = out, aes(Age-0.5, seds), colour = "black") +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+
+grid.arrange(a,b,c,d,e,f,g,h, ncol = 2)
+
+# 'mineralisation' and evaporite plots - Fig. S6C-D
+
+# run this block for sediment normalisation
+
+evap <- (grepl("evap", data_p2$lith, ignore.case=TRUE) | 
+           grepl("evap", data_p2$other, ignore.case=TRUE) | 
+           grepl("evap", data_p2$environ, ignore.case=TRUE) |
+           grepl("evap", data_p2$strat_phrase_root, ignore.case=TRUE) | 
+           grepl("evap", data_p2$phrase, ignore.case=TRUE) | 
+           grepl("evap", data_p2$strat_flag, ignore.case=TRUE) |
+           grepl("evap", data_p2$environ, ignore.case=TRUE))  &
+  (grepl("evap", data_p2$lith, ignore.case=TRUE) | 
+     grepl("evap", data_p2$other, ignore.case=TRUE) | 
+     grepl("evap", data_p2$strat_phrase_root, ignore.case=TRUE) | 
+     grepl("evap", data_p2$strat_flag, ignore.case=TRUE) |
+     grepl("evap", data_p2$phrase, ignore.case=TRUE) |
+     grepl("evap", data_p2$environ, ignore.case=TRUE))
+
+evap <- subset(data_p2, evap)
+
+evap1 <- subset(evap, t_age2 > cutoff & b_age2 > cutoff)
+evap2 <- evap1[!duplicated(evap1$unit_id), ]
+evap3 <- evap1[is.na(evap1$unit_id),]
+evap2 <- evap2[!is.na(evap2$unit_id),]
+evap3 <- evap3[!duplicated(evap3$strat_name_id),]
+evap1 <- rbind(evap2, evap3)
+
+evap2 <- subset(evap, t_age2 < cutoff & b_age2 < cutoff)
+evap3 <- evap2[!duplicated(evap2$unit_id), ]
+evap4 <- evap2[is.na(evap2$unit_id),]
+evap3 <- evap3[!is.na(evap3$unit_id),]
+evap4 <- evap4[!duplicated(evap4$strat_name_id),]
+evap2 <- rbind(evap3, evap4)
+
+evap3 <- subset(evap, t_age2 < cutoff & b_age2 == cutoff)
+evap4 <- evap3[!duplicated(evap3$unit_id), ]
+evap5 <- evap3[is.na(evap3$unit_id),]
+evap4 <- evap4[!is.na(evap4$unit_id),]
+evap5 <- evap5[!duplicated(evap5$strat_name_id),]
+evap3 <- rbind(evap4, evap5)
+
+evap4 <- subset(evap, t_age2 == cutoff & b_age2 > cutoff)
+evap5 <- evap4[!duplicated(evap4$unit_id), ]
+evap6 <- evap4[is.na(evap4$unit_id),]
+evap5 <- evap5[!is.na(evap5$unit_id),]
+evap6 <- evap6[!duplicated(evap6$strat_name_id),]
+evap4 <- rbind(evap5, evap6)
+
+evap <- rbind(evap1, evap2, evap3, evap4)
+
+evap <- melt(evap, id.vars = c(1:83,626), na.rm=TRUE)
+evap$value <- as.numeric(evap$value)
+evap <- subset(evap, variable != "b_age2")
+
+# Phanerozoic bins
+
+evap_bins1 <- hist(evap$value[evap$value >= 0 & evap$value < cutoff+1], breaks = seq(0, cutoff+1, by = phanerozoic_increment))
+evap_bins1 <- as.data.frame(cbind(evap_bins1$counts, evap_bins1$breaks))
+evap_bins1 <- evap_bins1[1:542,]
+
+# Precambrian bins
+evap_bins2 <- hist(evap$value[evap$value >= cutoff & evap$value <= 4001], breaks = seq(cutoff, 4001, by = precambrian_increment))
+evap_bins2 <- as.data.frame(cbind(evap_bins2$counts, evap_bins2$breaks))
+
+# Bind
+evap_bins <- rbind(evap_bins1,evap_bins2)
+evap_bins <- evap_bins[c(1:541,543:889),] # remove duplicate 541
+
+# block end
+
+veinsS <- as.data.frame(cbind((veins_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1),nodules_bins$V2))
+evapS <- as.data.frame(cbind((evap_bins$V1)/(sediments_bins$V1),nodules_bins$V2))
+
+a <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(Bottom, 541)) +
+  geom_step(data = veinsS, aes(V2-0.5, V1), colour = "red")
+
+b <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(541, Top)) +
+  geom_step(data = veinsS, aes(V2-0.5, V1), colour = "red") +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+c <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(Bottom, 541)) +
+  geom_step(data = evapS, aes(V2-0.5, V1), colour = "blue")
+
+d <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(541, Top)) +
+  geom_step(data = evapS, aes(V2-0.5, V1), colour = "blue") +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+grid.arrange(a,b,c,d, ncol = 2)
+
+# block end
+
+##### Supplementary Materials derived from PART 2 ####
+
+## lithology metrics - estimates - Fig. S5C ##
+
+## utilise units lith descriptions where possible by using dcast
+
+# run PART 2 up to melt of framboids and nodule datasets
+
+unit.liths <- combined.new.units[,c(7,40)]
+
+test <- grepl("Strom", framboids$target_word)
+test <- subset(framboids, test)
+
+unit.liths <- cbind(unit.liths, ave(unit.liths$strat_name_id, unit.liths$strat_name_id, FUN=seq_along))
+names(unit.liths)[3] <- "ID"
+unit.liths$liths <- "lith"
+unit.liths$liths <- paste(unit.liths$liths, unit.liths$ID)
+
+unit.liths <- dcast(unit.liths, strat_name_id ~ liths, value.var = "lith")
+
+# % pure mudstone
+
+combined.new <- rbind(framboids, nodules)
+combined.new <- combined.new[!duplicated(combined.new[,c("strat_name_id")]),]
+combined.new <- combined.new[,1:46]
+
+combined.new <- left_join(combined.new, unit.liths, by = "strat_name_id")
+
+muds <- grepl(paste(mud_rocks, collapse = "|"), combined.new$other, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), combined.new$strat_name_long, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), combined.new$`lith 1`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), combined.new$`lith 2`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), combined.new$`lith 3`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), combined.new$`lith 4`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), combined.new$`lith 5`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), combined.new$`lith 6`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), combined.new$`lith 7`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), combined.new$`lith 8`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), combined.new$`lith 9`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), combined.new$`lith 10`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), combined.new$`lith 11`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), combined.new$`lith 12`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), combined.new$`lith 13`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), combined.new$`lith 14`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), combined.new$`lith 15`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), combined.new$`lith 16`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), combined.new$`lith 17`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), combined.new$`lith 18`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), combined.new$`lith 19`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), combined.new$`lith 20`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), combined.new$`lith 21`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), combined.new$`lith 22`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), combined.new$`lith 23`, ignore.case=TRUE)
+
+
+muds.interbeds <- subset(combined.new, muds)
+
+muds.interbeds.total <- (100/nrow(combined.new))*nrow(muds.interbeds) # % mudstones - approximation includes subordinate beds
+
+
+others <- grepl(paste(other_rocks, collapse = "|"), muds.interbeds$other, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$strat_name_long, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$`lith 1`, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$`lith 2`, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$`lith 3`, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$`lith 4`, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$`lith 5`, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$`lith 6`, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$`lith 7`, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$`lith 8`, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$`lith 9`, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$`lith 10`, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$`lith 11`, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$`lith 12`, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$`lith 13`, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$`lith 14`, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$`lith 15`, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$`lith 16`, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$`lith 17`, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$`lith 18`, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$`lith 19`, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$`lith 20`, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$`lith 21`, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$`lith 22`, ignore.case=TRUE) |
+  grepl(paste(other_rocks, collapse = "|"), muds.interbeds$`lith 23`, ignore.case=TRUE)
+
+muds.pure <- subset(muds.interbeds, !others)
+
+muds.total <- (100/nrow(combined.new))*nrow(muds.pure) # % mudstones - approximation for pure mudstones
+
+# % pure sand
+
+targets <- c("sand", "conglomerate", "breccia", "quarzite")
+
+sand <- grepl(paste(targets, collapse = "|"), combined.new$other, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), combined.new$strat_name_long, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), combined.new$`lith 1`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), combined.new$`lith 2`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), combined.new$`lith 3`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), combined.new$`lith 4`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), combined.new$`lith 5`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), combined.new$`lith 6`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), combined.new$`lith 7`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), combined.new$`lith 8`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), combined.new$`lith 9`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), combined.new$`lith 10`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), combined.new$`lith 11`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), combined.new$`lith 12`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), combined.new$`lith 13`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), combined.new$`lith 14`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), combined.new$`lith 15`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), combined.new$`lith 16`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), combined.new$`lith 17`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), combined.new$`lith 18`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), combined.new$`lith 19`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), combined.new$`lith 20`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), combined.new$`lith 21`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), combined.new$`lith 22`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), combined.new$`lith 23`, ignore.case=TRUE)
+
+sand.interbeds <- subset(combined.new, sand)
+
+sand.interbeds.total <- (100/nrow(combined.new))*nrow(sand.interbeds) # % sandstones - approximation includes subordinate beds
+
+muds <- grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$other, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$strat_name_long, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$`lith 1`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$`lith 2`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$`lith 3`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$`lith 4`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$`lith 5`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$`lith 6`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$`lith 7`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$`lith 8`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$`lith 9`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$`lith 10`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$`lith 11`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$`lith 12`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$`lith 13`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$`lith 14`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$`lith 15`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$`lith 16`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$`lith 17`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$`lith 18`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$`lith 19`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$`lith 20`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$`lith 21`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$`lith 22`, ignore.case=TRUE) |
+  grepl(paste(mud_rocks, collapse = "|"), sand.interbeds$`lith 23`, ignore.case=TRUE)
+
+sand.interbeds.not.muds <- subset(sand.interbeds, !muds)
+
+sand.interbeds.not.muds.total <- (100/nrow(combined.new))*nrow(sand.interbeds.not.muds) # % sandstones - approximation includes subordinate beds, excluding mudstones
+
+other_targets <- c("lime", "volcaniclastic", "chert", "dolomite")
+
+others <- grepl(paste(other_targets, collapse = "|"), sand.interbeds.not.muds$other, ignore.case=TRUE) |
+  grepl(paste(other_targets, collapse = "|"), sand.interbeds.not.muds$strat_name_long, ignore.case=TRUE) |
+  grepl(paste(other_targets, collapse = "|"), sand.interbeds.not.muds$`lith 1`, ignore.case=TRUE) |
+  grepl(paste(other_targets, collapse = "|"), sand.interbeds.not.muds$`lith 2`, ignore.case=TRUE) |
+  grepl(paste(other_targets, collapse = "|"), sand.interbeds.not.muds$`lith 3`, ignore.case=TRUE) |
+  grepl(paste(other_targets, collapse = "|"), sand.interbeds.not.muds$`lith 4`, ignore.case=TRUE) |
+  grepl(paste(other_targets, collapse = "|"), sand.interbeds.not.muds$`lith 5`, ignore.case=TRUE) |
+  grepl(paste(other_targets, collapse = "|"), sand.interbeds.not.muds$`lith 6`, ignore.case=TRUE) |
+  grepl(paste(other_targets, collapse = "|"), sand.interbeds.not.muds$`lith 7`, ignore.case=TRUE) |
+  grepl(paste(other_targets, collapse = "|"), sand.interbeds.not.muds$`lith 8`, ignore.case=TRUE) |
+  grepl(paste(other_targets, collapse = "|"), sand.interbeds.not.muds$`lith 9`, ignore.case=TRUE) |
+  grepl(paste(other_targets, collapse = "|"), sand.interbeds.not.muds$`lith 10`, ignore.case=TRUE) |
+  grepl(paste(other_targets, collapse = "|"), sand.interbeds.not.muds$`lith 11`, ignore.case=TRUE) |
+  grepl(paste(other_targets, collapse = "|"), sand.interbeds.not.muds$`lith 12`, ignore.case=TRUE) |
+  grepl(paste(other_targets, collapse = "|"), sand.interbeds.not.muds$`lith 13`, ignore.case=TRUE) |
+  grepl(paste(other_targets, collapse = "|"), sand.interbeds.not.muds$`lith 14`, ignore.case=TRUE) |
+  grepl(paste(other_targets, collapse = "|"), sand.interbeds.not.muds$`lith 15`, ignore.case=TRUE) |
+  grepl(paste(other_targets, collapse = "|"), sand.interbeds.not.muds$`lith 16`, ignore.case=TRUE) |
+  grepl(paste(other_targets, collapse = "|"), sand.interbeds.not.muds$`lith 17`, ignore.case=TRUE) |
+  grepl(paste(other_targets, collapse = "|"), sand.interbeds.not.muds$`lith 18`, ignore.case=TRUE) |
+  grepl(paste(other_targets, collapse = "|"), sand.interbeds.not.muds$`lith 19`, ignore.case=TRUE) |
+  grepl(paste(other_targets, collapse = "|"), sand.interbeds.not.muds$`lith 20`, ignore.case=TRUE) |
+  grepl(paste(other_targets, collapse = "|"), sand.interbeds.not.muds$`lith 21`, ignore.case=TRUE) |
+  grepl(paste(other_targets, collapse = "|"), sand.interbeds.not.muds$`lith 22`, ignore.case=TRUE) |
+  grepl(paste(other_targets, collapse = "|"), sand.interbeds.not.muds$`lith 23`, ignore.case=TRUE)
+
+
+sand.pure <- subset(sand.interbeds.not.muds, !others)
+
+sand.total <- (100/nrow(combined.new))*nrow(sand.pure) # % sandstones - approximation for pure sandstones & conglomerates
+
+# % pure carbonate and dolomite
+
+bios <- c("lime", "chert", "dolomite")
+
+bios <- grepl(paste(bios, collapse = "|"), combined.new$other, ignore.case=TRUE) |
+  grepl(paste(bios, collapse = "|"), combined.new$strat_name_long, ignore.case=TRUE) |
+  grepl(paste(bios, collapse = "|"), combined.new$`lith 1`, ignore.case=TRUE) |
+  grepl(paste(bios, collapse = "|"), combined.new$`lith 2`, ignore.case=TRUE) |
+  grepl(paste(bios, collapse = "|"), combined.new$`lith 3`, ignore.case=TRUE) |
+  grepl(paste(bios, collapse = "|"), combined.new$`lith 4`, ignore.case=TRUE) |
+  grepl(paste(bios, collapse = "|"), combined.new$`lith 5`, ignore.case=TRUE) |
+  grepl(paste(bios, collapse = "|"), combined.new$`lith 6`, ignore.case=TRUE) |
+  grepl(paste(bios, collapse = "|"), combined.new$`lith 7`, ignore.case=TRUE) |
+  grepl(paste(bios, collapse = "|"), combined.new$`lith 8`, ignore.case=TRUE) |
+  grepl(paste(bios, collapse = "|"), combined.new$`lith 9`, ignore.case=TRUE) |
+  grepl(paste(bios, collapse = "|"), combined.new$`lith 10`, ignore.case=TRUE) |
+  grepl(paste(bios, collapse = "|"), combined.new$`lith 11`, ignore.case=TRUE) |
+  grepl(paste(bios, collapse = "|"), combined.new$`lith 12`, ignore.case=TRUE) |
+  grepl(paste(bios, collapse = "|"), combined.new$`lith 13`, ignore.case=TRUE) |
+  grepl(paste(bios, collapse = "|"), combined.new$`lith 14`, ignore.case=TRUE) |
+  grepl(paste(bios, collapse = "|"), combined.new$`lith 15`, ignore.case=TRUE) |
+  grepl(paste(bios, collapse = "|"), combined.new$`lith 16`, ignore.case=TRUE) |
+  grepl(paste(bios, collapse = "|"), combined.new$`lith 17`, ignore.case=TRUE) |
+  grepl(paste(bios, collapse = "|"), combined.new$`lith 18`, ignore.case=TRUE) |
+  grepl(paste(bios, collapse = "|"), combined.new$`lith 19`, ignore.case=TRUE) |
+  grepl(paste(bios, collapse = "|"), combined.new$`lith 20`, ignore.case=TRUE) |
+  grepl(paste(bios, collapse = "|"), combined.new$`lith 21`, ignore.case=TRUE) |
+  grepl(paste(bios, collapse = "|"), combined.new$`lith 22`, ignore.case=TRUE) |
+  grepl(paste(bios, collapse = "|"), combined.new$`lith 23`, ignore.case=TRUE)
+
+carbs.interbeds <- subset(combined.new, bios)
+
+carbs.interbeds.total <- (100/nrow(combined.new))*nrow(carbs.interbeds) # % carbonates - approximation includes subordinate beds
+
+targets <- c(mud_rocks, "volcaniclastic", "sand", "conglomerate", "breccia", "quarzite")
+
+others <-  grepl(paste(targets, collapse = "|"), carbs.interbeds$other, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), carbs.interbeds$strat_name_long, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), carbs.interbeds$`lith 1`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), carbs.interbeds$`lith 2`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), carbs.interbeds$`lith 3`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), carbs.interbeds$`lith 4`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), carbs.interbeds$`lith 5`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), carbs.interbeds$`lith 6`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), carbs.interbeds$`lith 7`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), carbs.interbeds$`lith 8`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), carbs.interbeds$`lith 9`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), carbs.interbeds$`lith 10`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), carbs.interbeds$`lith 11`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), carbs.interbeds$`lith 12`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), carbs.interbeds$`lith 13`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), carbs.interbeds$`lith 14`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), carbs.interbeds$`lith 15`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), carbs.interbeds$`lith 16`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), carbs.interbeds$`lith 17`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), carbs.interbeds$`lith 18`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), carbs.interbeds$`lith 19`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), carbs.interbeds$`lith 20`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), carbs.interbeds$`lith 21`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), carbs.interbeds$`lith 22`, ignore.case=TRUE) |
+  grepl(paste(targets, collapse = "|"), carbs.interbeds$`lith 23`, ignore.case=TRUE)
+
+carbs.pure <- subset(carbs.interbeds, !others)
+
+carb.total <- (100/nrow(combined.new))*nrow(carbs.pure) # % carbonates, dolomites, cherts - approximation for pure
+
+100 - carb.total - sand.total - muds.total
+
+# summary liths
+
+mud.dominant.interbeds <- (muds.interbeds.total-muds.total)*0.72 # based on manual assessment of interbedded mudstone packages
+mud.subordinate.interbeds <- (muds.interbeds.total-muds.total)*0.28 # based on manual assessment of interbedded mudstone packages
+
+remaining <- 100-sum(muds.total,mud.dominant.interbeds,mud.subordinate.interbeds,sand.total, carb.total)
+
+summary.liths <- as.data.frame(rbind(muds.total,mud.dominant.interbeds,mud.subordinate.interbeds,sand.total, carb.total, remaining))
+summary.liths$liths <- rownames(summary.liths)
+summary.liths$group <- "A"
+
+ggplot(summary.liths, aes(group, V1, fill = reorder(liths, V1))) + geom_col()
+
+# source summary - Fig. S5D
+
+unique(combined.new$author)
+
+sources <- table(combined.new$author, useNA = "ifany")
+sources <- as.data.frame(sources)
+sources$group <- "A"
+
+ggplot(sources, aes(group, Freq, fill = reorder(Var1, Freq))) + geom_col(position = "fill")
+
+(100/sum(sources$Freq))*3
+
+## counts - Fig. S4 ##
+
+out$framboids
+out$Age
+
+n <- 2
+
+a <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(Bottom, 541)) +
+  geom_step(data = out, aes(Age-0.5, framboids), colour = "red")
+
+b <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(541, Top)) +
+  geom_step(data = out, aes(Age-0.5, framboids), colour = "red") +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+c <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(Bottom, 541)) +
+  geom_step(data = out, aes(Age-0.5, nodules), colour = "blue")
+
+d <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(541, Top)) +
+  geom_step(data = out, aes(Age-0.5, nodules), colour = "blue") +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+e <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(Bottom, 541)) +
+  geom_step(data = out, aes(Age-0.5, undif), colour = "grey70")
+
+f <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(541, Top)) +
+  geom_step(data = out, aes(Age-0.5, undif), colour = "grey70") +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+g <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(Bottom, 541)) +
+  geom_step(data = out, aes(Age-0.5, seds), colour = "black")
+
+h <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(541, Top)) +
+  geom_step(data = out, aes(Age-0.5, seds), colour = "black") +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+
+grid.arrange(a,b,c,d,e,f,g,h, ncol = 2)
+
+# END #
+
+
