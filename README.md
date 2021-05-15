@@ -1,7 +1,26 @@
 # Emmings et al. Sedimentary pyrite meta-analysis.
 ### We analysed the xDD library for pyrite types through geological time (Figure 1). Then we conducted statistical analysis and machine learning of pyrite trace element geochemistry (Figures 2-5).
 
-We recommend implementation in RStudio.
+### This code accompanies a manuscript submitted to *Science Advances* in May 2021
+#### Title: Pyrite meta-analysis reveals modes of anoxia through geological time
+#### Authors: Joseph F. Emmings<sup>1,2</sup>, Simon W. Poulton<sup>3</sup>, Joanna Walsh<sup>4,5</sup>, Kathryn A. Leeming<sup>1</sup>, Ian Ross<sup>6</sup>, Shanan Peters<sup>7</sup>
+
+### Affiliations 
+<sup>1</sup>British Geological Survey, Keyworth, Nottingham, NG12 5GG, UK.
+
+<sup>2</sup>School of Geography, Geology and the Environment, University of Leicester, Leicester, LE1 7RH, UK.
+
+<sup>3</sup>School of Earth and Environment, University of Leeds, Leeds, LS2 9JT, UK.
+
+<sup>4</sup>Lyell Centre, British Geological Survey, Riccarton, Edinburgh EH14 4AS, UK.
+
+<sup>5</sup>Ordnance Survey, Explorer House, Adanac Drive, Southampton, SO16 0AS, UK.
+
+<sup>6</sup>Department of Computer Sciences, University of Wisconsin–Madison, Madison, Wisconsin 53706, USA. 
+
+<sup>7</sup>Department of Geoscience, University of Wisconsin–Madison, Madison, Wisconsin 53706, USA. 
+
+### We recommend implementation in RStudio.
 
 ## Steps following deployment of the [pyrite machine reading application](https://github.com/jemmings-git/pyrite_app):
 
