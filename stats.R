@@ -41,6 +41,7 @@ library(msir)
 library(caret)
 library(zCompositions)
 library(pammtools)
+library(randomForest)
 
 # set working directory
 
@@ -14330,17 +14331,17 @@ names(pre_results.melt.bins)[5] <- "type"
 
 # optional import results (to avoid re-running the above code every time)
 
-phan_results.bins <- read.csv("phanerozoic_pyrite_types_downsampled.csv")
-phan_results.bins <- phan_results.bins[,-1]
-names(phan_results.bins)[5:9] <- c("Type.5", "Type.1","Type.2", "Type.3", "Type.4")
-phan_results.melt.bins <- reshape2::melt(phan_results.bins, id.vars = c("edge","span", "mid", "variable"))
-names(phan_results.melt.bins)[5] <- "type"
+#phan_results.bins <- read.csv("phanerozoic_pyrite_types_downsampled.csv")
+#phan_results.bins <- phan_results.bins[,-1]
+##names(phan_results.bins)[5:9] <- c("Type.5", "Type.1","Type.2", "Type.3", "Type.4")
+#phan_results.melt.bins <- reshape2::melt(phan_results.bins, id.vars = c("edge","span", "mid", "variable"))
+#names(phan_results.melt.bins)[5] <- "type"
 
-pre_results.bins <- read.csv("precambrian_pyrite_types_downsampled.csv")
-pre_results.bins <- pre_results.bins[,-1]
-names(pre_results.bins)[5:9] <- c("Type.5", "Type.1","Type.2", "Type.3", "Type.4")
-pre_results.melt.bins <- reshape2::melt(pre_results.bins, id.vars = c("edge","span", "mid", "variable"))
-names(pre_results.melt.bins)[5] <- "type"
+#pre_results.bins <- read.csv("precambrian_pyrite_types_downsampled.csv")
+#pre_results.bins <- pre_results.bins[,-1]
+#names(pre_results.bins)[5:9] <- c("Type.5", "Type.1","Type.2", "Type.3", "Type.4")
+#pre_results.melt.bins <- reshape2::melt(pre_results.bins, id.vars = c("edge","span", "mid", "variable"))
+#names(pre_results.melt.bins)[5] <- "type"
 
 HEATT <- c(56, 66, 93, 116, 183, 200, 251, 359, 372, 383, 444, 514, 542) 
 
@@ -14755,3 +14756,31 @@ grid.arrange(b,a,ncol=2)
 
 # End main plots
 
+##### Additional plots not in manuscript ####
+
+# range plot for Supplementary Materials - Fig. S12-S13
+
+ranges <- coords.all %>% 
+  group_by(labels) %>% 
+  summarise(top = max(age),
+            base = min(age))
+
+a <- ggplot(ranges, aes(top, reorder(labels, top), group = labels)) +
+  geom_linerange(aes(xmin = base, xmax = top), size = 1) + 
+  geom_point(size = 1) + 
+  geom_point(aes(x = base), size = 1) + 
+  theme_bw() +
+  scale_x_reverse(limits = c(3600, 500), breaks = seq(500,3600, by = 100)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+
+b <- ggplot(ranges, aes(top, reorder(labels, top), group = labels)) +
+  geom_linerange(aes(xmin = base, xmax = top), size = 1) + 
+  geom_point(size = 1) + 
+  geom_point(aes(x = base), size = 1) + 
+  theme_bw() +
+  scale_x_reverse(limits = c(540, 0), breaks = seq(0,540, by = 10)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+
+grid.arrange(a,b,ncol=2)
+
+## End ##
