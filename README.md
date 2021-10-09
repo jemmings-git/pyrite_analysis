@@ -24,14 +24,14 @@
 
 ## Steps following deployment of the [pyrite machine reading application](https://github.com/jemmings-git/pyrite_app):
 
-# R scripts:
+### R scripts:
 
  * `install.R` - install the project's dependencies
  * `preparation.R` - [import xDD pyrite results](https://geodeepdive.org/app_output/jemmings_with_pyrite_24Oct2019.zip), collect and link related data from Macrostrat, do binning on the dataframe, save the results
  * `analysis.R` - produce a series of analytical plots illustrating the observable pyrite distributions as presented on Figure 1. This code is split into two parts, dealing with Figs 1A-B and 1C-D.
  * `stats.R`- conduct statistics and data manipulation as presented on Figures 2-5 and supplementary materials. Each code block (for each figure) should be run consecutively. SGP and pyrite trace element data are downloaded, culled and processed within R. This script reproduces Figures 2-5.
 
-# Results:
+#### Results:
 
 `xdd_binned_results.csv` - the results of text mining as presented on Figures 1A-1B
 `xdd_binned_results_strat_only.csv` - the results of text mining as presented on Figures 1C-1D
