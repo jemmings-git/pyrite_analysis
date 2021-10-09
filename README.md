@@ -24,7 +24,7 @@
  * `wilkin_snippets.R` - process Wilkin-pyrite mentions (Fig 1C) via the [xDD snippets API](https://xdd.wisc.edu/api/snippets?term=Wilkin,framboid&full_results=true&inclusive=true&clean&known_terms=stratigraphic_names)
  * `analysis.R` - produce a series of analytical plots illustrating the observable xDD pyrite distributions as presented on Figure 1. This code is split into two parts, dealing with Figs 1A-C and Supplementary figures 
  * `stats.R`- conduct data manipulation, statistical analysis and machine learning as presented on Figures 2-5 and supplementary materials. Each code block (for each figure) should be run consecutively. Pyrite trace element and SGP data are downloaded and analysed. This script reproduces Figures 2-5.
- * `gplates.R` - reconstruct palaeogeographic coordinates and interpolate results (in time and space), via the [GPlates Web Service[(https://gws.gplates.org/) interfaced with the [*chronosphere* R package](https://github.com/chronosphere-portal/r_package/)
+ * `gplates.R` - reconstruct palaeogeographic coordinates and interpolate results (in time and space), via the [GPlates Web Service](https://gws.gplates.org/) interfaced with the [*chronosphere* R package](https://github.com/chronosphere-portal/r_package/)
 
 #### Results:
  * `xdd_binned_results.csv` - the results of text mining as presented on Figures 1A-1B
