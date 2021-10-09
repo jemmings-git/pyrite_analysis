@@ -22,14 +22,14 @@
  * `install.R` - install the project's dependencies - UPDATE PENDING
  * `macrostrat_data.R` - download Macrostrat definitions
  * `preparation.R` - [import xDD pyrite results](https://geodeepdive.org/app_output/jemmings_with_pyrite_24Oct2019.zip), collect and link related data from Macrostrat, do binning on the dataframe, save the results
- * `wilkin_snippets.R` - process Wilkin-pyrite mentions (underlying Fig 1C) via the [xDD snippets API](https://xdd.wisc.edu/api/snippets?term=Wilkin,framboid&full_results=true&inclusive=true&clean&known_terms=stratigraphic_names)
+ * `wilkin_snippets.R` - process Wilkin-pyrite mentions (underlying Fig 1C) via the [xDD snippets API](https://xdd.wisc.edu/api/snippets)  
  * `analysis.R` - produce a series of analytical plots illustrating the observable xDD pyrite distributions as presented on **Figure 1**. This code is split into two parts, dealing with Figs 1A-C and Supplementary figures 
  * `stats.R`- conduct data manipulation, statistical analysis and machine learning as presented on **Figures 2-5** and supplementary materials. Each code block (for each figure) should be run consecutively. Pyrite trace element and SGP data are downloaded and analysed. 
  * `gplates.R` - reconstruct palaeogeographic coordinates and interpolate results (in time and space), via the [GPlates Web Service](https://gws.gplates.org/) interfaced with the [*chronosphere* R package](https://github.com/chronosphere-portal/r_package/). This script reproduces **Figures 6-7**.
 
 #### Datasets & results:
  * The pyrite trace element and SGP datasets are downloaded by deploying the code in this repository, and are not stored locally
- * `wilkin_snippets.json` - the aggregated Wilkin-pyrite [xDD snippets](https://xdd.wisc.edu/api/snippets) results (reproduced in this repository for ease). Used in **Figure 1C & supplementary xDD figures**
+ * `wilkin_snippets.json` - the aggregated Wilkin-pyrite [xDD snippets results](https://xdd.wisc.edu/api/snippets?term=Wilkin,framboid&full_results=true&inclusive=true&clean&known_terms=stratigraphic_names) (reproduced in this repository for ease). Used in **Figure 1C & supplementary xDD figures**
  *  `SEDEX.csv` - [an open access USGS dataset](https://pubs.usgs.gov/of/2009/1252/SedZn-PbEX2009.xls) that is not stored in this repository. [Singer *et al*., 2009](https://pubs.usgs.gov/of/2009/1252/). HEBS, BIFs and glaciations are hard-coded. These data are plotted on **Figures 1 & 4**
  * `xdd_binned_results.csv` - the results of xDD text mining as presented on **Figures 1A-1B**  
  * `xdd_binned_results_strat_only.csv` - the results of xDD text mining as presented on **supplementary xDD figures**  
