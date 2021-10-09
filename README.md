@@ -3,7 +3,7 @@
 
 ### This code accompanies a manuscript submitted to *Science Advances* in May 2021
 #### Title: Pyrite mega-analysis reveals modes of anoxia through geological time
-#### Authors: Joseph F. Emmings<sup>1,2</sup>, Simon W. Poulton<sup>3</sup>, Joanna Walsh<sup>4,5</sup>, Kathryn A. Leeming<sup>1</sup>, Ian Ross<sup>6</sup>, Shanan Peters<sup>7</sup>
+#### Authors: Joseph F. Emmings<sup>1,2</sup>*, Simon W. Poulton<sup>3</sup>, Joanna Walsh<sup>4,5</sup>, Kathryn A. Leeming<sup>1</sup>, Ian Ross<sup>6</sup>, Shanan Peters<sup>7</sup>
 
 ### Affiliations 
 <sup>1</sup>British Geological Survey, Keyworth, Nottingham, NG12 5GG, UK.  
@@ -13,6 +13,7 @@
 <sup>5</sup>Ordnance Survey, Explorer House, Adanac Drive, Southampton, SO16 0AS, UK.  
 <sup>6</sup>Department of Computer Sciences, University of Wisconsin–Madison, Madison, Wisconsin 53706, USA.   
 <sup>7</sup>Department of Geoscience, University of Wisconsin–Madison, Madison, Wisconsin 53706, USA.   
+* Present address: CGG, Tyn Y Coed, LLanrhos, Llandudno, LL30 1SA.
 
 #### We recommend implementation in RStudio.
 
