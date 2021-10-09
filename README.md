@@ -20,7 +20,7 @@
 ## Steps following deployment of the [pyrite machine reading application](https://github.com/jemmings-git/pyrite_app):
 
 #### R scripts:
- [ ] `install.R` - install the project's dependencies - 
+ * `install.R` - install the project's dependencies
  * `preparation.R` - [import xDD pyrite results](https://geodeepdive.org/app_output/jemmings_with_pyrite_24Oct2019.zip), collect and link related data from Macrostrat, do binning on the dataframe, save the results
  * `wilkin_snippets.R` - process Wilkin-pyrite mentions (Fig 1C) via the [xDD snippets API](https://xdd.wisc.edu/api/snippets?term=Wilkin,framboid&full_results=true&inclusive=true&clean&known_terms=stratigraphic_names)
  * `analysis.R` - produce a series of analytical plots illustrating the observable xDD pyrite distributions as presented on Figure 1. This code is split into two parts, dealing with Figs 1A-C and Supplementary figures 
@@ -28,12 +28,14 @@
  * `gplates.R` - reconstruct palaeogeographic coordinates and interpolate results (in time and space), via the [GPlates Web Service](https://gws.gplates.org/) interfaced with the [*chronosphere* R package](https://github.com/chronosphere-portal/r_package/). This script reproduces Figures 6-7.
 
 #### Datasets & results:
- * `xdd_binned_results.csv` - the results of text mining as presented on Figures 1A-1B - [x]
- * `xdd_binned_results_strat_only.csv` - the results of text mining as presented on supplementary figures - [x]
- * `pyrite_refs.txt` - list of refences in the xDD library containing at least one mention of framboidal, nodular, concretionary or undifferentiated pyrite matched to a (meta)sedimentary rock in the Macrostrat database. This is an expanded version of the reference list contained in the Supplementary Materials. - GOOD
- * `SGP_refs.txt` - list of references used to construct Figure 2 derived from the [Sedimentary Geochemistry and Palaeoenvironments Project, SGP](http://sgp-search.io/)
- * `precambrian_pyrite_types_downsampled.csv` - Results of statistical analysis, machine learning, downsampling and aggregation of Precambrian pyrite trace element data (as presented on Figure 5)
- * `phanerozoic_pyrite_types_downsampled.csv` - Results of statistical analysis, machine learning, downsampling and aggregation of Phanerozoic pyrite trace element data (as presented on Figure 5)
+
+ * `xdd_binned_results.csv` - the results of text mining as presented on Figures 1A-1B  
+ * `xdd_binned_results_strat_only.csv` - the results of text mining as presented on supplementary xDD figures  
+ * `pyrite_refs.txt` - list of refences in the xDD library containing at least one mention of framboidal, nodular, concretionary or undifferentiated pyrite matched to a (meta)sedimentary rock in the Macrostrat database. This is an expanded version of the reference list contained in the Supplementary Materials.
+ * `SGP_refs.csv` - list of references underlying the Fe-speciation and TOC/P dataset, from the [Sedimentary Geochemistry and Palaeoenvironments Project, SGP](http://sgp-search.io/)  
+ * `precambrian_pyrite_types_downsampled.csv` - Results of statistical analysis, machine learning, downsampling and aggregation of Precambrian pyrite trace element data (as presented on Figure 4)
+ * `phanerozoic_pyrite_types_downsampled.csv` - Results of statistical analysis, machine learning, downsampling and aggregation of Phanerozoic pyrite trace element data (as presented on Figure 4)
+ * `SEDEX.csv` - see (Singer *et al* 2009). This file is not stored in this repository, but is required to fully plot Figures 1 and 4. [Download](https://pubs.usgs.gov/of/2009/1252/SedZn-PbEX2009.xls)
 
 # Acknowledgements
 
