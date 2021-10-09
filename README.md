@@ -16,7 +16,7 @@
 
 #### We recommend implementation in RStudio.
 
-## Steps following deployment of the [pyrite machine reading application](https://github.com/jemmings-git/pyrite_app):
+### Steps following deployment of the [pyrite machine reading application](https://github.com/jemmings-git/pyrite_app):
 
 #### R scripts:
  * `install.R` - install the project's dependencies
