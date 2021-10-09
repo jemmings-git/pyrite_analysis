@@ -14,7 +14,7 @@
 <sup>6</sup>Department of Computer Sciences, University of Wisconsin–Madison, Madison, Wisconsin 53706, USA.   
 <sup>7</sup>Department of Geoscience, University of Wisconsin–Madison, Madison, Wisconsin 53706, USA.   
 
-### We recommend implementation in RStudio.
+#### We recommend implementation in RStudio.
 
 ## Steps following deployment of the [pyrite machine reading application](https://github.com/jemmings-git/pyrite_app):
 
