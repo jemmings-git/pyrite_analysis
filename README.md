@@ -84,4 +84,5 @@ All figures were produced initially in R using the code in this repository, foll
 
 # TO CHECK - all cases of setwd
 - check stats.R is fully operational
+- double check all datasets (just plot in excel)
 
