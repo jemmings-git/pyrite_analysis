@@ -33,12 +33,14 @@
  * `xdd_binned_results.csv` - the results of text mining as presented on Figures 1A-1B  
  * `xdd_binned_results_strat_only.csv` - the results of text mining as presented on supplementary xDD figures  
  * `pyrite_refs.txt` - list of refences in the xDD library containing at least one mention of framboidal, nodular, concretionary or undifferentiated pyrite matched to a (meta)sedimentary rock in the Macrostrat database. This is an expanded version of the reference list contained in the Supplementary Materials.
- * `SGP_refs.csv` - list of references underlying the Fe-speciation and TOC/P dataset, from the [Sedimentary Geochemistry and Palaeoenvironments Project, SGP](http://sgp-search.io/)  
- * `precambrian_pyrite_types_downsampled.csv` - Results of statistical analysis, machine learning, downsampling and aggregation of Precambrian pyrite trace element data (as presented on Figure 4)
- * `phanerozoic_pyrite_types_downsampled.csv` - Results of statistical analysis, machine learning, downsampling and aggregation of Phanerozoic pyrite trace element data (as presented on Figure 4)
- *  * `precambrian_pyrite_types_downsampled_singleCV.csv` - Results of statistical analysis, machine learning, downsampling and aggregation of Precambrian pyrite trace element data, using a single coherent cross-validated loess span (as presented in supplementary materials)  
- * `phanerozoic_pyrite_types_downsampled_singleCV.csv` - Results of statistical analysis, machine learning, downsampling and aggregation of Phanerozoic pyrite trace element data, using a single coherent cross-validated loess span (as presented in supplementary materials)  
- * `SEDEX.csv` - see (Singer *et al*., 2009)[https://pubs.usgs.gov/of/2009/1252/]. [Download](https://pubs.usgs.gov/of/2009/1252/SedZn-PbEX2009.xls).
+ * `SGP_refs.csv` - list of references underlying the Fe-speciation and TOC/P data stored in the [Sedimentary Geochemistry and Palaeoenvironments Project database, SGP](http://sgp-search.io/)  
+ * `precambrian_pyrite_types_downsampled.csv` - Results of statistical analysis, machine learning, downsampling and aggregation of [Precambrian pyrite trace element data](https://doi.org/10.1130/GEOL.S.12456332) (as presented on Figure 4)
+ * `phanerozoic_pyrite_types_downsampled.csv` - Results of statistical analysis, machine learning, downsampling and aggregation of [Phanerozoic pyrite trace element data](https://doi.org/10.1130/GEOL.S.12456332) (as presented on Figure 4)
+ *  * `precambrian_pyrite_types_downsampled_singleCV.csv` - Results of statistical analysis, machine learning, downsampling and aggregation of [Precambrian pyrite trace element data](https://doi.org/10.1130/GEOL.S.12456332), using a single coherent cross-validated loess span (as presented in supplementary materials)  
+ * `phanerozoic_pyrite_types_downsampled_singleCV.csv` - Results of statistical analysis, machine learning, downsampling and aggregation of [Phanerozoic pyrite trace element data](https://doi.org/10.1130/GEOL.S.12456332), using a single coherent cross-validated loess span (as presented in supplementary materials)  
+ * `SEDEX.csv` - an open access USGS dataset that is not stored in this repository. (Singer *et al*., 2009)[https://pubs.usgs.gov/of/2009/1252/]. [Download](https://pubs.usgs.gov/of/2009/1252/SedZn-PbEX2009.xls).
+ * 
+ * `pyrite_stats_with_long_lats.csv` - aggregated pyrite type fractions derived from [pyrite trace element data](https://doi.org/10.1130/GEOL.S.12456332) by age and geographic coordinates (added manually using [Google Earth](https://earth.google.com/web/)). Used in figures 5-6.
 
 # Acknowledgements
 
