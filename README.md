@@ -24,15 +24,15 @@
 
 ## Steps following deployment of the [pyrite machine reading application](https://github.com/jemmings-git/pyrite_app):
 
-### R scripts:
-
+#### R scripts:
  * `install.R` - install the project's dependencies
  * `preparation.R` - [import xDD pyrite results](https://geodeepdive.org/app_output/jemmings_with_pyrite_24Oct2019.zip), collect and link related data from Macrostrat, do binning on the dataframe, save the results
- * `analysis.R` - produce a series of analytical plots illustrating the observable pyrite distributions as presented on Figure 1. This code is split into two parts, dealing with Figs 1A-B and 1C-D.
- * `stats.R`- conduct statistics and data manipulation as presented on Figures 2-5 and supplementary materials. Each code block (for each figure) should be run consecutively. SGP and pyrite trace element data are downloaded, culled and processed within R. This script reproduces Figures 2-5.
+ * `wilkin_snippets.R` - process Wilkin-pyrite mentions (Fig 1C) via the [xDD snippets API](https://xdd.wisc.edu/api/snippets?term=Wilkin,framboid&full_results=true&inclusive=true&clean&known_terms=stratigraphic_names)
+ * `analysis.R` - produce a series of analytical plots illustrating the observable xDD pyrite distributions as presented on Figure 1. This code is split into two parts, dealing with Figs 1A-C and Supplementary figures 
+ * `stats.R`- conduct data manipulation, statistical analysis and machine learning as presented on Figures 2-5 and supplementary materials. Each code block (for each figure) should be run consecutively. Pyrite trace element and SGP data are downloaded and analysed. This script reproduces Figures 2-5.
+ * `gplates.R` - reconstruct palaeogeographic coordinates and interpolate results (in time and space), via the [GPlates Web Service[(https://gws.gplates.org/) interfaced with the [*chronosphere* R package](https://github.com/chronosphere-portal/r_package/)
 
 #### Results:
-
  * `xdd_binned_results.csv` - the results of text mining as presented on Figures 1A-1B
  * `xdd_binned_results_strat_only.csv` - the results of text mining as presented on Figures 1C-1D
  * `redox_zones.txt` - anoxic temporal stages A-E derived from interpretation of the text mining outputs
