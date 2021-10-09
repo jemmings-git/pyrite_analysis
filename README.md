@@ -19,7 +19,7 @@
 ### Steps following deployment of the [pyrite machine reading application](https://github.com/jemmings-git/pyrite_app):
 
 #### R scripts:
- * `install.R` - install the project's dependencies
+ * `install.R` - install the project's dependencies - UPDATE PENDING
  * `macrostrat_data.R` - download Macrostrat definitions
  * `preparation.R` - [import xDD pyrite results](https://geodeepdive.org/app_output/jemmings_with_pyrite_24Oct2019.zip), collect and link related data from Macrostrat, do binning on the dataframe, save the results
  * `wilkin_snippets.R` - process Wilkin-pyrite mentions (underlying Fig 1C) via the [xDD snippets API](https://xdd.wisc.edu/api/snippets?term=Wilkin,framboid&full_results=true&inclusive=true&clean&known_terms=stratigraphic_names)
@@ -46,6 +46,8 @@
  * `pyrite_combined_manual.csv` - present day geographic coordinates (clat, clng) for the xDD pyrite framboid and/or nodule-bearing rock record. Regarding *Phanerozoic* xDD pyrite-bearing rocks outside the Macrostrat focal area, present day geographic coordinates are estimates based on the type sections reported in the [British Geological Survey](https://www.bgs.ac.uk/technologies/the-bgs-lexicon-of-named-rock-units/) and [Geoscience Australia](https://asud.ga.gov.au/) stratigraphic lexicons). These xDD data were converted to a quasi-ferruginous fraction, and subsequently interpolated using reconstructed palaeogeographic coordinates. Presented on **Figure 6**
  * `pyrite_stats_with_long_lats.csv` - the fraction of ferruginous vs. euxinic conditions (microenvironment vs. ambient) on an age (1 Ma bin) and unit-by-unit basis for [pyrite trace element analyses](https://doi.org/10.1130/GEOL.S.12456332) reported by [Mukherjee and Large, 2021](https://doi.org/10.1130/GEOL.S.12456332). Present day geographic coordinates were added manually by inspection of the original dataset sample descriptions, cross-referenced to coordinates extracted primarily from [Google Earth](https://earth.google.com/web/), and rarely from [SGP](http://sgp-search.io/) entries. These data were interpolated using reconstructed palaeogeographic coordinates. Presented on **Figure 6**
  * `SGP_Fe_ferruginous_fractions.csv` - the fraction of ferruginous vs. euxinic conditions on an age (1 Ma bin) and long-lat basis for [SGP Fe-speciation data](http://sgp-search.io/). These data were interpolated using reconstructed palaeogeographic coordinates. Presented on **Figure 6**
+ * Final combined dataset - PENDING
+ * Matched list of units in pyrite TE and SGP datasets - Figure 7 - PENDING
 
 #### Reference lists:
  * `pyrite_refs.txt` - list of refences in the xDD library containing at least one mention of framboidal, nodular, concretionary or undifferentiated pyrite matched to a (meta)sedimentary rock in the Macrostrat database. This is an expanded version of the reference list contained in the Supplementary Materials.
@@ -79,4 +81,6 @@ Chronostratigraphic timescales were plotted in R using the [*deeptime* R package
 Please refer to the **Supplementary materials** for the complete R package reference list.
 
 All figures were produced initially in R using the code in this repository, followed by aesthetic adjustments using a professional graphics software package.
+
+# TO CHECK - all cases of setwd
 
