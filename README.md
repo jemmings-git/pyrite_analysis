@@ -1,5 +1,5 @@
 # Sedimentary pyrite mega-analysis
-### We analysed the xDD library for mentions of pyrite types through geological time (Figure 1). Then we conducted statistical analysis, machine learning and interpolation of pyrite and bulk sediment geochemistry (Figures 2-6).
+### We analysed the xDD library for mentions of pyrite types through geological time (Figure 1). Then we conducted statistical analysis, machine learning and interpolation of pyrite and bulk sediment geochemistry in order to map modes of anoxia through geological time and space (Figures 2-6).
 
 ### This code accompanies a manuscript submitted to *Science Advances* in May 2021
 #### Title: Pyrite mega-analysis reveals modes of anoxia through geological time
