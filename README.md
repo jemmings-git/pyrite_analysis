@@ -35,7 +35,9 @@
  * `SGP_refs.csv` - list of references underlying the Fe-speciation and TOC/P dataset, from the [Sedimentary Geochemistry and Palaeoenvironments Project, SGP](http://sgp-search.io/)  
  * `precambrian_pyrite_types_downsampled.csv` - Results of statistical analysis, machine learning, downsampling and aggregation of Precambrian pyrite trace element data (as presented on Figure 4)
  * `phanerozoic_pyrite_types_downsampled.csv` - Results of statistical analysis, machine learning, downsampling and aggregation of Phanerozoic pyrite trace element data (as presented on Figure 4)
- * `SEDEX.csv` - see (Singer *et al* 2009). This file is not stored in this repository, but is required to fully plot Figures 1 and 4. [Download](https://pubs.usgs.gov/of/2009/1252/SedZn-PbEX2009.xls)
+ *  * `precambrian_pyrite_types_downsampled_singleCV.csv` - Results of statistical analysis, machine learning, downsampling and aggregation of Precambrian pyrite trace element data, using a single coherent cross-validated loess span (as presented in supplementary materials)  
+ * `phanerozoic_pyrite_types_downsampled_singleCV.csv` - Results of statistical analysis, machine learning, downsampling and aggregation of Phanerozoic pyrite trace element data, using a single coherent cross-validated loess span (as presented in supplementary materials)  
+ * `SEDEX.csv` - see (Singer *et al*., 2009)[https://pubs.usgs.gov/of/2009/1252/]. [Download](https://pubs.usgs.gov/of/2009/1252/SedZn-PbEX2009.xls).
 
 # Acknowledgements
 
