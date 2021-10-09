@@ -13,7 +13,7 @@
 <sup>5</sup>Ordnance Survey, Explorer House, Adanac Drive, Southampton, SO16 0AS, UK.  
 <sup>6</sup>Department of Computer Sciences, University of Wisconsin–Madison, Madison, Wisconsin 53706, USA.   
 <sup>7</sup>Department of Geoscience, University of Wisconsin–Madison, Madison, Wisconsin 53706, USA.   
-* Present address: CGG, Tyn Y Coed, LLanrhos, Llandudno, LL30 1SA.
+\* Present address: CGG, Tyn Y Coed, LLanrhos, Llandudno, LL30 1SA.
 
 #### We recommend implementation in RStudio.
 
