@@ -58,7 +58,7 @@
 ### Figure 1 is derived from the [GeoDeepDive](https://geodeepdive.org) (now known as xDD) library and machine reading system
 As the basis of our pyrite application we [forked](https://github.com/jemmings-git/pyrite_app) the [original text mining application](https://github.com/UW-Macrostrat/stromatolites_demo) used in [Peters, Husson and Wilcots 2017, *Geology*](http://doi.org/10.1130/G38931.1). 
 
-### Figures 2-7 utilise [previously published pyrite trace element data](https://doi.org/10.1130/GEOL.S.12456332):  
+### Figures 2-7 utilise [previously published and open access pyrite trace element data](https://doi.org/10.1130/GEOL.S.12456332):  
 
 [Large et al., 2014. *Earth and Planetary Science Letters*, 389, 209-220.](http://dx.doi.org/10.1016/j.epsl.2013.12.020)  
 [Large et al., 2015. *Gondwana Research*, 28, 1282-1293.](http://dx.doi.org/10.1016/j.gr.2015.06.004)  
@@ -66,7 +66,7 @@ As the basis of our pyrite application we [forked](https://github.com/jemmings-g
 [Large et al., 2019. *Mineralium Deposita*, 54, 485-506.](https://doi.org/10.1007/s00126-019-00873-9)  
 [Mukherjee and Large, 2020. *Geology*, 48, 1018-1022.](https://doi.org/10.1130/G47890.1)  
 
-### Figures 5-7 utilise Fe-speciation and TOC/P data from the [Sedimentary Geochemistry and Palaeoenvironments Project (SGP)](http://sgp-search.io/)
+### Figures 5-7 utilise Fe-speciation and TOC/P data from the [open access Sedimentary Geochemistry and Palaeoenvironments Project (SGP)](http://sgp-search.io/)
 The citable references for the Phase 1 data product are:
 
 [Mehra et al., 2021. *GSA Today*, 31, 5, 4-10.](https://doi.org/10.1130/GSATG484A.1)  
