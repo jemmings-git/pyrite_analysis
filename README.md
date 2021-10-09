@@ -26,7 +26,7 @@
  * `stats.R`- conduct data manipulation, statistical analysis and machine learning as presented on Figures 2-5 and supplementary materials. Each code block (for each figure) should be run consecutively. Pyrite trace element and SGP data are downloaded and analysed. This script reproduces Figures 2-5.
  * `gplates.R` - reconstruct palaeogeographic coordinates and interpolate results (in time and space), via the [GPlates Web Service](https://gws.gplates.org/) interfaced with the [*chronosphere* R package](https://github.com/chronosphere-portal/r_package/). This script reproduces Figures 6-7.
 
-#### Datasets:
+#### Datasets & results:
  * `xdd_binned_results.csv` - the results of text mining as presented on Figures 1A-1B
  * `xdd_binned_results_strat_only.csv` - the results of text mining as presented on supplementary figures
  * `pyrite_refs.txt` - list of refences in the xDD library containing at least one mention of framboidal, nodular, concretionary or undifferentiated pyrite matched to a (meta)sedimentary rock in the Macrostrat database. This is an expanded version of the reference list contained in the Supplementary Materials.
