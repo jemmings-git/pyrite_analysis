@@ -1,8 +1,8 @@
-# Emmings et al. Sedimentary pyrite meta-analysis.
+# Sedimentary pyrite mega-analysis
 ### We analysed the xDD library for pyrite types through geological time (Figure 1). Then we conducted statistical analysis and machine learning of pyrite trace element geochemistry (Figures 2-5).
 
 ### This code accompanies a manuscript submitted to *Science Advances* in May 2021
-#### Title: Pyrite meta-analysis reveals modes of anoxia through geological time
+#### Title: Pyrite mega-analysis reveals modes of anoxia through geological time
 #### Authors: Joseph F. Emmings<sup>1,2</sup>, Simon W. Poulton<sup>3</sup>, Joanna Walsh<sup>4,5</sup>, Kathryn A. Leeming<sup>1</sup>, Ian Ross<sup>6</sup>, Shanan Peters<sup>7</sup>
 
 ### Affiliations 
