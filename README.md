@@ -37,7 +37,7 @@
  * `phanerozoic_pyrite_types_downsampled.csv` - Results of statistical analysis, machine learning, downsampling and aggregation of [Phanerozoic pyrite trace element data](https://doi.org/10.1130/GEOL.S.12456332) (as presented on Figure 4)
  * `precambrian_pyrite_types_downsampled_singleCV.csv` - Results of statistical analysis, machine learning, downsampling and aggregation of [Precambrian pyrite trace element data](https://doi.org/10.1130/GEOL.S.12456332), using a single coherent cross-validated loess span (as presented in supplementary materials)  
  * `phanerozoic_pyrite_types_downsampled_singleCV.csv` - Results of statistical analysis, machine learning, downsampling and aggregation of [Phanerozoic pyrite trace element data](https://doi.org/10.1130/GEOL.S.12456332), using a single coherent cross-validated loess span (as presented in supplementary materials)  
- * `SEDEX.csv` - an open access USGS dataset that is not stored in this repository. (Singer *et al*., 2009)[https://pubs.usgs.gov/of/2009/1252/]. [Download](https://pubs.usgs.gov/of/2009/1252/SedZn-PbEX2009.xls).
+ * `SEDEX.csv` - an open access USGS dataset that is not stored in this repository. [Singer *et al*., 2009](https://pubs.usgs.gov/of/2009/1252/). [Download](https://pubs.usgs.gov/of/2009/1252/SedZn-PbEX2009.xls). BIFs and glaciations are hard-coded.
  * 
  * `pyrite_stats_with_long_lats.csv` - aggregated pyrite type fractions derived from [pyrite trace element data](https://doi.org/10.1130/GEOL.S.12456332) by age and present day geographic coordinates (added manually using [Google Earth](https://earth.google.com/web/)). Used in figures 5-6.
 
