@@ -67,7 +67,7 @@ As the basis of our pyrite application we [forked](https://github.com/jemmings-g
 ### Figures 5-7 utilise Fe-speciation and TOC/P data from the [Sedimentary Geochemistry and Palaeoenvironments Project (SGP)](http://sgp-search.io/)
 The citable references for the Phase 1 data product are:
 
-[Mehra et al., 2021. *GSA Today*, 31](https://doi.org/10.1130/GSATG484A.1.)  
+[Mehra et al., 2021. *GSA Today*, 31, 5, 4-10.](https://doi.org/10.1130/GSATG484A.1)  
 [Farrell et al., 2021. *Geobiology*, 00, 1– 12.](https://doi.org/10.1111/gbi.12462)  
 
 ### Reconstructions ###
