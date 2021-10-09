@@ -30,7 +30,7 @@
 #### Datasets & results:
  * The pyrite trace element and SGP datasets are downloaded by deploying the code in this repository, and are not stored locally
  * `wilkin_snippets.json` - the aggregated Wilkin-pyrite [xDD snippets](https://xdd.wisc.edu/api/snippets) results (reproduced in this repository for ease). Used in **Figure 1C & supplementary xDD figures**
- *  `SEDEX.csv` - [an open access USGS dataset](https://pubs.usgs.gov/of/2009/1252/SedZn-PbEX2009.xls) that is not stored in this repository. [Singer *et al*., 2009](https://pubs.usgs.gov/of/2009/1252/). BIFs and glaciations are hard-coded. These data are plotted on **Figures 1 & 4**
+ *  `SEDEX.csv` - [an open access USGS dataset](https://pubs.usgs.gov/of/2009/1252/SedZn-PbEX2009.xls) that is not stored in this repository. [Singer *et al*., 2009](https://pubs.usgs.gov/of/2009/1252/). HEBS, BIFs and glaciations are hard-coded. These data are plotted on **Figures 1 & 4**
  * `xdd_binned_results.csv` - the results of xDD text mining as presented on **Figures 1A-1B**  
  * `xdd_binned_results_strat_only.csv` - the results of xDD text mining as presented on **supplementary xDD figures**  
  * `phanerozoic_pyrite_types_downsampled.csv` - Phanerozoic age-interpolated downsampled pyrite type fractions (bins of at least 1 Ma). The results of statistical analysis, machine learning, downsampling and aggregation of [Phanerozoic pyrite trace element data](https://doi.org/10.1130/GEOL.S.12456332) (as presented on **Figure 4**)
