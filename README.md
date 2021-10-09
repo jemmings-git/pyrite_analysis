@@ -28,6 +28,7 @@
  * `gplates.R` - reconstruct palaeogeographic coordinates and interpolate results (in time and space), via the [GPlates Web Service](https://gws.gplates.org/) interfaced with the [*chronosphere* R package](https://github.com/chronosphere-portal/r_package/). This script reproduces **Figures 6-7**.
 
 #### Datasets & results:
+ * The pyrite trace element and SGP datasets are downloaded by deploying the code in this repository, and are not stored locally
  * `wilkin_snippets.json` - the aggregated Wilkin-pyrite [xDD snippets](https://xdd.wisc.edu/api/snippets) results (reproduced in this repository for ease). Used in **Figure 1C & supplementary xDD figures**
  *  `SEDEX.csv` - [an open access USGS dataset](https://pubs.usgs.gov/of/2009/1252/SedZn-PbEX2009.xls) that is not stored in this repository. [Singer *et al*., 2009](https://pubs.usgs.gov/of/2009/1252/). BIFs and glaciations are hard-coded. These data are plotted on **Figures 1 & 4**
  * `xdd_binned_results.csv` - the results of xDD text mining as presented on **Figures 1A-1B**  
