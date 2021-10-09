@@ -33,13 +33,13 @@
 
 #### Results:
 
-`xdd_binned_results.csv` - the results of text mining as presented on Figures 1A-1B
-`xdd_binned_results_strat_only.csv` - the results of text mining as presented on Figures 1C-1D
-`redox_zones.txt` - anoxic temporal stages A-E derived from interpretation of the text mining outputs
-`pyrite_refs.txt` - list of refences in the xDD library containing at least one mention of framboidal, nodular, concretionary or undifferentiated pyrite matched to a (meta)sedimentary rock in the Macrostrat database. This is an expanded version of the reference list contained in the Supplementary Materials.
-`SGP_refs.txt` - list of references used to construct Figure 2 derived from the [Sedimentary Geochemistry and Palaeoenvironments Project, SGP](http://sgp-search.io/)
-`precambrian_pyrite_types_downsampled.csv` - Results of statistical analysis, machine learning, downsampling and aggregation of Precambrian pyrite trace element data (as presented on Figure 5)
-`phanerozoic_pyrite_types_downsampled.csv` - Results of statistical analysis, machine learning, downsampling and aggregation of Phanerozoic pyrite trace element data (as presented on Figure 5)
+ * `xdd_binned_results.csv` - the results of text mining as presented on Figures 1A-1B
+ * `xdd_binned_results_strat_only.csv` - the results of text mining as presented on Figures 1C-1D
+ * `redox_zones.txt` - anoxic temporal stages A-E derived from interpretation of the text mining outputs
+ * `pyrite_refs.txt` - list of refences in the xDD library containing at least one mention of framboidal, nodular, concretionary or undifferentiated pyrite matched to a (meta)sedimentary rock in the Macrostrat database. This is an expanded version of the reference list contained in the Supplementary Materials.
+ * `SGP_refs.txt` - list of references used to construct Figure 2 derived from the [Sedimentary Geochemistry and Palaeoenvironments Project, SGP](http://sgp-search.io/)
+ * `precambrian_pyrite_types_downsampled.csv` - Results of statistical analysis, machine learning, downsampling and aggregation of Precambrian pyrite trace element data (as presented on Figure 5)
+ * `phanerozoic_pyrite_types_downsampled.csv` - Results of statistical analysis, machine learning, downsampling and aggregation of Phanerozoic pyrite trace element data (as presented on Figure 5)
 
 # Acknowledgements
 
