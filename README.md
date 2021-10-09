@@ -42,7 +42,7 @@
  * `SGP_Fe_redox_fractions_downsampled_precambrian.csv` - Precambrian age-interpolated fraction of Precambrian ferruginous conditions based on the key Fe speciation thresholds (see main text). A derivative of the SGP dataset shown in **Figure 5A**. As presented on **Figure 5C, 6A**
  * `SGP_TOCP_redox_fractions_downsampled_phanerozoic.csv` - Phanerozoic age-interpolated fraction of Phanerozoic ferruginous conditions based on a key TOC/P threshold (see main text). A derivative of the SGP dataset shown in **Figure 5B**. As presented on **Figure 5C, 6A**
  * `SGP_TOCP_redox_fractions_downsampled_precambrian.csv` - Precambrian age-interpolated fraction of Precambrian ferruginous conditions based on a key TOC/P threshold (see main text). A derivative of the SGP dataset shown in **Figure 5B**. As presented on **Figure 5C, 6A**
- * `pyrite_combined_manual.csv` - present day geographic coordinates (clat, clng) for the xDD pyrite framboid and/or nodule-bearing rock record. Regarding *Phanerozoic* xDD pyrite-bearing rocks outside the Macrostrat focal area, present day geographic coordinates are estimates based on the type sections reported in the [British Geological Survey](https://www.bgs.ac.uk/technologies/the-bgs-lexicon-of-named-rock-units/) and [Geoscience Australia](https://asud.ga.gov.au/) stratigraphic lexicons). xDD were converted to a quasi-ferruginous fraction and subsequently interpolated using reconstructed palaeogeographic coordinates. Presented on **Figure 6**
+ * `pyrite_combined_manual.csv` - present day geographic coordinates (clat, clng) for the xDD pyrite framboid and/or nodule-bearing rock record. Regarding *Phanerozoic* xDD pyrite-bearing rocks outside the Macrostrat focal area, present day geographic coordinates are estimates based on the type sections reported in the [British Geological Survey](https://www.bgs.ac.uk/technologies/the-bgs-lexicon-of-named-rock-units/) and [Geoscience Australia](https://asud.ga.gov.au/) stratigraphic lexicons). These xDD data were converted to a quasi-ferruginous fraction, and subsequently interpolated using reconstructed palaeogeographic coordinates. Presented on **Figure 6**
  * `pyrite_stats_with_long_lats.csv` - the fraction of ferruginous vs. euxinic conditions (microenvironment vs. ambient) on an age (1 Ma bin) and unit-by-unit basis for [pyrite trace element analyses](https://doi.org/10.1130/GEOL.S.12456332) reported by [Mukherjee and Large, 2021](https://doi.org/10.1130/GEOL.S.12456332). Present day geographic coordinates were added manually by inspection of the original dataset sample descriptions, cross-referenced to coordinates extracted primarily from [Google Earth](https://earth.google.com/web/), and rarely SGP from entries. These data were interpolated using reconstructed palaeogeographic coordinates. Presented on **Figure 6**
  * `SGP_Fe_ferruginous_fractions.csv` - the fraction of ferruginous vs. euxinic conditions on an age (1 Ma bin) and long-lat basis for [SGP Fe-speciation data](http://sgp-search.io/). These data were interpolated using reconstructed palaeogeographic coordinates. Presented on **Figure 6**
 
@@ -55,23 +55,26 @@
 ### Figure 1 is derived from the [GeoDeepDive](https://geodeepdive.org) (now known as xDD) library and machine reading system
 As the basis of our pyrite application we [forked](https://github.com/jemmings-git/pyrite_app) the [original text mining application](https://github.com/UW-Macrostrat/stromatolites_demo) used in [Peters, Husson and Wilcots 2017, *Geology*](http://doi.org/10.1130/G38931.1). 
 
-### Figure 2 utilises Phase 1 data from the [Sedimentary Geochemistry and Palaeoenvironments Project (SGP)](http://sgp-search.io/)
-The citable references for the Phase 1 data product are:
-
-Mehra et al. 2021, GSA Today, 31, https://doi.org/10.1130/GSATG484A.1.
-
-Farrell et al., Geobiology (in review) (2021).
-
-### Figures 3-5 utilise [previously published pyrite trace element data](https://doi.org/10.1130/GEOL.S.12456332) : https://doi.org/10.1130/GEOL.S.12456332
+### Figures 2-7 utilise [previously published pyrite trace element data](https://doi.org/10.1130/GEOL.S.12456332) : https://doi.org/10.1130/GEOL.S.12456332
 The data derive from:
 
-Large et al., Earth and Planetary Science Letters 389, 209-220 (2014).
+[Large et al., 2014. *Earth and Planetary Science Letters*, 389, 209-220.](http://dx.doi.org/10.1016/j.epsl.2013.12.020)
+[Large et al., 2015. *Gondwana Research*, 28, 1282-1293.](http://dx.doi.org/10.1016/j.gr.2015.06.004)
+[Large et al., 2015. *Earth and Planetary Science Letters*, 428, 139-150.](http://dx.doi.org/10.1016/j.epsl.2015.07.026)
+[Large et al., 2019. *Mineralium Deposita*, 54, 485-506.](https://doi.org/10.1007/s00126-019-00873-9)
+[Mukherjee and Large, 2020. *Geology*, 48, 1018-1022.](https://doi.org/10.1130/G47890.1)
 
-Large et al., Gondwana Research 28, 1282-1293 (2015).
+### Figures 5-7 utilise Fe-speciation and TOC/P data from the [Sedimentary Geochemistry and Palaeoenvironments Project (SGP)](http://sgp-search.io/)
+The citable references for the Phase 1 data product are:
 
-Large et al., Earth and Planetary Science Letters 428, 139-150 (2015).
+[Mehra et al., 2021. *GSA Today*, 31](https://doi.org/10.1130/GSATG484A.1.)  
+[Farrell et al., 2021. *Geobiology*, 00, 1– 12.](https://doi.org/10.1111/gbi.12462)  
 
-Large et al., Mineralium Deposita 54, 485-506 (2019).
+### Reconstructions ###
 
-Mukherjee and Large, Geology 48, 1018-1022 (2020).
+Palaeogeographic reconstructions derive from the [GPlates Web Service](https://gws.gplates.org/) interfaced with the [*chronosphere* R package](https://github.com/chronosphere-portal/r_package/). The reconstructions derive from the model of [Scotese, C. R. 2016. Tutorial: PALEOMAP PaleoAtlas for GPlates and the PaleoData Plotter Program](https://www.earthbyte.org/paleomap-paleoatlas-for-gplates/). Palaeo-digital elevation models derive from [Scotese, C. R, and Wright, N. 2018. PALEOMAP Paleodigital Elevation Models (PaleoDEMS) for the Phanerozoic](https://www.earthbyte.org/paleodem-resource-scotese-and-wright-2018/).
+
+Chronostratigraphic timescales were plotted in R using the [*deeptime* R package](https://github.com/willgearty/deeptime).
+
+Please refer to the **Supplementary materials** for the complete R package reference list.
 
