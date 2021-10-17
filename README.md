@@ -25,7 +25,7 @@
  * `wilkin_snippets.R` - process Wilkin-pyrite mentions (underlying Fig 1C) via the [xDD snippets API](https://xdd.wisc.edu/api/snippets)  
  * `analysis.R` - produce a series of analytical plots illustrating the observable xDD pyrite distributions as presented on **Figure 1**. This code is split into two parts, dealing with Figs 1A-C and Supplementary figures 
  * `stats.R`- conduct data manipulation, statistical analysis and machine learning as presented on **Figures 2-5** and supplementary materials. Each code block (for each figure) should be run consecutively. Pyrite trace element and SGP data are downloaded and analysed. 
- * `gplates.R` - reconstruct palaeogeographic coordinates and interpolate results (in time and space), via the [GPlates Web Service](https://gws.gplates.org/) interfaced with the [*chronosphere* R package](https://github.com/chronosphere-portal/r_package/). This script reproduces **Figures 6-7**.
+ * `gplates.R` - reconstruct palaeogeographic coordinates and interpolate results (in time and space), via the [GPlates Web Service](https://gws.gplates.org/) interfaced with the [*chronosphere* R package](https://github.com/chronosphere-portal/r_package/). This script reproduces **Figure 5, plus the proximity values on Fig. 4F**.
 
 #### Datasets & results:
  * The pyrite trace element and SGP datasets are downloaded by deploying the code in this repository, and are not stored locally
@@ -56,7 +56,7 @@
 ### Figure 1 is derived from the [GeoDeepDive](https://geodeepdive.org) (now known as xDD) library and machine reading system
 As the basis of our pyrite application we [forked](https://github.com/jemmings-git/pyrite_app) the [original text mining application](https://github.com/UW-Macrostrat/stromatolites_demo) used in [Peters, Husson and Wilcots 2017, *Geology*](http://doi.org/10.1130/G38931.1). 
 
-### Figures 2-7 utilise previously published and open access [pyrite trace element data](https://doi.org/10.1130/GEOL.S.12456332):  
+### Figures 2-6 utilise previously published and open access [pyrite trace element data](https://doi.org/10.1130/GEOL.S.12456332):  
 
 [Large et al., 2014. *Earth and Planetary Science Letters*, 389, 209-220.](http://dx.doi.org/10.1016/j.epsl.2013.12.020)  
 [Large et al., 2015. *Gondwana Research*, 28, 1282-1293.](http://dx.doi.org/10.1016/j.gr.2015.06.004)  
@@ -64,12 +64,12 @@ As the basis of our pyrite application we [forked](https://github.com/jemmings-g
 [Large et al., 2019. *Mineralium Deposita*, 54, 485-506.](https://doi.org/10.1007/s00126-019-00873-9)  
 [Mukherjee and Large, 2020. *Geology*, 48, 1018-1022.](https://doi.org/10.1130/G47890.1)  
 
-### Figures 5-7 utilise Fe-speciation and TOC/P data from the open access [Sedimentary Geochemistry and Palaeoenvironments Project (SGP)](http://sgp-search.io/)
+### Figures 5-6 utilise Fe-speciation and TOC/P data from the open access [Sedimentary Geochemistry and Palaeoenvironments Project (SGP)](http://sgp-search.io/)
 The citable reference for the Phase 1 data product is:
 [Farrell et al., 2021. *Geobiology*, 00, 1– 12.](https://doi.org/10.1111/gbi.12462)  
 
 Users may also wish to read and cite:
-[Mehra et al., 2021. *GSA Today*, 31, 5, 4-10.](https://doi.org/10.1130/GSATG484A.1)  
+[Mehra et al., 2021. *GSA Today*, 31, 5, 4-10.](https://doi.org/10.1130/GSATG484A.1)
 
 ### Reconstructions (Figure 6) ###
 
@@ -84,4 +84,6 @@ All figures were produced initially in R using the code in this repository, foll
 # TO CHECK - all cases of setwd
 - check stats.R is fully operational
 - double check all datasets (just plot in excel)
+- check mentions of fig XX in code
+- check all instances of setwd
 
