@@ -15,8 +15,11 @@ library(safejoin)
 library(pammtools)
 library(gridExtra)
 library(tidyverse)
+library(deeptime)
+library(ggfittext)
+library(grid)
 
-project_home <- '...' # insert directory
+project_home <- 'C:/Users/jemmings/Documents/Offline_work/pyrite_analysis-master/pyrite_analysis-master' # insert directory
 tryCatch({
   setwd(project_home)
 }, error = function(err) { 
@@ -497,22 +500,130 @@ sediments_bins <- sediments_bins[c(1:541,543:889),] # remove duplicate 541
 
 # block end
 
+### import Wilkin-framboids ##
+
+wilkin_comp <-  read.csv(file = "wilkin_framboids_comp.csv", row.names = 1)
+
+sediments <- (grepl(paste(rocks, collapse = "|"), wilkin_comp$lith, ignore.case=TRUE) | 
+                grepl(paste(rocks, collapse = "|"), wilkin_comp$other, ignore.case=TRUE) | 
+                grepl(paste(rocks, collapse = "|"), wilkin_comp$environ, ignore.case=TRUE) | 
+                grepl(paste(rocks, collapse = "|"), wilkin_comp$highlight, ignore.case=TRUE) | 
+  grepl(paste(rocks, collapse = "|"), wilkin_comp$strat_name_long.x, ignore.case=TRUE)) &
+  (grepl(paste(rocks2, collapse = "|"), wilkin_comp$lith, ignore.case=TRUE) | 
+     grepl(paste(rocks2, collapse = "|"), wilkin_comp$other, ignore.case=TRUE) | 
+     grepl(paste(rocks2, collapse = "|"), wilkin_comp$environ, ignore.case=TRUE) | 
+     grepl(paste(rocks2, collapse = "|"), wilkin_comp$highlight, ignore.case=TRUE) | 
+  grepl(paste(rocks2, collapse = "|"), wilkin_comp$strat_name_long.x, ignore.case=TRUE))
+
+wilkin_comp <- subset(wilkin_comp, sediments) # subset to 'rocks' of interest
+
+wilkin_comp <- melt(wilkin_comp, id.vars = c(1:87), na.rm=TRUE)
+wilkin_comp$value <- as.numeric(wilkin_comp$value)
+wilkin_comp <- subset(wilkin_comp, variable != "b_age2")
+
+# all strat names mentioned in Wilkin-pyrite papers
+
+# Phanerozoic bins
+
+wilkin_comp_bins1 <- hist(wilkin_comp$value[wilkin_comp$value >= 0 & wilkin_comp$value < cutoff+1], breaks = seq(0, cutoff+1, by = phanerozoic_increment))
+wilkin_comp_bins1 <- as.data.frame(cbind(wilkin_comp_bins1$counts, wilkin_comp_bins1$breaks))
+wilkin_comp_bins1 <- wilkin_comp_bins1[1:542,]
+
+# Precambrian bins
+wilkin_comp_bins2 <- hist(wilkin_comp$value[wilkin_comp$value >= cutoff & wilkin_comp$value <= 4001], breaks = seq(cutoff, 4001, by = precambrian_increment))
+wilkin_comp_bins2 <- as.data.frame(cbind(wilkin_comp_bins2$counts, wilkin_comp_bins2$breaks))
+
+# Bind
+wilkin_comp_bins <- rbind(wilkin_comp_bins1,wilkin_comp_bins2)
+
+wilkin_comp_bins <- wilkin_comp_bins[c(1:541,543:889),] # remove duplicate 541
+
+# cull to 1 strat names mentioned in Wilkin-pyrite papers
+
+wilkin_comp.one <- subset(wilkin_comp, count <= 1)
+
+# Phanerozoic bins
+
+wilkin_comp.one_bins1 <- hist(wilkin_comp.one$value[wilkin_comp.one$value >= 0 & wilkin_comp.one$value < cutoff+1], breaks = seq(0, cutoff+1, by = phanerozoic_increment))
+wilkin_comp.one_bins1 <- as.data.frame(cbind(wilkin_comp.one_bins1$counts, wilkin_comp.one_bins1$breaks))
+wilkin_comp.one_bins1 <- wilkin_comp.one_bins1[1:542,]
+
+# Precambrian bins
+wilkin_comp.one_bins2 <- hist(wilkin_comp.one$value[wilkin_comp.one$value >= cutoff & wilkin_comp.one$value <= 4001], breaks = seq(cutoff, 4001, by = precambrian_increment))
+wilkin_comp.one_bins2 <- as.data.frame(cbind(wilkin_comp.one_bins2$counts, wilkin_comp.one_bins2$breaks))
+
+# Bind
+wilkin_comp.one_bins <- rbind(wilkin_comp.one_bins1,wilkin_comp.one_bins2)
+
+wilkin_comp.one_bins <- wilkin_comp.one_bins[c(1:541,543:889),] # remove duplicate 541
+
+# cull to 3 strat names mentioned in Wilkin-pyrite papers
+
+wilkin_comp.three <- subset(wilkin_comp, count <= 3)
+
+# Phanerozoic bins
+
+wilkin_comp.three_bins1 <- hist(wilkin_comp.three$value[wilkin_comp.three$value >= 0 & wilkin_comp.three$value < cutoff+1], breaks = seq(0, cutoff+1, by = phanerozoic_increment))
+wilkin_comp.three_bins1 <- as.data.frame(cbind(wilkin_comp.three_bins1$counts, wilkin_comp.three_bins1$breaks))
+wilkin_comp.three_bins1 <- wilkin_comp.three_bins1[1:542,]
+
+# Precambrian bins
+wilkin_comp.three_bins2 <- hist(wilkin_comp.three$value[wilkin_comp.three$value >= cutoff & wilkin_comp.three$value <= 4001], breaks = seq(cutoff, 4001, by = precambrian_increment))
+wilkin_comp.three_bins2 <- as.data.frame(cbind(wilkin_comp.three_bins2$counts, wilkin_comp.three_bins2$breaks))
+
+# Bind
+wilkin_comp.three_bins <- rbind(wilkin_comp.three_bins1,wilkin_comp.three_bins2)
+
+wilkin_comp.three_bins <- wilkin_comp.three_bins[c(1:541,543:889),] # remove duplicate 541
+
+# cull to 5 strat names mentioned in Wilkin-pyrite papers
+
+wilkin_comp.five <- subset(wilkin_comp, count <= 5)
+
+# Phanerozoic bins
+
+wilkin_comp.five_bins1 <- hist(wilkin_comp.five$value[wilkin_comp.five$value >= 0 & wilkin_comp.five$value < cutoff+1], breaks = seq(0, cutoff+1, by = phanerozoic_increment))
+wilkin_comp.five_bins1 <- as.data.frame(cbind(wilkin_comp.five_bins1$counts, wilkin_comp.five_bins1$breaks))
+wilkin_comp.five_bins1 <- wilkin_comp.five_bins1[1:542,]
+
+# Precambrian bins
+wilkin_comp.five_bins2 <- hist(wilkin_comp.five$value[wilkin_comp.five$value >= cutoff & wilkin_comp.five$value <= 4001], breaks = seq(cutoff, 4001, by = precambrian_increment))
+wilkin_comp.five_bins2 <- as.data.frame(cbind(wilkin_comp.five_bins2$counts, wilkin_comp.five_bins2$breaks))
+
+# Bind
+wilkin_comp.five_bins <- rbind(wilkin_comp.five_bins1,wilkin_comp.five_bins2)
+
+wilkin_comp.five_bins <- wilkin_comp.five_bins[c(1:541,543:889),] # remove duplicate 541
+
 # now for normalisation to sedimentary bins, as stacked output
 
 # block start
 
 # optional additional time points for plotting
 
+HEATT <- c(56, 66, 93, 116, 183, 200, 251, 359, 372, 383, 444, 514, 541) 
 ME <- c(445, 372, 252, 201, 65)
 OAEs <- c(183, 120, 111, 93) # from Jenkyns 2010
 PETM <- 55.8 # from Jenkyns 2010
 Sturt <- c(716, 663) # Sturtian glaciation from ???
 Es <- c(517, 502, 405, 393, 388, 382, 359, 330, 249, 240, 230, 220, 188, 145)
-Extras <- c(2500, 1600, 1000, 720, 635, 541, 485.4, 443.8, 419.2, 358.9, 298.9, 
+Extras <- c(2500, 1600, 1000, 850, 635, 541, 485.4, 443.8, 419.2, 358.9, 298.9, 
             251.9, 201.3, 145, 66, 23.03, 2.58) # Chronostrat divisions
 supercontinents <- c(320, 170, 900, 700, 1600, 1400) # from Li et al. 2019 Precambrian Research
 carb.intervals <- c(541, 465, 372, 323, 265, 227, 164, 133)
 lows <- c(323, 299, 201, 170) # carb.intervals and lows from Riding et al. 2019
+glacials <- cbind(c(2360, 2400,2450,717,650,467,330,315,307,305,300,34),
+                  c(2380,2440,2460,660,635,444,317,311,308,306,288,0))
+glacials <- as.data.frame(glacials)
+BIF <- cbind(c(3000,1000, 541), c(1800, 542, 527))
+BIF <- as.data.frame(BIF)
+HEBS <- cbind(c(130,310, 335,330,362,388,490,505,2050), c(89, 305, 336, 323,359,383,491,506,2060))
+HEBS <- as.data.frame(HEBS)
+
+SEDEX <- read.csv("SEDEX.csv")
+
+MVT <- subset(SEDEX, prevtype == "MVT")
+SEDEX <- subset(SEDEX, prevtype == "SEDEX")
 
 # plots
 
@@ -530,30 +641,84 @@ undifS <- as.data.frame(cbind((pyrite_undif_bins$V1+framboids_bins$V1+nodules_bi
 
 #### output - Figure 1A ###
 
+# also add thick precambrian-cambrian boundary..
+
 a <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(Bottom, 541)) +
-  geom_stepribbon(data = undifS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
-  geom_stepribbon(data = framboidsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "red") +
-  geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue") +
-  geom_step(data = undifS, aes(V2-0.5, V1)) +
-  geom_step(data = nodulesS, aes(V2-0.5, V1)) + 
-  geom_step(data = framboidsS, aes(V2-0.5, V1)) +
-  geom_vline(xintercept = c(Extras))
+  geom_linerange(data = glacials, aes(xmin= V1, xmax = V2, y = 0.38), colour = "deepskyblue", size = 2) +
+   annotate(x=c(3000,2850,2350,2100, 1900),y=0.4,label= c("BIF", "Major glacials", "SEDEX", "MVT", "HEBS"),
+           vjust=0,hjust = 0, geom="text", colour = c("orange", "deepskyblue", "black", "grey50", "red"), fontface = 2, size = 3.5) +
+  geom_linerange(data = BIF, aes(xmin= V1, xmax = V2, y = 0.39), colour = "orange", size = 2) +
+  geom_point(data = SEDEX, aes(agemy, y = 0.36)) +
+  geom_point(data = MVT, aes(agemy, y = 0.37), colour = "grey50") +
+  geom_point(data = HEBS, aes(V1, y = 0.37), colour = "red") +
+  geom_point(data = HEBS, aes(V2, y = 0.37), colour = "red") +
+  geom_linerange(data = HEBS, aes(xmax= V1, xmin = V2, y = 0.37), colour = "red", size = 2) +
+  scale_x_reverse(limits = c(Bottom, 542), expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  coord_cartesian(ylim = c(0, 0.35), clip="off") +
+  geom_vline(xintercept = c(Extras)) +
+  geom_vline(xintercept = c(HEATT), colour = "white", linetype = "dashed", size = 0.5) +
+  geom_stepribbon(data = undifS, aes(V2-0.5, ymin = 0, ymax = V1, fill = "Undifferentiated pyrite"), colour = "black") +
+  geom_stepribbon(data = framboidsS, aes(V2-0.5, ymin = 0, ymax = V1, fill = "Framboids"), colour = "black") +
+  geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1, fill = "Nodules/concretions"), colour = "black") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        plot.margin=unit(c(0.95,0,0.11,0), "cm"),
+        axis.title.y = element_text(angle = 0, hjust = 0.5, vjust = 0.5),
+        plot.tag.position = c(0.01,0.99),
+        axis.text.x=element_blank(),
+        axis.title.x=element_blank(),
+        panel.background = element_rect(fill = 'grey50'),
+        axis.text.y=element_text(size = 12),
+        legend.position = c(0.44, 0.9),
+        legend.background = element_rect(fill="white"),
+        legend.direction = "horizontal",
+        legend.margin = margin(0, 0, 0, 0),
+        legend.spacing.x = unit(0, "mm"),
+        legend.spacing.y = unit(0, "mm"),
+        legend.key.size = unit(0.7, 'cm')) +
+  ylab("Proportion of\npyrite-bearing\n(meta)sedimentary\nrocks") +
+  labs(tag = "A")  +
+  annotate(x=c(HEATT)-5,y=0.35,label=c(letters[length(HEATT):1]),
+           vjust=1,geom="label", colour = "black", fontface = 2, size = 3.5,
+           label.padding = unit(0.18, "lines"),
+           label.r = unit(0.11, "lines"),
+           label.size = NA) +
+  scale_fill_manual(values = c("Undifferentiated pyrite" = "grey90",
+                               "Framboids" = "red",
+                               "Nodules/concretions" = "blue"),
+                     name = NULL, guide = 'legend', 
+                     labels = c('Undifferentiated pyrite','Framboids', 'Nodules/concretions'))
 
 b <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(541, Top)) +
-  geom_stepribbon(data = undifS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
-  geom_stepribbon(data = framboidsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "red") +
-  geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue") +
-  geom_step(data = framboidsS, aes(V2-0.5, V1)) + 
-  geom_step(data = nodulesS, aes(V2-0.5, V1)) + 
-  geom_step(data = undifS, aes(V2-0.5, V1)) +
+  scale_x_reverse(limits = c(542, Top), expand = c(0,0)) +
+  geom_linerange(data = BIF, aes(xmin= V1, xmax = V2, y = 0.39), colour = "orange", size = 2) +
+  geom_linerange(data = glacials, aes(xmin= V1, xmax = V2, y = 0.38), colour = "deepskyblue", size = 2) +
+  geom_point(data = SEDEX, aes(agemy, y = 0.36)) +
+  geom_point(data = MVT, aes(agemy, y = 0.37), colour = "grey50") +
+  geom_point(data = HEBS, aes(V1, y = 0.37), colour = "red") +
+  geom_point(data = HEBS, aes(V2, y = 0.37), colour = "red") +
+  geom_linerange(data = HEBS, aes(xmax= V1, xmin = V2, y = 0.37), colour = "red", size = 2) +
+  scale_y_continuous(expand = c(0,0)) +
+  coord_cartesian(ylim = c(0, 0.35), clip="off") +
+  geom_vline(xintercept = c(Extras)) +
+  geom_vline(xintercept = c(HEATT), colour = "white", linetype = "dashed", size = 0.5) +
+  geom_stepribbon(data = undifS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey90", colour = "black") +
+  geom_stepribbon(data = framboidsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "red", colour = "black") +
+  geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue", colour = "black") +
   theme(axis.title.y=element_blank(),
         axis.text.y=element_blank(),
-        axis.ticks.y=element_blank()) +
-  geom_vline(xintercept = c(Extras)) #+ 
-#geom_vline(xintercept = ME) #+ 
-#geom_vline(xintercept = c(Es, OAEs))
+        axis.text.x=element_blank(),
+        axis.title.x=element_blank(),
+        axis.ticks.y=element_blank(),
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        plot.margin=unit(c(0.95,0.15,0.11,-0.16), "cm"),
+        panel.background = element_rect(fill = 'grey50')) +
+  annotate(x=c(HEATT)-5,y=0.35,label=c(letters[length(HEATT):1]),
+           vjust=1,geom="label", colour = "black", fontface = 2, size = 3.5,
+           label.padding = unit(0.18, "lines"),
+           label.r = unit(0.11, "lines"),
+           label.size = NA)
 
 # generate plots 
 
@@ -570,31 +735,42 @@ undifS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1+pyrite_undif_bi
 #### output - Figure 1B ###
 
 c <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(Bottom, 541)) +
-  scale_y_continuous(limits = c(0,0.45)) +
-  geom_stepribbon(data = undifS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
-  geom_stepribbon(data = framboidsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "red") +
-  geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue") +
-  geom_step(data = undifS, aes(V2-0.5, V1)) +
-  geom_step(data = nodulesS, aes(V2-0.5, V1)) + 
-  geom_step(data = framboidsS, aes(V2-0.5, V1)) +
-  geom_vline(xintercept = c(Extras))
+  scale_x_reverse(limits = c(Bottom, 542), expand = c(0,0)) +
+  geom_vline(xintercept = c(Extras))  +
+  geom_vline(xintercept = c(HEATT), colour = "white", linetype = "dashed", size = 0.5) +
+  scale_y_continuous(expand = c(0,0), limits = c(0,0.45)) +
+  geom_stepribbon(data = framboidsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "red", colour = "black") +
+  geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue", colour = "black") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        plot.margin=unit(c(0.11,0,0.11,0), "cm"),
+        axis.title.y = element_text(angle = 0, hjust = 0.5, vjust = 0.5),
+        plot.tag.position = c(0.01,0.99),
+        axis.text.x=element_blank(),
+        axis.title.x=element_blank(),
+        axis.text.y=element_text(size = 12),
+        panel.background = element_rect(fill = 'grey50')) +
+  ylab("Proportion of\nframboid and\nnodule-bearing\npyritic \n(meta)sedimentary\nrocks") +
+  labs(tag = "B")
 
 d <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(541, Top)) +
-  scale_y_continuous(limits = c(0,0.45)) +
-  geom_stepribbon(data = undifS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
-  geom_stepribbon(data = framboidsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "red") +
-  geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue") +
+  scale_x_reverse(limits = c(542, Top), expand = c(0,0))  +
+  geom_vline(xintercept = c(Extras)) +
+  geom_vline(xintercept = c(HEATT), colour = "white", linetype = "dashed", size = 0.5) +
+  scale_y_continuous(expand = c(0,0), limits = c(0,0.45)) +
+  geom_stepribbon(data = framboidsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "red", colour = "black") +
+  geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue", colour = "black") +
   geom_step(data = framboidsS, aes(V2-0.5, V1)) + 
   geom_step(data = nodulesS, aes(V2-0.5, V1)) + 
-  geom_step(data = undifS, aes(V2-0.5, V1)) +
+  #geom_step(data = undifS, aes(V2-0.5, V1)) +
   theme(axis.title.y=element_blank(),
         axis.text.y=element_blank(),
-        axis.ticks.y=element_blank()) +
-  geom_vline(xintercept = c(Extras)) #+ 
-#geom_vline(xintercept = ME) #+ 
-#geom_vline(xintercept = c(Es, OAEs))
+        axis.ticks.y=element_blank(),
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        plot.margin=unit(c(0.11,0.15,0.11,-0.16), "cm"),
+        axis.text.x=element_blank(),
+        axis.title.x=element_blank(),
+        panel.background = element_rect(fill = 'grey50'))
 
 #Extras, ME, OAEs, 
 
@@ -602,16 +778,93 @@ d <- ggplot() + theme_bw() +
 
 grid.arrange(c,d, ncol = 2)
 
+#### output - Figure 1C ###
+
+# wilkin-framboids
+
+wilk.framboidsS.all <- as.data.frame(cbind((wilkin_comp_bins$V1)/sediments_bins$V1,nodules_bins$V2))
+wilk.framboidsS.one <- as.data.frame(cbind((wilkin_comp.one_bins$V1)/sediments_bins$V1,nodules_bins$V2))
+wilk.framboidsS.three <- as.data.frame(cbind((wilkin_comp.three_bins$V1)/sediments_bins$V1,nodules_bins$V2))
+wilk.framboidsS.five <- as.data.frame(cbind((wilkin_comp.five_bins$V1)/sediments_bins$V1,nodules_bins$V2))
+
+e <-  ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(Bottom, 542), expand = c(0,0.11)) +
+  geom_vline(xintercept = c(Extras)) + 
+  geom_vline(xintercept = c(HEATT), colour = "white", linetype = "dashed", size = 0.5) +
+  scale_y_continuous(expand = c(0,0), limits = c(0,0.25)) +
+  #geom_stepribbon(data = wilk.framboidsS.all, aes(V2-0.5, ymin = 0, ymax = V1, fill = "Max"), colour = "black") +
+  geom_stepribbon(data = wilk.framboidsS.five, aes(V2-0.5, ymin = 0, ymax = V1, fill = "5"), colour = "black") +
+  geom_stepribbon(data = wilk.framboidsS.three, aes(V2-0.5, ymin = 0, ymax = V1, fill = "3"), colour = "black") +
+  geom_stepribbon(data = wilk.framboidsS.one, aes(V2-0.5, ymin = 0, ymax = V1, fill = "1"), colour = "black") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        plot.margin=unit(c(0,0,0,0), "cm"),
+        axis.title.y = element_text(angle = 0, hjust = 0.5, vjust = 0.5),
+        plot.tag.position = c(0.01,0.99),
+        panel.background = element_rect(fill = 'grey50'),
+        axis.text.y=element_text(size = 12),
+        axis.text.x=element_text(size = 12),
+        axis.title.x = element_blank(),
+        legend.position = c(0.48, 0.9),
+        legend.background = element_rect(fill="white"),
+        legend.direction = "horizontal",
+        legend.margin = margin(0, 0, 0, 0),
+        legend.spacing.x = unit(0, "mm"),
+        legend.spacing.y = unit(0, "mm"),
+        legend.key.size = unit(0.7, 'cm')) +
+  ylab("Proportion of\nWilkin-pyrite\n(meta)sedimentary\nrocks") +
+  coord_geo(dat = list("periods", "eras"), xlim = c(Bottom, 542), size = 3, 
+            height = list(unit(0.75, "lines"), unit(0.75, "lines")),
+            pos = list("b", "b"), abbrv = list(TRUE, TRUE),
+            skip = c("Cm", "Msr")) +
+  labs(tag = "C") +
+  scale_fill_manual(values = c("Max" = "lightsalmon",
+                               "5" = "tomato1",
+                               "3" = "orangered2",
+                               "1" = "orangered4"),
+                    name = 'Mentions of (meta)sedimentary rocks \nin "Wilkin" pyrite publications', guide = 'legend', 
+                    labels = c('Max','5', '3', '1'))
+
+
+f <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(542, Top), expand = c(0,0.11)) +
+  geom_vline(xintercept = c(Extras))  +
+  geom_vline(xintercept = c(HEATT), colour = "white", linetype = "dashed", size = 0.5) +
+  #geom_stepribbon(data = wilk.framboidsS.all, aes(V2-0.5, ymin = 0, ymax = V1), fill = "lightsalmon", colour = "black") +
+  geom_stepribbon(data = wilk.framboidsS.five, aes(V2-0.5, ymin = 0, ymax = V1), fill = "tomato1", colour = "black") +
+  geom_stepribbon(data = wilk.framboidsS.three, aes(V2-0.5, ymin = 0, ymax = V1), fill = "orangered2", colour = "black") +
+  geom_stepribbon(data = wilk.framboidsS.one, aes(V2-0.5, ymin = 0, ymax = V1), fill = "orangered4", colour = "black") +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        plot.margin=unit(c(0,0.15,0,-0.16), "cm"),
+        panel.background = element_rect(fill = 'grey50'),
+        axis.text.x=element_text(size = 12),
+        axis.title.x = element_blank()) +
+  scale_y_continuous(limits = c(0,0.25), expand = c(0,0)) +
+  coord_geo(dat = list("periods", "eras"), xlim = c(542, Top),
+            height = list(unit(0.75, "lines"), unit(0.75, "lines")),
+            pos = list("b", "b"), abbrv = list(TRUE, TRUE), size = 3)
+
+grid.arrange(a,b,c,d,e,f,ncol = 2, bottom = textGrob("Age (Ma)"))
+
+
+
 # optional data export
 
-out <- cbind(framboids_bins, nodules_bins, veins_bins, pyrite_undif_bins, sediments_bins)
-out <- out[,c(1,3,5,7,9:10)]
+out <- cbind(framboids_bins, nodules_bins, veins_bins, pyrite_undif_bins, sediments_bins, wilkin_comp.one_bins,wilkin_comp.three_bins,wilkin_comp.five_bins,wilkin_comp_bins)
+out <- out[,c(1,3,5,7,9,11,13,15,17:18)]
 names(out)[1] <- "framboids"
 names(out)[2] <- "nodules"
 names(out)[3] <- "min"
 names(out)[4] <- "undif"
 names(out)[5] <- "seds"
-names(out)[6] <- "Age"
+names(out)[6] <- "Wilkin.one"
+names(out)[7] <- "Wilkin.three"
+names(out)[8] <- "Wilkin.five"
+names(out)[9] <- "Wilkin.all"
+names(out)[10] <- "Age"
 
 write.csv(out, "xdd_binned_results.csv") 
 
@@ -1025,117 +1278,372 @@ sediments_bins <- sediments_bins[c(1:541,543:889),] # remove duplicate 541
 
 # block end
 
+### import Wilkin-framboids ##
+
+wilkin_comp <-  read.csv(file = "wilkin_framboids_strat.csv", row.names = 1)
+
+sediments <- (grepl(paste(rocks, collapse = "|"), wilkin_comp$other, ignore.case=TRUE) | 
+                grepl(paste(rocks, collapse = "|"), wilkin_comp$strat_name, ignore.case=TRUE) | 
+                grepl(paste(rocks, collapse = "|"), wilkin_comp$highlight, ignore.case=TRUE))  &
+  (grepl(paste(rocks2, collapse = "|"), wilkin_comp$other, ignore.case=TRUE) | 
+     grepl(paste(rocks2, collapse = "|"), wilkin_comp$strat_name, ignore.case=TRUE) | 
+     grepl(paste(rocks2, collapse = "|"), wilkin_comp$highlight, ignore.case=TRUE))
+
+wilkin_comp <- subset(wilkin_comp, sediments) # subset to 'rocks' of interest
+
+wilkin_comp <- melt(wilkin_comp, id.vars = c(1:48), na.rm=TRUE)
+wilkin_comp$value <- as.numeric(wilkin_comp$value)
+wilkin_comp <- subset(wilkin_comp, variable != "b_age2")
+
+# all strat names mentioned in Wilkin-pyrite papers
+
+# Phanerozoic bins
+
+wilkin_comp_bins1 <- hist(wilkin_comp$value[wilkin_comp$value >= 0 & wilkin_comp$value < cutoff+1], breaks = seq(0, cutoff+1, by = phanerozoic_increment))
+wilkin_comp_bins1 <- as.data.frame(cbind(wilkin_comp_bins1$counts, wilkin_comp_bins1$breaks))
+wilkin_comp_bins1 <- wilkin_comp_bins1[1:542,]
+
+# Precambrian bins
+wilkin_comp_bins2 <- hist(wilkin_comp$value[wilkin_comp$value >= cutoff & wilkin_comp$value <= 4001], breaks = seq(cutoff, 4001, by = precambrian_increment))
+wilkin_comp_bins2 <- as.data.frame(cbind(wilkin_comp_bins2$counts, wilkin_comp_bins2$breaks))
+
+# Bind
+wilkin_comp_bins <- rbind(wilkin_comp_bins1,wilkin_comp_bins2)
+
+wilkin_comp_bins <- wilkin_comp_bins[c(1:541,543:889),] # remove duplicate 541
+
+# cull to 1 strat names mentioned in Wilkin-pyrite papers
+
+wilkin_comp.one <- subset(wilkin_comp, count <= 1)
+
+# Phanerozoic bins
+
+wilkin_comp.one_bins1 <- hist(wilkin_comp.one$value[wilkin_comp.one$value >= 0 & wilkin_comp.one$value < cutoff+1], breaks = seq(0, cutoff+1, by = phanerozoic_increment))
+wilkin_comp.one_bins1 <- as.data.frame(cbind(wilkin_comp.one_bins1$counts, wilkin_comp.one_bins1$breaks))
+wilkin_comp.one_bins1 <- wilkin_comp.one_bins1[1:542,]
+
+# Precambrian bins
+wilkin_comp.one_bins2 <- hist(wilkin_comp.one$value[wilkin_comp.one$value >= cutoff & wilkin_comp.one$value <= 4001], breaks = seq(cutoff, 4001, by = precambrian_increment))
+wilkin_comp.one_bins2 <- as.data.frame(cbind(wilkin_comp.one_bins2$counts, wilkin_comp.one_bins2$breaks))
+
+# Bind
+wilkin_comp.one_bins <- rbind(wilkin_comp.one_bins1,wilkin_comp.one_bins2)
+
+wilkin_comp.one_bins <- wilkin_comp.one_bins[c(1:541,543:889),] # remove duplicate 541
+
+# cull to 3 strat names mentioned in Wilkin-pyrite papers
+
+wilkin_comp.three <- subset(wilkin_comp, count <= 3)
+
+# Phanerozoic bins
+
+wilkin_comp.three_bins1 <- hist(wilkin_comp.three$value[wilkin_comp.three$value >= 0 & wilkin_comp.three$value < cutoff+1], breaks = seq(0, cutoff+1, by = phanerozoic_increment))
+wilkin_comp.three_bins1 <- as.data.frame(cbind(wilkin_comp.three_bins1$counts, wilkin_comp.three_bins1$breaks))
+wilkin_comp.three_bins1 <- wilkin_comp.three_bins1[1:542,]
+
+# Precambrian bins
+wilkin_comp.three_bins2 <- hist(wilkin_comp.three$value[wilkin_comp.three$value >= cutoff & wilkin_comp.three$value <= 4001], breaks = seq(cutoff, 4001, by = precambrian_increment))
+wilkin_comp.three_bins2 <- as.data.frame(cbind(wilkin_comp.three_bins2$counts, wilkin_comp.three_bins2$breaks))
+
+# Bind
+wilkin_comp.three_bins <- rbind(wilkin_comp.three_bins1,wilkin_comp.three_bins2)
+
+wilkin_comp.three_bins <- wilkin_comp.three_bins[c(1:541,543:889),] # remove duplicate 541
+
+# cull to 5 strat names mentioned in Wilkin-pyrite papers
+
+wilkin_comp.five <- subset(wilkin_comp, count <= 5)
+
+# Phanerozoic bins
+
+wilkin_comp.five_bins1 <- hist(wilkin_comp.five$value[wilkin_comp.five$value >= 0 & wilkin_comp.five$value < cutoff+1], breaks = seq(0, cutoff+1, by = phanerozoic_increment))
+wilkin_comp.five_bins1 <- as.data.frame(cbind(wilkin_comp.five_bins1$counts, wilkin_comp.five_bins1$breaks))
+wilkin_comp.five_bins1 <- wilkin_comp.five_bins1[1:542,]
+
+# Precambrian bins
+wilkin_comp.five_bins2 <- hist(wilkin_comp.five$value[wilkin_comp.five$value >= cutoff & wilkin_comp.five$value <= 4001], breaks = seq(cutoff, 4001, by = precambrian_increment))
+wilkin_comp.five_bins2 <- as.data.frame(cbind(wilkin_comp.five_bins2$counts, wilkin_comp.five_bins2$breaks))
+
+# Bind
+wilkin_comp.five_bins <- rbind(wilkin_comp.five_bins1,wilkin_comp.five_bins2)
+
+wilkin_comp.five_bins <- wilkin_comp.five_bins[c(1:541,543:889),] # remove duplicate 541
+
+# now for normalisation to sedimentary bins, as stacked output
+
 # normalisation as in part 1
 
 # block start
 
+
 # optional additional time points for plotting
 
+HEATT <- c(56, 66, 93, 116, 183, 200, 251, 359, 372, 383, 444, 514, 541) 
 ME <- c(445, 372, 252, 201, 65)
 OAEs <- c(183, 120, 111, 93) # from Jenkyns 2010
 PETM <- 55.8 # from Jenkyns 2010
 Sturt <- c(716, 663) # Sturtian glaciation from ???
 Es <- c(517, 502, 405, 393, 388, 382, 359, 330, 249, 240, 230, 220, 188, 145)
-Extras <- c(2500, 1600, 1000, 720, 635, 541, 485.4, 443.8, 419.2, 358.9, 298.9, 
+Extras <- c(2500, 1600, 1000, 850, 635, 541, 485.4, 443.8, 419.2, 358.9, 298.9, 
             251.9, 201.3, 145, 66, 23.03, 2.58) # Chronostrat divisions
 supercontinents <- c(320, 170, 900, 700, 1600, 1400) # from Li et al. 2019 Precambrian Research
 carb.intervals <- c(541, 465, 372, 323, 265, 227, 164, 133)
 lows <- c(323, 299, 201, 170) # carb.intervals and lows from Riding et al. 2019
+glacials <- cbind(c(2360, 2400,2450,717,650,467,330,315,307,305,300,34),
+                  c(2380,2440,2460,660,635,444,317,311,308,306,288,0))
+glacials <- as.data.frame(glacials)
+BIF <- cbind(c(3000,1000, 541), c(1800, 542, 527))
+BIF <- as.data.frame(BIF)
+HEBS <- cbind(c(130,310, 335,330,362,388,490,505,2050), c(89, 305, 336, 323,359,383,491,506,2060))
+HEBS <- as.data.frame(HEBS)
 
-# output - plot 3
+SEDEX <- read.csv("SEDEX.csv")
+
+MVT <- subset(SEDEX, prevtype == "MVT")
+SEDEX <- subset(SEDEX, prevtype == "SEDEX")
+
+# plots
 
 Top <- -0 # top age for plot (in Ma), set at -0.5 in order to centre bins
 Bottom <- 3000 # bottom age for plot (in Ma)
 phanerozoic_increment <- 1
 precambrian_increment <- 10
 
-# choose for plot 3 - S indicates stacked
+# use below for plot 1 - S indicates stacked
 
+framboidsS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
 nodulesS <- as.data.frame(cbind((nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
-framboidsS  <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
 veinsS <- as.data.frame(cbind((veins_bins$V1+framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,veins_bins$V2))
 undifS <- as.data.frame(cbind((pyrite_undif_bins$V1+framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
 
-#### output - Figure 1C ###
+#### output - Figure 1A ###
+
+# also add thick precambrian-cambrian boundary..
 
 a <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(Bottom, 541)) +
-  scale_y_continuous(limits = c(0,0.25)) +
-  geom_stepribbon(data = undifS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
-  geom_stepribbon(data = framboidsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "red") +
-  geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue") +
-  geom_step(data = undifS, aes(V2-0.5, V1)) +
-  geom_step(data = nodulesS, aes(V2-0.5, V1)) + 
-  geom_step(data = framboidsS, aes(V2-0.5, V1)) +
+  geom_linerange(data = glacials, aes(xmin= V1, xmax = V2, y = 0.38), colour = "deepskyblue", size = 2) +
+  annotate(x=c(3000,2850,2350,2100, 1900),y=0.4,label= c("BIF", "Major glacials", "SEDEX", "MVT", "HEBS"),
+           vjust=0,hjust = 0, geom="text", colour = c("orange", "deepskyblue", "black", "grey50", "red"), fontface = 2, size = 3.5) +
+  geom_linerange(data = BIF, aes(xmin= V1, xmax = V2, y = 0.39), colour = "orange", size = 2) +
+  geom_point(data = SEDEX, aes(agemy, y = 0.36)) +
+  geom_point(data = MVT, aes(agemy, y = 0.37), colour = "grey50") +
+  geom_point(data = HEBS, aes(V1, y = 0.37), colour = "red") +
+  geom_point(data = HEBS, aes(V2, y = 0.37), colour = "red") +
+  geom_linerange(data = HEBS, aes(xmax= V1, xmin = V2, y = 0.37), colour = "red", size = 2) +
+  scale_x_reverse(limits = c(Bottom, 542), expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  coord_cartesian(ylim = c(0, 0.35), clip="off") +
   geom_vline(xintercept = c(Extras)) +
-  geom_vline(xintercept = 800, colour = "red")
+  geom_vline(xintercept = c(HEATT), colour = "white", linetype = "dashed", size = 0.5) +
+  geom_stepribbon(data = undifS, aes(V2-0.5, ymin = 0, ymax = V1, fill = "Undifferentiated pyrite"), colour = "black") +
+  geom_stepribbon(data = framboidsS, aes(V2-0.5, ymin = 0, ymax = V1, fill = "Framboids"), colour = "black") +
+  geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1, fill = "Nodules/concretions"), colour = "black") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        plot.margin=unit(c(0.95,0,0.11,0), "cm"),
+        axis.title.y = element_text(angle = 0, hjust = 0.5, vjust = 0.5),
+        plot.tag.position = c(0.01,0.99),
+        axis.text.x=element_blank(),
+        axis.title.x=element_blank(),
+        panel.background = element_rect(fill = 'grey50'),
+        axis.text.y=element_text(size = 12),
+        legend.position = c(0.44, 0.9),
+        legend.background = element_rect(fill="white"),
+        legend.direction = "horizontal",
+        legend.margin = margin(0, 0, 0, 0),
+        legend.spacing.x = unit(0, "mm"),
+        legend.spacing.y = unit(0, "mm"),
+        legend.key.size = unit(0.7, 'cm')) +
+  ylab("Proportion of\npyrite-bearing\n(meta)sedimentary\nrocks") +
+  labs(tag = "A")  +
+  annotate(x=c(HEATT)-5,y=0.35,label=c(letters[length(HEATT):1]),
+           vjust=1,geom="label", colour = "black", fontface = 2, size = 3.5,
+           label.padding = unit(0.18, "lines"),
+           label.r = unit(0.11, "lines"),
+           label.size = NA) +
+  scale_fill_manual(values = c("Undifferentiated pyrite" = "grey90",
+                               "Framboids" = "red",
+                               "Nodules/concretions" = "blue"),
+                    name = NULL, guide = 'legend', 
+                    labels = c('Undifferentiated pyrite','Framboids', 'Nodules/concretions'))
 
 b <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(541, Top)) +
-  scale_y_continuous(limits = c(0,0.25)) +
-  geom_stepribbon(data = undifS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
-  geom_stepribbon(data = framboidsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "red") +
-    geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue") +
-  geom_step(data = framboidsS, aes(V2-0.5, V1)) + 
-  geom_step(data = nodulesS, aes(V2-0.5, V1)) + 
-  geom_step(data = undifS, aes(V2-0.5, V1)) +
+  scale_x_reverse(limits = c(542, Top), expand = c(0,0)) +
+  geom_linerange(data = BIF, aes(xmin= V1, xmax = V2, y = 0.39), colour = "orange", size = 2) +
+  geom_linerange(data = glacials, aes(xmin= V1, xmax = V2, y = 0.38), colour = "deepskyblue", size = 2) +
+  geom_point(data = SEDEX, aes(agemy, y = 0.36)) +
+  geom_point(data = MVT, aes(agemy, y = 0.37), colour = "grey50") +
+  geom_point(data = HEBS, aes(V1, y = 0.37), colour = "red") +
+  geom_point(data = HEBS, aes(V2, y = 0.37), colour = "red") +
+  geom_linerange(data = HEBS, aes(xmax= V1, xmin = V2, y = 0.37), colour = "red", size = 2) +
+  scale_y_continuous(expand = c(0,0)) +
+  coord_cartesian(ylim = c(0, 0.35), clip="off") +
+  geom_vline(xintercept = c(Extras)) +
+  geom_vline(xintercept = c(HEATT), colour = "white", linetype = "dashed", size = 0.5) +
+  geom_stepribbon(data = undifS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey90", colour = "black") +
+  geom_stepribbon(data = framboidsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "red", colour = "black") +
+  geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue", colour = "black") +
   theme(axis.title.y=element_blank(),
         axis.text.y=element_blank(),
-        axis.ticks.y=element_blank()) +
-  geom_vline(xintercept = c(Extras)) +
-  geom_vline(xintercept = 55.9, colour = "red") #+ 
-#geom_vline(xintercept = ME) #+ 
-#geom_vline(xintercept = c(Es, OAEs))
+        axis.text.x=element_blank(),
+        axis.title.x=element_blank(),
+        axis.ticks.y=element_blank(),
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        plot.margin=unit(c(0.95,0.15,0.11,-0.16), "cm"),
+        panel.background = element_rect(fill = 'grey50')) +
+  annotate(x=c(HEATT)-5,y=0.35,label=c(letters[length(HEATT):1]),
+           vjust=1,geom="label", colour = "black", fontface = 2, size = 3.5,
+           label.padding = unit(0.18, "lines"),
+           label.r = unit(0.11, "lines"),
+           label.size = NA)
 
-#Extras, ME, OAEs, 
-
-# generate plots
+# generate plots 
 
 grid.arrange(a,b, ncol = 2)
 
-#### output - Figure 1D ###
 
-nodulesS <- as.data.frame(cbind((nodules_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1),nodules_bins$V2))
+# alternative used for plot 2 - normalised to all pyrite-bearing 'rocks',  - R indicates stacked
+
 framboidsS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1),nodules_bins$V2))
-veinsS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1+veins_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1+veins_bins$V1),nodules_bins$V2))
+nodulesS <- as.data.frame(cbind((nodules_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1),nodules_bins$V2))
+veinsS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1+veins_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1),nodules_bins$V2))
 undifS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1),nodules_bins$V2))
 
-# output - plot 4
+#### output - Figure 1B ###
 
 c <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(Bottom, 541)) +
-  scale_y_continuous(limits = c(0,0.3)) +
-  geom_stepribbon(data = undifS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
-  geom_stepribbon(data = framboidsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "red") +
-  geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue") +
-  geom_step(data = undifS, aes(V2-0.5, V1)) +
-  geom_step(data = nodulesS, aes(V2-0.5, V1)) + 
-  geom_step(data = framboidsS, aes(V2-0.5, V1)) +
-  geom_vline(xintercept = c(Extras)) +
-  geom_vline(xintercept = 800, colour = "red")
+  scale_x_reverse(limits = c(Bottom, 542), expand = c(0,0)) +
+  geom_vline(xintercept = c(Extras))  +
+  geom_vline(xintercept = c(HEATT), colour = "white", linetype = "dashed", size = 0.5) +
+  scale_y_continuous(expand = c(0,0), limits = c(0,0.45)) +
+  geom_stepribbon(data = framboidsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "red", colour = "black") +
+  geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue", colour = "black") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        plot.margin=unit(c(0.11,0,0.11,0), "cm"),
+        axis.title.y = element_text(angle = 0, hjust = 0.5, vjust = 0.5),
+        plot.tag.position = c(0.01,0.99),
+        axis.text.x=element_blank(),
+        axis.title.x=element_blank(),
+        axis.text.y=element_text(size = 12),
+        panel.background = element_rect(fill = 'grey50')) +
+  ylab("Proportion of\nframboid and\nnodule-bearing\npyritic \n(meta)sedimentary\nrocks") +
+  labs(tag = "B")
 
 d <- ggplot() + theme_bw() +
-  scale_x_reverse(limits = c(541, Top)) +
-  scale_y_continuous(limits = c(0,0.3)) +
-  geom_stepribbon(data = undifS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "grey") +
-  geom_stepribbon(data = framboidsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "red") +
-  geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue") +
+  scale_x_reverse(limits = c(542, Top), expand = c(0,0))  +
+  geom_vline(xintercept = c(Extras)) +
+  geom_vline(xintercept = c(HEATT), colour = "white", linetype = "dashed", size = 0.5) +
+  scale_y_continuous(expand = c(0,0), limits = c(0,0.45)) +
+  geom_stepribbon(data = framboidsS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "red", colour = "black") +
+  geom_stepribbon(data = nodulesS, aes(V2-0.5, ymin = 0, ymax = V1), fill = "blue", colour = "black") +
   geom_step(data = framboidsS, aes(V2-0.5, V1)) + 
   geom_step(data = nodulesS, aes(V2-0.5, V1)) + 
-  geom_step(data = undifS, aes(V2-0.5, V1)) +
+  #geom_step(data = undifS, aes(V2-0.5, V1)) +
   theme(axis.title.y=element_blank(),
         axis.text.y=element_blank(),
-        axis.ticks.y=element_blank()) +
-  geom_vline(xintercept = c(Extras)) +
-  geom_vline(xintercept = 55.9, colour = "red") #+ 
-#geom_vline(xintercept = ME) #+ 
-#geom_vline(xintercept = c(Es, OAEs))
+        axis.ticks.y=element_blank(),
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        plot.margin=unit(c(0.11,0.15,0.11,-0.16), "cm"),
+        axis.text.x=element_blank(),
+        axis.title.x=element_blank(),
+        panel.background = element_rect(fill = 'grey50'))
 
 #Extras, ME, OAEs, 
 
-# generate plots
+# generate plots 
 
-grid.arrange(a,b,c,d, ncol = 2)
+grid.arrange(c,d, ncol = 2)
+
+#### output - Figure 1C ###
+
+# wilkin-framboids
+
+wilk.framboidsS.all <- as.data.frame(cbind((wilkin_comp_bins$V1)/sediments_bins$V1,nodules_bins$V2))
+wilk.framboidsS.one <- as.data.frame(cbind((wilkin_comp.one_bins$V1)/sediments_bins$V1,nodules_bins$V2))
+wilk.framboidsS.three <- as.data.frame(cbind((wilkin_comp.three_bins$V1)/sediments_bins$V1,nodules_bins$V2))
+wilk.framboidsS.five <- as.data.frame(cbind((wilkin_comp.five_bins$V1)/sediments_bins$V1,nodules_bins$V2))
+
+e <-  ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(Bottom, 542), expand = c(0,0.11)) +
+  geom_vline(xintercept = c(Extras)) + 
+  geom_vline(xintercept = c(HEATT), colour = "white", linetype = "dashed", size = 0.5) +
+  scale_y_continuous(expand = c(0,0), limits = c(0,0.1)) +
+  #geom_stepribbon(data = wilk.framboidsS.all, aes(V2-0.5, ymin = 0, ymax = V1, fill = "Max"), colour = "black") +
+  geom_stepribbon(data = wilk.framboidsS.five, aes(V2-0.5, ymin = 0, ymax = V1, fill = "5"), colour = "black") +
+  geom_stepribbon(data = wilk.framboidsS.three, aes(V2-0.5, ymin = 0, ymax = V1, fill = "3"), colour = "black") +
+  geom_stepribbon(data = wilk.framboidsS.one, aes(V2-0.5, ymin = 0, ymax = V1, fill = "1"), colour = "black") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        plot.margin=unit(c(0,0,0,0), "cm"),
+        axis.title.y = element_text(angle = 0, hjust = 0.5, vjust = 0.5),
+        plot.tag.position = c(0.01,0.99),
+        panel.background = element_rect(fill = 'grey50'),
+        axis.text.y=element_text(size = 12),
+        axis.text.x=element_text(size = 12),
+        axis.title.x = element_blank(),
+        legend.position = c(0.48, 0.9),
+        legend.background = element_rect(fill="white"),
+        legend.direction = "horizontal",
+        legend.margin = margin(0, 0, 0, 0),
+        legend.spacing.x = unit(0, "mm"),
+        legend.spacing.y = unit(0, "mm"),
+        legend.key.size = unit(0.7, 'cm')) +
+  ylab("Proportion of\nWilkin-pyrite\n(meta)sedimentary\nrocks") +
+  coord_geo(dat = list("periods", "eras"), xlim = c(Bottom, 542), size = 3, 
+            height = list(unit(0.75, "lines"), unit(0.75, "lines")),
+            pos = list("b", "b"), abbrv = list(TRUE, TRUE),
+            skip = c("Cm", "Msr")) +
+  labs(tag = "C") +
+  scale_fill_manual(values = c("Max" = "lightsalmon",
+                               "5" = "tomato1",
+                               "3" = "orangered2",
+                               "1" = "orangered4"),
+                    name = 'Mentions of (meta)sedimentary rocks \nin "Wilkin" pyrite publications', guide = 'legend', 
+                    labels = c('Max','5', '3', '1'))
+
+
+f <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(542, Top), expand = c(0,0.11)) +
+  geom_vline(xintercept = c(Extras))  +
+  geom_vline(xintercept = c(HEATT), colour = "white", linetype = "dashed", size = 0.5) +
+  #geom_stepribbon(data = wilk.framboidsS.all, aes(V2-0.5, ymin = 0, ymax = V1), fill = "lightsalmon", colour = "black") +
+  geom_stepribbon(data = wilk.framboidsS.five, aes(V2-0.5, ymin = 0, ymax = V1), fill = "tomato1", colour = "black") +
+  geom_stepribbon(data = wilk.framboidsS.three, aes(V2-0.5, ymin = 0, ymax = V1), fill = "orangered2", colour = "black") +
+  geom_stepribbon(data = wilk.framboidsS.one, aes(V2-0.5, ymin = 0, ymax = V1), fill = "orangered4", colour = "black") +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        plot.margin=unit(c(0,0.15,0,-0.16), "cm"),
+        panel.background = element_rect(fill = 'grey50'),
+        axis.text.x=element_text(size = 12),
+        axis.title.x = element_blank()) +
+  scale_y_continuous(limits = c(0,0.1), expand = c(0,0)) +
+  coord_geo(dat = list("periods", "eras"), xlim = c(542, Top),
+            height = list(unit(0.75, "lines"), unit(0.75, "lines")),
+            pos = list("b", "b"), abbrv = list(TRUE, TRUE), size = 3)
+
+grid.arrange(a,b,c,d,e,f,ncol = 2, bottom = textGrob("Age (Ma)"))
+
+
+
+# optional data export
+
+out <- cbind(framboids_bins, nodules_bins, veins_bins, pyrite_undif_bins, sediments_bins, wilkin_comp.one_bins,wilkin_comp.three_bins,wilkin_comp.five_bins,wilkin_comp_bins)
+out <- out[,c(1,3,5,7,9,11,13,15,17:18)]
+names(out)[1] <- "framboids"
+names(out)[2] <- "nodules"
+names(out)[3] <- "min"
+names(out)[4] <- "undif"
+names(out)[5] <- "seds"
+names(out)[6] <- "Wilkin.one"
+names(out)[7] <- "Wilkin.three"
+names(out)[8] <- "Wilkin.five"
+names(out)[9] <- "Wilkin.all"
+names(out)[10] <- "Age"
+
+write.csv(out, "xdd_binned_results_strat_only.csv") 
 
 ## END ##
 
@@ -1154,7 +1662,7 @@ framboids.2 <- framboids[,c("result_id", "docid",
                             "strat_name_id", "strat_name_long",
                             "unit_id", "t_age", "b_age", 
                             "target_word", "phrase", "type", 
-                            "other", "lith", "environ")] 
+                            "other", "lith", "environ","clat","clng")] 
 
 framboids.2 <- framboids.2[!duplicated(framboids.2[,c("strat_name_id", "unit_id")]),]
 
@@ -1162,7 +1670,7 @@ nodules.2 <- nodules[,c("result_id", "docid",
                         "strat_name_id", "strat_name_long",
                         "unit_id", "t_age", "b_age", 
                         "target_word", "phrase", "type", 
-                        "other", "lith", "environ")] 
+                        "other", "lith", "environ","clat","clng")] 
 
 nodules.2 <- nodules.2[!duplicated(nodules.2[,c("strat_name_id", "unit_id")]),]
 
@@ -1202,8 +1710,8 @@ combined.strat <- rbind(combined.strat1, combined.strat2, combined.strat3)
 names(combined.units)[3] <- "strat_name_id"
 names(combined.strat)[5] <- "unit_id"
 
-combined.units <- combined.units[,-16]
-combined.strat <- combined.strat[,-17]
+combined.units <- combined.units[,-18]
+combined.strat <- combined.strat[,-19]
 
 combined <- rbind(combined.units, combined.strat)
 
@@ -1215,6 +1723,8 @@ combined.x$strat_name_long <- combined.x$strat_name_long.x
 combined.x$lith <- combined.x$lith.x
 combined.x$environ <- combined.x$environ.x
 combined.x$other <- combined.x$other.x
+combined.x$clat <- combined.x$clat.x
+combined.x$clng <- combined.x$clng.x
 
 combined.y <- combined[is.na(combined$t_age.x),]
 
@@ -1224,14 +1734,20 @@ combined.y$strat_name_long <- combined.y$strat_name_long.y
 combined.y$lith <- combined.y$lith.y
 combined.y$environ <- combined.y$environ.y
 combined.y$other <- combined.y$other.y
+combined.y$clat <- combined.y$clat.y
+combined.y$clng <- combined.y$clng.y
 
 combined <- rbind(combined.x, combined.y)
 
-combined <- combined[,c(-4,-6,-7,-10,-11,-12,-13,-17,-18,-22,-23,-24)]
+#combined <- combined[,c(-4,-6,-7,-10,-11,-12,-13,-17,-18,-22,-23,-24)]
 
 ggplot(combined, aes(t_age, reorder(strat_name_long, t_age), group = strat_name_long)) +
   geom_linerange(aes(xmin = b_age, xmax = t_age, colour = type)) + theme_bw() +
   scale_x_reverse(limits = c(3000, 0), breaks = seq(0,3000, by = 100))
+
+# export combined file for gplates figure
+
+write.csv(combined, "pyrite_combined.csv")
 
 ## lithology metrics - estimates - Fig. S5A ##
 
@@ -1885,9 +2401,27 @@ f <- ggplot() + theme_bw() +
 
 g <- ggplot() + theme_bw() +
   scale_x_reverse(limits = c(Bottom, 541)) +
-  geom_step(data = out, aes(Age-0.5, seds), colour = "black")
+  geom_step(data = out, aes(Age-0.5, Wilkin.one), colour = "grey70") +
+  geom_step(data = out, aes(Age-0.5, Wilkin.three), colour = "grey50") +
+  geom_step(data = out, aes(Age-0.5, Wilkin.five), colour = "grey30") +
+  geom_step(data = out, aes(Age-0.5, Wilkin.all), colour = "grey10")
+
 
 h <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(541, Top)) +
+  geom_step(data = out, aes(Age-0.5, Wilkin.one), colour = "grey70") +
+  geom_step(data = out, aes(Age-0.5, Wilkin.three), colour = "grey50") +
+  geom_step(data = out, aes(Age-0.5, Wilkin.five), colour = "grey30") +
+  geom_step(data = out, aes(Age-0.5, Wilkin.all), colour = "grey10") +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+i <- ggplot() + theme_bw() +
+  scale_x_reverse(limits = c(Bottom, 541)) +
+  geom_step(data = out, aes(Age-0.5, seds), colour = "black")
+
+j <- ggplot() + theme_bw() +
   scale_x_reverse(limits = c(541, Top)) +
   geom_step(data = out, aes(Age-0.5, seds), colour = "black") +
   theme(axis.title.y=element_blank(),
@@ -1895,7 +2429,7 @@ h <- ggplot() + theme_bw() +
         axis.ticks.y=element_blank())
 
 
-grid.arrange(a,b,c,d,e,f,g,h, ncol = 2)
+grid.arrange(a,b,c,d,e,f,g,h,i,j, ncol = 2)
 
 # END #
 
