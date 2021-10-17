@@ -1,5 +1,5 @@
 # Sedimentary pyrite mega-analysis
-#### We analysed the xDD library for mentions of pyrite types through geological time (Figure 1). Then we conducted statistical analysis, machine learning and resampling of the pyrite trace element (TE) (Mukherjee and Large, Large *et al.*) and bulk sediment (SGP) geochemistry. Finally, we integrated and interpolated the xDD, pyrite TE and bulk sediment observations in order to map modes of anoxia through geological time and space (Figures 2-7).
+#### We analysed the xDD library for mentions of pyrite types through geological time (Figure 1). Then we conducted statistical analysis, machine learning and resampling of the pyrite trace element (TE) (Mukherjee and Large, Large *et al.*) geochemistry (Figures 2-4). Finally, we integrated and interpolated the xDD, pyrite TE and bulk sediment observations from the Sedimentary Geochemistry and Palaeoenvironments Phase 1 database (SGP) in order to map modes of anoxia through geological time and space (Figures 5-6).
 
 ### This code accompanies a manuscript submitted to *Science Advances* in May 2021
 #### Title: Pyrite mega-analysis reveals modes of anoxia through geological time  
@@ -19,7 +19,7 @@
 ### Steps following deployment of the [pyrite machine reading application](https://github.com/jemmings-git/pyrite_app):
 
 #### R scripts:
- * `install.R` - install the project's dependencies - UPDATE PENDING
+ * `install.R` - install the project's dependencies for the xDD preparation and analysis
  * `macrostrat_data.R` - download Macrostrat definitions
  * `preparation.R` - [import xDD pyrite results](https://geodeepdive.org/app_output/jemmings_with_pyrite_24Oct2019.zip), collect and link related data from Macrostrat, do binning on the dataframe, save the results
  * `wilkin_snippets.R` - process Wilkin-pyrite mentions (underlying Fig 1C) via the [xDD snippets API](https://xdd.wisc.edu/api/snippets)  
