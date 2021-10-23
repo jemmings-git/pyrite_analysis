@@ -17,8 +17,6 @@
 #### We recommend implementation in RStudio.
 ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) pending Zenodo
 
-![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+) indicates final checks performed by the lead author immediately prior to archiving in Zenodo in October '21
-
 ### Steps following deployment of the [pyrite machine reading application](https://github.com/jemmings-git/pyrite_app):
 
 #### R scripts:
@@ -86,6 +84,8 @@ Chronostratigraphic timescales were plotted in R using the [*deeptime* R package
 Please refer to the **Supplementary materials** for the complete R package reference list.
 
 All figures were produced using the R code in this repository, followed by aesthetic adjustments using a professional graphics software package.
+
+![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+) indicates final checks performed by the lead author immediately prior to archiving in Zenodo in October '21
 
 ## to check prior to final publication
 - check stats.R is fully operational
