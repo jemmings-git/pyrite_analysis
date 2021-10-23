@@ -15,8 +15,9 @@
 \* Present address: CGG, Tyn Y Coed, LLanrhos, Llandudno, LL30 1SA.
 
 #### We recommend implementation in RStudio.
-
 ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) pending Zenodo
+
+![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+) indicates final checks performed by the lead author immediately prior to archiving in Zenodo
 
 ### Steps following deployment of the [pyrite machine reading application](https://github.com/jemmings-git/pyrite_app):
 
@@ -34,8 +35,8 @@
  * The [Reinhard *et al*](https://doi.org/10.1038/nature20772) TOC/P data shown on Figure 5B is also sourced dynamically and is not stored locally
  * `wilkin_snippets.json` - the aggregated Wilkin-pyrite [xDD snippets results](https://xdd.wisc.edu/api/snippets?term=Wilkin,framboid&full_results=true&inclusive=true&clean&known_terms=stratigraphic_names) (reproduced in this repository for ease). Used in **Figure 1C & supplementary xDD figures**
  *  `SEDEX.csv` - [an open access USGS Pb-Zn deposit database](https://pubs.usgs.gov/of/2009/1252/SedZn-PbEX2009.xls) that is not stored in this repository. See [Singer *et al*., 2009](https://pubs.usgs.gov/of/2009/1252/). HEBS, BIFs and glaciations are hard-coded. These data are plotted on **Figures 1 & 4**
- * `xdd_binned_results.csv` - the results of xDD text mining as presented on **Figures 1A-1C**  
- * `xdd_binned_results_strat_only.csv` - the results of xDD text mining as presented on **supplementary xDD figures**  
+ * `xdd_binned_results.csv` - the results of xDD text mining as presented on **Figures 1A-1C**  ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+)
+ * `xdd_binned_results_strat_only.csv` - the results of xDD text mining as presented on **supplementary xDD figures**  ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+)
  * `phanerozoic_pyrite_types_downsampled.csv` - Phanerozoic age-interpolated downsampled pyrite type fractions (bins ≥ 1 Ma). The results of statistical analysis, machine learning, downsampling and aggregation of [Phanerozoic pyrite trace element data](https://doi.org/10.1130/GEOL.S.12456332) (as presented on **Figure 4**)
  * `precambrian_pyrite_types_downsampled.csv` - Precambrian age-interpolated downsampled pyrite type fractions (bins ≥ 10 Ma). The results of statistical analysis, machine learning, downsampling and aggregation of [Precambrian pyrite trace element data](https://doi.org/10.1130/GEOL.S.12456332) (as presented on **Figure 4**)
  * `phanerozoic_pyrite_types_downsampled_singleCV.csv` - Phanerozoic age-interpolated downsampled pyrite type fractions (bins ≥ 1 Ma). The results of statistical analysis, machine learning, downsampling and aggregation of [Phanerozoic pyrite trace element data](https://doi.org/10.1130/GEOL.S.12456332), using a single coherent cross-validated loess span (as presented in the **supplementary materials**)  
