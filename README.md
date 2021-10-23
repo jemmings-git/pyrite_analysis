@@ -82,7 +82,7 @@ Chronostratigraphic timescales were plotted in R using the [*deeptime* R package
 
 Please refer to the **Supplementary materials** for the complete R package reference list.
 
-All figures were produced initially in R using the code in this repository, followed by aesthetic adjustments using a professional graphics software package.
+All figures were produced using the R code in this repository, followed by aesthetic adjustments using a professional graphics software package.
 
 ## to check prior to final publication
 - check stats.R is fully operational
