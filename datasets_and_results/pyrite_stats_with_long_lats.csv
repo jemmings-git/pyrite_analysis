@@ -1,470 +1,470 @@
 ,Location,Age.Ma,clusters,count,perc,Lat,Long,Phrase,Source,Notes
 1,"
-Pilbara Warrawoona, Aus.",3515,Type.2,15,0.25,-21.6939331,121.6385886,Pilbara,Google Earth,NA
+Pilbara Warrawoona, Aus.",3515,Type.2,15,0.250,-21.6939331,121.6385886,Pilbara,Google Earth,NA
 2,"
-Pilbara Warrawoona, Aus.",3515,Type.1,45,0.75,-21.6939331,121.6385886,Pilbara,Google Earth,NA
-3,"Aberystwyth, Wales",436,Type.2,1,0.045454545,52.4144683,-4.0776408,Aberystwyth,Google Earth,NA
-4,"Aberystwyth, Wales",436,Type.1,18,0.818181818,52.4144683,-4.0776408,Aberystwyth,Google Earth,NA
-5,"Aberystwyth, Wales",436,Type.3,3,0.136363636,52.4144683,-4.0776408,Aberystwyth,Google Earth,NA
-6,"Aberystwyth, Wales",441,Type.1,13,0.209677419,52.4144683,-4.0776408,Aberystwyth,Google Earth,NA
-7,"Aberystwyth, Wales",441,Type.3,46,0.741935484,52.4144683,-4.0776408,Aberystwyth,Google Earth,NA
-8,"Aberystwyth, Wales",441,Type.4,3,0.048387097,52.4144683,-4.0776408,Aberystwyth,Google Earth,NA
-9,"Aberystwyth, Wales",445,Type.2,1,0.1,52.4144683,-4.0776408,Aberystwyth,Google Earth,NA
-10,"Aberystwyth, Wales",445,Type.1,6,0.6,52.4144683,-4.0776408,Aberystwyth,Google Earth,NA
-11,"Aberystwyth, Wales",445,Type.3,3,0.3,52.4144683,-4.0776408,Aberystwyth,Google Earth,NA
+Pilbara Warrawoona, Aus.",3515,Type.1,45,0.750,-21.6939331,121.6385886,Pilbara,Google Earth,NA
+3,"Aberystwyth, Wales",436,Type.2,1,0.045,52.4144683,-4.0776408,Aberystwyth,Google Earth,NA
+4,"Aberystwyth, Wales",436,Type.1,18,0.818,52.4144683,-4.0776408,Aberystwyth,Google Earth,NA
+5,"Aberystwyth, Wales",436,Type.3,3,0.136,52.4144683,-4.0776408,Aberystwyth,Google Earth,NA
+6,"Aberystwyth, Wales",441,Type.1,13,0.210,52.4144683,-4.0776408,Aberystwyth,Google Earth,NA
+7,"Aberystwyth, Wales",441,Type.3,46,0.742,52.4144683,-4.0776408,Aberystwyth,Google Earth,NA
+8,"Aberystwyth, Wales",441,Type.4,3,0.048,52.4144683,-4.0776408,Aberystwyth,Google Earth,NA
+9,"Aberystwyth, Wales",445,Type.2,1,0.100,52.4144683,-4.0776408,Aberystwyth,Google Earth,NA
+10,"Aberystwyth, Wales",445,Type.1,6,0.600,52.4144683,-4.0776408,Aberystwyth,Google Earth,NA
+11,"Aberystwyth, Wales",445,Type.3,3,0.300,52.4144683,-4.0776408,Aberystwyth,Google Earth,NA
 12,"Aberystwyth, Wales",450,Type.2,1,0.125,52.4144683,-4.0776408,Aberystwyth,Google Earth,NA
 13,"Aberystwyth, Wales",450,Type.1,5,0.625,52.4144683,-4.0776408,Aberystwyth,Google Earth,NA
-14,"Aberystwyth, Wales",450,Type.3,2,0.25,52.4144683,-4.0776408,Aberystwyth,Google Earth,NA
-15,"Adelaidian Basin, Aus.",625,Type.1,30,0.967741935,-40.8453519,145.1365296,Smithton,Google Earth,NA
-16,"Adelaidian Basin, Aus.",625,Type.3,1,0.032258065,-40.8453519,145.1365296,Smithton,Google Earth,NA
-17,"Adelaidian Basin, Aus.",630,Type.2,2,0.1,-40.8453519,145.1365296,Unknown (assumed Smithton),Google Earth,NA
-18,"Adelaidian Basin, Aus.",630,Type.1,18,0.9,-40.8453519,145.1365296,Unknown (assumed Smithton),Google Earth,NA
-19,"Adelaidian Basin, Aus.",631,Type.1,18,1,-25.1184933,132.5689501,Near to Imanpa,Google Earth,NA
-20,"Adelaidian Basin, Aus.",633,Type.1,10,1,-25.1184933,132.5689501,Near to Imanpa,Google Earth,NA
-21,"Adelaidian Basin, Aus.",635,Type.2,2,0.222222222,-25.1184933,132.5689501,Near to Imanpa (assumed),Google Earth,NA
-22,"Adelaidian Basin, Aus.",635,Type.1,7,0.777777778,-25.1184933,132.5689501,Near to Imanpa (assumed),Google Earth,NA
-23,"Adelaidian Basin, Aus.",637,Type.1,10,1,-25.1184933,132.5689501,Near to Imanpa (assumed),Google Earth,NA
-24,"Adelaidian Basin, Aus.",638,Type.2,1,0.090909091,-40.8453519,145.1365296,Smithton,Google Earth,NA
-25,"Adelaidian Basin, Aus.",638,Type.1,10,0.909090909,-40.8453519,145.1365296,Smithton,Google Earth,NA
-26,"Adelaidian Basin, Aus.",639.5,Type.1,11,0.916666667,-40.8453519,145.1365296,Smithton,Google Earth,NA
-27,"Adelaidian Basin, Aus.",639.5,Type.3,1,0.083333333,-40.8453519,145.1365296,Smithton,Google Earth,NA
-28,"Adelaidian Basin, Aus.",641,Type.3,11,1,-40.8453519,145.1365296,Smithton,Google Earth,NA
-29,"Adelaidian Basin, Aus.",642,Type.1,2,0.166666667,-40.8453519,145.1365296,Smithton,Google Earth,NA
-30,"Adelaidian Basin, Aus.",642,Type.3,10,0.833333333,-40.8453519,145.1365296,Smithton,Google Earth,NA
-31,"Adelaidian Basin, Aus.",643,Type.1,14,1,-40.8453519,145.1365296,Smithton,Google Earth,NA
-32,"Adelaidian Basin, Aus.",645,Type.1,27,0.710526316,-40.8453519,145.1365296,Smithton,Google Earth,NA
-33,"Adelaidian Basin, Aus.",645,Type.3,11,0.289473684,-40.8453519,145.1365296,Smithton,Google Earth,NA
-34,"Adelaidian Basin, Aus.",646,Type.2,1,0.1,-40.8453519,145.1365296,Smithton,Google Earth,NA
-35,"Adelaidian Basin, Aus.",646,Type.1,1,0.1,-40.8453519,145.1365296,Smithton,Google Earth,NA
-36,"Adelaidian Basin, Aus.",646,Type.3,8,0.8,-40.8453519,145.1365296,Smithton,Google Earth,NA
-37,"Adelaidian Basin, Aus.",647,Type.1,11,1,-40.8453519,145.1365296,Smithton,Google Earth,NA
-38,"Adelaidian Basin, Aus.",657,Type.1,11,1,-40.8453519,145.1365296,Smithton,Google Earth,NA
-39,"Adelaidian Basin, Aus.",659,Type.3,11,1,-40.8453519,145.1365296,Smithton,Google Earth,NA
-40,"Adelaidian Basin, Aus.",660,Type.1,5,0.454545455,-40.8453519,145.1365296,Smithton,Google Earth,NA
-41,"Adelaidian Basin, Aus.",660,Type.3,6,0.545454545,-40.8453519,145.1365296,Smithton,Google Earth,NA
-42,"Alum Shale, Sweden",490,Type.5,1,0.018867925,55.4787,14.2979,Alum Shale,SGP,NA
-43,"Alum Shale, Sweden",490,Type.2,18,0.339622642,55.4787,14.2979,Alum Shale,SGP,NA
-44,"Alum Shale, Sweden",490,Type.3,6,0.113207547,55.4787,14.2979,Alum Shale,SGP,NA
-45,"Alum Shale, Sweden",490,Type.4,28,0.528301887,55.4787,14.2979,Alum Shale,SGP,NA
-46,"Amadius Basin, Aus.",657,Type.3,26,1,-25.1184933,132.5689501,Near to Imanpa (assumed),Google Earth,NA
-47,"Amardius Basin, Aus.",630,Type.1,2,0.2,-25.1184933,132.5689501,Near to Imanpa (assumed),Google Earth,NA
-48,"Amardius Basin, Aus.",630,Type.3,8,0.8,-25.1184933,132.5689501,Near to Imanpa (assumed),Google Earth,NA
-49,"Anna Shale, USA",310,Type.5,23,1,41.06861,-93.80833,Anna Shale,SGP,NA
-50,Bakken Fm. USA,357,Type.3,12,0.52173913,47.11567,-103.38982,Bakken Shale,SGP,NA
-51,Bakken Fm. USA,357,Type.4,11,0.47826087,47.11567,-103.38982,Bakken Shale,SGP,NA
-52,"Balaklava, Ukraine",131,Type.5,8,0.228571429,44.5349485,33.682572,Balaklava,Google Earth,Note discrepancy between quoted Location and additional descriptions in Mukherjee and Large - Ukraine or Australia?
-53,"Balaklava, Ukraine",131,Type.3,10,0.285714286,44.5349485,33.682572,Balaklava,Google Earth,Note discrepancy between quoted Location and additional descriptions in Mukherjee and Large - Ukraine or Australia?
-54,"Balaklava, Ukraine",131,Type.4,17,0.485714286,44.5349485,33.682572,Balaklava,Google Earth,Note discrepancy between quoted Location and additional descriptions in Mukherjee and Large - Ukraine or Australia?
-55,Barnery Ck Fm. Aus.,1640,Type.2,9,0.126760563,-16.1721234,136.151713,Near McArthur,Google Earth,Note discrepancy between quoted Location and additional descriptions in Mukherjee and Large - Ukraine or Australia?
-56,Barnery Ck Fm. Aus.,1640,Type.3,62,0.873239437,-16.1721234,136.151713,Near McArthur,Google Earth,Note discrepancy between quoted Location and additional descriptions in Mukherjee and Large - Ukraine or Australia?
-57,"Bendigo, Aus",470,Type.1,8,1,-36.7561799,144.280152,Bendigo,Google Earth,Note discrepancy between quoted Location and additional descriptions in Mukherjee and Large - Ukraine or Australia?
-58,"Bentong, Malaysia",205,Type.5,65,1,3.414646,102.0466376,Bentong,Google Earth,Note discrepancy between quoted Location and additional descriptions in Mukherjee and Large - Ukraine or Australia?
-59,"Black Flags, Aus",2680,Type.1,44,1,-31.2531267,119.3388552,"In Yilgarn Craton, near Southern Cross",http://www.ga.gov.au/webtemp/image_cache/GA15820.pdf,NA
-60,"Black Flags, Aus",2692,Type.2,22,0.785714286,-31.2531267,119.3388552,"In Yilgarn Craton, near Southern Cross",http://www.ga.gov.au/webtemp/image_cache/GA15820.pdf,NA
-61,"Black Flags, Aus",2692,Type.1,6,0.214285714,-31.2531267,119.3388552,"In Yilgarn Craton, near Southern Cross",http://www.ga.gov.au/webtemp/image_cache/GA15820.pdf,NA
-62,"Blake River Gp., Canada",2694,Type.2,22,0.47826087,48.008,-80.964,Blake River,SGP,NA
-63,"Blake River Gp., Canada",2694,Type.1,24,0.52173913,48.008,-80.964,Blake River,SGP,NA
-64,"Boston, USA",555,Type.1,21,1,42.31435,-70.970284,Boston,Google Earth,NA
-65,"Browse Basin, Aus",140,Type.1,1,0.038461538,-14.8225298,122.5561343,Browse Basin,http://www.ga.gov.au/scientific-topics/energy/province-sedimentary-basin-geology/petroleum/offshore-northwest-australia/browse,NA
-66,"Browse Basin, Aus",140,Type.3,19,0.730769231,-14.8225298,122.5561343,Browse Basin,http://www.ga.gov.au/scientific-topics/energy/province-sedimentary-basin-geology/petroleum/offshore-northwest-australia/browse,NA
-67,"Browse Basin, Aus",140,Type.4,6,0.230769231,-14.8225298,122.5561343,Browse Basin,http://www.ga.gov.au/scientific-topics/energy/province-sedimentary-basin-geology/petroleum/offshore-northwest-australia/browse,NA
-68,"Browse Basin, Aus",145,Type.2,1,0.0625,-14.8225298,122.5561343,Browse Basin,http://www.ga.gov.au/scientific-topics/energy/province-sedimentary-basin-geology/petroleum/offshore-northwest-australia/browse,NA
-69,"Browse Basin, Aus",145,Type.3,12,0.75,-14.8225298,122.5561343,Browse Basin,http://www.ga.gov.au/scientific-topics/energy/province-sedimentary-basin-geology/petroleum/offshore-northwest-australia/browse,NA
-70,"Browse Basin, Aus",145,Type.4,3,0.1875,-14.8225298,122.5561343,Browse Basin,http://www.ga.gov.au/scientific-topics/energy/province-sedimentary-basin-geology/petroleum/offshore-northwest-australia/browse,NA
-71,"Buck Reef, South Africa",3416,Type.5,5,0.0625,-25.7750414,31.0419625,Near Barberton,Google Earth,NA
-72,"Buck Reef, South Africa",3416,Type.2,43,0.5375,-25.7750414,31.0419625,Near Barberton,Google Earth,NA
+14,"Aberystwyth, Wales",450,Type.3,2,0.250,52.4144683,-4.0776408,Aberystwyth,Google Earth,NA
+15,"Adelaidian Basin, Aus.",625,Type.1,30,0.968,-40.8453519,145.1365296,Smithton,Google Earth,NA
+16,"Adelaidian Basin, Aus.",625,Type.3,1,0.032,-40.8453519,145.1365296,Smithton,Google Earth,NA
+17,"Adelaidian Basin, Aus.",630,Type.2,2,0.100,-40.8453519,145.1365296,Unknown (assumed Smithton),Google Earth,NA
+18,"Adelaidian Basin, Aus.",630,Type.1,18,0.900,-40.8453519,145.1365296,Unknown (assumed Smithton),Google Earth,NA
+19,"Adelaidian Basin, Aus.",631,Type.1,18,1.000,-25.1184933,132.5689501,Near to Imanpa,Google Earth,NA
+20,"Adelaidian Basin, Aus.",633,Type.1,10,1.000,-25.1184933,132.5689501,Near to Imanpa,Google Earth,NA
+21,"Adelaidian Basin, Aus.",635,Type.2,2,0.222,-25.1184933,132.5689501,Near to Imanpa (assumed),Google Earth,NA
+22,"Adelaidian Basin, Aus.",635,Type.1,7,0.778,-25.1184933,132.5689501,Near to Imanpa (assumed),Google Earth,NA
+23,"Adelaidian Basin, Aus.",637,Type.1,10,1.000,-25.1184933,132.5689501,Near to Imanpa (assumed),Google Earth,NA
+24,"Adelaidian Basin, Aus.",638,Type.2,1,0.091,-40.8453519,145.1365296,Smithton,Google Earth,NA
+25,"Adelaidian Basin, Aus.",638,Type.1,10,0.909,-40.8453519,145.1365296,Smithton,Google Earth,NA
+26,"Adelaidian Basin, Aus.",639.5,Type.1,11,0.917,-40.8453519,145.1365296,Smithton,Google Earth,NA
+27,"Adelaidian Basin, Aus.",639.5,Type.3,1,0.083,-40.8453519,145.1365296,Smithton,Google Earth,NA
+28,"Adelaidian Basin, Aus.",641,Type.3,11,1.000,-40.8453519,145.1365296,Smithton,Google Earth,NA
+29,"Adelaidian Basin, Aus.",642,Type.1,2,0.167,-40.8453519,145.1365296,Smithton,Google Earth,NA
+30,"Adelaidian Basin, Aus.",642,Type.3,10,0.833,-40.8453519,145.1365296,Smithton,Google Earth,NA
+31,"Adelaidian Basin, Aus.",643,Type.1,14,1.000,-40.8453519,145.1365296,Smithton,Google Earth,NA
+32,"Adelaidian Basin, Aus.",645,Type.1,27,0.711,-40.8453519,145.1365296,Smithton,Google Earth,NA
+33,"Adelaidian Basin, Aus.",645,Type.3,11,0.289,-40.8453519,145.1365296,Smithton,Google Earth,NA
+34,"Adelaidian Basin, Aus.",646,Type.2,1,0.100,-40.8453519,145.1365296,Smithton,Google Earth,NA
+35,"Adelaidian Basin, Aus.",646,Type.1,1,0.100,-40.8453519,145.1365296,Smithton,Google Earth,NA
+36,"Adelaidian Basin, Aus.",646,Type.3,8,0.800,-40.8453519,145.1365296,Smithton,Google Earth,NA
+37,"Adelaidian Basin, Aus.",647,Type.1,11,1.000,-40.8453519,145.1365296,Smithton,Google Earth,NA
+38,"Adelaidian Basin, Aus.",657,Type.1,11,1.000,-40.8453519,145.1365296,Smithton,Google Earth,NA
+39,"Adelaidian Basin, Aus.",659,Type.3,11,1.000,-40.8453519,145.1365296,Smithton,Google Earth,NA
+40,"Adelaidian Basin, Aus.",660,Type.1,5,0.455,-40.8453519,145.1365296,Smithton,Google Earth,NA
+41,"Adelaidian Basin, Aus.",660,Type.3,6,0.545,-40.8453519,145.1365296,Smithton,Google Earth,NA
+42,"Alum Shale, Sweden",490,Type.5,1,0.019,55.4787,14.2979,Alum Shale,SGP,NA
+43,"Alum Shale, Sweden",490,Type.2,18,0.340,55.4787,14.2979,Alum Shale,SGP,NA
+44,"Alum Shale, Sweden",490,Type.3,6,0.113,55.4787,14.2979,Alum Shale,SGP,NA
+45,"Alum Shale, Sweden",490,Type.4,28,0.528,55.4787,14.2979,Alum Shale,SGP,NA
+46,"Amadius Basin, Aus.",657,Type.3,26,1.000,-25.1184933,132.5689501,Near to Imanpa (assumed),Google Earth,NA
+47,"Amardius Basin, Aus.",630,Type.1,2,0.200,-25.1184933,132.5689501,Near to Imanpa (assumed),Google Earth,NA
+48,"Amardius Basin, Aus.",630,Type.3,8,0.800,-25.1184933,132.5689501,Near to Imanpa (assumed),Google Earth,NA
+49,"Anna Shale, USA",310,Type.5,23,1.000,41.06861,-93.80833,Anna Shale,SGP,NA
+50,Bakken Fm. USA,357,Type.3,12,0.522,47.11567,-103.38982,Bakken Shale,SGP,NA
+51,Bakken Fm. USA,357,Type.4,11,0.478,47.11567,-103.38982,Bakken Shale,SGP,NA
+52,"Balaklava, Ukraine",131,Type.5,8,0.229,44.5349485,33.682572,Balaklava,Google Earth,Note discrepancy between quoted Location and additional descriptions in Mukherjee and Large - Ukraine or Australia?
+53,"Balaklava, Ukraine",131,Type.3,10,0.286,44.5349485,33.682572,Balaklava,Google Earth,Note discrepancy between quoted Location and additional descriptions in Mukherjee and Large - Ukraine or Australia?
+54,"Balaklava, Ukraine",131,Type.4,17,0.486,44.5349485,33.682572,Balaklava,Google Earth,Note discrepancy between quoted Location and additional descriptions in Mukherjee and Large - Ukraine or Australia?
+55,Barnery Ck Fm. Aus.,1640,Type.2,9,0.127,-16.1721234,136.151713,Near McArthur,Google Earth,Note discrepancy between quoted Location and additional descriptions in Mukherjee and Large - Ukraine or Australia?
+56,Barnery Ck Fm. Aus.,1640,Type.3,62,0.873,-16.1721234,136.151713,Near McArthur,Google Earth,Note discrepancy between quoted Location and additional descriptions in Mukherjee and Large - Ukraine or Australia?
+57,"Bendigo, Aus",470,Type.1,8,1.000,-36.7561799,144.280152,Bendigo,Google Earth,Note discrepancy between quoted Location and additional descriptions in Mukherjee and Large - Ukraine or Australia?
+58,"Bentong, Malaysia",205,Type.5,65,1.000,3.414646,102.0466376,Bentong,Google Earth,Note discrepancy between quoted Location and additional descriptions in Mukherjee and Large - Ukraine or Australia?
+59,"Black Flags, Aus",2680,Type.1,44,1.000,-31.2531267,119.3388552,"In Yilgarn Craton, near Southern Cross",http://www.ga.gov.au/webtemp/image_cache/GA15820.pdf,NA
+60,"Black Flags, Aus",2692,Type.2,22,0.786,-31.2531267,119.3388552,"In Yilgarn Craton, near Southern Cross",http://www.ga.gov.au/webtemp/image_cache/GA15820.pdf,NA
+61,"Black Flags, Aus",2692,Type.1,6,0.214,-31.2531267,119.3388552,"In Yilgarn Craton, near Southern Cross",http://www.ga.gov.au/webtemp/image_cache/GA15820.pdf,NA
+62,"Blake River Gp., Canada",2694,Type.2,22,0.478,48.008,-80.964,Blake River,SGP,NA
+63,"Blake River Gp., Canada",2694,Type.1,24,0.522,48.008,-80.964,Blake River,SGP,NA
+64,"Boston, USA",555,Type.1,21,1.000,42.31435,-70.970284,Boston,Google Earth,NA
+65,"Browse Basin, Aus",140,Type.1,1,0.038,-14.8225298,122.5561343,Browse Basin,http://www.ga.gov.au/scientific-topics/energy/province-sedimentary-basin-geology/petroleum/offshore-northwest-australia/browse,NA
+66,"Browse Basin, Aus",140,Type.3,19,0.731,-14.8225298,122.5561343,Browse Basin,http://www.ga.gov.au/scientific-topics/energy/province-sedimentary-basin-geology/petroleum/offshore-northwest-australia/browse,NA
+67,"Browse Basin, Aus",140,Type.4,6,0.231,-14.8225298,122.5561343,Browse Basin,http://www.ga.gov.au/scientific-topics/energy/province-sedimentary-basin-geology/petroleum/offshore-northwest-australia/browse,NA
+68,"Browse Basin, Aus",145,Type.2,1,0.063,-14.8225298,122.5561343,Browse Basin,http://www.ga.gov.au/scientific-topics/energy/province-sedimentary-basin-geology/petroleum/offshore-northwest-australia/browse,NA
+69,"Browse Basin, Aus",145,Type.3,12,0.750,-14.8225298,122.5561343,Browse Basin,http://www.ga.gov.au/scientific-topics/energy/province-sedimentary-basin-geology/petroleum/offshore-northwest-australia/browse,NA
+70,"Browse Basin, Aus",145,Type.4,3,0.188,-14.8225298,122.5561343,Browse Basin,http://www.ga.gov.au/scientific-topics/energy/province-sedimentary-basin-geology/petroleum/offshore-northwest-australia/browse,NA
+71,"Buck Reef, South Africa",3416,Type.5,5,0.063,-25.7750414,31.0419625,Near Barberton,Google Earth,NA
+72,"Buck Reef, South Africa",3416,Type.2,43,0.538,-25.7750414,31.0419625,Near Barberton,Google Earth,NA
 73,"Buck Reef, South Africa",3416,Type.1,18,0.225,-25.7750414,31.0419625,Near Barberton,Google Earth,NA
-74,"Buck Reef, South Africa",3416,Type.3,3,0.0375,-25.7750414,31.0419625,Near Barberton,Google Earth,NA
-75,"Buck Reef, South Africa",3416,Type.4,11,0.1375,-25.7750414,31.0419625,Near Barberton,Google Earth,NA
-76,Campbell R. Canada,83,Type.3,19,0.76,50.0109455,-125.3010675,Campbell River,Google Earth,NA
-77,Campbell R. Canada,83,Type.4,6,0.24,50.0109455,-125.3010675,Campbell River,Google Earth,NA
-78,Canarvon Basin Aus.,125,Type.1,3,0.176470588,-20.5228064,118.4703418,Carnarvon Basin,Google Earth,NA
-79,Canarvon Basin Aus.,125,Type.3,14,0.823529412,-20.5228064,118.4703418,Carnarvon Basin,Google Earth,NA
-80,"Canning Basin, Aus.",338,Type.1,5,0.833333333,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-81,"Canning Basin, Aus.",338,Type.3,1,0.166666667,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-82,"Canning Basin, Aus.",339,Type.1,8,0.888888889,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-83,"Canning Basin, Aus.",339,Type.3,1,0.111111111,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-84,"Canning Basin, Aus.",340,Type.1,5,0.185185185,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-85,"Canning Basin, Aus.",340,Type.3,17,0.62962963,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-86,"Canning Basin, Aus.",340,Type.4,5,0.185185185,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-87,"Canning Basin, Aus.",349,Type.1,1,0.333333333,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-88,"Canning Basin, Aus.",349,Type.3,2,0.666666667,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-89,"Canning Basin, Aus.",350,Type.1,2,0.333333333,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-90,"Canning Basin, Aus.",350,Type.3,4,0.666666667,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-91,"Canning Basin, Aus.",352,Type.1,1,0.111111111,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-92,"Canning Basin, Aus.",352,Type.3,8,0.888888889,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-93,"Canning Basin, Aus.",355,Type.5,31,0.455882353,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-94,"Canning Basin, Aus.",355,Type.3,23,0.338235294,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-95,"Canning Basin, Aus.",355,Type.4,14,0.205882353,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-96,"Canning Basin, Aus.",356,Type.1,1,0.333333333,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-97,"Canning Basin, Aus.",356,Type.3,2,0.666666667,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-98,"Canning Basin, Aus.",357,Type.1,8,0.19047619,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-99,"Canning Basin, Aus.",357,Type.3,17,0.404761905,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-100,"Canning Basin, Aus.",357,Type.4,17,0.404761905,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-101,"Canning Basin, Aus.",359,Type.1,37,0.902439024,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-102,"Canning Basin, Aus.",359,Type.3,4,0.097560976,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-103,"Canning Basin, Aus.",365,Type.3,25,1,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-104,"Canning Basin, Aus.",366,Type.1,7,0.4375,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-105,"Canning Basin, Aus.",366,Type.3,9,0.5625,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-106,"Canning Basin, Aus.",368,Type.3,7,1,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-107,"Canning Basin, Aus.",370,Type.2,1,0.041666667,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-108,"Canning Basin, Aus.",370,Type.1,5,0.208333333,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-109,"Canning Basin, Aus.",370,Type.3,18,0.75,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
-110,Cariaco basin,0.1,Type.5,34,1,10.4957903,-64.3401337,Cariaco Basin,Google Earth,NA
-111,Cleverville Fm. Aus,3020,Type.2,3,0.036144578,-20.6748977,117.1482407,Near Wickham (and Cleaverville),Google Earth,NA
-112,Cleverville Fm. Aus,3020,Type.1,66,0.795180723,-20.6748977,117.1482407,Near Wickham (and Cleaverville),Google Earth,NA
-113,Cleverville Fm. Aus,3020,Type.3,14,0.168674699,-20.6748977,117.1482407,Near Wickham (and Cleaverville),Google Earth,NA
-114,Dial Ra. Aus.,540,Type.1,2,0.105263158,-41.1999995,146.0333333,Dial Range,Google Earth,NA
-115,Dial Ra. Aus.,540,Type.3,12,0.631578947,-41.1999995,146.0333333,Dial Range,Google Earth,NA
-116,Dial Ra. Aus.,540,Type.4,5,0.263157895,-41.1999995,146.0333333,Dial Range,Google Earth,NA
-117,"Dixon Is. Fm., Aus.",3200,Type.2,6,0.162162162,-20.6274482,117.0633034,Dixon Island,Google Earth,NA
-118,"Dixon Is. Fm., Aus.",3200,Type.1,24,0.648648649,-20.6274482,117.0633034,Dixon Island,Google Earth,NA
-119,"Dixon Is. Fm., Aus.",3200,Type.4,7,0.189189189,-20.6274482,117.0633034,Dixon Island,Google Earth,NA
-120,"Doushantou Fm, China",540,Type.2,2,0.2,28.288772,108.590222,Doushantou,SGP,NA
-121,"Doushantou Fm, China",540,Type.1,3,0.3,28.288772,108.590222,Doushantou,SGP,NA
-122,"Doushantou Fm, China",540,Type.3,5,0.5,28.288772,108.590222,Doushantou,SGP,NA
-123,"Doushantou Fm, China",560,Type.1,5,0.217391304,28.288772,108.590222,Doushantou,SGP,NA
-124,"Doushantou Fm, China",560,Type.3,6,0.260869565,28.288772,108.590222,Doushantou,SGP,NA
-125,"Doushantou Fm, China",560,Type.4,12,0.52173913,28.288772,108.590222,Doushantou,SGP,NA
-126,"Doushantou Fm, China",570,Type.3,1,0.2,28.288772,108.590222,Doushantou,SGP,NA
-127,"Doushantou Fm, China",570,Type.4,4,0.8,28.288772,108.590222,Doushantou,SGP,NA
-128,"Doushantou Fm, China",578,Type.1,2,0.25,28.288772,108.590222,Doushantou,SGP,NA
-129,"Doushantou Fm, China",578,Type.4,6,0.75,28.288772,108.590222,Doushantou,SGP,NA
-130,"Doushantou Fm, China",590,Type.3,9,1,28.288772,108.590222,Doushantou,SGP,NA
-131,"Doushantou Fm, China",605,Type.3,10,1,28.288772,108.590222,Doushantou,SGP,NA
+74,"Buck Reef, South Africa",3416,Type.3,3,0.038,-25.7750414,31.0419625,Near Barberton,Google Earth,NA
+75,"Buck Reef, South Africa",3416,Type.4,11,0.138,-25.7750414,31.0419625,Near Barberton,Google Earth,NA
+76,Campbell R. Canada,83,Type.3,19,0.760,50.0109455,-125.3010675,Campbell River,Google Earth,NA
+77,Campbell R. Canada,83,Type.4,6,0.240,50.0109455,-125.3010675,Campbell River,Google Earth,NA
+78,Canarvon Basin Aus.,125,Type.1,3,0.176,-20.5228064,118.4703418,Carnarvon Basin,Google Earth,NA
+79,Canarvon Basin Aus.,125,Type.3,14,0.824,-20.5228064,118.4703418,Carnarvon Basin,Google Earth,NA
+80,"Canning Basin, Aus.",338,Type.1,5,0.833,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+81,"Canning Basin, Aus.",338,Type.3,1,0.167,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+82,"Canning Basin, Aus.",339,Type.1,8,0.889,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+83,"Canning Basin, Aus.",339,Type.3,1,0.111,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+84,"Canning Basin, Aus.",340,Type.1,5,0.185,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+85,"Canning Basin, Aus.",340,Type.3,17,0.630,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+86,"Canning Basin, Aus.",340,Type.4,5,0.185,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+87,"Canning Basin, Aus.",349,Type.1,1,0.333,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+88,"Canning Basin, Aus.",349,Type.3,2,0.667,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+89,"Canning Basin, Aus.",350,Type.1,2,0.333,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+90,"Canning Basin, Aus.",350,Type.3,4,0.667,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+91,"Canning Basin, Aus.",352,Type.1,1,0.111,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+92,"Canning Basin, Aus.",352,Type.3,8,0.889,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+93,"Canning Basin, Aus.",355,Type.5,31,0.456,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+94,"Canning Basin, Aus.",355,Type.3,23,0.338,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+95,"Canning Basin, Aus.",355,Type.4,14,0.206,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+96,"Canning Basin, Aus.",356,Type.1,1,0.333,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+97,"Canning Basin, Aus.",356,Type.3,2,0.667,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+98,"Canning Basin, Aus.",357,Type.1,8,0.190,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+99,"Canning Basin, Aus.",357,Type.3,17,0.405,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+100,"Canning Basin, Aus.",357,Type.4,17,0.405,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+101,"Canning Basin, Aus.",359,Type.1,37,0.902,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+102,"Canning Basin, Aus.",359,Type.3,4,0.098,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+103,"Canning Basin, Aus.",365,Type.3,25,1.000,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+104,"Canning Basin, Aus.",366,Type.1,7,0.438,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+105,"Canning Basin, Aus.",366,Type.3,9,0.563,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+106,"Canning Basin, Aus.",368,Type.3,7,1.000,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+107,"Canning Basin, Aus.",370,Type.2,1,0.042,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+108,"Canning Basin, Aus.",370,Type.1,5,0.208,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+109,"Canning Basin, Aus.",370,Type.3,18,0.750,-18.5956725,124.3895127,Canning Basin,Google Earth,NA
+110,Cariaco basin,0.1,Type.5,34,1.000,10.4957903,-64.3401337,Cariaco Basin,Google Earth,NA
+111,Cleverville Fm. Aus,3020,Type.2,3,0.036,-20.6748977,117.1482407,Near Wickham (and Cleaverville),Google Earth,NA
+112,Cleverville Fm. Aus,3020,Type.1,66,0.795,-20.6748977,117.1482407,Near Wickham (and Cleaverville),Google Earth,NA
+113,Cleverville Fm. Aus,3020,Type.3,14,0.169,-20.6748977,117.1482407,Near Wickham (and Cleaverville),Google Earth,NA
+114,Dial Ra. Aus.,540,Type.1,2,0.105,-41.1999995,146.0333333,Dial Range,Google Earth,NA
+115,Dial Ra. Aus.,540,Type.3,12,0.632,-41.1999995,146.0333333,Dial Range,Google Earth,NA
+116,Dial Ra. Aus.,540,Type.4,5,0.263,-41.1999995,146.0333333,Dial Range,Google Earth,NA
+117,"Dixon Is. Fm., Aus.",3200,Type.2,6,0.162,-20.6274482,117.0633034,Dixon Island,Google Earth,NA
+118,"Dixon Is. Fm., Aus.",3200,Type.1,24,0.649,-20.6274482,117.0633034,Dixon Island,Google Earth,NA
+119,"Dixon Is. Fm., Aus.",3200,Type.4,7,0.189,-20.6274482,117.0633034,Dixon Island,Google Earth,NA
+120,"Doushantou Fm, China",540,Type.2,2,0.200,28.288772,108.590222,Doushantou,SGP,NA
+121,"Doushantou Fm, China",540,Type.1,3,0.300,28.288772,108.590222,Doushantou,SGP,NA
+122,"Doushantou Fm, China",540,Type.3,5,0.500,28.288772,108.590222,Doushantou,SGP,NA
+123,"Doushantou Fm, China",560,Type.1,5,0.217,28.288772,108.590222,Doushantou,SGP,NA
+124,"Doushantou Fm, China",560,Type.3,6,0.261,28.288772,108.590222,Doushantou,SGP,NA
+125,"Doushantou Fm, China",560,Type.4,12,0.522,28.288772,108.590222,Doushantou,SGP,NA
+126,"Doushantou Fm, China",570,Type.3,1,0.200,28.288772,108.590222,Doushantou,SGP,NA
+127,"Doushantou Fm, China",570,Type.4,4,0.800,28.288772,108.590222,Doushantou,SGP,NA
+128,"Doushantou Fm, China",578,Type.1,2,0.250,28.288772,108.590222,Doushantou,SGP,NA
+129,"Doushantou Fm, China",578,Type.4,6,0.750,28.288772,108.590222,Doushantou,SGP,NA
+130,"Doushantou Fm, China",590,Type.3,9,1.000,28.288772,108.590222,Doushantou,SGP,NA
+131,"Doushantou Fm, China",605,Type.3,10,1.000,28.288772,108.590222,Doushantou,SGP,NA
 132,"Doushantou Fm, China",615,Type.1,5,0.625,28.288772,108.590222,Doushantou,SGP,NA
 133,"Doushantou Fm, China",615,Type.3,3,0.375,28.288772,108.590222,Doushantou,SGP,NA
 134,"Doushantou Fm, China",620,Type.1,5,0.625,28.288772,108.590222,Doushantou,SGP,NA
 135,"Doushantou Fm, China",620,Type.3,1,0.125,28.288772,108.590222,Doushantou,SGP,NA
-136,"Doushantou Fm, China",620,Type.4,2,0.25,28.288772,108.590222,Doushantou,SGP,NA
-137,"Doushantou Fm, China",628.3,Type.1,10,1,28.288772,108.590222,Doushantou,SGP,NA
-138,"Doushantou Fm, China",633,Type.1,1,0.142857143,28.288772,108.590222,Doushantou,SGP,NA
-139,"Doushantou Fm, China",633,Type.3,6,0.857142857,28.288772,108.590222,Doushantou,SGP,NA
-140,"Doushantou Fm, China",635,Type.2,1,0.1,28.288772,108.590222,Doushantou,SGP,NA
-141,"Doushantou Fm, China",635,Type.1,7,0.7,28.288772,108.590222,Doushantou,SGP,NA
-142,"Doushantou Fm, China",635,Type.3,2,0.2,28.288772,108.590222,Doushantou,SGP,NA
-143,"Doushantou Fm, China",637,Type.5,5,0.5,28.288772,108.590222,Doushantou,SGP,NA
-144,"Doushantou Fm, China",637,Type.3,5,0.5,28.288772,108.590222,Doushantou,SGP,NA
-145,"Fife, Scotland",331,Type.3,9,0.818181818,56.2296582,-3.1421098,Fife,Google Earth,NA
-146,"Fife, Scotland",331,Type.4,2,0.181818182,56.2296582,-3.1421098,Fife,Google Earth,NA
-147,"Fuizhou, S. China",523,Type.5,13,1,26.9197484,106.5995972,Taken as Guizhou,Google Earth,NA
-148,"Georgina Basin, Aus",500,Type.3,8,1,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
+136,"Doushantou Fm, China",620,Type.4,2,0.250,28.288772,108.590222,Doushantou,SGP,NA
+137,"Doushantou Fm, China",628.3,Type.1,10,1.000,28.288772,108.590222,Doushantou,SGP,NA
+138,"Doushantou Fm, China",633,Type.1,1,0.143,28.288772,108.590222,Doushantou,SGP,NA
+139,"Doushantou Fm, China",633,Type.3,6,0.857,28.288772,108.590222,Doushantou,SGP,NA
+140,"Doushantou Fm, China",635,Type.2,1,0.100,28.288772,108.590222,Doushantou,SGP,NA
+141,"Doushantou Fm, China",635,Type.1,7,0.700,28.288772,108.590222,Doushantou,SGP,NA
+142,"Doushantou Fm, China",635,Type.3,2,0.200,28.288772,108.590222,Doushantou,SGP,NA
+143,"Doushantou Fm, China",637,Type.5,5,0.500,28.288772,108.590222,Doushantou,SGP,NA
+144,"Doushantou Fm, China",637,Type.3,5,0.500,28.288772,108.590222,Doushantou,SGP,NA
+145,"Fife, Scotland",331,Type.3,9,0.818,56.2296582,-3.1421098,Fife,Google Earth,NA
+146,"Fife, Scotland",331,Type.4,2,0.182,56.2296582,-3.1421098,Fife,Google Earth,NA
+147,"Fuizhou, S. China",523,Type.5,13,1.000,26.9197484,106.5995972,Taken as Guizhou,Google Earth,NA
+148,"Georgina Basin, Aus",500,Type.3,8,1.000,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
 149,"Georgina Basin, Aus",501,Type.2,1,0.125,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
 150,"Georgina Basin, Aus",501,Type.3,7,0.875,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
-151,"Georgina Basin, Aus",504,Type.5,4,0.571428571,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
-152,"Georgina Basin, Aus",504,Type.2,3,0.428571429,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
-153,"Georgina Basin, Aus",505,Type.5,1,0.142857143,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
-154,"Georgina Basin, Aus",505,Type.2,5,0.714285714,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
-155,"Georgina Basin, Aus",505,Type.3,1,0.142857143,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
-156,"Georgina Basin, Aus",506,Type.5,1,0.2,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
-157,"Georgina Basin, Aus",506,Type.3,3,0.6,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
-158,"Georgina Basin, Aus",506,Type.4,1,0.2,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
-159,"Georgina Basin, Aus",507,Type.5,7,1,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
-160,"Georgina Basin, Aus",508,Type.5,8,1,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
-161,"Georgina Basin, Aus",509,Type.3,7,1,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
-162,"Georgina Basin, Aus",510,Type.5,17,1,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
-163,"Georgina Basin, Aus",512,Type.3,16,1,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
-164,"Great Basin, USA",350,Type.3,6,0.136363636,38.6905556,-113.4477778,Great Basin,SGP,NA
-165,"Great Basin, USA",350,Type.4,38,0.863636364,38.6905556,-113.4477778,Great Basin,SGP,NA
-166,"Great Basin, USA",355,Type.4,18,1,38.6905556,-113.4477778,Great Basin,SGP,NA
-167,"Great Basin, USA",390,Type.5,15,1,38.6905556,-113.4477778,Great Basin,SGP,NA
-168,"Great Basin, USA",395,Type.5,15,1,38.6905556,-113.4477778,Great Basin,SGP,NA
-169,"Great Basin, USA",400,Type.5,14,1,38.6905556,-113.4477778,Great Basin,SGP,NA
-170,"Great Basin, USA",410,Type.3,8,1,38.6905556,-113.4477778,Great Basin,SGP,NA
-171,"Great Basin, USA",415,Type.5,16,1,38.6905556,-113.4477778,Great Basin,SGP,NA
-172,"Great Basin, USA",416,Type.3,8,1,38.6905556,-113.4477778,Great Basin,SGP,NA
-173,"Great Basin, USA",420,Type.5,3,0.176470588,38.6905556,-113.4477778,Great Basin,SGP,NA
-174,"Great Basin, USA",420,Type.2,10,0.588235294,38.6905556,-113.4477778,Great Basin,SGP,NA
-175,"Great Basin, USA",420,Type.4,4,0.235294118,38.6905556,-113.4477778,Great Basin,SGP,NA
-176,"Heath Shale, USA",333,Type.5,16,1,46.63333,-109.13333,Heath Shale,SGP,NA
-177,"Huronian, Canada",2300,Type.1,8,1,46.6284214,-81.3878728,"North of Huron Lake, taken near Espanola",Google Earth,NA
-178,Hushpuckney Sh. USA,305,Type.5,14,1,39.13,-94.89,Hushpuckney Shale,SGP,NA
-179,"Jerinah Fm, pilbara, Aus.",2660,Type.2,37,0.544117647,-22.2277276,118.2746029,Near Wittenoom,Google Earth,NA
-180,"Jerinah Fm, pilbara, Aus.",2660,Type.1,22,0.323529412,-22.2277276,118.2746029,Near Wittenoom,Google Earth,NA
-181,"Jerinah Fm, pilbara, Aus.",2660,Type.3,1,0.014705882,-22.2277276,118.2746029,Near Wittenoom,Google Earth,NA
-182,"Jerinah Fm, pilbara, Aus.",2660,Type.4,8,0.117647059,-22.2277276,118.2746029,Near Wittenoom,Google Earth,NA
-183,"Kalgoolie, Aus.",2685,Type.2,7,0.777777778,-30.7530899,121.4645704,Near Kalgoorlie,Google Earth,NA
-184,"Kalgoolie, Aus.",2685,Type.1,1,0.111111111,-30.7530899,121.4645704,Near Kalgoorlie,Google Earth,NA
-185,"Kalgoolie, Aus.",2685,Type.4,1,0.111111111,-30.7530899,121.4645704,Near Kalgoorlie,Google Earth,NA
-186,"Kasmovian Shale, USA",304,Type.5,1,1,37.188289,-109.953348,"Location unclear. Taken as Kasimovian, USA entry listed in SGP",SGP,NA
-187,"Kasmovian Shale, USA",304.5,Type.5,1,1,37.188289,-109.953348,"Location unclear. Taken as Kasimovian, USA entry listed in SGP",SGP,NA
-188,King Is. Aus.,650,Type.1,10,1,-39.8686304,143.9857663,King Island,Google Earth,NA
-189,"Kure, Turkey",190,Type.1,19,0.95,41.8044624,33.6632355,Kure,Google Earth,NA
-190,"Kure, Turkey",190,Type.3,1,0.05,41.8044624,33.6632355,Kure,Google Earth,NA
-191,"Lillian Fm, WA",1039,Type.2,2,0.222222222,-25.4464054,128.6714649,"Taken as Lilian Fm, Bentley Basin from Geoscience Australia lexicon",Google Earth,NA
-192,"Lillian Fm, WA",1039,Type.3,7,0.777777778,-25.4464054,128.6714649,"Taken as Lilian Fm, Bentley Basin from Geoscience Australia lexicon",Google Earth,NA
-193,"Lillian Fm, WA",1041,Type.2,2,0.2,-25.4464054,128.6714649,"Taken as Lilian Fm, Bentley Basin from Geoscience Australia lexicon",Google Earth,NA
-194,"Lillian Fm, WA",1041,Type.1,8,0.8,-25.4464054,128.6714649,"Taken as Lilian Fm, Bentley Basin from Geoscience Australia lexicon",Google Earth,NA
-195,"Lillian Fm, WA",1042,Type.1,25,1,-25.4464054,128.6714649,"Taken as Lilian Fm, Bentley Basin from Geoscience Australia lexicon",Google Earth,NA
-196,"Lillian Fm, WA",1045,Type.1,10,1,-25.4464054,128.6714649,"Taken as Lilian Fm, Bentley Basin from Geoscience Australia lexicon",Google Earth,NA
-197,Linton Fm. USA,308,Type.5,7,1,39.03478,-87.157522,Near Linton,Google Earth,NA
-198,Lisburne Fm. USA,328,Type.5,22,1,68.8811108,-166.21,Near Cape Lisburne,Google Earth,NA
-199,"McArthur Basin, Aus",1730,Type.2,8,1,-16.0697379,136.3086189,Near Borroola,Google Earth,NA
-200,Mecca Quy. Shale USA,307,Type.5,8,1,39.7270699,-87.3319715,"Near Mecca, Indiana",Google Earth,NA
-201,Mecca Quy. Shale USA,310,Type.5,8,1,39.7270699,-87.3319715,"Near Mecca, Indiana",Google Earth,NA
-202,"Meidang Basin, S China",980,Type.1,53,1,25.1825482,101.8628502,"Taken as part of Kunyang Group, Yunnan",Google Earth,NA
-203,"Moffat Shale, Scotland",444,Type.5,6,0.857142857,55.3329763,-3.4400749,Near Moffat,Google Earth,NA
-204,"Moffat Shale, Scotland",444,Type.3,1,0.142857143,55.3329763,-3.4400749,Near Moffat,Google Earth,NA
-205,"Mt McRae Shale, Aus",2541,Type.2,16,0.551724138,-22.2277276,118.2746029,Near Wittenoom,Google Earth,NA
-206,"Mt McRae Shale, Aus",2541,Type.1,13,0.448275862,-22.2277276,118.2746029,Near Wittenoom,Google Earth,NA
-207,"Mt McRae Shale, Aus.",2504,Type.2,12,0.210526316,-22.2277276,118.2746029,Near Wittenoom,Google Earth,NA
-208,"Mt McRae Shale, Aus.",2504,Type.1,24,0.421052632,-22.2277276,118.2746029,Near Wittenoom,Google Earth,NA
-209,"Mt McRae Shale, Aus.",2504,Type.3,21,0.368421053,-22.2277276,118.2746029,Near Wittenoom,Google Earth,NA
-210,Mwasha Gp. Zambia,715,Type.2,2,0.142857143,-9.2269237,26.2580166,Location unclear. Taken as Katanga for Katangan Supergroup,Google Earth,NA
-211,Mwasha Gp. Zambia,715,Type.1,12,0.857142857,-9.2269237,26.2580166,Location unclear. Taken as Katanga for Katangan Supergroup,Google Earth,NA
-212,"Nth. West Shelf, Aus.",202,Type.4,15,1,-20.1326602,116.7975829,"Northwest shelf, near Dampier",Google Earth,NA
-213,"NW. Tasmania, Aus",637,Type.3,15,1,-40.8453519,145.1365296,Taken as Smithton,Google Earth,NA
-214,"NW. Tasmania, Aus.",640,Type.3,18,1,-40.8453519,145.1365296,Taken as Smithton,Google Earth,NA
-215,"Officer Basin, Aus.",760,Type.3,65,0.970149254,-28.6733175,127.1904985,Taken south of Warburton,Google Earth,NA
-216,"Officer Basin, Aus.",760,Type.4,2,0.029850746,-28.6733175,127.1904985,Taken south of Warburton,Google Earth,NA
-217,"Officer Basin, Aus.",780,Type.3,2,1,-28.6733175,127.1904985,Taken south of Warburton,Google Earth,NA
-218,"OIDP302, Arctic Ocean",53,Type.5,4,0.333333333,74.9999997,174.9999999,Lomonosov Ridge,Google Earth,NA
-219,"OIDP302, Arctic Ocean",53,Type.2,2,0.166666667,74.9999997,174.9999999,Lomonosov Ridge,Google Earth,NA
-220,"OIDP302, Arctic Ocean",53,Type.3,6,0.5,74.9999997,174.9999999,Lomonosov Ridge,Google Earth,NA
-221,"OIDP302, Arctic Ocean",56,Type.2,2,0.4,74.9999997,174.9999999,Lomonosov Ridge,Google Earth,NA
-222,"OIDP302, Arctic Ocean",56,Type.3,3,0.6,74.9999997,174.9999999,Lomonosov Ridge,Google Earth,NA
-223,"Otago basin, N.Z.",250,Type.1,6,0.857142857,-45.3973949,169.7615971,Taken as region of Otago,Google Earth,NA
-224,"Otago basin, N.Z.",250,Type.3,1,0.142857143,-45.3973949,169.7615971,Taken as region of Otago,Google Earth,NA
-225,Otway basin. Aus.,91,Type.2,1,0.076923077,-38.3786543,142.4767053,"NW of Otway Ranges, near Warrnambool",Google Earth,NA
-226,Otway basin. Aus.,91,Type.1,2,0.153846154,-38.3786543,142.4767053,"NW of Otway Ranges, near Warrnambool",Google Earth,NA
-227,Otway basin. Aus.,91,Type.3,3,0.230769231,-38.3786543,142.4767053,"NW of Otway Ranges, near Warrnambool",Google Earth,NA
-228,Otway basin. Aus.,91,Type.4,7,0.538461538,-38.3786543,142.4767053,"NW of Otway Ranges, near Warrnambool",Google Earth,NA
-229,Otway basin. Aus.,92,Type.1,2,0.133333333,-38.3786543,142.4767053,"NW of Otway Ranges, near Warrnambool",Google Earth,NA
-230,Otway basin. Aus.,92,Type.3,6,0.4,-38.3786543,142.4767053,"NW of Otway Ranges, near Warrnambool",Google Earth,NA
-231,Otway basin. Aus.,92,Type.4,7,0.466666667,-38.3786543,142.4767053,"NW of Otway Ranges, near Warrnambool",Google Earth,NA
-232,"Padbury Basin, Aus",1891,Type.2,2,0.666666667,-25.5206076,118.583388,W of DeGrussa,Google Earth,NA
-233,"Padbury Basin, Aus",1891,Type.1,1,0.333333333,-25.5206076,118.583388,W of DeGrussa,Google Earth,NA
-234,"Pathhead Fm, Scotland",332,Type.1,3,0.111111111,55.867187,-2.9676947,Pathhead,Google Earth,NA
-235,"Pathhead Fm, Scotland",332,Type.3,24,0.888888889,55.867187,-2.9676947,Pathhead,Google Earth,NA
-236,"Perchenga, Russia",2000,Type.5,1,0.035714286,69.539966,31.1893181,Taken as Pechenga,Google Earth,NA
-237,"Perchenga, Russia",2000,Type.2,26,0.928571429,69.539966,31.1893181,Taken as Pechenga,Google Earth,NA
-238,"Perchenga, Russia",2000,Type.4,1,0.035714286,69.539966,31.1893181,Taken as Pechenga,Google Earth,NA
-239,"Perth Basin, Aus.",250,Type.1,1,0.038461538,-31.9124173,115.5091353,Taken as offshore Perth,Google Earth,NA
-240,"Perth Basin, Aus.",250,Type.3,25,0.961538462,-31.9124173,115.5091353,Taken as offshore Perth,Google Earth,NA
-241,"Perth Basin, Aus.",252,Type.5,1,0.02173913,-31.9124173,115.5091353,Taken as offshore Perth,Google Earth,NA
-242,"Perth Basin, Aus.",252,Type.2,10,0.217391304,-31.9124173,115.5091353,Taken as offshore Perth,Google Earth,NA
-243,"Perth Basin, Aus.",252,Type.1,3,0.065217391,-31.9124173,115.5091353,Taken as offshore Perth,Google Earth,NA
-244,"Perth Basin, Aus.",252,Type.3,22,0.47826087,-31.9124173,115.5091353,Taken as offshore Perth,Google Earth,NA
-245,"Perth Basin, Aus.",252,Type.4,10,0.217391304,-31.9124173,115.5091353,Taken as offshore Perth,Google Earth,NA
-246,Phosphoria Fm. USA,270,Type.5,14,1,42.5296486,-111.2607625,Phosphoria Gulch,Google Earth,NA
-247,"Posidonia Shale, Germany",180,Type.4,20,1,47.6898627,12.2615888,Taken as type section (Sachrang),Google Earth,NA
-248,"Promise Fm, Witts, South Afr.",2980,Type.2,38,0.88372093,-26.1715215,28.0400246,Taken as Johanessberg,Google Earth,NA
-249,"Promise Fm, Witts, South Afr.",2980,Type.1,5,0.11627907,-26.1715215,28.0400246,Taken as Johanessberg,Google Earth,NA
-250,"Que River Shale, Aus",500,Type.2,9,0.642857143,-41.6105018,145.5443054,Taken as Que River,Google Earth,NA
-251,"Que River Shale, Aus",500,Type.1,4,0.285714286,-41.6105018,145.5443054,Taken as Que River,Google Earth,NA
-252,"Que River Shale, Aus",500,Type.4,1,0.071428571,-41.6105018,145.5443054,Taken as Que River,Google Earth,NA
-253,"Reefton, NZ",495,Type.2,9,0.692307692,-42.1093415,171.8603591,Reefton,Google Earth,NA
-254,"Reefton, NZ",495,Type.1,4,0.307692308,-42.1093415,171.8603591,Reefton,Google Earth,NA
-255,"Richarson Trough, Canada",370,Type.3,4,1,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-256,"Richarson Trough, Canada",371,Type.3,6,1,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-257,"Richarson Trough, Canada",372,Type.2,2,0.2,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-258,"Richarson Trough, Canada",372,Type.3,8,0.8,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-259,"Richarson Trough, Canada",372.2,Type.1,1,0.111111111,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-260,"Richarson Trough, Canada",372.2,Type.3,8,0.888888889,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-261,"Richarson Trough, Canada",375,Type.2,1,0.111111111,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-262,"Richarson Trough, Canada",375,Type.1,1,0.111111111,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-263,"Richarson Trough, Canada",375,Type.3,7,0.777777778,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-264,"Richarson Trough, Canada",375.5,Type.5,1,0.25,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-265,"Richarson Trough, Canada",375.5,Type.4,3,0.75,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-266,"Richarson Trough, Canada",376.5,Type.3,12,0.923076923,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-267,"Richarson Trough, Canada",376.5,Type.4,1,0.076923077,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-268,"Richarson Trough, Canada",377,Type.2,3,0.5,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-269,"Richarson Trough, Canada",377,Type.3,3,0.5,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-270,"Richarson Trough, Canada",377.5,Type.1,2,0.5,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-271,"Richarson Trough, Canada",377.5,Type.3,2,0.5,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+151,"Georgina Basin, Aus",504,Type.5,4,0.571,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
+152,"Georgina Basin, Aus",504,Type.2,3,0.429,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
+153,"Georgina Basin, Aus",505,Type.5,1,0.143,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
+154,"Georgina Basin, Aus",505,Type.2,5,0.714,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
+155,"Georgina Basin, Aus",505,Type.3,1,0.143,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
+156,"Georgina Basin, Aus",506,Type.5,1,0.200,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
+157,"Georgina Basin, Aus",506,Type.3,3,0.600,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
+158,"Georgina Basin, Aus",506,Type.4,1,0.200,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
+159,"Georgina Basin, Aus",507,Type.5,7,1.000,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
+160,"Georgina Basin, Aus",508,Type.5,8,1.000,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
+161,"Georgina Basin, Aus",509,Type.3,7,1.000,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
+162,"Georgina Basin, Aus",510,Type.5,17,1.000,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
+163,"Georgina Basin, Aus",512,Type.3,16,1.000,-19.669889,140.4333335,Georgina Basin,Google Earth,NA
+164,"Great Basin, USA",350,Type.3,6,0.136,38.6905556,-113.4477778,Great Basin,SGP,NA
+165,"Great Basin, USA",350,Type.4,38,0.864,38.6905556,-113.4477778,Great Basin,SGP,NA
+166,"Great Basin, USA",355,Type.4,18,1.000,38.6905556,-113.4477778,Great Basin,SGP,NA
+167,"Great Basin, USA",390,Type.5,15,1.000,38.6905556,-113.4477778,Great Basin,SGP,NA
+168,"Great Basin, USA",395,Type.5,15,1.000,38.6905556,-113.4477778,Great Basin,SGP,NA
+169,"Great Basin, USA",400,Type.5,14,1.000,38.6905556,-113.4477778,Great Basin,SGP,NA
+170,"Great Basin, USA",410,Type.3,8,1.000,38.6905556,-113.4477778,Great Basin,SGP,NA
+171,"Great Basin, USA",415,Type.5,16,1.000,38.6905556,-113.4477778,Great Basin,SGP,NA
+172,"Great Basin, USA",416,Type.3,8,1.000,38.6905556,-113.4477778,Great Basin,SGP,NA
+173,"Great Basin, USA",420,Type.5,3,0.176,38.6905556,-113.4477778,Great Basin,SGP,NA
+174,"Great Basin, USA",420,Type.2,10,0.588,38.6905556,-113.4477778,Great Basin,SGP,NA
+175,"Great Basin, USA",420,Type.4,4,0.235,38.6905556,-113.4477778,Great Basin,SGP,NA
+176,"Heath Shale, USA",333,Type.5,16,1.000,46.63333,-109.13333,Heath Shale,SGP,NA
+177,"Huronian, Canada",2300,Type.1,8,1.000,46.6284214,-81.3878728,"North of Huron Lake, taken near Espanola",Google Earth,NA
+178,Hushpuckney Sh. USA,305,Type.5,14,1.000,39.13,-94.89,Hushpuckney Shale,SGP,NA
+179,"Jerinah Fm, pilbara, Aus.",2660,Type.2,37,0.544,-22.2277276,118.2746029,Near Wittenoom,Google Earth,NA
+180,"Jerinah Fm, pilbara, Aus.",2660,Type.1,22,0.324,-22.2277276,118.2746029,Near Wittenoom,Google Earth,NA
+181,"Jerinah Fm, pilbara, Aus.",2660,Type.3,1,0.015,-22.2277276,118.2746029,Near Wittenoom,Google Earth,NA
+182,"Jerinah Fm, pilbara, Aus.",2660,Type.4,8,0.118,-22.2277276,118.2746029,Near Wittenoom,Google Earth,NA
+183,"Kalgoolie, Aus.",2685,Type.2,7,0.778,-30.7530899,121.4645704,Near Kalgoorlie,Google Earth,NA
+184,"Kalgoolie, Aus.",2685,Type.1,1,0.111,-30.7530899,121.4645704,Near Kalgoorlie,Google Earth,NA
+185,"Kalgoolie, Aus.",2685,Type.4,1,0.111,-30.7530899,121.4645704,Near Kalgoorlie,Google Earth,NA
+186,"Kasmovian Shale, USA",304,Type.5,1,1.000,37.188289,-109.953348,"Location unclear. Taken as Kasimovian, USA entry listed in SGP",SGP,NA
+187,"Kasmovian Shale, USA",304.5,Type.5,1,1.000,37.188289,-109.953348,"Location unclear. Taken as Kasimovian, USA entry listed in SGP",SGP,NA
+188,King Is. Aus.,650,Type.1,10,1.000,-39.8686304,143.9857663,King Island,Google Earth,NA
+189,"Kure, Turkey",190,Type.1,19,0.950,41.8044624,33.6632355,Kure,Google Earth,NA
+190,"Kure, Turkey",190,Type.3,1,0.050,41.8044624,33.6632355,Kure,Google Earth,NA
+191,"Lillian Fm, WA",1039,Type.2,2,0.222,-25.4464054,128.6714649,"Taken as Lilian Fm, Bentley Basin from Geoscience Australia lexicon",Google Earth,NA
+192,"Lillian Fm, WA",1039,Type.3,7,0.778,-25.4464054,128.6714649,"Taken as Lilian Fm, Bentley Basin from Geoscience Australia lexicon",Google Earth,NA
+193,"Lillian Fm, WA",1041,Type.2,2,0.200,-25.4464054,128.6714649,"Taken as Lilian Fm, Bentley Basin from Geoscience Australia lexicon",Google Earth,NA
+194,"Lillian Fm, WA",1041,Type.1,8,0.800,-25.4464054,128.6714649,"Taken as Lilian Fm, Bentley Basin from Geoscience Australia lexicon",Google Earth,NA
+195,"Lillian Fm, WA",1042,Type.1,25,1.000,-25.4464054,128.6714649,"Taken as Lilian Fm, Bentley Basin from Geoscience Australia lexicon",Google Earth,NA
+196,"Lillian Fm, WA",1045,Type.1,10,1.000,-25.4464054,128.6714649,"Taken as Lilian Fm, Bentley Basin from Geoscience Australia lexicon",Google Earth,NA
+197,Linton Fm. USA,308,Type.5,7,1.000,39.03478,-87.157522,Near Linton,Google Earth,NA
+198,Lisburne Fm. USA,328,Type.5,22,1.000,68.8811108,-166.21,Near Cape Lisburne,Google Earth,NA
+199,"McArthur Basin, Aus",1730,Type.2,8,1.000,-16.0697379,136.3086189,Near Borroola,Google Earth,NA
+200,Mecca Quy. Shale USA,307,Type.5,8,1.000,39.7270699,-87.3319715,"Near Mecca, Indiana",Google Earth,NA
+201,Mecca Quy. Shale USA,310,Type.5,8,1.000,39.7270699,-87.3319715,"Near Mecca, Indiana",Google Earth,NA
+202,"Meidang Basin, S China",980,Type.1,53,1.000,25.1825482,101.8628502,"Taken as part of Kunyang Group, Yunnan",Google Earth,NA
+203,"Moffat Shale, Scotland",444,Type.5,6,0.857,55.3329763,-3.4400749,Near Moffat,Google Earth,NA
+204,"Moffat Shale, Scotland",444,Type.3,1,0.143,55.3329763,-3.4400749,Near Moffat,Google Earth,NA
+205,"Mt McRae Shale, Aus",2541,Type.2,16,0.552,-22.2277276,118.2746029,Near Wittenoom,Google Earth,NA
+206,"Mt McRae Shale, Aus",2541,Type.1,13,0.448,-22.2277276,118.2746029,Near Wittenoom,Google Earth,NA
+207,"Mt McRae Shale, Aus.",2504,Type.2,12,0.211,-22.2277276,118.2746029,Near Wittenoom,Google Earth,NA
+208,"Mt McRae Shale, Aus.",2504,Type.1,24,0.421,-22.2277276,118.2746029,Near Wittenoom,Google Earth,NA
+209,"Mt McRae Shale, Aus.",2504,Type.3,21,0.368,-22.2277276,118.2746029,Near Wittenoom,Google Earth,NA
+210,Mwasha Gp. Zambia,715,Type.2,2,0.143,-9.2269237,26.2580166,Location unclear. Taken as Katanga for Katangan Supergroup,Google Earth,NA
+211,Mwasha Gp. Zambia,715,Type.1,12,0.857,-9.2269237,26.2580166,Location unclear. Taken as Katanga for Katangan Supergroup,Google Earth,NA
+212,"Nth. West Shelf, Aus.",202,Type.4,15,1.000,-20.1326602,116.7975829,"Northwest shelf, near Dampier",Google Earth,NA
+213,"NW. Tasmania, Aus",637,Type.3,15,1.000,-40.8453519,145.1365296,Taken as Smithton,Google Earth,NA
+214,"NW. Tasmania, Aus.",640,Type.3,18,1.000,-40.8453519,145.1365296,Taken as Smithton,Google Earth,NA
+215,"Officer Basin, Aus.",760,Type.3,65,0.970,-28.6733175,127.1904985,Taken south of Warburton,Google Earth,NA
+216,"Officer Basin, Aus.",760,Type.4,2,0.030,-28.6733175,127.1904985,Taken south of Warburton,Google Earth,NA
+217,"Officer Basin, Aus.",780,Type.3,2,1.000,-28.6733175,127.1904985,Taken south of Warburton,Google Earth,NA
+218,"OIDP302, Arctic Ocean",53,Type.5,4,0.333,74.9999997,174.9999999,Lomonosov Ridge,Google Earth,NA
+219,"OIDP302, Arctic Ocean",53,Type.2,2,0.167,74.9999997,174.9999999,Lomonosov Ridge,Google Earth,NA
+220,"OIDP302, Arctic Ocean",53,Type.3,6,0.500,74.9999997,174.9999999,Lomonosov Ridge,Google Earth,NA
+221,"OIDP302, Arctic Ocean",56,Type.2,2,0.400,74.9999997,174.9999999,Lomonosov Ridge,Google Earth,NA
+222,"OIDP302, Arctic Ocean",56,Type.3,3,0.600,74.9999997,174.9999999,Lomonosov Ridge,Google Earth,NA
+223,"Otago basin, N.Z.",250,Type.1,6,0.857,-45.3973949,169.7615971,Taken as region of Otago,Google Earth,NA
+224,"Otago basin, N.Z.",250,Type.3,1,0.143,-45.3973949,169.7615971,Taken as region of Otago,Google Earth,NA
+225,Otway basin. Aus.,91,Type.2,1,0.077,-38.3786543,142.4767053,"NW of Otway Ranges, near Warrnambool",Google Earth,NA
+226,Otway basin. Aus.,91,Type.1,2,0.154,-38.3786543,142.4767053,"NW of Otway Ranges, near Warrnambool",Google Earth,NA
+227,Otway basin. Aus.,91,Type.3,3,0.231,-38.3786543,142.4767053,"NW of Otway Ranges, near Warrnambool",Google Earth,NA
+228,Otway basin. Aus.,91,Type.4,7,0.538,-38.3786543,142.4767053,"NW of Otway Ranges, near Warrnambool",Google Earth,NA
+229,Otway basin. Aus.,92,Type.1,2,0.133,-38.3786543,142.4767053,"NW of Otway Ranges, near Warrnambool",Google Earth,NA
+230,Otway basin. Aus.,92,Type.3,6,0.400,-38.3786543,142.4767053,"NW of Otway Ranges, near Warrnambool",Google Earth,NA
+231,Otway basin. Aus.,92,Type.4,7,0.467,-38.3786543,142.4767053,"NW of Otway Ranges, near Warrnambool",Google Earth,NA
+232,"Padbury Basin, Aus",1891,Type.2,2,0.667,-25.5206076,118.583388,W of DeGrussa,Google Earth,NA
+233,"Padbury Basin, Aus",1891,Type.1,1,0.333,-25.5206076,118.583388,W of DeGrussa,Google Earth,NA
+234,"Pathhead Fm, Scotland",332,Type.1,3,0.111,55.867187,-2.9676947,Pathhead,Google Earth,NA
+235,"Pathhead Fm, Scotland",332,Type.3,24,0.889,55.867187,-2.9676947,Pathhead,Google Earth,NA
+236,"Perchenga, Russia",2000,Type.5,1,0.036,69.539966,31.1893181,Taken as Pechenga,Google Earth,NA
+237,"Perchenga, Russia",2000,Type.2,26,0.929,69.539966,31.1893181,Taken as Pechenga,Google Earth,NA
+238,"Perchenga, Russia",2000,Type.4,1,0.036,69.539966,31.1893181,Taken as Pechenga,Google Earth,NA
+239,"Perth Basin, Aus.",250,Type.1,1,0.038,-31.9124173,115.5091353,Taken as offshore Perth,Google Earth,NA
+240,"Perth Basin, Aus.",250,Type.3,25,0.962,-31.9124173,115.5091353,Taken as offshore Perth,Google Earth,NA
+241,"Perth Basin, Aus.",252,Type.5,1,0.022,-31.9124173,115.5091353,Taken as offshore Perth,Google Earth,NA
+242,"Perth Basin, Aus.",252,Type.2,10,0.217,-31.9124173,115.5091353,Taken as offshore Perth,Google Earth,NA
+243,"Perth Basin, Aus.",252,Type.1,3,0.065,-31.9124173,115.5091353,Taken as offshore Perth,Google Earth,NA
+244,"Perth Basin, Aus.",252,Type.3,22,0.478,-31.9124173,115.5091353,Taken as offshore Perth,Google Earth,NA
+245,"Perth Basin, Aus.",252,Type.4,10,0.217,-31.9124173,115.5091353,Taken as offshore Perth,Google Earth,NA
+246,Phosphoria Fm. USA,270,Type.5,14,1.000,42.5296486,-111.2607625,Phosphoria Gulch,Google Earth,NA
+247,"Posidonia Shale, Germany",180,Type.4,20,1.000,47.6898627,12.2615888,Taken as type section (Sachrang),Google Earth,NA
+248,"Promise Fm, Witts, South Afr.",2980,Type.2,38,0.884,-26.1715215,28.0400246,Taken as Johanessberg,Google Earth,NA
+249,"Promise Fm, Witts, South Afr.",2980,Type.1,5,0.116,-26.1715215,28.0400246,Taken as Johanessberg,Google Earth,NA
+250,"Que River Shale, Aus",500,Type.2,9,0.643,-41.6105018,145.5443054,Taken as Que River,Google Earth,NA
+251,"Que River Shale, Aus",500,Type.1,4,0.286,-41.6105018,145.5443054,Taken as Que River,Google Earth,NA
+252,"Que River Shale, Aus",500,Type.4,1,0.071,-41.6105018,145.5443054,Taken as Que River,Google Earth,NA
+253,"Reefton, NZ",495,Type.2,9,0.692,-42.1093415,171.8603591,Reefton,Google Earth,NA
+254,"Reefton, NZ",495,Type.1,4,0.308,-42.1093415,171.8603591,Reefton,Google Earth,NA
+255,"Richarson Trough, Canada",370,Type.3,4,1.000,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+256,"Richarson Trough, Canada",371,Type.3,6,1.000,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+257,"Richarson Trough, Canada",372,Type.2,2,0.200,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+258,"Richarson Trough, Canada",372,Type.3,8,0.800,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+259,"Richarson Trough, Canada",372.2,Type.1,1,0.111,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+260,"Richarson Trough, Canada",372.2,Type.3,8,0.889,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+261,"Richarson Trough, Canada",375,Type.2,1,0.111,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+262,"Richarson Trough, Canada",375,Type.1,1,0.111,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+263,"Richarson Trough, Canada",375,Type.3,7,0.778,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+264,"Richarson Trough, Canada",375.5,Type.5,1,0.250,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+265,"Richarson Trough, Canada",375.5,Type.4,3,0.750,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+266,"Richarson Trough, Canada",376.5,Type.3,12,0.923,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+267,"Richarson Trough, Canada",376.5,Type.4,1,0.077,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+268,"Richarson Trough, Canada",377,Type.2,3,0.500,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+269,"Richarson Trough, Canada",377,Type.3,3,0.500,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+270,"Richarson Trough, Canada",377.5,Type.1,2,0.500,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+271,"Richarson Trough, Canada",377.5,Type.3,2,0.500,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
 272,"Richarson Trough, Canada",378,Type.2,2,0.125,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
 273,"Richarson Trough, Canada",378,Type.1,2,0.125,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-274,"Richarson Trough, Canada",378,Type.3,12,0.75,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-275,"Richarson Trough, Canada",378.9,Type.2,1,0.1,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-276,"Richarson Trough, Canada",378.9,Type.3,9,0.9,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-277,"Richarson Trough, Canada",379,Type.1,3,0.272727273,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-278,"Richarson Trough, Canada",379,Type.4,8,0.727272727,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-279,"Richarson Trough, Canada",379.2,Type.3,1,0.2,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-280,"Richarson Trough, Canada",379.2,Type.4,4,0.8,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-281,"Richarson Trough, Canada",379.6,Type.4,6,1,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-282,"Richarson Trough, Canada",380,Type.5,5,0.416666667,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-283,"Richarson Trough, Canada",380,Type.4,7,0.583333333,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-284,"Richarson Trough, Canada",380.1,Type.5,13,1,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-285,"Richarson Trough, Canada",380.3,Type.5,11,1,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-286,"Richarson Trough, Canada",380.5,Type.5,2,0.25,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-287,"Richarson Trough, Canada",380.5,Type.4,6,0.75,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-288,"Richarson Trough, Canada",382,Type.4,8,1,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-289,"Richarson Trough, Canada",382.5,Type.4,8,1,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-290,"Richarson Trough, Canada",383,Type.4,2,1,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-291,"Richarson Trough, Canada",383.3,Type.4,8,1,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-292,"Richarson Trough, Canada",383.5,Type.4,4,1,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-293,"Richarson Trough, Canada",383.7,Type.5,4,0.5,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-294,"Richarson Trough, Canada",383.7,Type.4,4,0.5,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+274,"Richarson Trough, Canada",378,Type.3,12,0.750,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+275,"Richarson Trough, Canada",378.9,Type.2,1,0.100,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+276,"Richarson Trough, Canada",378.9,Type.3,9,0.900,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+277,"Richarson Trough, Canada",379,Type.1,3,0.273,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+278,"Richarson Trough, Canada",379,Type.4,8,0.727,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+279,"Richarson Trough, Canada",379.2,Type.3,1,0.200,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+280,"Richarson Trough, Canada",379.2,Type.4,4,0.800,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+281,"Richarson Trough, Canada",379.6,Type.4,6,1.000,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+282,"Richarson Trough, Canada",380,Type.5,5,0.417,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+283,"Richarson Trough, Canada",380,Type.4,7,0.583,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+284,"Richarson Trough, Canada",380.1,Type.5,13,1.000,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+285,"Richarson Trough, Canada",380.3,Type.5,11,1.000,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+286,"Richarson Trough, Canada",380.5,Type.5,2,0.250,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+287,"Richarson Trough, Canada",380.5,Type.4,6,0.750,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+288,"Richarson Trough, Canada",382,Type.4,8,1.000,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+289,"Richarson Trough, Canada",382.5,Type.4,8,1.000,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+290,"Richarson Trough, Canada",383,Type.4,2,1.000,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+291,"Richarson Trough, Canada",383.3,Type.4,8,1.000,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+292,"Richarson Trough, Canada",383.5,Type.4,4,1.000,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+293,"Richarson Trough, Canada",383.7,Type.5,4,0.500,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+294,"Richarson Trough, Canada",383.7,Type.4,4,0.500,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
 295,"Richarson Trough, Canada",383.8,Type.5,1,0.125,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
 296,"Richarson Trough, Canada",383.8,Type.4,7,0.875,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-297,"Richarson Trough, Canada",384,Type.5,5,0.714285714,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-298,"Richarson Trough, Canada",384,Type.4,2,0.285714286,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-299,"Richarson Trough, Canada",384.5,Type.4,6,1,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-300,"Richarson Trough, Canada",384.8,Type.4,6,1,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-301,"Richarson Trough, Canada",385,Type.5,10,1,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-302,"Richarson Trough, Canada",387,Type.5,8,0.533333333,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-303,"Richarson Trough, Canada",387,Type.4,7,0.466666667,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-304,"Richarson Trough, Canada",387.5,Type.5,1,0.2,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-305,"Richarson Trough, Canada",387.5,Type.4,4,0.8,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-306,"Richarson Trough, Canada",388,Type.1,5,0.384615385,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-307,"Richarson Trough, Canada",388,Type.3,6,0.461538462,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-308,"Richarson Trough, Canada",388,Type.4,2,0.153846154,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+297,"Richarson Trough, Canada",384,Type.5,5,0.714,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+298,"Richarson Trough, Canada",384,Type.4,2,0.286,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+299,"Richarson Trough, Canada",384.5,Type.4,6,1.000,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+300,"Richarson Trough, Canada",384.8,Type.4,6,1.000,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+301,"Richarson Trough, Canada",385,Type.5,10,1.000,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+302,"Richarson Trough, Canada",387,Type.5,8,0.533,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+303,"Richarson Trough, Canada",387,Type.4,7,0.467,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+304,"Richarson Trough, Canada",387.5,Type.5,1,0.200,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+305,"Richarson Trough, Canada",387.5,Type.4,4,0.800,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+306,"Richarson Trough, Canada",388,Type.1,5,0.385,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+307,"Richarson Trough, Canada",388,Type.3,6,0.462,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+308,"Richarson Trough, Canada",388,Type.4,2,0.154,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
 309,"Richarson Trough, Canada",388.7,Type.5,1,0.125,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
 310,"Richarson Trough, Canada",388.7,Type.1,5,0.625,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-311,"Richarson Trough, Canada",388.7,Type.3,2,0.25,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-312,"Richarson Trough, Canada",389,Type.3,6,1,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-313,"Richarson Trough, Canada",391,Type.5,6,1,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-314,"Richarson Trough, Canada",391.2,Type.5,7,1,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-315,"Richarson Trough, Canada",391.4,Type.5,6,1,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-316,"Richarson Trough, Canada",391.6,Type.5,6,1,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-317,"Richarson Trough, Canada",391.8,Type.5,5,0.833333333,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-318,"Richarson Trough, Canada",391.8,Type.2,1,0.166666667,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-319,"Richarson Trough, Canada",392,Type.5,5,0.833333333,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-320,"Richarson Trough, Canada",392,Type.2,1,0.166666667,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-321,"Richarson Trough, Canada",392.2,Type.5,3,0.5,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-322,"Richarson Trough, Canada",392.2,Type.4,3,0.5,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-323,"Richarson Trough, Canada",392.4,Type.5,4,0.333333333,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-324,"Richarson Trough, Canada",392.4,Type.2,6,0.5,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-325,"Richarson Trough, Canada",392.4,Type.4,2,0.166666667,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-326,"Richarson Trough, Canada",392.5,Type.5,11,0.916666667,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-327,"Richarson Trough, Canada",392.5,Type.2,1,0.083333333,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-328,"Richarson Trough, Canada",392.7,Type.5,10,0.833333333,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-329,"Richarson Trough, Canada",392.7,Type.2,2,0.166666667,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-330,"Richarson Trough, Canada",392.75,Type.5,6,0.857142857,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-331,"Richarson Trough, Canada",392.75,Type.2,1,0.142857143,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-332,"Richarson Trough, Canada",392.9,Type.5,5,0.833333333,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-333,"Richarson Trough, Canada",392.9,Type.2,1,0.166666667,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-334,"Richarson Trough, Canada",393,Type.5,12,1,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-335,"Richarson Trough, Canada",393.2,Type.5,7,0.583333333,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-336,"Richarson Trough, Canada",393.2,Type.4,5,0.416666667,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-337,"Richarson Trough, Canada",393.4,Type.5,3,0.5,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-338,"Richarson Trough, Canada",393.4,Type.2,1,0.166666667,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-339,"Richarson Trough, Canada",393.4,Type.4,2,0.333333333,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-340,"Richarson Trough, Canada",393.45,Type.4,6,1,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-341,"Richarson Trough, Canada",393.5,Type.5,6,1,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-342,"Richarson Trough, Canada",393.7,Type.5,4,0.666666667,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-343,"Richarson Trough, Canada",393.7,Type.2,1,0.166666667,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-344,"Richarson Trough, Canada",393.7,Type.4,1,0.166666667,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-345,"Richarson Trough, Canada",393.8,Type.5,6,1,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-346,"Richarson Trough, Canada",394,Type.5,3,0.5,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-347,"Richarson Trough, Canada",394,Type.2,2,0.333333333,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-348,"Richarson Trough, Canada",394,Type.4,1,0.166666667,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
-349,"Riversleigh Fm, Aus",1630,Type.2,2,0.285714286,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
-350,"Riversleigh Fm, Aus",1630,Type.1,5,0.714285714,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
-351,"Riversleigh Fm, Aus",1631,Type.1,8,0.727272727,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
-352,"Riversleigh Fm, Aus",1631,Type.3,3,0.272727273,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
-353,"Riversleigh Fm, Aus",1632,Type.1,5,0.5,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
-354,"Riversleigh Fm, Aus",1632,Type.3,5,0.5,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
-355,"Riversleigh Fm, Aus",1632.5,Type.3,9,1,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
-356,"Riversleigh Fm, Aus",1633,Type.3,7,1,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
-357,"Riversleigh Fm, Aus",1634,Type.2,8,0.727272727,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
-358,"Riversleigh Fm, Aus",1634,Type.1,1,0.090909091,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
-359,"Riversleigh Fm, Aus",1634,Type.3,2,0.181818182,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
-360,"Riversleigh Fm, Aus",1634.2,Type.3,9,1,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
-361,"Riversleigh Fm, Aus",1634.5,Type.2,8,0.727272727,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
-362,"Riversleigh Fm, Aus",1634.5,Type.3,3,0.272727273,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
-363,"Riversleigh Fm, Aus",1636,Type.3,11,1,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
-364,"Riversleigh Fm, Aus",1637,Type.2,2,0.2,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
-365,"Riversleigh Fm, Aus",1637,Type.3,8,0.8,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
-366,"Riversleigh Fm, Aus",1638,Type.3,10,1,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
-367,"Riversleigh Fm, Aus",1639,Type.1,1,0.142857143,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
-368,"Riversleigh Fm, Aus",1639,Type.3,6,0.857142857,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
-369,"Riversleigh Fm, Aus",1640,Type.1,6,1,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
-370,"Riversleigh Fm, Aus",1644,Type.1,3,0.333333333,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
-371,"Riversleigh Fm, Aus",1644,Type.3,6,0.666666667,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
-372,"Rocky Cape, Aus.",1260,Type.2,5,0.2,-40.8965947,145.4880168,Rocky Cape,Google Earth,NA
-373,"Rocky Cape, Aus.",1260,Type.1,12,0.48,-40.8965947,145.4880168,Rocky Cape,Google Earth,NA
-374,"Rocky Cape, Aus.",1260,Type.3,8,0.32,-40.8965947,145.4880168,Rocky Cape,Google Earth,NA
-375,"Roper Gp., Aus",1360,Type.5,13,0.5,-16.0697379,136.3086189,"Taken as McArthur Basin, near Borroola",Google Earth,NA
-376,"Roper Gp., Aus",1360,Type.2,12,0.461538462,-16.0697379,136.3086189,"Taken as McArthur Basin, near Borroola",Google Earth,NA
-377,"Roper Gp., Aus",1360,Type.3,1,0.038461538,-16.0697379,136.3086189,"Taken as McArthur Basin, near Borroola",Google Earth,NA
-378,"Roper Gp., Aus",1440,Type.3,9,1,-16.0697379,136.3086189,"Taken as McArthur Basin, near Borroola",Google Earth,NA
-379,"Roper Gp., Aus",1470,Type.2,2,0.043478261,-16.0697379,136.3086189,"Taken as McArthur Basin, near Borroola",Google Earth,NA
-380,"Roper Gp., Aus",1470,Type.3,43,0.934782609,-16.0697379,136.3086189,"Taken as McArthur Basin, near Borroola",Google Earth,NA
-381,"Roper Gp., Aus",1470,Type.4,1,0.02173913,-16.0697379,136.3086189,"Taken as McArthur Basin, near Borroola",Google Earth,NA
-382,"Rove Fm, Canada",1850,Type.2,19,1,48.0941267,-90.357496,Rove Lake (type section),Google Earth,NA
-383,"S. Urals, Russia",1550,Type.2,1,0.03030303,59.9621951,61.5648907,Taken as Ural Mountains,Google Earth,NA
-384,"S. Urals, Russia",1550,Type.3,31,0.939393939,59.9621951,61.5648907,Taken as Ural Mountains,Google Earth,NA
-385,"S. Urals, Russia",1550,Type.4,1,0.03030303,59.9621951,61.5648907,Taken as Ural Mountains,Google Earth,NA
-386,"Salmon River, Aus",540,Type.5,5,0.384615385,-41.0186318,144.8659522,Salmon River,Google Earth,NA
-387,"Salmon River, Aus",540,Type.4,8,0.615384615,-41.0186318,144.8659522,Salmon River,Google Earth,NA
-388,"Selwyn Basin, Canada",304,Type.5,5,1,62.6319209,-130.8607064,Selwyn Basin,Google Earth,NA
-389,"Selwyn Basin, Canada",304.5,Type.5,5,1,62.6319209,-130.8607064,Selwyn Basin,Google Earth,NA
-390,"Selwyn Basin, Canada",305,Type.5,5,1,62.6319209,-130.8607064,Selwyn Basin,Google Earth,NA
-391,"Semantan, Malaysia",205,Type.1,5,1,3.547363,102.1674585,Semantan,Google Earth,NA
-392,"Sese Coalfield, Botswana",285,Type.4,10,1,-24.6539708,24.8061321,Sese,Google Earth,NA
-393,"Skillogalee, Aus",790,Type.2,12,0.857142857,-34.0162448,138.6244816,Assumed Skillogalee Dolomite. Taken as Skillogalee Creek.,Google Earth,NA
-394,"Skillogalee, Aus",790,Type.1,1,0.071428571,-34.0162448,138.6244816,Assumed Skillogalee Dolomite. Taken as Skillogalee Creek.,Google Earth,NA
-395,"Skillogalee, Aus",790,Type.3,1,0.071428571,-34.0162448,138.6244816,Assumed Skillogalee Dolomite. Taken as Skillogalee Creek.,Google Earth,NA
-396,"Smithton, Aus.",560,Type.1,15,0.483870968,-40.8453519,145.1365296,Smithton,Google Earth,NA
-397,"Smithton, Aus.",560,Type.3,16,0.516129032,-40.8453519,145.1365296,Smithton,Google Earth,NA
-398,"SW Urals, Russia",367,Type.1,36,0.923076923,59.9621951,61.5648907,Taken as Ural Mountains,Google Earth,NA
-399,"SW Urals, Russia",367,Type.3,1,0.025641026,59.9621951,61.5648907,Taken as Ural Mountains,Google Earth,NA
-400,"SW Urals, Russia",367,Type.4,2,0.051282051,59.9621951,61.5648907,Taken as Ural Mountains,Google Earth,NA
-401,"Talvavaara, Finland",1950,Type.2,12,0.52173913,63.949569,28.1714839,Talvivaara,Google Earth,NA
-402,"Talvavaara, Finland",1950,Type.1,11,0.47826087,63.949569,28.1714839,Talvivaara,Google Earth,NA
-403,"Tanami Basin, Aus",1840,Type.5,5,0.192307692,-19.8119498,130.2837284,Taken as Tanami Desert,Google Earth,NA
-404,"Tanami Basin, Aus",1840,Type.3,21,0.807692308,-19.8119498,130.2837284,Taken as Tanami Desert,Google Earth,NA
-405,"Tasmania Basin, Aus.",274,Type.3,13,1,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
-406,"Tasmania Basin, Aus.",278,Type.3,11,1,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
-407,"Tasmania Basin, Aus.",282,Type.3,11,1,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
-408,"Tasmania Basin, Aus.",284,Type.3,11,1,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
-409,"Tasmania Basin, Aus.",288,Type.5,1,0.083333333,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
-410,"Tasmania Basin, Aus.",288,Type.3,11,0.916666667,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
-411,"Tasmania Basin, Aus.",291,Type.3,8,1,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
-412,"Tasmania Basin, Aus.",292,Type.2,6,0.315789474,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
-413,"Tasmania Basin, Aus.",292,Type.1,4,0.210526316,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
-414,"Tasmania Basin, Aus.",292,Type.3,9,0.473684211,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
-415,"Tasmania Basin, Aus.",292.5,Type.3,13,1,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
-416,"Tasmania Basin, Aus.",293,Type.2,7,0.269230769,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
-417,"Tasmania Basin, Aus.",293,Type.1,14,0.538461538,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
-418,"Tasmania Basin, Aus.",293,Type.3,5,0.192307692,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
-419,"Tasmania Basin, Aus.",294,Type.2,4,0.444444444,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
-420,"Tasmania Basin, Aus.",294,Type.1,5,0.555555556,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
-421,"Tasmania Basin, Aus.",296,Type.2,3,0.230769231,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
-422,"Tasmania Basin, Aus.",296,Type.1,9,0.692307692,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
-423,"Tasmania Basin, Aus.",296,Type.3,1,0.076923077,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
-424,"Tasmania Basin, Aus.",297,Type.2,19,1,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
-425,"Tasmania Basin, Aus.",450,Type.3,14,1,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
-426,"Tasmania Basin, Aus.",455,Type.4,15,1,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
-427,"Tasmania Basin, Aus.",456,Type.4,15,1,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
-428,"Tasmania Basin, Aus.",457,Type.4,15,1,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
-429,"Tasmania Basin, Aus.",458,Type.3,16,1,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
-430,"Tasmania Basin, Aus.",459,Type.4,15,1,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
-431,"Tasmania Basin, Aus.",463,Type.5,14,1,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
-432,Tebo Coal. USA,308.6,Type.5,7,1,38.300023,-93.4652069,Tebo Creek,Google Earth,NA
-433,"Transval, South Africa",2521,Type.2,4,0.307692308,-25.3055301,33.0759198,Taken as region of Transvaal,Google Earth,NA
-434,"Transval, South Africa",2521,Type.1,9,0.692307692,-25.3055301,33.0759198,Taken as region of Transvaal,Google Earth,NA
-435,"Transval, South Africa",2563,Type.2,16,1,-25.3055301,33.0759198,Taken as region of Transvaal,Google Earth,NA
-436,Trewern Brook. Wales,432,Type.3,22,1,-25.3055301,33.0759198,Taken as region of Transvaal,Google Earth,NA
-437,Unknown,359,Type.5,7,0.538461538,NA,NA,NA,NA,NA
-438,Unknown,359,Type.1,3,0.230769231,NA,NA,NA,NA,NA
-439,Unknown,359,Type.4,3,0.230769231,NA,NA,NA,NA,NA
-440,Unknown,393,Type.2,2,0.222222222,NA,NA,NA,NA,NA
-441,Unknown,393,Type.1,2,0.222222222,NA,NA,NA,NA,NA
-442,Unknown,393,Type.4,5,0.555555556,NA,NA,NA,NA,NA
-443,Volga basin Russia,169,Type.5,2,0.066666667,48.6815831,44.856677,Taken near Kuybyshev,Google Earth,NA
-444,Volga basin Russia,169,Type.2,1,0.033333333,48.6815831,44.856677,Taken near Kuybyshev,Google Earth,NA
-445,Volga basin Russia,169,Type.3,1,0.033333333,48.6815831,44.856677,Taken near Kuybyshev,Google Earth,NA
-446,Volga basin Russia,169,Type.4,26,0.866666667,48.6815831,44.856677,Taken near Kuybyshev,Google Earth,NA
-447,"Whitby mudstone, Scotland",180,Type.3,7,0.538461538,54.4805755,-0.6193045,Taken as Whitby (England),Google Earth,NA
-448,"Whitby mudstone, Scotland",180,Type.4,6,0.461538462,54.4805755,-0.6193045,Taken as Whitby (England),Google Earth,NA
-449,"Whitby Mudstone, UK",180,Type.2,4,0.148148148,54.4805755,-0.6193045,Taken as Whitby (England),Google Earth,NA
-450,"Whitby Mudstone, UK",180,Type.1,11,0.407407407,54.4805755,-0.6193045,Taken as Whitby (England),Google Earth,NA
-451,"Whitby Mudstone, UK",180,Type.3,6,0.222222222,54.4805755,-0.6193045,Taken as Whitby (England),Google Earth,NA
-452,"Whitby Mudstone, UK",180,Type.4,6,0.222222222,54.4805755,-0.6193045,Taken as Whitby (England),Google Earth,NA
-453,Whites Fm. Aus.,1900,Type.2,8,1,-13.1300713,132.7559113,North of Pine Creek,Google Earth,NA
-454,"Wittenoon, Pilbara, Aus.",2561,Type.2,44,0.530120482,-22.2277276,118.2746029,Wittenoom,Google Earth,NA
-455,"Wittenoon, Pilbara, Aus.",2561,Type.1,39,0.469879518,-22.2277276,118.2746029,Wittenoom,Google Earth,NA
-456,"Wittenoon, Pilbara, Aus.",2575,Type.2,20,0.357142857,-22.2277276,118.2746029,Wittenoom,Google Earth,NA
-457,"Wittenoon, Pilbara, Aus.",2575,Type.1,33,0.589285714,-22.2277276,118.2746029,Wittenoom,Google Earth,NA
-458,"Wittenoon, Pilbara, Aus.",2575,Type.3,3,0.053571429,-22.2277276,118.2746029,Wittenoom,Google Earth,NA
-459,"Witts Basin, South Africa",2930,Type.2,68,0.985507246,-26.1715215,28.0400246,Taken as Johanessberg,Google Earth,NA
-460,"Witts Basin, South Africa",2930,Type.4,1,0.014492754,-26.1715215,28.0400246,Taken as Johanessberg,Google Earth,NA
-461,"Witts Basin, South Africa",2970,Type.2,48,1,-26.1715215,28.0400246,Taken as Johanessberg,Google Earth,NA
-462,"Yeneena Basin, Aus.",830,Type.3,10,1,-22.416619,121.6833862,Taken as Yeneena Creek,Google Earth,NA
-463,"Yerrida Basin, Aus.",2170,Type.2,9,0.160714286,-26.1750874,121.652186,South of DeGrussa,Google Earth,NA
-464,"Yerrida Basin, Aus.",2170,Type.1,36,0.642857143,-26.1750874,121.652186,South of DeGrussa,Google Earth,NA
-465,"Yerrida Basin, Aus.",2170,Type.3,11,0.196428571,-26.1750874,121.652186,South of DeGrussa,Google Earth,NA
-466,"Zawar, India",1700,Type.2,25,0.961538462,24.3557749,73.7355888,Zawar,Google Earth,NA
-467,"Zawar, India",1700,Type.3,1,0.038461538,24.3557749,73.7355888,Zawar,Google Earth,NA
+311,"Richarson Trough, Canada",388.7,Type.3,2,0.250,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+312,"Richarson Trough, Canada",389,Type.3,6,1.000,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+313,"Richarson Trough, Canada",391,Type.5,6,1.000,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+314,"Richarson Trough, Canada",391.2,Type.5,7,1.000,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+315,"Richarson Trough, Canada",391.4,Type.5,6,1.000,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+316,"Richarson Trough, Canada",391.6,Type.5,6,1.000,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+317,"Richarson Trough, Canada",391.8,Type.5,5,0.833,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+318,"Richarson Trough, Canada",391.8,Type.2,1,0.167,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+319,"Richarson Trough, Canada",392,Type.5,5,0.833,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+320,"Richarson Trough, Canada",392,Type.2,1,0.167,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+321,"Richarson Trough, Canada",392.2,Type.5,3,0.500,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+322,"Richarson Trough, Canada",392.2,Type.4,3,0.500,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+323,"Richarson Trough, Canada",392.4,Type.5,4,0.333,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+324,"Richarson Trough, Canada",392.4,Type.2,6,0.500,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+325,"Richarson Trough, Canada",392.4,Type.4,2,0.167,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+326,"Richarson Trough, Canada",392.5,Type.5,11,0.917,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+327,"Richarson Trough, Canada",392.5,Type.2,1,0.083,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+328,"Richarson Trough, Canada",392.7,Type.5,10,0.833,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+329,"Richarson Trough, Canada",392.7,Type.2,2,0.167,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+330,"Richarson Trough, Canada",392.75,Type.5,6,0.857,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+331,"Richarson Trough, Canada",392.75,Type.2,1,0.143,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+332,"Richarson Trough, Canada",392.9,Type.5,5,0.833,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+333,"Richarson Trough, Canada",392.9,Type.2,1,0.167,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+334,"Richarson Trough, Canada",393,Type.5,12,1.000,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+335,"Richarson Trough, Canada",393.2,Type.5,7,0.583,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+336,"Richarson Trough, Canada",393.2,Type.4,5,0.417,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+337,"Richarson Trough, Canada",393.4,Type.5,3,0.500,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+338,"Richarson Trough, Canada",393.4,Type.2,1,0.167,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+339,"Richarson Trough, Canada",393.4,Type.4,2,0.333,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+340,"Richarson Trough, Canada",393.45,Type.4,6,1.000,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+341,"Richarson Trough, Canada",393.5,Type.5,6,1.000,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+342,"Richarson Trough, Canada",393.7,Type.5,4,0.667,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+343,"Richarson Trough, Canada",393.7,Type.2,1,0.167,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+344,"Richarson Trough, Canada",393.7,Type.4,1,0.167,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+345,"Richarson Trough, Canada",393.8,Type.5,6,1.000,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+346,"Richarson Trough, Canada",394,Type.5,3,0.500,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+347,"Richarson Trough, Canada",394,Type.2,2,0.333,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+348,"Richarson Trough, Canada",394,Type.4,1,0.167,68.1699997,-137.0000001,Taken as Richardson Mountains,Google Earth,NA
+349,"Riversleigh Fm, Aus",1630,Type.2,2,0.286,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
+350,"Riversleigh Fm, Aus",1630,Type.1,5,0.714,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
+351,"Riversleigh Fm, Aus",1631,Type.1,8,0.727,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
+352,"Riversleigh Fm, Aus",1631,Type.3,3,0.273,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
+353,"Riversleigh Fm, Aus",1632,Type.1,5,0.500,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
+354,"Riversleigh Fm, Aus",1632,Type.3,5,0.500,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
+355,"Riversleigh Fm, Aus",1632.5,Type.3,9,1.000,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
+356,"Riversleigh Fm, Aus",1633,Type.3,7,1.000,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
+357,"Riversleigh Fm, Aus",1634,Type.2,8,0.727,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
+358,"Riversleigh Fm, Aus",1634,Type.1,1,0.091,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
+359,"Riversleigh Fm, Aus",1634,Type.3,2,0.182,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
+360,"Riversleigh Fm, Aus",1634.2,Type.3,9,1.000,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
+361,"Riversleigh Fm, Aus",1634.5,Type.2,8,0.727,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
+362,"Riversleigh Fm, Aus",1634.5,Type.3,3,0.273,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
+363,"Riversleigh Fm, Aus",1636,Type.3,11,1.000,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
+364,"Riversleigh Fm, Aus",1637,Type.2,2,0.200,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
+365,"Riversleigh Fm, Aus",1637,Type.3,8,0.800,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
+366,"Riversleigh Fm, Aus",1638,Type.3,10,1.000,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
+367,"Riversleigh Fm, Aus",1639,Type.1,1,0.143,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
+368,"Riversleigh Fm, Aus",1639,Type.3,6,0.857,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
+369,"Riversleigh Fm, Aus",1640,Type.1,6,1.000,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
+370,"Riversleigh Fm, Aus",1644,Type.1,3,0.333,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
+371,"Riversleigh Fm, Aus",1644,Type.3,6,0.667,-17.7439935,138.7397155,"South of Doomadgee, Riversleigh Siltstone, Lawn Hill",Google Earth,NA
+372,"Rocky Cape, Aus.",1260,Type.2,5,0.200,-40.8965947,145.4880168,Rocky Cape,Google Earth,NA
+373,"Rocky Cape, Aus.",1260,Type.1,12,0.480,-40.8965947,145.4880168,Rocky Cape,Google Earth,NA
+374,"Rocky Cape, Aus.",1260,Type.3,8,0.320,-40.8965947,145.4880168,Rocky Cape,Google Earth,NA
+375,"Roper Gp., Aus",1360,Type.5,13,0.500,-16.0697379,136.3086189,"Taken as McArthur Basin, near Borroola",Google Earth,NA
+376,"Roper Gp., Aus",1360,Type.2,12,0.462,-16.0697379,136.3086189,"Taken as McArthur Basin, near Borroola",Google Earth,NA
+377,"Roper Gp., Aus",1360,Type.3,1,0.038,-16.0697379,136.3086189,"Taken as McArthur Basin, near Borroola",Google Earth,NA
+378,"Roper Gp., Aus",1440,Type.3,9,1.000,-16.0697379,136.3086189,"Taken as McArthur Basin, near Borroola",Google Earth,NA
+379,"Roper Gp., Aus",1470,Type.2,2,0.043,-16.0697379,136.3086189,"Taken as McArthur Basin, near Borroola",Google Earth,NA
+380,"Roper Gp., Aus",1470,Type.3,43,0.935,-16.0697379,136.3086189,"Taken as McArthur Basin, near Borroola",Google Earth,NA
+381,"Roper Gp., Aus",1470,Type.4,1,0.022,-16.0697379,136.3086189,"Taken as McArthur Basin, near Borroola",Google Earth,NA
+382,"Rove Fm, Canada",1850,Type.2,19,1.000,48.0941267,-90.357496,Rove Lake (type section),Google Earth,NA
+383,"S. Urals, Russia",1550,Type.2,1,0.030,59.9621951,61.5648907,Taken as Ural Mountains,Google Earth,NA
+384,"S. Urals, Russia",1550,Type.3,31,0.939,59.9621951,61.5648907,Taken as Ural Mountains,Google Earth,NA
+385,"S. Urals, Russia",1550,Type.4,1,0.030,59.9621951,61.5648907,Taken as Ural Mountains,Google Earth,NA
+386,"Salmon River, Aus",540,Type.5,5,0.385,-41.0186318,144.8659522,Salmon River,Google Earth,NA
+387,"Salmon River, Aus",540,Type.4,8,0.615,-41.0186318,144.8659522,Salmon River,Google Earth,NA
+388,"Selwyn Basin, Canada",304,Type.5,5,1.000,62.6319209,-130.8607064,Selwyn Basin,Google Earth,NA
+389,"Selwyn Basin, Canada",304.5,Type.5,5,1.000,62.6319209,-130.8607064,Selwyn Basin,Google Earth,NA
+390,"Selwyn Basin, Canada",305,Type.5,5,1.000,62.6319209,-130.8607064,Selwyn Basin,Google Earth,NA
+391,"Semantan, Malaysia",205,Type.1,5,1.000,3.547363,102.1674585,Semantan,Google Earth,NA
+392,"Sese Coalfield, Botswana",285,Type.4,10,1.000,-24.6539708,24.8061321,Sese,Google Earth,NA
+393,"Skillogalee, Aus",790,Type.2,12,0.857,-34.0162448,138.6244816,Assumed Skillogalee Dolomite. Taken as Skillogalee Creek.,Google Earth,NA
+394,"Skillogalee, Aus",790,Type.1,1,0.071,-34.0162448,138.6244816,Assumed Skillogalee Dolomite. Taken as Skillogalee Creek.,Google Earth,NA
+395,"Skillogalee, Aus",790,Type.3,1,0.071,-34.0162448,138.6244816,Assumed Skillogalee Dolomite. Taken as Skillogalee Creek.,Google Earth,NA
+396,"Smithton, Aus.",560,Type.1,15,0.484,-40.8453519,145.1365296,Smithton,Google Earth,NA
+397,"Smithton, Aus.",560,Type.3,16,0.516,-40.8453519,145.1365296,Smithton,Google Earth,NA
+398,"SW Urals, Russia",367,Type.1,36,0.923,59.9621951,61.5648907,Taken as Ural Mountains,Google Earth,NA
+399,"SW Urals, Russia",367,Type.3,1,0.026,59.9621951,61.5648907,Taken as Ural Mountains,Google Earth,NA
+400,"SW Urals, Russia",367,Type.4,2,0.051,59.9621951,61.5648907,Taken as Ural Mountains,Google Earth,NA
+401,"Talvavaara, Finland",1950,Type.2,12,0.522,63.949569,28.1714839,Talvivaara,Google Earth,NA
+402,"Talvavaara, Finland",1950,Type.1,11,0.478,63.949569,28.1714839,Talvivaara,Google Earth,NA
+403,"Tanami Basin, Aus",1840,Type.5,5,0.192,-19.8119498,130.2837284,Taken as Tanami Desert,Google Earth,NA
+404,"Tanami Basin, Aus",1840,Type.3,21,0.808,-19.8119498,130.2837284,Taken as Tanami Desert,Google Earth,NA
+405,"Tasmania Basin, Aus.",274,Type.3,13,1.000,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
+406,"Tasmania Basin, Aus.",278,Type.3,11,1.000,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
+407,"Tasmania Basin, Aus.",282,Type.3,11,1.000,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
+408,"Tasmania Basin, Aus.",284,Type.3,11,1.000,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
+409,"Tasmania Basin, Aus.",288,Type.5,1,0.083,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
+410,"Tasmania Basin, Aus.",288,Type.3,11,0.917,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
+411,"Tasmania Basin, Aus.",291,Type.3,8,1.000,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
+412,"Tasmania Basin, Aus.",292,Type.2,6,0.316,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
+413,"Tasmania Basin, Aus.",292,Type.1,4,0.211,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
+414,"Tasmania Basin, Aus.",292,Type.3,9,0.474,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
+415,"Tasmania Basin, Aus.",292.5,Type.3,13,1.000,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
+416,"Tasmania Basin, Aus.",293,Type.2,7,0.269,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
+417,"Tasmania Basin, Aus.",293,Type.1,14,0.538,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
+418,"Tasmania Basin, Aus.",293,Type.3,5,0.192,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
+419,"Tasmania Basin, Aus.",294,Type.2,4,0.444,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
+420,"Tasmania Basin, Aus.",294,Type.1,5,0.556,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
+421,"Tasmania Basin, Aus.",296,Type.2,3,0.231,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
+422,"Tasmania Basin, Aus.",296,Type.1,9,0.692,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
+423,"Tasmania Basin, Aus.",296,Type.3,1,0.077,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
+424,"Tasmania Basin, Aus.",297,Type.2,19,1.000,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
+425,"Tasmania Basin, Aus.",450,Type.3,14,1.000,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
+426,"Tasmania Basin, Aus.",455,Type.4,15,1.000,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
+427,"Tasmania Basin, Aus.",456,Type.4,15,1.000,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
+428,"Tasmania Basin, Aus.",457,Type.4,15,1.000,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
+429,"Tasmania Basin, Aus.",458,Type.3,16,1.000,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
+430,"Tasmania Basin, Aus.",459,Type.4,15,1.000,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
+431,"Tasmania Basin, Aus.",463,Type.5,14,1.000,-40.8453519,145.1365296,Central Tasmania,Google Earth,NA
+432,Tebo Coal. USA,308.6,Type.5,7,1.000,38.300023,-93.4652069,Tebo Creek,Google Earth,NA
+433,"Transval, South Africa",2521,Type.2,4,0.308,-25.3055301,33.0759198,Taken as region of Transvaal,Google Earth,NA
+434,"Transval, South Africa",2521,Type.1,9,0.692,-25.3055301,33.0759198,Taken as region of Transvaal,Google Earth,NA
+435,"Transval, South Africa",2563,Type.2,16,1.000,-25.3055301,33.0759198,Taken as region of Transvaal,Google Earth,NA
+436,Trewern Brook. Wales,432,Type.3,22,1.000,-25.3055301,33.0759198,Taken as region of Transvaal,Google Earth,NA
+437,Unknown,359,Type.5,7,0.538,NA,NA,NA,NA,NA
+438,Unknown,359,Type.1,3,0.231,NA,NA,NA,NA,NA
+439,Unknown,359,Type.4,3,0.231,NA,NA,NA,NA,NA
+440,Unknown,393,Type.2,2,0.222,NA,NA,NA,NA,NA
+441,Unknown,393,Type.1,2,0.222,NA,NA,NA,NA,NA
+442,Unknown,393,Type.4,5,0.556,NA,NA,NA,NA,NA
+443,Volga basin Russia,169,Type.5,2,0.067,48.6815831,44.856677,Taken near Kuybyshev,Google Earth,NA
+444,Volga basin Russia,169,Type.2,1,0.033,48.6815831,44.856677,Taken near Kuybyshev,Google Earth,NA
+445,Volga basin Russia,169,Type.3,1,0.033,48.6815831,44.856677,Taken near Kuybyshev,Google Earth,NA
+446,Volga basin Russia,169,Type.4,26,0.867,48.6815831,44.856677,Taken near Kuybyshev,Google Earth,NA
+447,"Whitby mudstone, Scotland",180,Type.3,7,0.538,54.4805755,-0.6193045,Taken as Whitby (England),Google Earth,NA
+448,"Whitby mudstone, Scotland",180,Type.4,6,0.462,54.4805755,-0.6193045,Taken as Whitby (England),Google Earth,NA
+449,"Whitby Mudstone, UK",180,Type.2,4,0.148,54.4805755,-0.6193045,Taken as Whitby (England),Google Earth,NA
+450,"Whitby Mudstone, UK",180,Type.1,11,0.407,54.4805755,-0.6193045,Taken as Whitby (England),Google Earth,NA
+451,"Whitby Mudstone, UK",180,Type.3,6,0.222,54.4805755,-0.6193045,Taken as Whitby (England),Google Earth,NA
+452,"Whitby Mudstone, UK",180,Type.4,6,0.222,54.4805755,-0.6193045,Taken as Whitby (England),Google Earth,NA
+453,Whites Fm. Aus.,1900,Type.2,8,1.000,-13.1300713,132.7559113,North of Pine Creek,Google Earth,NA
+454,"Wittenoon, Pilbara, Aus.",2561,Type.2,44,0.530,-22.2277276,118.2746029,Wittenoom,Google Earth,NA
+455,"Wittenoon, Pilbara, Aus.",2561,Type.1,39,0.470,-22.2277276,118.2746029,Wittenoom,Google Earth,NA
+456,"Wittenoon, Pilbara, Aus.",2575,Type.2,20,0.357,-22.2277276,118.2746029,Wittenoom,Google Earth,NA
+457,"Wittenoon, Pilbara, Aus.",2575,Type.1,33,0.589,-22.2277276,118.2746029,Wittenoom,Google Earth,NA
+458,"Wittenoon, Pilbara, Aus.",2575,Type.3,3,0.054,-22.2277276,118.2746029,Wittenoom,Google Earth,NA
+459,"Witts Basin, South Africa",2930,Type.2,68,0.986,-26.1715215,28.0400246,Taken as Johanessberg,Google Earth,NA
+460,"Witts Basin, South Africa",2930,Type.4,1,0.014,-26.1715215,28.0400246,Taken as Johanessberg,Google Earth,NA
+461,"Witts Basin, South Africa",2970,Type.2,48,1.000,-26.1715215,28.0400246,Taken as Johanessberg,Google Earth,NA
+462,"Yeneena Basin, Aus.",830,Type.3,10,1.000,-22.416619,121.6833862,Taken as Yeneena Creek,Google Earth,NA
+463,"Yerrida Basin, Aus.",2170,Type.2,9,0.161,-26.1750874,121.652186,South of DeGrussa,Google Earth,NA
+464,"Yerrida Basin, Aus.",2170,Type.1,36,0.643,-26.1750874,121.652186,South of DeGrussa,Google Earth,NA
+465,"Yerrida Basin, Aus.",2170,Type.3,11,0.196,-26.1750874,121.652186,South of DeGrussa,Google Earth,NA
+466,"Zawar, India",1700,Type.2,25,0.962,24.3557749,73.7355888,Zawar,Google Earth,NA
+467,"Zawar, India",1700,Type.3,1,0.038,24.3557749,73.7355888,Zawar,Google Earth,NA
