@@ -29,6 +29,7 @@
 
 #### Datasets & results:
  * The pyrite trace element and SGP datasets are downloaded by deploying the code in this repository, and are not stored locally
+ * The Reinhard *et al* TOC/P data shown on Figure 5B is also sourced dynamically and is not stored locally
  * `wilkin_snippets.json` - the aggregated Wilkin-pyrite [xDD snippets results](https://xdd.wisc.edu/api/snippets?term=Wilkin,framboid&full_results=true&inclusive=true&clean&known_terms=stratigraphic_names) (reproduced in this repository for ease). Used in **Figure 1C & supplementary xDD figures**
  *  `SEDEX.csv` - [an open access USGS Pb-Zn deposit database](https://pubs.usgs.gov/of/2009/1252/SedZn-PbEX2009.xls) that is not stored in this repository. See [Singer *et al*., 2009](https://pubs.usgs.gov/of/2009/1252/). HEBS, BIFs and glaciations are hard-coded. These data are plotted on **Figures 1 & 4**
  * `xdd_binned_results.csv` - the results of xDD text mining as presented on **Figures 1A-1C**  
