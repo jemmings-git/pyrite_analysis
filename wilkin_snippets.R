@@ -1,7 +1,8 @@
 ### xDD snippets extraction file written by J Emmings ##
 ## purpose: to manipulate Wilkin-framboid xDD snippets ##
+## the Wilkin-pyrite results generated from this R script are used in 'analysis.R' (Fig. 1C)
 
-setwd("D:/Pyrite_backup/pyrite_analysis-master/pyrite_analysis-master") ### set your working directory
+setwd(...) ### set your working directory
 
 library(jsonlite)
 library(ggplot2)
@@ -40,7 +41,7 @@ library(dplyr)
 
 #write_json(wilkin, "wilkin_snippets.json")
 
-# read file
+# read pre-compiled json file contained in this directory
 
 wilkin <- fromJSON("wilkin_snippets.json")
 
