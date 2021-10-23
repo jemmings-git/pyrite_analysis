@@ -107,7 +107,7 @@ ggplot(dem4) +
 
 ## import Mukherjee and Large pyrites with clusters 1-5
 
-setwd("D:/Pyrite_backup/pyrite_analysis-master/pyrite_analysis-master")
+setwd(...) # insert working directory
 
 pyrites <- read.csv("pyrite_stats_with_long_lats.csv")
 
@@ -1158,7 +1158,7 @@ a <- ggplot(pyrites.xdd.all) +
   scale_x_reverse(limits = c(543,-1), expand = c(0,0)) + theme_bw() +
   coord_cartesian(clip = "off") +
   scale_y_continuous(breaks = c(-90,-45,0,45,90), limits = c(-90,90), expand = c(0, 0)) +
-  xlab("Age (Ma)") + ylab("Palaeolatitude (°)") + 
+  xlab("Age (Ma)") + ylab("Palaeolatitude (Â°)") + 
   theme(legend.position = "none", panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
   geom_scatterpie(aes(Age.Ma, Pal.Lat, r = 3), colour = "black", data = pyrites.samples, 
                   cols=c("Type.5","Type.2","Type.1","Type.3","Type.4")) +
@@ -1170,7 +1170,7 @@ b <- ggplot(pyrites.xdd.all) +
   scale_x_reverse(limits = c(422,300), expand = c(0,0)) + theme_bw() +
   coord_cartesian(clip = "off") +
   scale_y_continuous(breaks = c(-45,-22.5,0,22.5,45), limits = c(-45,45), expand = c(0, 0)) +
-  xlab("Age (Ma)") + ylab("Palaeolatitude (°)") + 
+  xlab("Age (Ma)") + ylab("Palaeolatitude (Â°)") + 
   theme(legend.position = "none", panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
   geom_scatterpie(aes(Age.Ma, Pal.Lat, r = 1.5), colour = "black", data = pyrites.samples, 
                   cols=c("Type.5","Type.2","Type.1","Type.3","Type.4")) +
@@ -1258,7 +1258,7 @@ c <- ggplot(dem4) +
   scale_y_continuous(limits = c(-90,90), expand = c(0.01, 0.01), breaks = c(-90,0,90)) +
   scale_shape_manual(values = c(21:23), name = "Pyrite-bearing rocks") + 
   theme(legend.position = "bottom", axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
-  xlab("Palaeolongitude (°)") + ylab("Palaeolatitude (°)")
+  xlab("Palaeolongitude (Â°)") + ylab("Palaeolatitude (Â°)")
 
 lay <- rbind(c(1),
              c(1),
@@ -1374,7 +1374,7 @@ b <- ggplot(pyrites.xdd.all) +
   scale_x_reverse(limits = c(540,1), expand = c(0,0)) + theme_bw() +
   coord_cartesian(clip = "off") +
   scale_y_continuous(breaks = c(-90,-45,0,45,90), limits = c(-90,90), expand = c(0, 0)) +
-  xlab("Age (Ma)") + ylab("Palaeolatitude (°)") + 
+  xlab("Age (Ma)") + ylab("Palaeolatitude (Â°)") + 
   theme(legend.position = "none", panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         plot.tag.position = c(0.01,0.99)) +
   geom_point(aes(Age.Ma, Pal.Lat, fill = fraction), colour = "black", data = pyrites.samples, pch = 21, size = 2) +
@@ -1541,7 +1541,7 @@ c <- ggplot(pyrites.xdd.all) +
                        #values = scales::rescale(c(0,0.1, 0.4, 0.6,0.9,1))) +
   coord_cartesian(clip = "off") +
   scale_y_continuous(breaks = c(-90,-45,0,45,90), limits = c(-90,90), expand = c(0, 0)) +
-  xlab("Age (Ma)") + ylab("Palaeolatitude (°)") + 
+  xlab("Age (Ma)") + ylab("Palaeolatitude (Â°)") + 
   #theme(legend.position = "none", panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
   #geom_point(aes(Age.Ma, Pal.Lat), colour = "black", data = pyrites.samples) +
   #geom_point(aes(Age.Ma, Pal.Lat), colour = "black", data = SGP_fractions.all, pch = 21) +
@@ -1701,7 +1701,7 @@ d <- ggplot(land1) +
   coord_fixed(ratio = 1) +
   scale_x_continuous(limits = c(-180,180), expand = c(0.01, 0.01), breaks = c(-180,0,180)) + 
   scale_y_continuous(limits = c(-90,90), expand = c(0.01, 0.01), breaks = c(-90,0,90)) +
-  xlab("Palaeolongitude (°)") + ylab("Palaeolatitude (°)") +
+  xlab("Palaeolongitude (Â°)") + ylab("Palaeolatitude (Â°)") +
   theme(legend.position = "none",
         axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
         plot.tag.position = c(0.01,0.99)) +
