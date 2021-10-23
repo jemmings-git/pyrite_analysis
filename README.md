@@ -72,7 +72,7 @@ The citable reference for the Phase 1 data product is:
 Users may also wish to read and cite:
 [Mehra et al., 2021. *GSA Today*, 31, 5, 4-10.](https://doi.org/10.1130/GSATG484A.1)
 
-Figure 5B also includes TOC/P data from [Reinhard *et al*](https://doi.org/10.1038/nature20772).
+Figure 5B also includes TOC/P data from [Reinhard et al., 2017. *Nature* 383-389](https://doi.org/10.1038/nature20772).
 
 ### Reconstructions (Figure 6) ###
 
