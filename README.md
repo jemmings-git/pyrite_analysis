@@ -61,7 +61,7 @@ As the basis of our pyrite application we [forked](https://github.com/jemmings-g
 
 ### Figures 2-6 utilise previously published & open access [pyrite trace element data](https://doi.org/10.1130/GEOL.S.12456332):  
 
-**Users should note use is restricted to [CC-BY-NC terms](https://creativecommons.org/licenses/by-nc/4.0/). Please see Mukherjee and Large 2020 supplementary materials [figshare](https://gsapubs.figshare.com/articles/journal_contribution/Supplemental_Material_Co-evolution_of_trace_elements_and_life_in_Precambrian_oceans_The_pyrite_edition/12456332)**
+**Users should note use is restricted to [CC-BY-NC terms](https://creativecommons.org/licenses/by-nc/4.0/). Please refer to the Mukherjee and Large (2020) [figshare](https://gsapubs.figshare.com/articles/journal_contribution/Supplemental_Material_Co-evolution_of_trace_elements_and_life_in_Precambrian_oceans_The_pyrite_edition/12456332)**
 
 [Large et al., 2014. *Earth and Planetary Science Letters*, 389, 209-220.](http://dx.doi.org/10.1016/j.epsl.2013.12.020)  
 [Large et al., 2015. *Gondwana Research*, 28, 1282-1293.](http://dx.doi.org/10.1016/j.gr.2015.06.004)  
