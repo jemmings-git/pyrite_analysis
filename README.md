@@ -57,7 +57,7 @@ The pyrite text mining results can be downloaded from [xDD](https://geodeepdive.
 # Acknowledgements
 
 ### Figure 1 is derived from the [GeoDeepDive](https://geodeepdive.org) (now known as xDD) library and machine reading system
-As the basis of our pyrite application we [forked](https://github.com/jemmings-git/pyrite_app) the [original text mining application](https://github.com/UW-Macrostrat/stromatolites_demo) used in [Peters, Husson and Wilcots 2017, *Geology*](http://doi.org/10.1130/G38931.1). 
+As the basis of our pyrite application we [forked](https://github.com/jemmings-git/pyrite_app) the [original text mining application](https://github.com/UW-Macrostrat/stromatolites_demo) used in [Peters, Husson and Wilcots 2017, *Geology*](http://doi.org/10.1130/G38931.1). The [original application](https://github.com/UW-Macrostrat/stromatolites_demo) is available under a CC-BY license.
 
 ### Figures 2-6 utilise previously published, non-commercial open access [pyrite trace element data](https://doi.org/10.1130/GEOL.S.12456332):  
 
@@ -87,3 +87,5 @@ Please refer to the **Supplementary materials** for the complete R package refer
 All figures were produced using the R code in this repository, followed by aesthetic adjustments using a professional graphics software package.
 
 ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+) indicates final checks performed by the lead author immediately prior to archiving in Zenodo in October '21
+
+Please refer to the accompanying publication for license details.
