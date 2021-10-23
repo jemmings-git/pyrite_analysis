@@ -95,3 +95,4 @@ All figures were produced using the R code in this repository, followed by aesth
 - add data_p1, data_p2
 - update instances of precambrian etc. files with correct starting age
 - fix rounding to 2dp in all results
+- need to deploy results at speed = 10
