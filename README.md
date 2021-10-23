@@ -57,15 +57,17 @@ The pyrite text mining results can be downloaded from [xDD](https://geodeepdive.
 # Acknowledgements
 
 ### Figure 1 is derived from the [GeoDeepDive](https://geodeepdive.org) (now known as xDD) library and machine reading system
-As the basis of our pyrite application we [forked](https://github.com/jemmings-git/pyrite_app) the [original text mining application](https://github.com/UW-Macrostrat/stromatolites_demo) used in [Peters, Husson and Wilcots 2017, *Geology*](http://doi.org/10.1130/G38931.1). The [original application](https://github.com/UW-Macrostrat/stromatolites_demo) is available under a CC-BY license.
+As the basis of our pyrite application we [forked](https://github.com/jemmings-git/pyrite_app) the [original text mining application](https://github.com/UW-Macrostrat/stromatolites_demo) used in [Peters, Husson and Wilcots 2017, *Geology*](http://doi.org/10.1130/G38931.1). The [original application](https://github.com/UW-Macrostrat/stromatolites_demo) is available under a [CC-BY license](https://creativecommons.org/licenses/by/4.0/).
 
 ### Figures 2-6 utilise previously published, non-commercial open access [pyrite trace element data](https://doi.org/10.1130/GEOL.S.12456332):  
+
+**Users should note use is restricted to [CC-BY-NC terms](https://creativecommons.org/licenses/by-nc/4.0/). Please see Mukherjee and Large 2020 supplementary materials [figshare](https://gsapubs.figshare.com/articles/journal_contribution/Supplemental_Material_Co-evolution_of_trace_elements_and_life_in_Precambrian_oceans_The_pyrite_edition/12456332)**
 
 [Large et al., 2014. *Earth and Planetary Science Letters*, 389, 209-220.](http://dx.doi.org/10.1016/j.epsl.2013.12.020)  
 [Large et al., 2015. *Gondwana Research*, 28, 1282-1293.](http://dx.doi.org/10.1016/j.gr.2015.06.004)  
 [Large et al., 2015. *Earth and Planetary Science Letters*, 428, 139-150.](http://dx.doi.org/10.1016/j.epsl.2015.07.026)  
 [Large et al., 2019. *Mineralium Deposita*, 54, 485-506.](https://doi.org/10.1007/s00126-019-00873-9)  
-[Mukherjee and Large, 2020. *Geology*, 48, 1018-1022.](https://doi.org/10.1130/G47890.1)  **future users should note use is restricted to CC-BY-NC terms**
+[Mukherjee and Large, 2020. *Geology*, 48, 1018-1022.](https://doi.org/10.1130/G47890.1)
 
 ### Figures 5-6 utilise Fe-speciation and TOC/P data from the open access [Sedimentary Geochemistry and Palaeoenvironments Project (SGP)](http://sgp-search.io/)
 The citable reference for the Phase 1 data product is:
