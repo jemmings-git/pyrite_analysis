@@ -94,4 +94,4 @@ All figures were produced using the R code in this repository, followed by aesth
 - check all instances of setwd
 - add data_p1, data_p2
 - update instances of precambrian etc. files with correct starting age
-
+- fix rounding to 2dp in all results
