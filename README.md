@@ -20,8 +20,8 @@
 ### Steps following deployment of the [pyrite machine reading application](https://github.com/jemmings-git/pyrite_app):
 
 #### R scripts:
- * `install.R` - install the project's dependencies for the xDD preparation and analysis
- * `macrostrat_data.R` - download Macrostrat definitions
+ * `install.R` - install the project's dependencies for the xDD preparation and analysis ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+)
+ * `macrostrat_data.R` - download Macrostrat definitions ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+)
  * `preparation.R` - [import xDD pyrite results](https://geodeepdive.org/app_output/jemmings_with_pyrite_24Oct2019.zip), collect and link related data from Macrostrat, do binning on the dataframe, save the results
  * `wilkin_snippets.R` - process Wilkin-pyrite mentions (underlying Fig 1C) via the [xDD snippets API](https://xdd.wisc.edu/api/snippets)  
  * `analysis.R` - produce a series of analytical plots illustrating the observable xDD pyrite distributions as presented on **Fig. 1**. This code is split into two parts, dealing with Figs 1A-C and Supplementary figures 
