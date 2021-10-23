@@ -53,7 +53,7 @@ library(kernlab)
 
 # set working directory
 
-setwd("D:/Pyrite_backup/pyrite_analysis-master/pyrite_analysis-master")
+setwd(...)
 
 ##### Figure 1 - text mining outputs ####
 
