@@ -19,7 +19,7 @@ library(deeptime)
 library(ggfittext)
 library(grid)
 
-project_home <- 'C:/Users/jemmings/Documents/Offline_work/pyrite_analysis-master/pyrite_analysis-master' # insert directory
+project_home <- '...' # insert directory
 tryCatch({
   setwd(project_home)
 }, error = function(err) { 
