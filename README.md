@@ -89,12 +89,3 @@ Please refer to the **Supplementary materials** for the complete R package refer
 All figures were produced using the R code in this repository, followed by aesthetic adjustments using a professional graphics software package.
 
 ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+) indicates final checks performed by the lead author immediately prior to archiving in Zenodo in October '21
-
-## to check prior to final publication
-- check stats.R is fully operational
-- double check all datasets (just plot in excel)
-- check mentions of fig XX in code
-- check all instances of setwd
-- update instances of precambrian etc. files with correct starting age
-- fix rounding to 2dp in all results
-- need to deploy results at speed = 10
