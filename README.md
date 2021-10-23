@@ -59,7 +59,7 @@ The pyrite text mining results can be downloaded from [xDD](https://geodeepdive.
 ### Figure 1 is derived from the [GeoDeepDive](https://geodeepdive.org) (now known as xDD) library and machine reading system
 As the basis of our pyrite application we [forked](https://github.com/jemmings-git/pyrite_app) the [original text mining application](https://github.com/UW-Macrostrat/stromatolites_demo) used in [Peters, Husson and Wilcots 2017, *Geology*](http://doi.org/10.1130/G38931.1). The [original application](https://github.com/UW-Macrostrat/stromatolites_demo) is available under a [CC-BY license](https://creativecommons.org/licenses/by/4.0/).
 
-### Figures 2-6 utilise previously published, non-commercial open access [pyrite trace element data](https://doi.org/10.1130/GEOL.S.12456332):  
+### Figures 2-6 utilise previously published & open access [pyrite trace element data](https://doi.org/10.1130/GEOL.S.12456332):  
 
 **Users should note use is restricted to [CC-BY-NC terms](https://creativecommons.org/licenses/by-nc/4.0/). Please see Mukherjee and Large 2020 supplementary materials [figshare](https://gsapubs.figshare.com/articles/journal_contribution/Supplemental_Material_Co-evolution_of_trace_elements_and_life_in_Precambrian_oceans_The_pyrite_edition/12456332)**
 
