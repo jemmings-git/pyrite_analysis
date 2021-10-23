@@ -16,6 +16,8 @@
 
 #### We recommend implementation in RStudio.
 
+![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) pending Zenodo
+
 ### Steps following deployment of the [pyrite machine reading application](https://github.com/jemmings-git/pyrite_app):
 
 #### R scripts:
