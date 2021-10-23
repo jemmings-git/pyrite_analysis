@@ -19,7 +19,7 @@
 
 ### Steps following deployment of the [pyrite machine reading application](https://github.com/jemmings-git/pyrite_app):
 
-The pyrite results can be downloaded from [xDD](https://geodeepdive.org/app_output/jemmings_with_pyrite_24Oct2019.zip) or are available in the Zenodo archive ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) 
+The pyrite text mining results can be downloaded from [xDD](https://geodeepdive.org/app_output/jemmings_with_pyrite_24Oct2019.zip) or are available in the Zenodo archive ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) 
 
 #### R scripts:
  * `install.R` - install the project's dependencies for the xDD preparation and analysis ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+)
