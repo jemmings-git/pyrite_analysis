@@ -72,6 +72,8 @@ The citable reference for the Phase 1 data product is:
 Users may also wish to read and cite:
 [Mehra et al., 2021. *GSA Today*, 31, 5, 4-10.](https://doi.org/10.1130/GSATG484A.1)
 
+Figure 5B also includes TOC/P data from [Reinhard *et al*](https://doi.org/10.1038/nature20772).
+
 ### Reconstructions (Figure 6) ###
 
 Palaeogeographic reconstructions derive from the [GPlates Web Service](https://gws.gplates.org/) interfaced with the [*chronosphere* R package](https://github.com/chronosphere-portal/r_package/). The reconstructions derive from the model of [Scotese, C. R. 2016. Tutorial: PALEOMAP PaleoAtlas for GPlates and the PaleoData Plotter Program](https://www.earthbyte.org/paleomap-paleoatlas-for-gplates/). Palaeo-digital elevation models derive from [Scotese, C. R, and Wright, N. 2018. PALEOMAP Paleodigital Elevation Models (PaleoDEMS) for the Phanerozoic](https://www.earthbyte.org/paleodem-resource-scotese-and-wright-2018/).
