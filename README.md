@@ -23,7 +23,7 @@
  * `install.R` - install the project's dependencies for the xDD preparation and analysis ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+)
  * `macrostrat_data.R` - download Macrostrat definitions ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+)
  * `preparation.R` - [import xDD pyrite results](https://geodeepdive.org/app_output/jemmings_with_pyrite_24Oct2019.zip), collect and link related data from Macrostrat, do binning on the dataframe, save the results ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+)
- * `wilkin_snippets.R` - process Wilkin-pyrite mentions (underlying Fig 1C) via the [xDD snippets API](https://xdd.wisc.edu/api/snippets)  
+ * `wilkin_snippets.R` - process Wilkin-pyrite mentions (underlying Fig 1C) via the [xDD snippets API](https://xdd.wisc.edu/api/snippets) ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+)
  * `analysis.R` - produce a series of analytical plots illustrating the observable xDD pyrite distributions as presented on **Fig. 1**. This code is split into two parts, dealing with Figs 1A-C and Supplementary figures 
  * `stats.R`- conduct data manipulation, statistical analysis and machine learning as presented on **Figs. 2-5** and supplementary materials. Each code block (for each figure) should be run consecutively. Pyrite trace element and SGP data are downloaded and analysed. 
  * `gplates.R` - reconstruct palaeogeographic coordinates and interpolate results (in time and space), via the [GPlates Web Service](https://gws.gplates.org/) interfaced with the [*chronosphere* R package](https://github.com/chronosphere-portal/r_package/). This script reproduces **Fig. 5, plus the proximity values on Fig. 4F**.
