@@ -29,7 +29,7 @@
  * `gplates.R` - reconstruct palaeogeographic coordinates and interpolate results (in time and space), via the [GPlates Web Service](https://gws.gplates.org/) interfaced with the [*chronosphere* R package](https://github.com/chronosphere-portal/r_package/). This script reproduces **Fig. 5, plus the proximity values on Fig. 4F**.
 
 #### Datasets & results:
- * The pyrite trace element and SGP datasets are downloaded by deploying the code in this repository, and are not stored locally
+ * The pyrite trace element and SGP datasets are downloaded by deploying the code in this repository, and are not stored locally. **Important:** users should note that the Mukherjee and Large (2020) pyrite dataset is available under a **CC-BY-NC** license.
  * The [Reinhard *et al*](https://doi.org/10.1038/nature20772) TOC/P data shown on Fig. 5B is also sourced dynamically and is not stored locally
  * Intermediary (but not *final*) xDD results (*data_part2_comp.csv* - composite xDD pyrite outputs as in Fig 1A-B, *data_part1_comp.csv* - strat-only xDD pyrite outputs as in Fig S3A-B, *wilkin_framboids_comp.csv* - wilkin-pyrite composite results as in Fig. 1C, *wilkin_framboids_strat.csv* - wilkin-pyrite strat-only results as in Fig. 3C) are generated using the R code in this directory (copies are not stored in this directory) ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+)
  * `wilkin_snippets.json` - the aggregated Wilkin-pyrite [xDD snippets results](https://xdd.wisc.edu/api/snippets?term=Wilkin,framboid&full_results=true&inclusive=true&clean&known_terms=stratigraphic_names) (reproduced in this repository for ease). Used in **Fig. 1C & supplementary xDD figures**
@@ -65,7 +65,7 @@ As the basis of our pyrite application we [forked](https://github.com/jemmings-g
 [Large et al., 2015. *Gondwana Research*, 28, 1282-1293.](http://dx.doi.org/10.1016/j.gr.2015.06.004)  
 [Large et al., 2015. *Earth and Planetary Science Letters*, 428, 139-150.](http://dx.doi.org/10.1016/j.epsl.2015.07.026)  
 [Large et al., 2019. *Mineralium Deposita*, 54, 485-506.](https://doi.org/10.1007/s00126-019-00873-9)  
-[Mukherjee and Large, 2020. *Geology*, 48, 1018-1022.](https://doi.org/10.1130/G47890.1)  
+[Mukherjee and Large, 2020. *Geology*, 48, 1018-1022.](https://doi.org/10.1130/G47890.1)  **future users should note use is restricted to CC-BY-NC terms**
 
 ### Figures 5-6 utilise Fe-speciation and TOC/P data from the open access [Sedimentary Geochemistry and Palaeoenvironments Project (SGP)](http://sgp-search.io/)
 The citable reference for the Phase 1 data product is:
