@@ -272,17 +272,65 @@ pyrite_undif <- subset(data_p2, pyrite_undif)
 
 pyrite_undif <- rbind(pyritic_strat, pyrite_undif)
 
+# pyrite mineralisation and veins searches - including framboid- and nodule-bearing rocks
+
+pyrite_all <- pyrite_undif
+
+pyrite_all1 <- subset(pyrite_all, t_age2 > cutoff & b_age2 > cutoff)
+pyrite_all2 <- pyrite_all1[!duplicated(pyrite_all1$unit_id), ]
+pyrite_all3 <- pyrite_all1[is.na(pyrite_all1$unit_id),]
+pyrite_all2 <- pyrite_all2[!is.na(pyrite_all2$unit_id),]
+pyrite_all3 <- pyrite_all3[!duplicated(pyrite_all3$strat_name_id),]
+pyrite_all1 <- rbind(pyrite_all2, pyrite_all3)
+
+pyrite_all2 <- subset(pyrite_all, t_age2 < cutoff & b_age2 < cutoff)
+pyrite_all3 <- pyrite_all2[!duplicated(pyrite_all2$unit_id), ]
+pyrite_all4 <- pyrite_all2[is.na(pyrite_all2$unit_id),]
+pyrite_all3 <- pyrite_all3[!is.na(pyrite_all3$unit_id),]
+pyrite_all4 <- pyrite_all4[!duplicated(pyrite_all4$strat_name_id),]
+pyrite_all2 <- rbind(pyrite_all3, pyrite_all4)
+
+pyrite_all3 <- subset(pyrite_all, t_age2 < cutoff & b_age2 == cutoff)
+pyrite_all4 <- pyrite_all3[!duplicated(pyrite_all3$unit_id), ]
+pyrite_all5 <- pyrite_all3[is.na(pyrite_all3$unit_id),]
+pyrite_all4 <- pyrite_all4[!is.na(pyrite_all4$unit_id),]
+pyrite_all5 <- pyrite_all5[!duplicated(pyrite_all5$strat_name_id),]
+pyrite_all3 <- rbind(pyrite_all4, pyrite_all5)
+
+pyrite_all4 <- subset(pyrite_all, t_age2 == cutoff & b_age2 > cutoff)
+pyrite_all5 <- pyrite_all4[!duplicated(pyrite_all4$unit_id), ]
+pyrite_all6 <- pyrite_all4[is.na(pyrite_all4$unit_id),]
+pyrite_all5 <- pyrite_all5[!is.na(pyrite_all5$unit_id),]
+pyrite_all6 <- pyrite_all6[!duplicated(pyrite_all6$strat_name_id),]
+pyrite_all4 <- rbind(pyrite_all5, pyrite_all6)
+
+pyrite_all <- rbind(pyrite_all1, pyrite_all2, pyrite_all3, pyrite_all4)
+
+sediments <- (grepl(paste(rocks, collapse = "|"), pyrite_all$lith, ignore.case=TRUE) | 
+                grepl(paste(rocks, collapse = "|"), pyrite_all$other, ignore.case=TRUE) | 
+                grepl(paste(rocks, collapse = "|"), pyrite_all$environ, ignore.case=TRUE) | 
+                grepl(paste(rocks, collapse = "|"), pyrite_all$strat_phrase_root, ignore.case=TRUE) | 
+                grepl(paste(rocks, collapse = "|"), pyrite_all$phrase, ignore.case=TRUE) | 
+                grepl(paste(rocks, collapse = "|"), pyrite_all$strat_flag, ignore.case=TRUE) |
+                grepl(paste(rocks, collapse = "|"), pyrite_all$environ, ignore.case=TRUE))  &
+  (grepl(paste(rocks2, collapse = "|"), pyrite_all$lith, ignore.case=TRUE) | 
+     grepl(paste(rocks2, collapse = "|"), pyrite_all$other, ignore.case=TRUE) | 
+     grepl(paste(rocks2, collapse = "|"), pyrite_all$strat_phrase_root, ignore.case=TRUE) | 
+     grepl(paste(rocks2, collapse = "|"), pyrite_all$strat_flag, ignore.case=TRUE) |
+     grepl(paste(rocks2, collapse = "|"), pyrite_all$phrase, ignore.case=TRUE) |
+     grepl(paste(rocks2, collapse = "|"), pyrite_all$environ, ignore.case=TRUE))
+
+pyrite_all <- subset(pyrite_all, sediments)
+
+# extract nearby mentions of veins or mineralisation
+
+veins2 <- grepl("vein", pyrite_all$phrase, ignore.case=TRUE)  |  grepl("mineralisation", pyrite_all$phrase, ignore.case=TRUE)
+
+veins2 <- subset(pyrite_all, veins2)
+
 # use anti_join to again carry forward only packages not already identified as containing framboids or nodules
 
 pyrite_undif <- anti_join(pyrite_undif, all0, by = "strat_name_id") 
-
-# subset so only sediments extracted
-
-# run this line if ALL sediments - note slightly different ordering of subset compared to framboids and nodules
-# this is because ALL framboids and nodules are assumed to be sedimentary, UNLESS the strat ID is matched to
-# a non-sedimentary unit. Whereas undifferentiated pyrite is included ONLY if explicitly
-# linked to a sedimentary unit - this is because framboids + nodules form primarily in 
-# a 'sedimentary' environment whereas 'pyrite' in general is present in many settings
 
 pyrite_undif1 <- subset(pyrite_undif, t_age2 > cutoff & b_age2 > cutoff)
 pyrite_undif2 <- pyrite_undif1[!duplicated(pyrite_undif1$unit_id), ]
@@ -330,7 +378,7 @@ sediments <- (grepl(paste(rocks, collapse = "|"), pyrite_undif$lith, ignore.case
 
 pyrite_undif <- subset(pyrite_undif, sediments)
 
-# extract nearby mentions of veins or mineralisation
+# extract nearby mentions of veins or mineralisation - not including framboid- or nodule- bearing rocks
 
 veins <- grepl("vein", pyrite_undif$phrase, ignore.case=TRUE)  |  grepl("mineralisation", pyrite_undif$phrase, ignore.case=TRUE)
 
@@ -359,6 +407,10 @@ pyrite_undif <- subset(pyrite_undif, variable != "b_age2")
 veins <- melt(veins, id.vars = c(1:83,626), na.rm=TRUE)
 veins$value <- as.numeric(veins$value)
 veins <- subset(veins, variable != "b_age2")
+
+veins2 <- melt(veins2, id.vars = c(1:83,626), na.rm=TRUE)
+veins2$value <- as.numeric(veins2$value)
+veins2 <- subset(veins2, variable != "b_age2")
 
 # block end
 
@@ -423,6 +475,16 @@ veins_bins2 <- as.data.frame(cbind(veins_bins2$counts, veins_bins2$breaks))
 
 veins_bins <- rbind(veins_bins1,veins_bins2)
 veins_bins <- veins_bins[c(1:541,543:889),] # remove duplicate 541
+
+veins2_bins1 <- hist(veins2$value[veins2$value >= 0 & veins2$value < cutoff+1], breaks = seq(0, cutoff+1, by = phanerozoic_increment))
+veins2_bins1 <- as.data.frame(cbind(veins2_bins1$counts, veins2_bins1$breaks))
+veins2_bins1 <- veins2_bins1[1:542,]
+
+veins2_bins2 <- hist(veins2$value[veins2$value >= cutoff & veins2$value <= 4001], breaks = seq(cutoff, 4001, by = precambrian_increment))
+veins2_bins2 <- as.data.frame(cbind(veins2_bins2$counts, veins2_bins2$breaks))
+
+veins2_bins <- rbind(veins2_bins1,veins2_bins2)
+veins2_bins <- veins2_bins[c(1:541,543:889),] # remove duplicate 541
 
 # block end
 
@@ -635,6 +697,7 @@ precambrian_increment <- 10
 framboidsS <- as.data.frame(cbind((framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
 nodulesS <- as.data.frame(cbind((nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
 veinsS <- as.data.frame(cbind((veins_bins$V1+framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,veins_bins$V2))
+veins2S <- as.data.frame(cbind((veins2_bins$V1+framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,veins2_bins$V2))
 undifS <- as.data.frame(cbind((pyrite_undif_bins$V1+framboids_bins$V1+nodules_bins$V1)/sediments_bins$V1,nodules_bins$V2))
 
 #### output - Figure 1A ###
@@ -665,7 +728,7 @@ a <- ggplot() + theme_bw() +
         plot.tag.position = c(0.01,0.99),
         axis.text.x=element_blank(),
         axis.title.x=element_blank(),
-        panel.background = element_rect(fill = 'grey50'),
+        panel.background = element_rect(fill = 'white'),
         axis.text.y=element_text(size = 12),
         legend.position = c(0.44, 0.9),
         legend.background = element_rect(fill="white"),
@@ -711,7 +774,7 @@ b <- ggplot() + theme_bw() +
         panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank(),
         plot.margin=unit(c(0.95,0.15,0.11,-0.16), "cm"),
-        panel.background = element_rect(fill = 'grey50')) +
+        panel.background = element_rect(fill = 'white')) +
   annotate(x=c(HEATT)-5,y=0.35,label=c(letters[length(HEATT):1]),
            vjust=1,geom="label", colour = "black", fontface = 2, size = 3.5,
            label.padding = unit(0.18, "lines"),
@@ -746,7 +809,7 @@ c <- ggplot() + theme_bw() +
         axis.text.x=element_blank(),
         axis.title.x=element_blank(),
         axis.text.y=element_text(size = 12),
-        panel.background = element_rect(fill = 'grey50')) +
+        panel.background = element_rect(fill = 'white')) +
   ylab("Proportion of\nframboid and\nnodule-bearing\npyritic \n(meta)sedimentary\nrocks") +
   labs(tag = "B")
 
@@ -768,7 +831,7 @@ d <- ggplot() + theme_bw() +
         plot.margin=unit(c(0.11,0.15,0.11,-0.16), "cm"),
         axis.text.x=element_blank(),
         axis.title.x=element_blank(),
-        panel.background = element_rect(fill = 'grey50'))
+        panel.background = element_rect(fill = 'white'))
 
 #Extras, ME, OAEs, 
 
@@ -798,7 +861,7 @@ e <-  ggplot() + theme_bw() +
         plot.margin=unit(c(0,0,0,0), "cm"),
         axis.title.y = element_text(angle = 0, hjust = 0.5, vjust = 0.5),
         plot.tag.position = c(0.01,0.99),
-        panel.background = element_rect(fill = 'grey50'),
+        panel.background = element_rect(fill = 'white'),
         axis.text.y=element_text(size = 12),
         axis.text.x=element_text(size = 12),
         axis.title.x = element_blank(),
@@ -837,7 +900,7 @@ f <- ggplot() + theme_bw() +
         panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank(),
         plot.margin=unit(c(0,0.15,0,-0.16), "cm"),
-        panel.background = element_rect(fill = 'grey50'),
+        panel.background = element_rect(fill = 'white'),
         axis.text.x=element_text(size = 12),
         axis.title.x = element_blank()) +
   scale_y_continuous(limits = c(0,0.25), expand = c(0,0)) +
@@ -1440,7 +1503,7 @@ a <- ggplot() + theme_bw() +
         plot.tag.position = c(0.01,0.99),
         axis.text.x=element_blank(),
         axis.title.x=element_blank(),
-        panel.background = element_rect(fill = 'grey50'),
+        panel.background = element_rect(fill = 'white'),
         axis.text.y=element_text(size = 12),
         legend.position = c(0.44, 0.9),
         legend.background = element_rect(fill="white"),
@@ -1486,7 +1549,7 @@ b <- ggplot() + theme_bw() +
         panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank(),
         plot.margin=unit(c(0.95,0.15,0.11,-0.16), "cm"),
-        panel.background = element_rect(fill = 'grey50')) +
+        panel.background = element_rect(fill = 'white')) +
   annotate(x=c(HEATT)-5,y=0.35,label=c(letters[length(HEATT):1]),
            vjust=1,geom="label", colour = "black", fontface = 2, size = 3.5,
            label.padding = unit(0.18, "lines"),
@@ -1521,7 +1584,7 @@ c <- ggplot() + theme_bw() +
         axis.text.x=element_blank(),
         axis.title.x=element_blank(),
         axis.text.y=element_text(size = 12),
-        panel.background = element_rect(fill = 'grey50')) +
+        panel.background = element_rect(fill = 'white')) +
   ylab("Proportion of\nframboid and\nnodule-bearing\npyritic \n(meta)sedimentary\nrocks") +
   labs(tag = "B")
 
@@ -1543,7 +1606,7 @@ d <- ggplot() + theme_bw() +
         plot.margin=unit(c(0.11,0.15,0.11,-0.16), "cm"),
         axis.text.x=element_blank(),
         axis.title.x=element_blank(),
-        panel.background = element_rect(fill = 'grey50'))
+        panel.background = element_rect(fill = 'white'))
 
 #Extras, ME, OAEs, 
 
@@ -1573,7 +1636,7 @@ e <-  ggplot() + theme_bw() +
         plot.margin=unit(c(0,0,0,0), "cm"),
         axis.title.y = element_text(angle = 0, hjust = 0.5, vjust = 0.5),
         plot.tag.position = c(0.01,0.99),
-        panel.background = element_rect(fill = 'grey50'),
+        panel.background = element_rect(fill = 'white'),
         axis.text.y=element_text(size = 12),
         axis.text.x=element_text(size = 12),
         axis.title.x = element_blank(),
@@ -1612,7 +1675,7 @@ f <- ggplot() + theme_bw() +
         panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank(),
         plot.margin=unit(c(0,0.15,0,-0.16), "cm"),
-        panel.background = element_rect(fill = 'grey50'),
+        panel.background = element_rect(fill = 'white'),
         axis.text.x=element_text(size = 12),
         axis.title.x = element_blank()) +
   scale_y_continuous(limits = c(0,0.1), expand = c(0,0)) +
@@ -2047,15 +2110,21 @@ evap_bins <- evap_bins[c(1:541,543:889),] # remove duplicate 541
 # block end
 
 veinsS <- as.data.frame(cbind((veins_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1),nodules_bins$V2))
+veins2S <- as.data.frame(cbind((veins2_bins$V1)/(framboids_bins$V1+nodules_bins$V1+pyrite_undif_bins$V1),nodules_bins$V2))
 evapS <- as.data.frame(cbind((evap_bins$V1)/(sediments_bins$V1),nodules_bins$V2))
+
+# note veins2S (including framboid & nodule-bearing rocks) and veinsS (excluding framboid and nodule-bearing pyritic rocks) are
+# produce nearly identitical results. VeinsS is shown on Fig. S7D.
 
 a <- ggplot() + theme_bw() +
   scale_x_reverse(limits = c(Bottom, 541)) +
-  geom_step(data = veinsS, aes(V2-0.5, V1), colour = "red")
+  geom_step(data = veins2S, aes(V2-0.5, V1), colour = "red") +
+  geom_step(data = veinsS, aes(V2-0.5, V1), colour = "black")
 
 b <- ggplot() + theme_bw() +
   scale_x_reverse(limits = c(541, Top)) +
-  geom_step(data = veinsS, aes(V2-0.5, V1), colour = "red") +
+  geom_step(data = veins2S, aes(V2-0.5, V1), colour = "red") +
+  geom_step(data = veinsS, aes(V2-0.5, V1), colour = "black") +
   theme(axis.title.y=element_blank(),
         axis.text.y=element_blank(),
         axis.ticks.y=element_blank())
