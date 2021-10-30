@@ -3,7 +3,7 @@
 
 ### This code accompanies a manuscript submitted to *Science Advances* in May 2021
 #### Title: Pyrite mega-analysis reveals modes of anoxia through geological time  
-#### Authors: Joseph F. Emmings<sup>1,2</sup>*, Simon W. Poulton<sup>3</sup>, Joanna Walsh<sup>4,5</sup>, Kathryn A. Leeming<sup>1</sup>, Ian Ross<sup>6</sup>, Shanan Peters<sup>7</sup>
+#### Authors: Joseph F. Emmings<sup>1,2</sup>*, Simon W. Poulton<sup>3</sup>, Joanna Walsh<sup>4,5</sup>, Kathryn A. Leeming<sup>1</sup>, Ian Ross<sup>6</sup>, Shanan E. Peters<sup>7</sup>
 #### Affiliations 
 <sup>1</sup>British Geological Survey, Keyworth, Nottingham, NG12 5GG, UK.  
 <sup>2</sup>School of Geography, Geology and the Environment, University of Leicester, Leicester, LE1 7RH, UK.  
