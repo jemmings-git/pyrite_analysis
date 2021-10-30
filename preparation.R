@@ -42,14 +42,7 @@ source('macrostrat_data.R') # use choices below to find strat flag hits not in c
 rocks <- meta_sedimentary_rocks # normalisation to all sedimentary and metamorphosed sedimentary rocks - choose this option to replicate the results in the manuscript
 #rocks <- mud_rocks # normalisation to mudstones - perhaps this is the most robust approach
 
-
-# import GDD extractions 
-
-if (!file.exists('results.csv')) {
-  source_data <- 'https://geodeepdive.org/app_output/jemmings_with_pyrite_24Oct2019.zip'
-  download.file(source_data, 'jemmings_etal.zip', method='auto')
-  unzip('jemmings_etal.zip')
-}
+# import GDD extractions (condensed, public-facing version, fully deployable)
 
 extracts <- read_csv("results.csv")
 
