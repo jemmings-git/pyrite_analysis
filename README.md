@@ -17,7 +17,7 @@
 #### We recommend implementation in RStudio.
 ### Steps following deployment of the [pyrite machine reading application](https://github.com/jemmings-git/pyrite_app):
 
-The pyrite text mining results can be downloaded from [xDD](https://geodeepdive.org/app_output/jemmings_with_pyrite_24Oct2019.zip) and/or is accessible in the accompanying archived dataset (please refer to the manuscript for details).
+Since the original publications used in text mining are copyrighted, and cannot be distributed publicly *en masse*, we condensed the raw xDD pyrite phrases into the tuples and contextual phrases of interest. `results.csv` represents the reduced, open access xDD output. The code is fully deployable, and the results are fully reproducible, using this dataset. Examples of the more complete phrases extracted by the pyrite application are provided in the Supplementary Materials.
 
 #### R scripts:
  * `install.R` - install the project's dependencies for the xDD preparation and analysis ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+)
@@ -28,7 +28,10 @@ The pyrite text mining results can be downloaded from [xDD](https://geodeepdive.
  * `stats.R`- conduct data manipulation, statistical analysis and machine learning as presented on **Figs. 2-5** and supplementary materials. Each code block (for each figure) should be run consecutively. Pyrite trace element and SGP data are downloaded and analysed. ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+)
  * `gplates.R` - reconstruct palaeogeographic coordinates and interpolate results (in time and space), via the [GPlates Web Service](https://gws.gplates.org/) interfaced with the [*chronosphere* R package](https://github.com/chronosphere-portal/r_package/). This script reproduces **Fig. 5, plus the proximity values on Fig. 4F**. ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+)
 
+The user should run the above scripts in sequence.`analysis.R` displays the xDD results as presented in **Fig. 1**. `analysis.R` is dependent on `install.R`, `macrostrat_data.R`, `preparation.R` and `wilkin_snippets.R`. Depending on purpose, the user is able to skip straight to `stats.R` (**Figs. 2, 4, 5**) or `gplates.R`(**Fig. 6**). i.e., `stats.R` and `gplates.R` were originally developed in sequence (following from `analysis.R`), but can be deployed independently.
+
 #### Datasets & results:
+ * `results.csv` - the condensed, open access xDD results following deployment of the [pyrite machine reading application](https://github.com/jemmings-git/pyrite_app).
  * The pyrite trace element and SGP datasets are downloaded by deploying the code in this repository, and are not stored locally. **Important:** users should note that the Mukherjee and Large (2020) pyrite dataset is available under a [**CC-BY-NC license**](https://creativecommons.org/licenses/by-nc/4.0/).
  * The [Reinhard *et al*](https://doi.org/10.1038/nature20772) TOC/P data shown on Fig. 5B is also sourced dynamically and is not stored locally
  * Intermediary (but not *final*) xDD results (*data_part2_comp.csv* - composite xDD pyrite outputs as in Fig 1A-B, *data_part1_comp.csv* - strat-only xDD pyrite outputs as in Fig S3A-B, *wilkin_framboids_comp.csv* - wilkin-pyrite composite results as in Fig. 1C, *wilkin_framboids_strat.csv* - wilkin-pyrite strat-only results as in Fig. 3C) are generated using the R code in this directory (copies are not stored in this directory) ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+)
